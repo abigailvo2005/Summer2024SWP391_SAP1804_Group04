@@ -108,7 +108,9 @@
             </div>
           </div>
         </div>
-        <a class="btn bg-gradient-primary mt-3 w-100" href="../seller/create-property.html"
+        <a
+          class="btn bg-gradient-primary mt-3 w-100"
+          href="../seller/create-property.html"
           >Create Property</a
         >
       </div>
@@ -138,7 +140,7 @@
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
               >
-              Create Property
+                Create Property
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Create Property</h6>
@@ -187,8 +189,224 @@
       </nav>
       <!-- END: Nav Bar -->
 
-      
-    
+      <!-- START: INTRODUCTION HEADER -->
+      <section class="min-vh-100 mb-8">
+        <div
+          class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
+          style="
+            background-image: url('../../assets/img/curved-images/create-property-background.jpeg');
+          "
+        >
+          <span class="mask bg-gradient-dark opacity-6"></span>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-sm-12 col-md-8 col-lg-6 text-center mx-auto">
+                <h2 class="text-white mb-1 mt-sm-4">Posting Validation</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END: INTRODUCTION HEADER -->
+
+        <!-- START: FORM TO CREATE PROPERTY -->
+        <div class="container">
+          <div class="row mt-lg-n8 mt-md-n8 mt-n7 mt-sm-n9">
+            <div class="col-12 col-xl-11 mx-auto">
+              <div class="card z-index-0">
+                <div class="card-header text-center pt-4">
+                  <h5>Validation Request Form</h5>
+                </div>
+
+                <div class="card-body">
+                  <form role="form text-left" name="property-information">
+                    <div class="mb-3 row">
+                      <div class="col-lg-2 col-sm-2"><label> Name:</label></div>
+                      <div class="col-lg-10 col-sm-10">
+                        <input
+                          type="text"
+                          class="form-control form-create-control col-10"
+                          placeholder="your property's name"
+                        />
+                        <!-- ERROR MESSAGE BEING HIDDEN -->
+                        <p class="text-danger text-error mb-0 text-center pt-1 hidden">name should only contains 255 characters.</p>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-lg-2 col-sm-2">
+                        <label> Address:</label>
+                      </div>
+                      <div class="col-lg-10 col-sm-10">
+                        <input
+                          type="text"
+                          class="form-control form-create-control col-10"
+                          placeholder="your property's adress"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-lg-2 col-sm-2">
+                        <label> Description:</label>
+                      </div>
+                      <div class="col-lg-10 col-sm-10">
+                        <input
+                          type="text"
+                          class="form-control form-create-control col-10"
+                          placeholder="your property's description (i.e interior/exterior features)"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2"><label> Area:</label></div>
+                      <div class="col-sm-3">
+                        <input
+                          type="number"
+                          class="form-control form-create-control col-10"
+                          placeholder="your property's area"
+                          min="1"
+                        />
+                      </div>
+                      <div class="col-sm-1"><label>m²</label></div>
+
+                      <div class="col-sm-2"><label>Price:</label></div>
+                      <div class="col-sm-3">
+                        <input
+                          type="number"
+                          class="form-control form-create-control col-10"
+                          placeholder="your property's price"
+                          min="1"
+                        />
+                      </div>
+                      <div class="col-sm-1"><label>VND</label></div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-lg-2 col-sm-2">
+                        <label>Property Type:</label>
+                      </div>
+                      <div class="col-lg-10 col-sm-10">
+                        <select class="form-control form-create-control col-10">
+                          <option value="" disabled selected>
+                            Select type
+                          </option>
+                          <option value="land">Land</option>
+                          <option value="house">House</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Only fields for land -->
+                    <div id="land-info-section">
+                      <div class="ps-1 row">
+                        <p class="text-message">
+                          Fill these fields if your property's type is "land"
+                        </p>
+                      </div>
+                      <div class="mb-3 row">
+                        <div class="col-sm-2">
+                          <label>Land Category:</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <select
+                            class="form-control form-create-control col-10"
+                            disabled
+                          >
+                            <option value="" disabled selected>
+                              Select category (for Land type only)
+                            </option>
+                            <option value="agricultural">
+                              Agricultural Land
+                            </option>
+                            <option value="non-agricultural">
+                              Non-agricultural Land
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Only fields for house -->
+                    <div id="house-info-section disabled-form">
+                      <div class="ps-1 row">
+                        <p class="text-message">
+                          Fill these fields if your property's type is "house"
+                        </p>
+                      </div>
+                      <div class="mb-3 row">
+                        <div class="col-sm-2">
+                          <label>House Category:</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <select
+                            class="form-control form-create-control col-10"
+                            disabled
+                          >
+                            <option value="" disabled selected>
+                              Select category (for House type only)
+                            </option>
+                            <option value="apartment">Apartment</option>
+                            <option value="townhouse">Townhouse</option>
+                            <option value="mansion">Mansion, Villa</option>
+                            <option value="bungalow">Bungalow</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="mb-3 row">
+                        <div class="col-sm-2"><label> Built Year:</label></div>
+                        <div class="col-sm-2">
+                          <input
+                            type="number"
+                            class="form-control form-create-control col-10"
+                            placeholder="year"
+                            min="1"
+                            disabled
+                          />
+                        </div>
+
+                        <div class="col-sm-1"><label>Bedroom:</label></div>
+                        <div class="col-sm-2">
+                          <input
+                            type="number"
+                            class="form-control form-create-control col-10"
+                            placeholder="number"
+                            min="1"
+                            disabled
+                          />
+                        </div>
+                        <div class="col-sm-1"><label>room(s)</label></div>
+
+                        <div class="col-sm-1"><label>Bathroom:</label></div>
+                        <div class="col-sm-2">
+                          <input
+                            type="number"
+                            class="form-control form-create-control col-10"
+                            placeholder="number"
+                            min="1"
+                            disabled
+                          />
+                        </div>
+                        <div class="col-sm-1"><label>room(s)</label></div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        class="btn bg-gradient-dark w-100 my-4 mb-2"
+                      >
+                        Submit Request
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: FORM TO CREATE PROPERTY -->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
@@ -234,5 +452,6 @@
     <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../../assets/js/plugins/chartjs.min.js"></script>
+    <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>
