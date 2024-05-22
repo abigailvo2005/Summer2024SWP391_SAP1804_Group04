@@ -9,10 +9,3 @@
 2) Link Documents:
 - RDS: https://docs.google.com/document/d/15SDh-Ex4_TVpaIvb4n8133UEWXm_dEsW/edit#heading=h.3dy6vkm
 - SDS: https://docs.google.com/document/d/1L2gJtYs5iWmwn3VkW9iIZQGHFHLkz8_V/edit?usp=drive_link
-  
-3) SQL Script:
-- link: http://113.173.55.226:81/phpmyadmin
-- username: admin
-- password: 191004
-
-4) Hosted Project: http://113.173.55.226:8080/recs-1.0/demoview
