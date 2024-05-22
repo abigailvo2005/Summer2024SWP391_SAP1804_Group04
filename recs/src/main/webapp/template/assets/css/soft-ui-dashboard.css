@@ -23493,6 +23493,10 @@ html {
 }
 
 @media (min-width: 1200px) {
+  .g-sidenav-show .no-dash  {
+    margin-left: 17.125rem !important;
+  }
+  
   .g-sidenav-hidden.rtl .main-content {
     margin-right: 6rem !important;
   }
