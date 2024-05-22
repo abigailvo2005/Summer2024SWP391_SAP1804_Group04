@@ -1,6 +1,6 @@
-<%@ include file="/common/taglib.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
+file="/common/taglib.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,22 +8,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RECS - Login</title>
-    <!-- CSS Files -->
+    
+    <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/demoview/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
       rel="stylesheet"
     />
 
     <!--Web's favicon-->
     <link
-          rel="icon"
-          type="image/png"
-          href="<c:url value='/template/demoview/assets/img/logos/logo-no-name.png' />"
-        />
+      rel="icon"
+      type="image/png"
+      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+    />
 
     <!-- Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
   </head>
   <body class="bg-gray-100">
     <!-- START MAIN FORM LOG IN -->
@@ -33,14 +37,14 @@
           <div class="container">
             <div class="row">
               <div
-                class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto"
+                class="col-xl-5 col-lg-5 col-md-6 d-flex flex-column mx-auto"
               >
                 <div class="card card-plain mt-8">
                   <!--logo on left section-->
                   <div class="card-header pb-0 bg-transparent">
                     <div style="text-align: center">
                       <img
-                        src="<c:url value='/template/demoview/assets/img/logos/logo-og.png' />"
+                        src="<c:url value='/template/assets/img/logos/logo-og.png' />"
                         style="width: 50%"
                       />
                     </div>
@@ -55,12 +59,12 @@
                     <p class="mb-0">Enter your email and password to sign in</p>
                   </div>
 
-                  <!-- Form to Login:
+                  <!-- Form to Login: 
                     + retrieve param through id
                     + redirect to a post method in action
                   -->
                   <div class="card-body">
-                    <form role="form" action="" method="POST">
+                    <form role="form" action="${pageContext.request.contextPath}/signin" method="post">
                       <label>Email</label>
                       <div class="mb-3">
                         <input
@@ -99,7 +103,7 @@
                       <!-- sign in button -->
                       <div class="text-center">
                         <button
-                          type="button"
+                          type="submit"
                           class="btn bg-gradient-info w-100 mt-4 mb-0"
                         >
                           Sign in
@@ -130,7 +134,7 @@
                   <div
                     class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n8"
                     style="
-                      background-image: url(<c:url value='/template/demoview/assets/img/curved-images/login-background.jpeg' />);
+                      background-image: url(<c:url value='/template/assets/img/curved-images/login-background.jpeg' />);
                       background-position: center;
                       width: 50%;
                     "
@@ -149,7 +153,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mb-4 mx-auto text-center">
-           <!-- optional function: introduce what our system's doing -->
+            <!-- optional function: introduce what our system's doing -->
             <a
               href="javascript:;"
               target="_blank"
@@ -163,17 +167,18 @@
               target="_blank"
               class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
             >
-             Team
+              Team
             </a>
 
-          <div class="col-8 mx-auto text-center mt-1">
-            <p class="mt-3 text-secondary">
-              Copyright ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              RECS by Team 4 - SAP1804.
-            </p>
+            <div class="col-8 mx-auto text-center mt-1">
+              <p class="mt-3 text-secondary">
+                Copyright ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                RECS by Team 4 - SAP1804.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -181,12 +186,12 @@
     <!-- END FOOTER-->
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/demoview/assets/js/core/popper.min.js' />"></script>
+    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
 
-    <script src="<c:url value='/template/demoview/assets/js/core/bootstrap.min.js' />"></script>
+    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
 
-    <script src="<c:url value='/template/demoview/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
+    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
 
-    <script src="<c:url value='/template/demoview/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
+    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
   </body>
 </html>
