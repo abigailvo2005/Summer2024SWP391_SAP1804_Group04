@@ -65,7 +65,7 @@ file="/common/taglib.jsp" %>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/dashboard-seller"
+              href="${pageContext.request.contextPath}/dashboard-man"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -74,7 +74,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-table-columns"
                   style="
                     $ {
-                      currentpage !='dashboard'?'color: #30221b' : '';
+                      currentPage !='dashboard'?'color: #30221b': '';
                     }
                   "
                 ></i>
@@ -84,8 +84,8 @@ file="/common/taglib.jsp" %>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'profile-seller' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/profile-seller"
+              class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/profile-man"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -94,7 +94,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentpage!='profile-seller'?'color: #30221b' : '';
+                      currentPage != 'profile'?'color: #30221b': '';
                     }
                   "
                 ></i>
@@ -102,10 +102,50 @@ file="/common/taglib.jsp" %>
               <span class="nav-link-text ms-1">Profile</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a
+              class="nav-link ${currentPage == 'requests' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/requests-man"
+            >
+              <div
+                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i
+                  class="fa-solid fa-code-pull-request"
+                  style="
+                    $ {
+                      currentPage!='requests'?'color: #30221b': '';
+                    }
+                  "
+                ></i>
+              </div>
+              <span class="nav-link-text ms-1">Validating Requests</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link ${currentPage == 'register' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/register-acc-man"
+            >
+              <div
+                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i
+                  class="fa-solid fa-pen-to-square"
+                  style="
+                    $ {
+                      currentPage!='register'?'color: #30221b': '';
+                    }
+                  "
+                ></i>
+              </div>
+              <span class="nav-link-text ms-1">Register Staff</span>
+            </a>
+          </li>
         </ul>
       </div>
 
-      <!-- sidebar: create property and history track section-->
+      <!-- sidebar: assign new Job, register for a new staff and history track section-->
       <div class="sidenav-footer mx-3">
         <div
           class="card card-background shadow-none card-background-mask-secondary"
@@ -119,12 +159,13 @@ file="/common/taglib.jsp" %>
           ></div>
           <div class="card-body text-start p-3 w-100">
             <div class="docs-info">
-              <h6 class="text-white up mb-0">Want to keep track?</h6>
+              <h6 class="text-white up mb-1">Want to keep track?</h6>
               <p class="text-xs">
-                View your successfully connected properties here.
+                View jobs, requests and properties you have successfully
+                handled.
               </p>
               <a
-                href="${pageContext.request.contextPath}/history-seller"
+                href="${pageContext.request.contextPath}/history-man"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -134,8 +175,8 @@ file="/common/taglib.jsp" %>
         </div>
         <a
           class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/create-property"
-          >Create Property</a
+          href="${pageContext.request.contextPath}/assign-job"
+          >Assign Job</a
         >
       </div>
     </aside>
@@ -165,16 +206,18 @@ file="/common/taglib.jsp" %>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-seller' ?
-                'View History' : (currentPage == 'create-property' ? 'Create
-                Property' : '')))}
+                'profile' ? 'View Profile' : (currentPage == 'history-man' ?
+                'View History' : (currentPage == 'assign-job' ? 'Assign Job' :
+                (currentPage == 'requests-man' ? 'Validating Requests' :
+                (currentPage == 'register' ? 'Register Account Staff' : '')))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-seller' ?
-              'History' : (currentPage == 'create-property' ? 'Create Property'
-              : '')))}
+              'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
+              : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
+              'requests-man' ? 'Validating Requests' : (currentPage ==
+              'register' ? 'Register Staff' : '')))))}
             </h6>
           </nav>
 

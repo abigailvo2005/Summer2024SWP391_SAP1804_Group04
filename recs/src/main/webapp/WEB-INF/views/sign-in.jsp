@@ -65,26 +65,26 @@ file="/common/taglib.jsp" %>
                   -->
                   <div class="card-body">
                     <form role="form" action="${pageContext.request.contextPath}/signin" method="post">
-                      <label>Email</label>
+                      <label>Username</label>
                       <div class="mb-3">
                         <input
-                          id="email"
-                          type="email"
+                          id="username"
+                          name="username"
+                          type="text"
                           class="form-control"
-                          placeholder="Email"
-                          aria-label="Email"
-                          aria-describedby="email-addon"
+                          placeholder="Username"
+                          aria-label="Username"
                         />
                       </div>
                       <label>Password</label>
                       <div class="mb-3">
                         <input
                           id="password"
-                          type="email"
+                          name="password"
+                          type="password"
                           class="form-control"
                           placeholder="Password"
                           aria-label="Password"
-                          aria-describedby="password-addon"
                         />
                       </div>
                       <!-- remember me toggle btn -->

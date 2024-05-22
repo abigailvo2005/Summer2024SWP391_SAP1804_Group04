@@ -8457,6 +8457,10 @@ fieldset:disabled .btn {
   display: flex !important;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .d-inline-flex {
   display: inline-flex !important;
 }
@@ -10537,6 +10541,12 @@ fieldset:disabled .btn {
 
 .text-end {
   text-align: right !important;
+}
+
+.text-error {
+  font-size: 0.6em;
+  font-style: italic;
+  font-weight: 600;
 }
 
 .text-center {
