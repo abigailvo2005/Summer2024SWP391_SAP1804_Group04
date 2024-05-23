@@ -1,7 +1,3 @@
-<%@ include file="/common/taglib.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
-
 <%@ include file="/common/taglib.jsp" %> <%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
 file="/common/taglib.jsp" %>
@@ -47,10 +43,11 @@ file="/common/taglib.jsp" %>
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
+    <!-- START DASHBOARD MAIN CONTENT -->
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-      <!-- START: List Processing Job -->
+      <!-- START: List Account Register Requests-->
       <div class="row my-4 mx-2">
         <div class="mb-md-0 mb-4">
           <div class="card">
@@ -59,8 +56,8 @@ file="/common/taglib.jsp" %>
                 <div class="col-lg-6 col-7">
                   <h6>Account Register Requests</h6>
                   <p class="text-sm mb-0">
-                    <i class="fa-solid fa-hourglass-start"></i>
-                    <span class="font-weight-bold ms-1">4 requests</span>
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span class="font-weight-bold ms-1">3 requests</span>
                     pending
                   </p>
                 </div>
@@ -78,19 +75,19 @@ file="/common/taglib.jsp" %>
                         ID
                       </th>
                       <th
-                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                       >
-                        PROPERTY NAME
+                        NAME
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                       >
-                        Price
+                        Role
                       </th>
                       <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
-                        Status
+                        Created By
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -122,8 +119,7 @@ file="/common/taglib.jsp" %>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
                             <p class="mb-0 text-sm fw-bold text-dark">
-                              Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
-                              City Tây Mỗ
+                              Hoàng Việt Hùng
                             </p>
                           </div>
                         </div>
@@ -133,9 +129,7 @@ file="/common/taglib.jsp" %>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              1.75 tỷ
-                            </p>
+                            <p class="mb-0 text-sm fw-bold text-dark">Staff</p>
                           </div>
                         </div>
                       </td>
@@ -144,9 +138,7 @@ file="/common/taglib.jsp" %>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-warning">
-                              Submitted
-                            </p>
+                            <p class="mb-0 text-sm fw-bold text-dark">LongND</p>
                           </div>
                         </div>
                       </td>
@@ -180,18 +172,18 @@ file="/common/taglib.jsp" %>
       </div>
       <!-- END LIST 1-->
 
-      <!-- START: List Processing Properties -->
+      <!-- START: List All Users in system -->
       <div class="row my-4 mx-2">
         <div class="mb-md-0 mb-4">
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>All Users In System</h6>
+                  <h6>All Users</h6>
                   <p class="text-sm mb-0">
-                    <i class="fa-solid fa-house-user"></i>
-                    <span class="font-weight-bold ms-1">3 properties</span>
-                    being handled
+                    <i class="fa-solid fa-user"></i>
+                    <span class="font-weight-bold ms-1">300 users</span>
+                    in system
                   </p>
                 </div>
               </div>
@@ -208,25 +200,26 @@ file="/common/taglib.jsp" %>
                         ID
                       </th>
                       <th
-                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                       >
-                        PROPERTY NAME
-                      </th>
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                      >
-                        Price
-                      </th>
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                      >
-                        Status
+                        NAME
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-3"
                       >
-                        Date Created
+                        ID No.
                       </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                      >
+                        Role
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                      >
+                        Status
+                      </th>
+
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
@@ -236,7 +229,7 @@ file="/common/taglib.jsp" %>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <!-- row 1: example property has been posted & available -->
+                    <!-- row 1: example request just submitted -->
                     <tr>
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
@@ -251,8 +244,7 @@ file="/common/taglib.jsp" %>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
                             <p class="mb-0 text-sm fw-bold text-dark">
-                              Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
-                              City Tây Mỗ
+                              Nguyễn Đức Long
                             </p>
                           </div>
                         </div>
@@ -263,7 +255,7 @@ file="/common/taglib.jsp" %>
                             class="d-flex flex-column justify-content-center"
                           >
                             <p class="mb-0 text-sm fw-bold text-dark">
-                              1.75 tỷ
+                              001928437725193
                             </p>
                           </div>
                         </div>
@@ -273,9 +265,7 @@ file="/common/taglib.jsp" %>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-muted">
-                              Available
-                            </p>
+                            <p class="mb-0 text-sm fw-bold text-dark">Seller</p>
                           </div>
                         </div>
                       </td>
@@ -284,9 +274,7 @@ file="/common/taglib.jsp" %>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              20/05/2024
-                            </p>
+                            <p class="mb-0 text-sm fw-bold text-dark">Active</p>
                           </div>
                         </div>
                       </td>
@@ -346,6 +334,7 @@ file="/common/taglib.jsp" %>
       </footer>
       <!-- END: FOOTER -->
     </main>
+    <!-- END DASHBOARD MAIN CONTENT -->
 
     <!--   Core JS Files   -->
     <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
