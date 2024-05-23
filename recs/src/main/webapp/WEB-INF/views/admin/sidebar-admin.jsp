@@ -50,7 +50,7 @@ file="/common/taglib.jsp" %>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/dashboard-seller"
+          href="${pageContext.request.contextPath}/dashboard-admin"
           target="_self"
         >
           <img
@@ -69,7 +69,7 @@ file="/common/taglib.jsp" %>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/dashboard-man"
+              href="${pageContext.request.contextPath}/dashboard-admin"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -78,7 +78,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-table-columns"
                   style="
                     $ {
-                      currentPage !='dashboard'?'color: #30221b': '';
+                      currentPage !='dashboard'?'color: #30221b;': '';
                     }
                   "
                 ></i>
@@ -89,7 +89,7 @@ file="/common/taglib.jsp" %>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/profile-man"
+              href="${pageContext.request.contextPath}/profile-admin"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -98,7 +98,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentPage != 'profile' ? 'color: #30221b;': '';
+                      currentPage != 'profile'?'color: #30221b;': '';
                     }
                   "
                 ></i>
@@ -108,28 +108,8 @@ file="/common/taglib.jsp" %>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'requests' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/requests-man"
-            >
-              <div
-                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i
-                  class="fa-solid fa-code-pull-request"
-                  style="
-                    $ {
-                      currentPage!='requests'?'color: #30221b': '';
-                    }
-                  "
-                ></i>
-              </div>
-              <span class="nav-link-text ms-1">Validating Requests</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link ${currentPage == 'register' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/register-acc-man"
+              class="nav-link ${currentPage == 'tracking' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/property-tracking"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -138,12 +118,12 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-pen-to-square"
                   style="
                     $ {
-                      currentPage!='register'?'color: #30221b': '';
+                      currentPage!='tracking'?'color: #30221b;': '';
                     }
                   "
                 ></i>
               </div>
-              <span class="nav-link-text ms-1">Register Staff</span>
+              <span class="nav-link-text ms-1">Property Tracking</span>
             </a>
           </li>
         </ul>
@@ -169,7 +149,7 @@ file="/common/taglib.jsp" %>
                 handled.
               </p>
               <a
-                href="${pageContext.request.contextPath}/history-man"
+                href="${pageContext.request.contextPath}/history-admin"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -177,11 +157,6 @@ file="/common/taglib.jsp" %>
             </div>
           </div>
         </div>
-        <a
-          class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/assign-job"
-          >Assign Job</a
-        >
       </div>
     </aside>
     <!-- END SIDEBAR -->
@@ -210,18 +185,14 @@ file="/common/taglib.jsp" %>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-man' ?
-                'View History' : (currentPage == 'assign-job' ? 'Assign Job' :
-                (currentPage == 'requests-man' ? 'Validating Requests' :
-                (currentPage == 'register' ? 'Register Account Staff' : '')))))}
+                'profile' ? 'View Profile' : (currentPage == 'history-admin' ?
+                'View History' : (currentPage == 'tracking' ? 'System Property Tracking' : '')))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
-              ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
-              : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-              'requests-man' ? 'Validating Requests' : (currentPage ==
-              'register' ? 'Register Staff' : '')))))}
+                ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
+                'profile' ? 'Profile' : (currentPage == 'history-admin' ?
+                'History' : (currentPage == 'tracking' ? 'Property Tracking' : '')))}
             </h6>
           </nav>
 

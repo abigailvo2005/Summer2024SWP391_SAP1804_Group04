@@ -18,7 +18,7 @@ public class ManagerController {
 
     @RequestMapping(value = "/profile-man", method = RequestMethod.GET)
     public ModelAndView viewProfile() {
-        ModelAndView mav = new ModelAndView("/profile-man");
+        ModelAndView mav = new ModelAndView("/manager/profile-man");
         mav.addObject("currentPage", "profile");
         return mav;
     }

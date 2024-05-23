@@ -51,7 +51,7 @@ file="/common/taglib.jsp" %>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url(<c:urlvalue='/template/assets/img/register-staff-bg.png'/>);
+            background-image: url(<c:url value='/template/assets/img/register-staff-bg.png'/>);
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
