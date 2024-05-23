@@ -47,18 +47,224 @@ file="/common/taglib.jsp" %>
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-      <!-- START: List Account Register Requests-->
+      <!-- START: INTRODUCTION HEADER -->
+      <section class="min-vh-100 mb-4">
+        <div
+          class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
+          style="
+            background-image: url(<c:urlvalue='/template/assets/img/register-staff-bg.png'/>);
+          "
+        >
+          <span class="mask bg-gradient-dark opacity-6"></span>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-sm-12 col-md-8 col-lg-6 text-center mx-auto">
+                <h2 class="text-white mb-1 mt-sm-4">Register New Staff</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END: INTRODUCTION HEADER -->
+
+        <!-- START: FORM TO REGISTER NEW STAFF -->
+        <div class="container">
+          <div class="row mt-lg-n8 mt-md-n8 mt-n7 mt-sm-n9">
+            <div class="col-12 col-xl-11 mx-auto">
+              <div class="card z-index-0">
+                <div class="card-header text-center pt-4">
+                  <h5><b>Staff Register Form</b></h5>
+                </div>
+
+                <div class="card-body">
+                  <form role="form text-left" name="register-staff-form">
+                    <div class="mb-3 row">
+                      <div class="col-sm-2"><label>First Name:</label></div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="firstName"
+                          class="form-control form-create-control col-10"
+                          placeholder="Enter first name"
+                          required
+                        />
+                        <!-- ERROR MESSAGE BEING HIDDEN -->
+                        <!-- <p
+                    class="text-danger text-error mb-0 text-center pt-1 hidden"
+                  >
+                    name should only contains 255 characters.
+                  </p> -->
+                      </div>
+                      <div class="col-sm-2"><label>Last Name:</label></div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="lastName"
+                          class="form-control form-create-control col-10"
+                          placeholder="Enter last name"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2">
+                        <label>Gender:</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <select
+                          class="form-control form-create-control col-10"
+                          name="gender"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Select biological gender
+                          </option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+
+                      <div class="col-sm-2"><label>Date of Birth:</label></div>
+                      <div class="col-sm-4">
+                        <input
+                          type="date"
+                          name="birthday"
+                          class="form-control form-create-control col-10"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2">
+                        <label> Email:</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          type="email"
+                          name="emai"
+                          class="form-control form-create-control col-10"
+                          placeholder="Enter work email"
+                          required
+                        />
+                      </div>
+
+                      <div class="col-sm-2">
+                        <label> Phone:</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          type="number"
+                          name="phone"
+                          class="form-control form-create-control col-10"
+                          placeholder="Enter phone number"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2">
+                        <label> Address:</label>
+                      </div>
+                      <div class="col-sm-10">
+                        <input
+                          type="text"
+                          name="address"
+                          class="form-control form-create-control col-10"
+                          placeholder="your property's adress"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2">
+                        <label> ID Card No. :</label>
+                      </div>
+                      <div class="col-sm-10">
+                        <input
+                          type="number"
+                          name="address"
+                          class="form-control form-create-control col-10"
+                          placeholder="Enter ID card number"
+                          min="1"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2">
+                        <label> ID Card (Front):</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          class="form-control form-create-control col-10"
+                          type="file"
+                          name="frontID"
+                        />
+                      </div>
+
+                      <div class="col-sm-2">
+                        <label> ID Card (Back):</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          class="form-control form-create-control col-10"
+                          type="file"
+                          name="backID"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2"><label> Role:</label></div>
+                      <div class="col-sm-2">
+                        <input
+                          type="text"
+                          class="form-control form-create-control col-10"
+                          value="Staff"
+                          disabled
+                        />
+                      </div>
+
+                      <!-- submit button -->
+                      <div class="text-center container">
+                        <div class="row">
+                          <div class="col-sm-4"></div>
+                          <div class="col-sm-4">
+                            <button
+                              type="button"
+                              class="btn bg-gradient-dark w-100 my-4 mb-2"
+                            >
+                              Submit Request
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: FORM TO REGISTER NEW STAFF -->
+
+      <!-- START: LIST REGISTER REQUEST -->
       <div class="row my-4 mx-2">
         <div class="mb-md-0 mb-4">
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Account Register Requests</h6>
+                  <h6>Staff Register Requests</h6>
                   <p class="text-sm mb-0">
-                    <i class="fa-solid fa-file-invoice"></i>
-                    <span class="font-weight-bold ms-1">3 requests</span>
-                    pending
+                    <i class="fa-solid fa-house-user"></i>
+                    <span class="font-weight-bold ms-1">21 requests</span>
+                    in total
                   </p>
                 </div>
               </div>
@@ -85,16 +291,15 @@ file="/common/taglib.jsp" %>
                         Role
                       </th>
                       <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                      >
-                        Created By
-                      </th>
-                      <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                       >
                         Date Created
                       </th>
-
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                      >
+                        Status
+                      </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
@@ -104,7 +309,7 @@ file="/common/taglib.jsp" %>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <!-- row 1: example request just submitted -->
+                    <!-- row 1: example property has been posted & available -->
                     <tr>
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
@@ -129,16 +334,9 @@ file="/common/taglib.jsp" %>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-dark">Staff</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">LongND</p>
+                            <p class="mb-0 text-sm fw-bold text-dark">
+                              Staff
+                            </p>
                           </div>
                         </div>
                       </td>
@@ -148,7 +346,18 @@ file="/common/taglib.jsp" %>
                             class="d-flex flex-column justify-content-center"
                           >
                             <p class="mb-0 text-sm fw-bold text-dark">
-                              20/05/2024
+                             20/05/2024
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="d-flex px-2 py-1 justify-content-center">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <p class="mb-0 text-sm fw-bold text-muted">
+                              Reviewing
                             </p>
                           </div>
                         </div>
@@ -170,132 +379,7 @@ file="/common/taglib.jsp" %>
           </div>
         </div>
       </div>
-      <!-- END LIST 1-->
-
-      <!-- START: List All Users in system -->
-      <div class="row my-4 mx-2">
-        <div class="mb-md-0 mb-4">
-          <div class="card">
-            <div class="card-header pb-0">
-              <div class="row">
-                <div class="col-lg-6 col-7">
-                  <h6>All Users</h6>
-                  <p class="text-sm mb-0">
-                    <i class="fa-solid fa-user"></i>
-                    <span class="font-weight-bold ms-1">300 users</span>
-                    in system
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-body px-0 pb-2">
-              <div class="table-responsive">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th
-                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                      >
-                        ID
-                      </th>
-                      <th
-                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
-                      >
-                        NAME
-                      </th>
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-3"
-                      >
-                        ID No.
-                      </th>
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                      >
-                        Role
-                      </th>
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                      >
-                        Status
-                      </th>
-
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                      >
-                        View Details
-                      </th>
-                    </tr>
-                  </thead>
-                  <!--input list of validating requests here - only 1 row for reference-->
-                  <tbody>
-                    <!-- row 1: example request just submitted -->
-                    <tr>
-                      <td class="align-middle text-center text-sm">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">01</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex justify-content-start">
-                          <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              Nguyễn Đức Long
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              001928437725193
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">Seller</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">Active</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <a href="#"><i class="fa-solid fa-eye"></i></a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END LIST 2-->
+      <!-- END LIST REGISTER REQUEST-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">

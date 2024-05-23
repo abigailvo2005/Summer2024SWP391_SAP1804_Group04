@@ -250,8 +250,137 @@ file="/common/taglib.jsp" %>
           </div>
         </div>
       </section>
-
       <!-- END: FORM TO REGISTER NEW STAFF -->
+
+
+      <!-- START: LIST REGISTER REQUEST -->
+      <div class="row my-4 mx-2">
+        <div class="mb-md-0 mb-4">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6>Responsibled Properties</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa-solid fa-house-user"></i>
+                    <span class="font-weight-bold ms-1">3 properties</span>
+                    being handled
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                      >
+                        ID
+                      </th>
+                      <th
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
+                      >
+                        PROPERTY NAME
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                      >
+                        Price
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-3"
+                      >
+                        Date Created
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                      >
+                        View Details
+                      </th>
+                    </tr>
+                  </thead>
+                  <!--input list of validating requests here - only 1 row for reference-->
+                  <tbody>
+                    <!-- row 1: example property has been posted & available -->
+                    <tr>
+                      <td class="align-middle text-center text-sm">
+                        <div class="d-flex px-2 py-1 justify-content-center">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex justify-content-start">
+                          <div class="d-flex flex-column justify-content-start">
+                            <p class="mb-0 text-sm fw-bold text-dark">
+                              Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
+                              City Tây Mỗ
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex px-2 py-1 justify-content-center">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <p class="mb-0 text-sm fw-bold text-dark">
+                              1.75 tỷ
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="d-flex px-2 py-1 justify-content-center">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <p class="mb-0 text-sm fw-bold text-muted">
+                              Available
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="d-flex px-2 py-1 justify-content-center">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <p class="mb-0 text-sm fw-bold text-dark">
+                              20/05/2024
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <div class="d-flex px-2 py-1 justify-content-center">
+                          <div
+                            class="d-flex flex-column justify-content-center"
+                          >
+                            <a href="#"><i class="fa-solid fa-eye"></i></a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END LIST REGISTER REQUEST-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
