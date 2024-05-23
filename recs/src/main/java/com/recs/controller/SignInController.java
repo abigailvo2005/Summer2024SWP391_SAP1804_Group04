@@ -22,7 +22,7 @@ public class SignInController {
         }
 
         mav.addObject("currentPage", "dashboard");
-        mav.addObject("username", "LongND");
+        mav.addObject("username", "user");
         return mav;
     }
 
@@ -30,7 +30,7 @@ public class SignInController {
     public ModelAndView innerDashboard() {
         ModelAndView mav = new ModelAndView("/seller/dashboard-seller");
         mav.addObject("currentPage", "/dashboard");
-        mav.addObject("username", "LongND");
+        mav.addObject("username", "user");
         return mav;
     }
 

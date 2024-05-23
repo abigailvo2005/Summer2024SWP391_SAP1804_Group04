@@ -7,11 +7,13 @@ file="/common/taglib.jsp" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RECS - ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-        'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
-        : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-        'requests-man' ? 'Validating Requests' : (currentPage ==
-        'register' ? 'Register Staff' : '')))))}</title>
+    <title>
+      RECS - ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
+      'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History' :
+      (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
+      'requests-man' ? 'Validating Requests' : (currentPage == 'register' ?
+      'Register Staff' : '')))))}
+    </title>
 
     <!-- Link CSS -->
     <link
@@ -43,7 +45,7 @@ file="/common/taglib.jsp" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <aside
-      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 z-index-1 fixed-start ms-3"
       id="sidenav-main"
     >
       <!-- sidebar: menu section-->
@@ -78,7 +80,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-table-columns"
                   style="
                     $ {
-                      currentPage !='dashboard'?'color: #30221b;': '';
+                      currentpage!= 'dashboard' ? 'color: #30221b;' : '';
                     }
                   "
                 ></i>
@@ -98,7 +100,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentPage != 'profile'?'color: #30221b;': '';
+                      currentpage!= 'profile'?'color: #30221b;': '';
                     }
                   "
                 ></i>
@@ -186,13 +188,15 @@ file="/common/taglib.jsp" %>
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
                 'profile' ? 'View Profile' : (currentPage == 'history-admin' ?
-                'View History' : (currentPage == 'tracking' ? 'System Property Tracking' : '')))}
+                'View History' : (currentPage == 'tracking' ? 'System Property
+                Tracking' : '')))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
-                ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'Profile' : (currentPage == 'history-admin' ?
-                'History' : (currentPage == 'tracking' ? 'Property Tracking' : '')))}
+              ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
+              'profile' ? 'Profile' : (currentPage == 'history-admin' ?
+              'History' : (currentPage == 'tracking' ? 'Property Tracking' :
+              '')))}
             </h6>
           </nav>
 

@@ -1,6 +1,7 @@
 <%@ include file="/common/taglib.jsp" %> <%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
 file="/common/taglib.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +37,7 @@ file="/common/taglib.jsp" %>
     />
   </head>
 
-  <body class="g-sidenav-show bg-gray-100">
+  <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
       <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
@@ -252,7 +253,6 @@ file="/common/taglib.jsp" %>
       </section>
       <!-- END: FORM TO REGISTER NEW STAFF -->
 
-
       <!-- START: LIST REGISTER REQUEST -->
       <div class="row my-4 mx-2">
         <div class="mb-md-0 mb-4">
@@ -260,10 +260,10 @@ file="/common/taglib.jsp" %>
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-6 col-7">
-                  <h6>Responsibled Properties</h6>
+                  <h6>Your Staff Register Requests</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-house-user"></i>
-                    <span class="font-weight-bold ms-1">3 properties</span>
+                    <span class="font-weight-bold ms-1">1 request(s)</span>
                     being handled
                   </p>
                 </div>
@@ -283,12 +283,7 @@ file="/common/taglib.jsp" %>
                       <th
                         class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
                       >
-                        PROPERTY NAME
-                      </th>
-                      <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                      >
-                        Price
+                        Staff Name
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -309,7 +304,7 @@ file="/common/taglib.jsp" %>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <!-- row 1: example property has been posted & available -->
+                    <% for(int i = 0; i < 15; i+=1) { %>
                     <tr>
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
@@ -324,8 +319,7 @@ file="/common/taglib.jsp" %>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
                             <p class="mb-0 text-sm fw-bold text-dark">
-                              Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
-                              City Tây Mỗ
+                              Hoàng Việt Hùng
                             </p>
                           </div>
                         </div>
@@ -335,19 +329,8 @@ file="/common/taglib.jsp" %>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              1.75 tỷ
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
                             <p class="mb-0 text-sm fw-bold text-muted">
-                              Available
+                              Reviewing
                             </p>
                           </div>
                         </div>
@@ -373,6 +356,7 @@ file="/common/taglib.jsp" %>
                         </div>
                       </td>
                     </tr>
+                    <% } %>
                   </tbody>
                 </table>
               </div>
@@ -419,6 +403,24 @@ file="/common/taglib.jsp" %>
       </footer>
       <!-- END: FOOTER -->
     </main>
+
+    <script type="text/javascript">
+        function makeTableScroll() {
+            // Constant retrieved from server-side via JSP
+            var maxRows = 5;
+
+            var table = document.querySelector('.table');
+            var wrapper = table.parentNode;
+            var rowsInTable = table.rows.length;
+            var height = 0;
+            if (rowsInTable > maxRows) {
+                for (var i = 0; i < maxRows; i++) {
+                    height += table.rows[i].clientHeight;
+                }
+                wrapper.style.height = height + "px";
+            }
+        }
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>

@@ -24,14 +24,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/history-admin", method = RequestMethod.GET)
-    public ModelAndView historyMan() {
+    public ModelAndView historyAdmin() {
         ModelAndView mav = new ModelAndView("/admin/history-admin");
         mav.addObject("currentPage", "history");
         return mav;
     }
 
     @RequestMapping(value = "/tracking", method = RequestMethod.GET)
-    public ModelAndView historySeller() {
+    public ModelAndView propertyTracking() {
         ModelAndView mav = new ModelAndView("/admin/property-tracking");
         mav.addObject("currentPage", "tracking");
         return mav;
