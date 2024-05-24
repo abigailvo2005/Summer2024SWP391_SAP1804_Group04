@@ -36,7 +36,7 @@ file="/common/taglib.jsp" %>
     />
   </head>
 
-  <body class="g-sidenav-show bg-gray-100">
+  <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
       <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
@@ -52,13 +52,28 @@ file="/common/taglib.jsp" %>
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
-                <div class="col-lg-6 col-7">
+                <div class="col-lg-8 col-9">
                   <h6>Jobs On Hold</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-hourglass-start"></i>
                     <span class="font-weight-bold ms-1">4 requests</span>
                     pending
                   </p>
+                </div>
+                <!-- search bar -->
+                <div
+                  class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                >
+                  <div class="input-group">
+                    <span class="input-group-text text-body"
+                      ><i class="fas fa-search" aria-hidden="true"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Type name here..."
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -182,13 +197,28 @@ file="/common/taglib.jsp" %>
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
-                <div class="col-lg-6 col-7">
+                <div class="col-lg-8 col-9">
                   <h6>Responsibled Properties</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-house-user"></i>
                     <span class="font-weight-bold ms-1">3 properties</span>
                     being handled
                   </p>
+                </div>
+                <!-- search bar -->
+                <div
+                  class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                >
+                  <div class="input-group">
+                    <span class="input-group-text text-body"
+                      ><i class="fas fa-search" aria-hidden="true"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Type name here..."
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -342,6 +372,35 @@ file="/common/taglib.jsp" %>
       </footer>
       <!-- END: FOOTER -->
     </main>
+
+    <script type="text/javascript">
+      function makeTableScroll() {
+        // Constant retrieved from server-side via JSP
+        var maxRows = 6;
+
+        var table = document.querySelector(".table");
+        var wrapper = table.parentNode;
+        var rowsInTable = table.rows.length;
+        var height = 20;
+
+        if (rowsInTable > maxRows) {
+          // Create a new wrapper element for the table
+          var newWrapper = document.createElement("div");
+          newWrapper.style.maxHeight = height + "rem";
+          newWrapper.style.overflowY = "scroll";
+
+          // Move the table into the new wrapper
+          wrapper.parentNode.insertBefore(newWrapper, wrapper);
+          newWrapper.appendChild(table);
+
+          // Set the header to be fixed
+          var header = table.getElementsByTagName("thead")[0];
+          header.style.position = "sticky";
+          header.style.top = "0";
+          header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
+        }
+      }
+    </script>
 
     <!--   Core JS Files   -->
     <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>

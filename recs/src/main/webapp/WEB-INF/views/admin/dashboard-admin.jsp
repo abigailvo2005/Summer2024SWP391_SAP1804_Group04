@@ -54,13 +54,25 @@ file="/common/taglib.jsp" %>
             <div class="card">
               <div class="card-header pb-0">
                 <div class="row">
-                  <div class="col-lg-6 col-7">
-                    <h6>Staff Register Requests</h6>
+                  <div class="col-lg-8 col-9">
+                    <h6>All Register Requests</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1">1 request(s)</span>
                       in total
                     </p>
+                  </div>
+                  <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
+                    <div class="input-group">
+                      <span class="input-group-text text-body"
+                        ><i class="fas fa-search" aria-hidden="true"></i
+                      ></span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Type username here..."
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,7 +202,7 @@ file="/common/taglib.jsp" %>
             <div class="card">
               <div class="card-header pb-0">
                 <div class="row">
-                  <div class="col-lg-6 col-7">
+                  <div class="col-lg-8 col-9">
                     <h6>All Users</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
@@ -198,6 +210,17 @@ file="/common/taglib.jsp" %>
                       in system
                     </p>
                   </div>
+                  <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
+                    <div class="input-group">
+                      <span class="input-group-text text-body"
+                        ><i class="fas fa-search" aria-hidden="true"></i
+                      ></span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Type username here..."
+                      />
+                    </div>
                 </div>
               </div>
 
@@ -207,14 +230,14 @@ file="/common/taglib.jsp" %>
                     <thead>
                       <tr>
                         <th
-                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                         >
                           ID
                         </th>
                         <th
-                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                         >
-                          NAME
+                          Name
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -374,6 +397,7 @@ file="/common/taglib.jsp" %>
               id="registered-name"
               class="card-header font-weight-bolder mb-0"
             >
+            <!-- full name -->
               Hoàng Việt Hùng
             </h4>
           </div>
@@ -394,13 +418,24 @@ file="/common/taglib.jsp" %>
                   <div class="container-fluid">
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Account ID:</strong> &nbsp;
-                        HungHV
+                        <strong class="text-dark">Username:</strong> &nbsp;
+                        HungVH
                       </li>
+                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <strong class="text-dark">Password:</strong> &nbsp; Male
+                      </li>
+                    </div>
+
+                    <div class="row">
+                        <li class="list-group-item border-0 ps-0 text-sm col-6">
+                          <strong class="text-dark">Username:</strong> &nbsp;
+                          HungHV
+                        </li>
+                       
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
                         <strong class="text-dark">Gender:</strong> &nbsp; Male
                       </li>
-                    </div>
+                      </div>
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
@@ -486,48 +521,35 @@ file="/common/taglib.jsp" %>
       </div>
     </div>
 
-    <!-- JS MODIFY POPUP -->
-    <script>
-      var maxRows = 5;
-      function makeTableScroll() {
-        //set limit each display only allow 5 rows for a list
-        var table = document.querySelector(".table");
-        var wrapper = table.parentNode;
-        var rowsInTable = table.rows.length;
-        var height = 0;
-        if (rowsInTable > maxRows) {
-          for (var i = 0; i < maxRows; i++) {
-            height += table.rows[i].clientHeight;
+   
+    <script type="text/javascript">
+        function makeTableScroll() {
+          // Constant retrieved from server-side via JSP
+          var maxRows = 6;
+  
+          var table = document.querySelector(".table");
+          var wrapper = table.parentNode;
+          var rowsInTable = table.rows.length;
+          var height = 20;
+  
+          if (rowsInTable > maxRows) {
+            // Create a new wrapper element for the table
+            var newWrapper = document.createElement("div");
+            newWrapper.style.maxHeight = height + "rem";
+            newWrapper.style.overflowY = "scroll";
+  
+            // Move the table into the new wrapper
+            wrapper.parentNode.insertBefore(newWrapper, wrapper);
+            newWrapper.appendChild(table);
+  
+            // Set the header to be fixed
+            var header = table.getElementsByTagName("thead")[0];
+            header.style.position = "sticky";
+            header.style.top = "0";
+            header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
           }
-          wrapper.style.height = height + "px";
         }
-      }
-
-      // Get the popup container and close button
-      const popupRegisterRequest = document.getElementById(
-        "popup-register-request"
-      );
-      const closeButton = document.querySelector(".close-button");
-
-      // Show popup view detail register
-      function viewDetailRegisterRequest() {
-        popupRegisterRequest.classList.remove("hidden");
-      }
-
-      //Close popup view detail register
-      function closeDetailRegisterRequest() {
-        popupRegisterRequest.classList.add("hidden");
-      }
-
-      //Show popup view detail user
-      function viewDetailUser() {
-        popupRegisterRequest.classList.remove("hidden");
-      }
-
-      function adminResponse() {
-        //update db --> is user activate/denied
-      }
-    </script>
+      </script>
 
     <!-- ---------------- END POPUP SECTION --------------------- -->
   </body>

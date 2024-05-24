@@ -1,7 +1,7 @@
 <%@ include file="/common/taglib.jsp" %> <%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
-file="/common/taglib.jsp" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+file="/common/taglib.jsp" %> <%@taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,35 +78,23 @@ file="/common/taglib.jsp" %>
                 <div class="card-body">
                   <form role="form text-left" name="register-staff-form">
                     <div class="mb-3 row">
-                      <div class="col-sm-2"><label>First Name:</label></div>
+                      <div class="col-sm-2"><label>Full Name:</label></div>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="firstName"
+                          name="fullName"
                           class="form-control form-create-control col-10"
-                          placeholder="Enter first name"
+                          placeholder="Enter full name"
                           required
                         />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <!-- <p
-                    class="text-danger text-error mb-0 text-center pt-1 hidden"
-                  >
-                    name should only contains 255 characters.
-                  </p> -->
+                  class="text-danger text-error mb-0 text-center pt-1 hidden"
+                >
+                  name should only contains 255 characters.
+                </p> -->
                       </div>
-                      <div class="col-sm-2"><label>Last Name:</label></div>
-                      <div class="col-sm-4">
-                        <input
-                          type="text"
-                          name="lastName"
-                          class="form-control form-create-control col-10"
-                          placeholder="Enter last name"
-                          required
-                        />
-                      </div>
-                    </div>
 
-                    <div class="mb-3 row">
                       <div class="col-sm-2">
                         <label>Gender:</label>
                       </div>
@@ -123,7 +111,9 @@ file="/common/taglib.jsp" %>
                           <option value="female">Female</option>
                         </select>
                       </div>
+                    </div>
 
+                    <div class="mb-3 row">
                       <div class="col-sm-2"><label>Date of Birth:</label></div>
                       <div class="col-sm-4">
                         <input
@@ -133,9 +123,6 @@ file="/common/taglib.jsp" %>
                           required
                         />
                       </div>
-                    </div>
-
-                    <div class="mb-3 row">
                       <div class="col-sm-2">
                         <label> Email:</label>
                       </div>
@@ -148,7 +135,9 @@ file="/common/taglib.jsp" %>
                           required
                         />
                       </div>
+                    </div>
 
+                    <div class="mb-3 row">
                       <div class="col-sm-2">
                         <label> Phone:</label>
                       </div>
@@ -161,13 +150,10 @@ file="/common/taglib.jsp" %>
                           required
                         />
                       </div>
-                    </div>
-
-                    <div class="mb-3 row">
                       <div class="col-sm-2">
                         <label> Address:</label>
                       </div>
-                      <div class="col-sm-10">
+                      <div class="col-sm-4">
                         <input
                           type="text"
                           name="address"
@@ -179,10 +165,20 @@ file="/common/taglib.jsp" %>
                     </div>
 
                     <div class="mb-3 row">
+                      <div class="col-sm-2"><label>Password:</label></div>
+                      <div class="col-sm-4">
+                        <input
+                          type="text"
+                          name="password"
+                          class="form-control form-create-control col-10"
+                          placeholder="Enter expected password"
+                          required
+                        />
+                      </div>
                       <div class="col-sm-2">
                         <label> ID Card No. :</label>
                       </div>
-                      <div class="col-sm-10">
+                      <div class="col-sm-4">
                         <input
                           type="number"
                           name="address"
@@ -259,13 +255,29 @@ file="/common/taglib.jsp" %>
           <div class="card">
             <div class="card-header pb-0">
               <div class="row">
-                <div class="col-lg-6 col-7">
+                <div class="col-lg-8 col-9">
                   <h6>Your Staff Register Requests</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-house-user"></i>
                     <span class="font-weight-bold ms-1">1 request(s)</span>
                     being handled
                   </p>
+                </div>
+
+                <!-- search bar -->
+                <div
+                  class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                >
+                  <div class="input-group">
+                    <span class="input-group-text text-body"
+                      ><i class="fas fa-search" aria-hidden="true"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Type username here..."
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -281,9 +293,14 @@ file="/common/taglib.jsp" %>
                         ID
                       </th>
                       <th
-                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                       >
-                        Staff Name
+                        FULL NAME
+                      </th>
+                      <th
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-2"
+                      >
+                        USERNAME
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -321,6 +338,13 @@ file="/common/taglib.jsp" %>
                             <p class="mb-0 text-sm fw-bold text-dark">
                               Hoàng Việt Hùng
                             </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex justify-content-start">
+                          <div class="d-flex flex-column justify-content-start">
+                            <p class="mb-0 text-sm fw-bold text-dark">HungVH</p>
                           </div>
                         </div>
                       </td>
@@ -404,22 +428,34 @@ file="/common/taglib.jsp" %>
       <!-- END: FOOTER -->
     </main>
 
+    <!-- make table scrollable & fixed header -->
     <script type="text/javascript">
-        function makeTableScroll() {
-            // Constant retrieved from server-side via JSP
-            var maxRows = 5;
+      function makeTableScroll() {
+        // Constant retrieved from server-side via JSP
+        var maxRows = 6;
 
-            var table = document.querySelector('.table');
-            var wrapper = table.parentNode;
-            var rowsInTable = table.rows.length;
-            var height = 0;
-            if (rowsInTable > maxRows) {
-                for (var i = 0; i < maxRows; i++) {
-                    height += table.rows[i].clientHeight;
-                }
-                wrapper.style.height = height + "px";
-            }
+        var table = document.querySelector(".table");
+        var wrapper = table.parentNode;
+        var rowsInTable = table.rows.length;
+        var height = 20;
+
+        if (rowsInTable > maxRows) {
+          // Create a new wrapper element for the table
+          var newWrapper = document.createElement("div");
+          newWrapper.style.maxHeight = height + "rem";
+          newWrapper.style.overflowY = "scroll";
+
+          // Move the table into the new wrapper
+          wrapper.parentNode.insertBefore(newWrapper, wrapper);
+          newWrapper.appendChild(table);
+
+          // Set the header to be fixed
+          var header = table.getElementsByTagName("thead")[0];
+          header.style.position = "sticky";
+          header.style.top = "0";
+          header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
         }
+      }
     </script>
 
     <!--   Core JS Files   -->

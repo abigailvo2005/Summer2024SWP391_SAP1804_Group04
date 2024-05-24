@@ -11,6 +11,8 @@ public class AdminController {
     @RequestMapping(value = "/dashboard-admin", method = RequestMethod.GET)
     public ModelAndView innerDashboard() {
         ModelAndView mav = new ModelAndView("/admin/dashboard-admin");
+
+        /* tạo list mẫu trong controller chứa dữ liệu sample --> load list lên dashboard page bằng mav.addObject() gắn attribute sampleList */
         mav.addObject("currentPage", "dashboard");
         mav.addObject("username", "LongND");
         return mav;
@@ -34,6 +36,13 @@ public class AdminController {
     public ModelAndView propertyTracking() {
         ModelAndView mav = new ModelAndView("/admin/property-tracking");
         mav.addObject("currentPage", "tracking");
+        return mav;
+    }
+
+    @RequestMapping(value = "/create-account", method = RequestMethod.GET)
+    public ModelAndView createAccount() {
+        ModelAndView mav = new ModelAndView("/admin/create-account");
+        mav.addObject("currentPage", "create-account");
         return mav;
     }
 }
