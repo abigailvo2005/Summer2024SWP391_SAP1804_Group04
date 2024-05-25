@@ -62,7 +62,9 @@ file="/common/taglib.jsp" %>
                       in total
                     </p>
                   </div>
-                  <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
+                  <div
+                    class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                  >
                     <div class="input-group">
                       <span class="input-group-text text-body"
                         ><i class="fas fa-search" aria-hidden="true"></i
@@ -75,118 +77,128 @@ file="/common/taglib.jsp" %>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="card-body px-0 pb-2">
-                <div class="table-responsive">
-                  <table class="table align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th
-                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                        >
-                          ID
-                        </th>
-                        <th
-                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
-                        >
-                          NAME
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                        >
-                          Role
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                        >
-                          Date Created
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                        >
-                          Status
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                        >
-                          View Details
-                        </th>
-                      </tr>
-                    </thead>
-                    <!--input list of validating requests here - only 1 row for reference-->
-                    <tbody>
-                      <!-- row 1: example property has been posted & available -->
-                      <tr>
-                        <td class="align-middle text-center text-sm">
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="card-body px-0 pb-2">
+                  <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th
+                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          >
+                            ID
+                          </th>
+                          <th
+                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                          >
+                            NAME
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                          >
+                            Role
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                          >
+                            Date Created
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          >
+                            Status
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          >
+                            View Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <!--input list of validating requests here - only 1 row for reference-->
+                      <tbody>
+                        <!-- row 1: example property has been posted & available -->
+                        <tr>
+                          <td class="align-middle text-center text-sm">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex justify-content-start">
+                          </td>
+                          <td>
+                            <div class="d-flex justify-content-start">
+                              <div
+                                class="d-flex flex-column justify-content-start"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  Hoàng Việt Hùng
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
                             <div
-                              class="d-flex flex-column justify-content-start"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">
-                                Hoàng Việt Hùng
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  Staff
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                          </td>
+                          <td class="align-middle">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">
-                                Staff
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  20/05/2024
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                          </td>
+                          <td class="align-middle">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">
-                                20/05/2024
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-muted">
+                                  Reviewing
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                          </td>
+                          <td class="align-middle">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-muted">
-                                Reviewing
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <a
+                                  class="show-detail"
+                                  onclick="viewDetailRegisterRequest()"
+                                  ><i class="fa-solid fa-eye"></i
+                                ></a>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
-                            <div
-                              class="d-flex flex-column justify-content-center"
-                            >
-                              <a
-                                class="show-detail"
-                                onclick="viewDetailRegisterRequest()"
-                                ><i class="fa-solid fa-eye"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -210,7 +222,9 @@ file="/common/taglib.jsp" %>
                       in system
                     </p>
                   </div>
-                  <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
+                  <div
+                    class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                  >
                     <div class="input-group">
                       <span class="input-group-text text-body"
                         ><i class="fas fa-search" aria-hidden="true"></i
@@ -221,158 +235,173 @@ file="/common/taglib.jsp" %>
                         placeholder="Type username here..."
                       />
                     </div>
+                  </div>
                 </div>
-              </div>
 
-              <div class="card-body px-0 pb-2">
-                <div class="table-responsive">
-                  <table class="table align-items-center mb-0">
-                    <thead>
-                      <tr>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                        >
-                          ID
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
-                        >
-                          Name
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                        >
-                          Role
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                        >
-                          Gender
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                        >
-                          Status
-                        </th>
-                        <th
-                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                        >
-                          View Details
-                        </th>
-                      </tr>
-                    </thead>
-                    <!--input list of validating requests here - only 1 row for reference-->
-                    <tbody>
-                      <!-- row 1: example property has been posted & available -->
-                      <tr>
-                        <td class="align-middle text-center text-sm">
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                <div class="card-body px-0 pb-2">
+                  <div class="table-responsive">
+                    <table class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          >
+                            ID
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                          >
+                            Name
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                          >
+                            Role
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                          >
+                            Gender
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          >
+                            Status
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                          >
+                            View Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <!--input list of validating requests here - only 1 row for reference-->
+                      <tbody>
+                        <!-- row 1: example property has been posted & available -->
+                        <tr>
+                          <td class="align-middle text-center text-sm">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex justify-content-start">
+                          </td>
+                          <td>
+                            <div class="d-flex justify-content-start">
+                              <div
+                                class="d-flex flex-column justify-content-start"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  Nguyễn Đức Long
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
                             <div
-                              class="d-flex flex-column justify-content-start"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">
-                                Nguyễn Đức Long
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  Manager
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                          </td>
+                          <td class="align-middle">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">
-                                Manager
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  Male
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                          </td>
+                          <td class="align-middle">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">Male</p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-muted">
+                                  Active
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
+                          </td>
+                          <td class="align-middle">
                             <div
-                              class="d-flex flex-column justify-content-center"
+                              class="d-flex px-2 py-1 justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-muted">
-                                Active
-                              </p>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <a
+                                  onclick="viewDetailUser()"
+                                  class="show-detail"
+                                  ><i class="fa-solid fa-eye"></i
+                                ></a>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
-                            <div
-                              class="d-flex flex-column justify-content-center"
-                            >
-                              <a onclick="viewDetailUser()" class="show-detail"
-                                ><i class="fa-solid fa-eye"></i
-                              ></a>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- END LIST ALL USERS IN SYSTEM-->
+
+        <!-- START FOOTER-->
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div
+                  class="copyright text-center text-sm text-muted text-lg-start"
+                >
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with <i class="fa fa-heart"></i> by
+                  <b>Team 4 - SAP1801</b>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul
+                  class="nav nav-footer justify-content-center justify-content-lg-end"
+                >
+                  <li class="nav-item">
+                    <a href="#" class="nav-link text-muted" target="_blank"
+                      >About Us</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link text-muted" target="_blank"
+                      >Team</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
-      <!-- END LIST ALL USERS IN SYSTEM-->
-
-      <!-- START FOOTER-->
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div
-                class="copyright text-center text-sm text-muted text-lg-start"
-              >
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <b>Team 4 - SAP1801</b>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul
-                class="nav nav-footer justify-content-center justify-content-lg-end"
-              >
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-muted" target="_blank"
-                    >About Us</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-muted" target="_blank"
-                    >Team</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
       <!-- END: FOOTER -->
     </main>
     <!-- END DASHBOARD MAIN CONTENT -->
@@ -397,7 +426,7 @@ file="/common/taglib.jsp" %>
               id="registered-name"
               class="card-header font-weight-bolder mb-0"
             >
-            <!-- full name -->
+              <!-- full name -->
               Hoàng Việt Hùng
             </h4>
           </div>
@@ -422,43 +451,38 @@ file="/common/taglib.jsp" %>
                         HungVH
                       </li>
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Password:</strong> &nbsp; Male
+                        <strong class="text-dark">Password:</strong> &nbsp;
+                        123456
                       </li>
                     </div>
-
-                    <div class="row">
-                        <li class="list-group-item border-0 ps-0 text-sm col-6">
-                          <strong class="text-dark">Username:</strong> &nbsp;
-                          HungHV
-                        </li>
-                       
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Gender:</strong> &nbsp; Male
-                      </li>
-                      </div>
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
                         <strong class="text-dark">Email:</strong> &nbsp;
                         hoangviethung@gmail.com
                       </li>
+
+                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <strong class="text-dark">Gender:</strong> &nbsp; Male
+                      </li>
+                    </div>
+
+                    <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
                         <strong class="text-dark">Birthday:</strong> &nbsp;
                         01/02/2003
                       </li>
-                    </div>
-
-                    <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
                         <strong class="text-dark">Phone:</strong> &nbsp;
                         09128382948
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Role:</strong> &nbsp; Staff
-                      </li>
                     </div>
 
                     <div class="row">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <strong class="text-dark">Role:</strong> &nbsp; Staff
+                      </li>
+
                       <li class="list-group-item border-0 ps-0 text-sm">
                         <strong class="text-dark">ID Number:</strong> &nbsp;
                         0013349227592
@@ -520,37 +544,56 @@ file="/common/taglib.jsp" %>
         </div>
       </div>
     </div>
-
-   
-    <script type="text/javascript">
-        function makeTableScroll() {
-          // Constant retrieved from server-side via JSP
-          var maxRows = 6;
-  
-          var table = document.querySelector(".table");
-          var wrapper = table.parentNode;
-          var rowsInTable = table.rows.length;
-          var height = 20;
-  
-          if (rowsInTable > maxRows) {
-            // Create a new wrapper element for the table
-            var newWrapper = document.createElement("div");
-            newWrapper.style.maxHeight = height + "rem";
-            newWrapper.style.overflowY = "scroll";
-  
-            // Move the table into the new wrapper
-            wrapper.parentNode.insertBefore(newWrapper, wrapper);
-            newWrapper.appendChild(table);
-  
-            // Set the header to be fixed
-            var header = table.getElementsByTagName("thead")[0];
-            header.style.position = "sticky";
-            header.style.top = "0";
-            header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
-          }
-        }
-      </script>
-
     <!-- ---------------- END POPUP SECTION --------------------- -->
+
+    <script type="text/javascript">
+      //to show detail register request popup
+      function viewDetailRegisterRequest() {
+        var popup = document.getElementById("popup-register-request");
+        popup.classList.remove("hidden");
+      }
+
+      //to close detail register request popup
+      function closeDetailRegisterRequest() {
+        var popup = document.getElementById("popup-register-request");
+        popup.classList.add("hidden");
+      }
+
+      //still forcely close every popup if clicked on somewhere else than close button
+      window.onclick = function (event) {
+        var popup = document.querySelector(".popup-container");
+        if (event.target == popup) {
+          popup.classList.add("hidden");
+        }
+      };
+
+      //style table to have fixed heading and scrollable
+      function makeTableScroll() {
+        // Constant retrieved from server-side via JSP
+        var maxRows = 6;
+
+        var table = document.querySelector(".table");
+        var wrapper = table.parentNode;
+        var rowsInTable = table.rows.length;
+        var height = 20;
+
+        if (rowsInTable > maxRows) {
+          // Create a new wrapper element for the table
+          var newWrapper = document.createElement("div");
+          newWrapper.style.maxHeight = height + "rem";
+          newWrapper.style.overflowY = "scroll";
+
+          // Move the table into the new wrapper
+          wrapper.parentNode.insertBefore(newWrapper, wrapper);
+          newWrapper.appendChild(table);
+
+          // Set the header to be fixed
+          var header = table.getElementsByTagName("thead")[0];
+          header.style.position = "sticky";
+          header.style.top = "0";
+          header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
+        }
+      }
+    </script>
   </body>
 </html>
