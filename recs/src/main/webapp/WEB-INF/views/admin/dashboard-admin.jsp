@@ -62,9 +62,7 @@ file="/common/taglib.jsp" %>
                       in total
                     </p>
                   </div>
-                  <div
-                    class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
-                  >
+                  <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
                     <div class="input-group">
                       <span class="input-group-text text-body"
                         ><i class="fas fa-search" aria-hidden="true"></i
@@ -204,6 +202,118 @@ file="/common/taglib.jsp" %>
                       
                     </table>
                   </div>
+              </div>
+
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          ID
+                        </th>
+                        <th
+                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                        >
+                          NAME
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        >
+                          Role
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        >
+                          Date Created
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          View Details
+                        </th>
+                      </tr>
+                    </thead>
+                    <!--input list of validating requests here - only 1 row for reference-->
+                    <tbody>
+                      <!-- row 1: example property has been posted & available -->
+                      <tr>
+                        <td class="align-middle text-center text-sm">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex justify-content-start">
+                            <div
+                              class="d-flex flex-column justify-content-start"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                Hoàng Việt Hùng
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                Staff
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                20/05/2024
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-muted">
+                                Reviewing
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <a
+                                class="show-detail"
+                                onclick="viewDetailRegisterRequest()"
+                                ><i class="fa-solid fa-eye"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -227,9 +337,7 @@ file="/common/taglib.jsp" %>
                       in system
                     </p>
                   </div>
-                  <div
-                    class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
-                  >
+                  <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
                     <div class="input-group">
                       <span class="input-group-text text-body"
                         ><i class="fas fa-search" aria-hidden="true"></i
@@ -240,173 +348,158 @@ file="/common/taglib.jsp" %>
                         placeholder="Type username here..."
                       />
                     </div>
-                  </div>
                 </div>
+              </div>
 
-                <div class="card-body px-0 pb-2">
-                  <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                      <thead>
-                        <tr>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            ID
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
-                          >
-                            Name
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                          >
-                            Role
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                          >
-                            Gender
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            Status
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            View Details
-                          </th>
-                        </tr>
-                      </thead>
-                      <!--input list of validating requests here - only 1 row for reference-->
-                      <tbody>
-                        <!-- row 1: example property has been posted & available -->
-                        <tr>
-                          <td class="align-middle text-center text-sm">
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          ID
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                        >
+                          Name
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        >
+                          Role
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        >
+                          Gender
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          View Details
+                        </th>
+                      </tr>
+                    </thead>
+                    <!--input list of validating requests here - only 1 row for reference-->
+                    <tbody>
+                      <!-- row 1: example property has been posted & available -->
+                      <tr>
+                        <td class="align-middle text-center text-sm">
+                          <div class="d-flex px-2 py-1 justify-content-center">
                             <div
-                              class="d-flex px-2 py-1 justify-content-center"
+                              class="d-flex flex-column justify-content-center"
                             >
-                              <div
-                                class="d-flex flex-column justify-content-center"
-                              >
-                                <p class="mb-0 text-sm fw-bold text-dark">01</p>
-                              </div>
+                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
                             </div>
-                          </td>
-                          <td>
-                            <div class="d-flex justify-content-start">
-                              <div
-                                class="d-flex flex-column justify-content-start"
-                              >
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  Nguyễn Đức Long
-                                </p>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex justify-content-start">
                             <div
-                              class="d-flex px-2 py-1 justify-content-center"
+                              class="d-flex flex-column justify-content-start"
                             >
-                              <div
-                                class="d-flex flex-column justify-content-center"
-                              >
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  Manager
-                                </p>
-                              </div>
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                Nguyễn Đức Long
+                              </p>
                             </div>
-                          </td>
-                          <td class="align-middle">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1 justify-content-center">
                             <div
-                              class="d-flex px-2 py-1 justify-content-center"
+                              class="d-flex flex-column justify-content-center"
                             >
-                              <div
-                                class="d-flex flex-column justify-content-center"
-                              >
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  Male
-                                </p>
-                              </div>
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                Manager
+                              </p>
                             </div>
-                          </td>
-                          <td class="align-middle">
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
                             <div
-                              class="d-flex px-2 py-1 justify-content-center"
+                              class="d-flex flex-column justify-content-center"
                             >
-                              <div
-                                class="d-flex flex-column justify-content-center"
-                              >
-                                <p class="mb-0 text-sm fw-bold text-muted">
-                                  Active
-                                </p>
-                              </div>
+                              <p class="mb-0 text-sm fw-bold text-dark">Male</p>
                             </div>
-                          </td>
-                          <td class="align-middle">
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
                             <div
-                              class="d-flex px-2 py-1 justify-content-center"
+                              class="d-flex flex-column justify-content-center"
                             >
-                              <div
-                                class="d-flex flex-column justify-content-center"
-                              >
-                                <a
-                                  onclick="viewDetailUser()"
-                                  class="show-detail"
-                                  ><i class="fa-solid fa-eye"></i
-                                ></a>
-                              </div>
+                              <p class="mb-0 text-sm fw-bold text-muted">
+                                Active
+                              </p>
                             </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <a onclick="viewDetailUser()" class="show-detail"
+                                ><i class="fa-solid fa-eye"></i
+                              ></a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- END LIST ALL USERS IN SYSTEM-->
+      </div>
+      <!-- END LIST ALL USERS IN SYSTEM-->
 
-        <!-- START FOOTER-->
-        <footer class="footer pt-3">
-          <div class="container-fluid">
-            <div class="row align-items-center justify-content-lg-between">
-              <div class="col-lg-6 mb-lg-0 mb-4">
-                <div
-                  class="copyright text-center text-sm text-muted text-lg-start"
-                >
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with <i class="fa fa-heart"></i> by
-                  <b>Team 4 - SAP1801</b>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <ul
-                  class="nav nav-footer justify-content-center justify-content-lg-end"
-                >
-                  <li class="nav-item">
-                    <a href="#" class="nav-link text-muted" target="_blank"
-                      >About Us</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link text-muted" target="_blank"
-                      >Team</a
-                    >
-                  </li>
-                </ul>
+      <!-- START FOOTER-->
+      <footer class="footer pt-3">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div
+                class="copyright text-center text-sm text-muted text-lg-start"
+              >
+                ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , made with <i class="fa fa-heart"></i> by
+                <b>Team 4 - SAP1801</b>
               </div>
             </div>
+            <div class="col-lg-6">
+              <ul
+                class="nav nav-footer justify-content-center justify-content-lg-end"
+              >
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-muted" target="_blank"
+                    >About Us</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-muted" target="_blank"
+                    >Team</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
       <!-- END: FOOTER -->
     </main>
     <!-- END DASHBOARD MAIN CONTENT -->
@@ -431,7 +524,7 @@ file="/common/taglib.jsp" %>
               id="registered-name"
               class="card-header font-weight-bolder mb-0"
             >
-              <!-- full name -->
+            <!-- full name -->
               Hoàng Việt Hùng
             </h4>
           </div>

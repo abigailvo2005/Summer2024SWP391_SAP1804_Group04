@@ -51,7 +51,7 @@ file="/common/taglib.jsp" %>
         <div
           class="page-header min-height-300 border-radius-xl mt-2"
           style="
-            background-image: url('../../template/assets/img/curved-images/profile-background.jpeg');
+            background-image: url(<c:url value='/template/assets/img/curved-images/profile-background.jpeg'/>);
             background-position-y: 50%;
           "
         >
@@ -62,7 +62,7 @@ file="/common/taglib.jsp" %>
             <div class="col-auto">
               <div class="avatar avatar-xl position-relative">
                 <img
-                  src="../../template/assets/img/male-pfp.png"
+                  src="<c:url value='/template/assets/img/male-pfp.png'/>"
                   alt="profile_image"
                   class="w-100 border-radius-lg shadow-sm"
                 />
@@ -72,7 +72,7 @@ file="/common/taglib.jsp" %>
               <div class="h-100">
                 <h5 class="mb-1">Nguyễn Đức Long</h5>
                 <p class="mb-0 font-weight-bold text-sm">
-                  Seller / Property Owner
+                  Manager
                 </p>
               </div>
             </div>
@@ -109,8 +109,8 @@ file="/common/taglib.jsp" %>
                       <strong class="text-dark">Gender:</strong> &nbsp; Male
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
-                      <strong class="text-dark">Address:</strong> &nbsp; đường
-                      số 1, phường Tân Phong, Quận 7, TP HCM, Việt Nam.
+                      <strong class="text-dark">Address:</strong> &nbsp; Đường Tây 
+                      Hòa, Phước Long A, Quận 9, Thàn phố Hồ Chí Minh
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
                       <strong class="text-dark">Birthday:</strong> &nbsp;
@@ -215,7 +215,6 @@ file="/common/taglib.jsp" %>
           </div>
         </div>
       </div>
-    </main>
     <!--END: Profile-->
 
     <!-- START FOOTER-->
@@ -250,6 +249,7 @@ file="/common/taglib.jsp" %>
       </div>
     </footer>
     <!-- END: FOOTER -->
+  </main>
 
     <!--   Core JS Files   -->
     <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>

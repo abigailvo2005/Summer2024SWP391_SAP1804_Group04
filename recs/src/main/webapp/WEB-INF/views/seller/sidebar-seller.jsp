@@ -84,7 +84,7 @@ file="/common/taglib.jsp" %>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'profile-seller' ? 'active' : ''}"
+              class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
               href="${pageContext.request.contextPath}/profile-seller"
             >
               <div
@@ -94,7 +94,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentpage!='profile-seller'?'color: #30221b' : '';
+                      currentpage!='profile'?'color: #30221b' : '';
                     }
                   "
                 ></i>
