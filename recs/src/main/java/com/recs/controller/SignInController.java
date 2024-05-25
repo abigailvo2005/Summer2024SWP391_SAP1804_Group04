@@ -29,14 +29,24 @@ public class SignInController {
     @RequestMapping(value = "/dashboard-seller", method = RequestMethod.GET)
     public ModelAndView innerDashboard() {
         ModelAndView mav = new ModelAndView("/seller/dashboard-seller");
+<<<<<<< HEAD
         mav.addObject("currentPage", "/dashboard");
+=======
+        mav.addObject("currentPage", "dashboard");
+>>>>>>> a332012 (Fix)
         mav.addObject("username", "user");
         return mav;
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = "/profil-seller", method = RequestMethod.GET)
     public ModelAndView viewProfile() {
         ModelAndView mav = new ModelAndView("/profile-seller");
+=======
+    @RequestMapping(value = "/profile-seller", method = RequestMethod.GET)
+    public ModelAndView viewProfile() {
+        ModelAndView mav = new ModelAndView("/seller/profile-seller");
+>>>>>>> a332012 (Fix)
         mav.addObject("currentPage", "profile");
         return mav;
     }

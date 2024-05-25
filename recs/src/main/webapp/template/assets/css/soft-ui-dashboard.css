@@ -4077,12 +4077,21 @@ fieldset:disabled .btn {
 
 .btn-link {
   --bs-btn-font-weight: 400;
+<<<<<<< HEAD
   --bs-btn-color: #cb0c9f;
   --bs-btn-bg: transparent;
   --bs-btn-border-color: transparent;
   --bs-btn-hover-color: #830866;
   --bs-btn-hover-border-color: transparent;
   --bs-btn-active-color: #830866;
+=======
+  --bs-btn-color: #b49966;
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: #8e6925;
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-color: #76510b;
+>>>>>>> a332012 (Fix)
   --bs-btn-active-border-color: transparent;
   --bs-btn-disabled-color: #6c757d;
   --bs-btn-disabled-border-color: transparent;
@@ -21010,6 +21019,10 @@ fieldset:disabled .btn {
 .card.card-plain {
   background-color: transparent;
   box-shadow: none;
+<<<<<<< HEAD
+=======
+  top: -150px;
+>>>>>>> a332012 (Fix)
 }
 
 .card .card-footer {

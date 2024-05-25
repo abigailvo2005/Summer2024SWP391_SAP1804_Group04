@@ -38,6 +38,7 @@
 
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
+<<<<<<< HEAD
     <aside
       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
       id="sidenav-main"
@@ -191,6 +192,16 @@
         </div>
       </nav>
       <!-- END: Nav Bar-->
+=======
+    <header>
+      <jsp:include page="/WEB-INF/views/seller/sidebar-seller.jsp" />
+    </header>
+    <!-- END SIDEBAR -->
+
+    <main
+      class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+>>>>>>> a332012 (Fix)
 
       <!-- START: Profile -->
       <div class="container-fluid py-4">
@@ -198,7 +209,11 @@
         <div
           class="page-header min-height-300 border-radius-xl mt-2"
           style="
+<<<<<<< HEAD
             background-image: url('../../template/assets/img/curved-images/profile-background.jpeg');
+=======
+            background-image: url(<c:url value='/template/assets/img/curved-images/profile-background.jpeg'/>);
+>>>>>>> a332012 (Fix)
             background-position-y: 50%;
           "
         >
@@ -209,7 +224,11 @@
             <div class="col-auto">
               <div class="avatar avatar-xl position-relative">
                 <img
+<<<<<<< HEAD
                   src="../../template/assets/img/male-pfp.png"
+=======
+                  src="<c:url value='/template/assets/img/male-pfp.png'/>"
+>>>>>>> a332012 (Fix)
                   alt="profile_image"
                   class="w-100 border-radius-lg shadow-sm"
                 />
@@ -268,6 +287,13 @@
                       longnd@gmail.com
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
+<<<<<<< HEAD
+=======
+                      <strong class="text-dark">Company:</strong> &nbsp;
+                      Công Ty Tây Mỗ
+                    </li>
+                    <li class="list-group-item border-0 ps-0 text-sm">
+>>>>>>> a332012 (Fix)
                       <strong class="text-dark">ID Number:</strong> &nbsp;
                       0013349227592
                     </li>
@@ -319,6 +345,7 @@
                       >
                         <i class="fa-solid fa-lock"></i>
                       </div>
+<<<<<<< HEAD
 
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
@@ -332,6 +359,14 @@
                         <p class="mb-0 text-xs">Password</p>
                       </div>
 
+=======
+                      <div
+                        class="d-flex align-items-start flex-column justify-content-center"
+                      >
+                        <h6 class="mb-0 text-sm">**************</h6>
+                        <p class="mb-0 text-xs">Password</p>
+                      </div>
+>>>>>>> a332012 (Fix)
                       <!-- eye open - viewable / eye close - not viewable -->
                       <div class="pe-1 ps-0 mb-0 ms-auto">
                         <div class="d-flex">
