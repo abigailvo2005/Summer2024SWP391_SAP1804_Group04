@@ -115,88 +115,93 @@ file="/common/taglib.jsp" %>
                           </th>
                         </tr>
                       </thead>
-                      <!--input list of validating requests here - only 1 row for reference-->
+
                       <tbody>
-                        <!-- row 1: example property has been posted & available -->
-                        <tr>
-                          <td class="align-middle text-center text-sm">
-                            <div
-                              class="d-flex px-2 py-1 justify-content-center"
-                            >
+                        <c:forEach items="${reqList}" var="req">
+                          <!-- row 1: example property has been posted & available -->
+                          <tr>
+                            <td class="align-middle text-center text-sm">
                               <div
-                                class="d-flex flex-column justify-content-center"
+                                class="d-flex px-2 py-1 justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                                <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                    ${req.id}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="d-flex justify-content-start">
+                            </td>
+                            <td>
+                              <div class="d-flex justify-content-start">
+                                <div
+                                  class="d-flex flex-column justify-content-start"
+                                >
+                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                    ${req.name}
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
                               <div
-                                class="d-flex flex-column justify-content-start"
+                                class="d-flex px-2 py-1 justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  Hoàng Việt Hùng
-                                </p>
+                                <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                    ${req.role}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div
-                              class="d-flex px-2 py-1 justify-content-center"
-                            >
+                            </td>
+                            <td class="align-middle">
                               <div
-                                class="d-flex flex-column justify-content-center"
+                                class="d-flex px-2 py-1 justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  Staff
-                                </p>
+                                <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                    ${req.dateCreated}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td class="align-middle">
-                            <div
-                              class="d-flex px-2 py-1 justify-content-center"
-                            >
+                            </td>
+                            <td class="align-middle">
                               <div
-                                class="d-flex flex-column justify-content-center"
+                                class="d-flex px-2 py-1 justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  20/05/2024
-                                </p>
+                                <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <p class="mb-0 text-sm fw-bold text-muted">
+                                    ${req.status}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td class="align-middle">
-                            <div
-                              class="d-flex px-2 py-1 justify-content-center"
-                            >
+                            </td>
+                            <td class="align-middle">
                               <div
-                                class="d-flex flex-column justify-content-center"
+                                class="d-flex px-2 py-1 justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold text-muted">
-                                  Reviewing
-                                </p>
+                                <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <a
+                                    class="show-detail"
+                                    onclick="viewDetailRegisterRequest()"
+                                    ><i class="fa-solid fa-eye"></i
+                                  ></a>
+                                </div>
                               </div>
-                            </div>
-                          </td>
-                          <td class="align-middle">
-                            <div
-                              class="d-flex px-2 py-1 justify-content-center"
-                            >
-                              <div
-                                class="d-flex flex-column justify-content-center"
-                              >
-                                <a
-                                  class="show-detail"
-                                  onclick="viewDetailRegisterRequest()"
-                                  ><i class="fa-solid fa-eye"></i
-                                ></a>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
+                            </td>
+                          </tr>
+                        </c:forEach>
                       </tbody>
+                      
                     </table>
                   </div>
                 </div>

@@ -321,7 +321,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <% for(int i = 0; i < 15; i+=1) { %>
+                    <% for(int i = 0; i < 20; i+=1) { %>
                     <tr>
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
