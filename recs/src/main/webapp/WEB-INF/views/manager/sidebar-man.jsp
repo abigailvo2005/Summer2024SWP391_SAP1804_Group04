@@ -231,8 +231,6 @@ file="/common/taglib.jsp" %>
             id="navbar"
           >
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-<<<<<<< HEAD
-=======
               <div class="input-group">
                 <span class="input-group-text text-body"
                   ><i class="fas fa-search" aria-hidden="true"></i
@@ -243,7 +241,6 @@ file="/common/taglib.jsp" %>
                   placeholder="Type here..."
                 />
               </div>
->>>>>>> a332012 (Fix)
             </div>
             <ul class="navbar-nav justify-content-end">
               <li class="nav-item d-flex align-items-center">

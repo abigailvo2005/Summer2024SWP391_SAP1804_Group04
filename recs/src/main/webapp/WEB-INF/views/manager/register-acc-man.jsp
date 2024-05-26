@@ -274,8 +274,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     ></span>
                     <input
                       type="text"
+                      id="reqSearch"
                       class="form-control"
                       placeholder="Type username here..."
+                      onkeyup="searchTable()"
                     />
                   </div>
                 </div>
@@ -284,7 +286,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+                <table class="register-req-table table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th
@@ -322,7 +324,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
                     <% for(int i = 0; i < 20; i+=1) { %>
-                    <tr>
+                    <tr class="tbl-row">
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
                           <div
@@ -335,7 +337,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">
+                            <p
+                              class="mb-0 text-sm fw-bold text-dark"
+                            >
                               Hoàng Việt Hùng
                             </p>
                           </div>
@@ -344,7 +348,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">HungVH</p>
+                            <p 
+                            id="uname" class="mb-0 text-sm fw-bold text-dark">HungVH</p>
                           </div>
                         </div>
                       </td>
@@ -428,8 +433,30 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <!-- END: FOOTER -->
     </main>
 
-    <!-- make table scrollable & fixed header -->
     <script type="text/javascript">
+      //display elements according to search value
+      function searchTable() {
+        console.log("onkeyup trigger events");
+        // Lấy giá trị từ ô input
+        var searchInput = document
+          .getElementById("reqSearch")
+          .value.toLowerCase();
+
+        // Lấy tất cả các hàng trong table
+        var tableRows = document.querySelectorAll(".tbl-row");
+
+        // Lặp qua từng hàng và ẩn/hiện dựa trên giá trị tìm kiếm
+        tableRows.forEach(function (row) {
+          var username = row.querySelector("#uname").textContent.toLowerCase();
+          if (username.includes(searchInput)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+
+      //make table scrollable & fixed header
       function makeTableScroll() {
         // Constant retrieved from server-side via JSP
         var maxRows = 6;
