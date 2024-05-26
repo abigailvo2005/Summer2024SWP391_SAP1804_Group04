@@ -9,21 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller(value = "controllerSignIn")
 public class SignInController {
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public ModelAndView homePage(@RequestParam("username") String uname) {
-        ModelAndView mav = null;
-        if (uname.equalsIgnoreCase("man")) {
-            mav = new ModelAndView("/manager/dashboard-man");
-        } else if (uname.equalsIgnoreCase("admin")) {
-            mav = new ModelAndView("/admin/dashboard-admin");
+    public String homePage(@RequestParam("username") String uname) {
+        if (uname.equalsIgnoreCase("admin")) {
+            return "redirect:/dashboard-admin";
         } else if (uname.equalsIgnoreCase("seller")) {
-            mav = new ModelAndView("/seller/dashboard-seller");
+            return "redirect:/dashboard-seller";
         } else {
-            mav = new ModelAndView("/seller/dashboard-seller");
+            return "redirect:/dashboard-man";
         }
-
-        mav.addObject("currentPage", "dashboard");
-        mav.addObject("username", "user");
-        return mav;
     }
 
     @RequestMapping(value = "/dashboard-seller", method = RequestMethod.GET)

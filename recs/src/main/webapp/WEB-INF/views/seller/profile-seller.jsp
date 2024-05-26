@@ -126,7 +126,6 @@
                       Công Ty Tây Mỗ
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
-
                       <strong class="text-dark">ID Number:</strong> &nbsp;
                       0013349227592
                     </li>
@@ -181,7 +180,12 @@
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
-                        <h6 class="mb-0 text-sm">**************</h6>
+                        <div class="d-flex">
+                          <h6 class="mb-0 text-sm">longnd2003@123</h6>
+                          <h6 class="mb-0 text-sm position-absolute">
+                            **************
+                          </h6>
+                        </div>
                         <p class="mb-0 text-xs">Password</p>
                       </div>
                       <!-- eye open - viewable / eye close - not viewable -->

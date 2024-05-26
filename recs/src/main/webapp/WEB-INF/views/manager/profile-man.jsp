@@ -176,7 +176,12 @@ file="/common/taglib.jsp" %>
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
-                        <h6 class="mb-0 text-sm">**************</h6>
+                        <div class="d-flex">
+                          <h6 class="mb-0 text-sm">longnd2003@123</h6>
+                          <h6 class="mb-0 text-sm position-absolute">
+                            **************
+                          </h6>
+                        </div>
                         <p class="mb-0 text-xs">Password</p>
                       </div>
 

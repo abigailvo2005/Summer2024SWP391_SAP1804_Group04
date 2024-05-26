@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ManagerController {
     @RequestMapping(value = "/dashboard-man", method = RequestMethod.GET)
     public ModelAndView innerDashboard() {
-        ModelAndView mav = new ModelAndView("/manager/dashboard-manager");
+        ModelAndView mav = new ModelAndView("/manager/dashboard-man");
         mav.addObject("currentPage", "dashboard");
         mav.addObject("username", "LongND");
         return mav;

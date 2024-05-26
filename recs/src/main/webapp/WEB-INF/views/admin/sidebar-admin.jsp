@@ -101,7 +101,7 @@ file="/common/taglib.jsp" %>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentpage!='profile'?'color: #30221b;': '';
+                      currentpage!='profile' ?'color: #30221b;': '';
                     }
                   "
                 ></i>
@@ -112,7 +112,7 @@ file="/common/taglib.jsp" %>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'tracking' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/property-tracking"
+              href="${pageContext.request.contextPath}/tracking"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -215,7 +215,7 @@ file="/common/taglib.jsp" %>
               </div>
               <ul class="navbar-nav justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                  <a href="#" class="nav-link text-body font-weight-bold px-0">
+                  <a href="${pageContext.request.contextPath}/profile-admin" class="nav-link text-body font-weight-bold px-0">
                     <i class="fa fa-user me-sm-1"></i>
                     <span class="d-sm-inline d-none">Welcome, ${username}</span>
                   </a>
