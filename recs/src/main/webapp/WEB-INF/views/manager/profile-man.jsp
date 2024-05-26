@@ -51,11 +51,7 @@ file="/common/taglib.jsp" %>
         <div
           class="page-header min-height-300 border-radius-xl mt-2"
           style="
-<<<<<<< HEAD
-            background-image: url('../../template/assets/img/curved-images/profile-background.jpeg');
-=======
             background-image: url(<c:url value='/template/assets/img/curved-images/profile-background.jpeg'/>);
->>>>>>> a332012 (Fix)
             background-position-y: 50%;
           "
         >
@@ -66,11 +62,7 @@ file="/common/taglib.jsp" %>
             <div class="col-auto">
               <div class="avatar avatar-xl position-relative">
                 <img
-<<<<<<< HEAD
-                  src="../../template/assets/img/male-pfp.png"
-=======
                   src="<c:url value='/template/assets/img/male-pfp.png'/>"
->>>>>>> a332012 (Fix)
                   alt="profile_image"
                   class="w-100 border-radius-lg shadow-sm"
                 />
@@ -80,11 +72,7 @@ file="/common/taglib.jsp" %>
               <div class="h-100">
                 <h5 class="mb-1">Nguyễn Đức Long</h5>
                 <p class="mb-0 font-weight-bold text-sm">
-<<<<<<< HEAD
-                  Seller / Property Owner
-=======
                   Manager
->>>>>>> a332012 (Fix)
                 </p>
               </div>
             </div>
@@ -121,13 +109,8 @@ file="/common/taglib.jsp" %>
                       <strong class="text-dark">Gender:</strong> &nbsp; Male
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
-<<<<<<< HEAD
-                      <strong class="text-dark">Address:</strong> &nbsp; đường
-                      số 1, phường Tân Phong, Quận 7, TP HCM, Việt Nam.
-=======
                       <strong class="text-dark">Address:</strong> &nbsp; Đường Tây 
                       Hòa, Phước Long A, Quận 9, Thàn phố Hồ Chí Minh
->>>>>>> a332012 (Fix)
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
                       <strong class="text-dark">Birthday:</strong> &nbsp;
@@ -193,16 +176,7 @@ file="/common/taglib.jsp" %>
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
-<<<<<<< HEAD
-                        <div class="d-flex">
-                          <h6 class="mb-0 text-sm">longnd2003@123</h6>
-                          <h6 class="mb-0 text-sm position-absolute">
-                            **************
-                          </h6>
-                        </div>
-=======
                         <h6 class="mb-0 text-sm">**************</h6>
->>>>>>> a332012 (Fix)
                         <p class="mb-0 text-xs">Password</p>
                       </div>
 
@@ -236,10 +210,6 @@ file="/common/taglib.jsp" %>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-    </main>
-=======
->>>>>>> a332012 (Fix)
     <!--END: Profile-->
 
     <!-- START FOOTER-->
@@ -274,10 +244,7 @@ file="/common/taglib.jsp" %>
       </div>
     </footer>
     <!-- END: FOOTER -->
-<<<<<<< HEAD
-=======
   </main>
->>>>>>> a332012 (Fix)
 
     <!--   Core JS Files   -->
     <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
