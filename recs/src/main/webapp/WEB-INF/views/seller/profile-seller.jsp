@@ -46,7 +46,6 @@
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-
       <!-- START: Profile -->
       <div class="container-fluid py-4">
         <!--profile header: pfp, name, role-->
@@ -178,7 +177,6 @@
                       >
                         <i class="fa-solid fa-lock"></i>
                       </div>
-
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
@@ -190,7 +188,6 @@
                         </div>
                         <p class="mb-0 text-xs">Password</p>
                       </div>
-
                       <!-- eye open - viewable / eye close - not viewable -->
                       <div class="pe-1 ps-0 mb-0 ms-auto">
                         <div class="d-flex">

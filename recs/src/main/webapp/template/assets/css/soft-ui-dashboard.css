@@ -10434,6 +10434,7 @@ fieldset:disabled .btn {
 
 .ps-3 {
   padding-left: 1rem !important;
+  margin-right: 15px;
 }
 
 .ps-4 {
@@ -11285,6 +11286,7 @@ fieldset:disabled .btn {
 
   .d-sm-inline {
     display: inline !important;
+    margin-right: 30px;
   }
 
   .d-sm-inline-block {
@@ -21010,10 +21012,7 @@ fieldset:disabled .btn {
 .card.card-plain {
   background-color: transparent;
   box-shadow: none;
-<<<<<<< HEAD
-=======
   top: -150px;
->>>>>>> a332012 (Fix)
 }
 
 .card .card-footer {
