@@ -26,7 +26,7 @@ public class ManagerController {
     @RequestMapping(value = "/assign-job", method = RequestMethod.GET)
     public ModelAndView assignJob() {
         ModelAndView mav = new ModelAndView("/manager/assign-job");
-        mav.addObject("currentPage", "createProperty");
+        mav.addObject("currentPage", "assign-job");
         return mav;
     }
 

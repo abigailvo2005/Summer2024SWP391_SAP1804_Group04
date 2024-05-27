@@ -598,6 +598,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <script type="text/javascript">
+      
       //to show detail register request popup
       function viewDetailRegisterRequest(reqID, reqListStr) {
         var popup = document.getElementById("popup-register-request");
