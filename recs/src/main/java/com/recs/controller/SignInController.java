@@ -26,7 +26,6 @@ public class SignInController {
         mav.addObject("username", "user");
         return mav;
     }
-
     @RequestMapping(value = "/profile-seller", method = RequestMethod.GET)
     public ModelAndView viewProfile() {
         ModelAndView mav = new ModelAndView("seller/profile-seller");

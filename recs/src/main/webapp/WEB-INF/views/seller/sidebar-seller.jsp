@@ -205,6 +205,9 @@ file="/common/taglib.jsp" %>
                   </div>
                 </a>
               </li>
+              <li class="nav-item d-flex align-items-center">
+                <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
+              </li>
             </ul>
           </div>
         </div>
@@ -219,5 +222,16 @@ file="/common/taglib.jsp" %>
     <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
     <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
     <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script>
+      document.getElementById('logoutButton').addEventListener('click', function () {
+        var userConfirmation = confirm('Are you sure you want to sign out?');
+        if (userConfirmation) {
+          window.location.href = '${pageContext.request.contextPath}/logout';
+        } else {
+          alert('Logout canceled.');
+        }
+      });
+    </script>
+>>>>>>> 6738c16 (Profile man screen  and logout)
   </body>
 </html>
