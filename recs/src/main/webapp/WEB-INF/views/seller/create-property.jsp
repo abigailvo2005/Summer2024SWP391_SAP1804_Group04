@@ -1,6 +1,6 @@
-<%@ include file="/common/taglib.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
+file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +28,6 @@
       rel="stylesheet"
     />
 
-
     <!-- FontAwesome: icons used in website-->
     <link
       rel="stylesheet"
@@ -38,167 +37,20 @@
 
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
-    <aside
-      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
-      id="sidenav-main"
-    >
-      <!-- sidebar: menu section-->
-      <div class="sidenav-header mt-0">
-        <a
-          class="navbar-brand m-0"
-          href="../seller/dashboard-seller.html"
-          target="_blank"
-        >
-          <img
-            src="../../template/assets/img/logos/logo-no-name.png"
-            class="navbar-brand-img h-100"
-            alt="main_logo"
-          />
-          <span class="font-weight-bolder" style="margin-left: -0.5rem"
-            >RECS</span
-          >
-        </a>
-      </div>
-      <hr class="horizontal dark mt-0" />
-      <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../seller/dashboard-seller.html">
-              <div
-                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="fa-solid fa-table-columns" style="color: #30221b"></i>
-              </div>
-              <span class="nav-link-text ms-1">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../seller/profile-seller.html">
-              <div
-                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i class="fa-solid fa-user" style="color: #30221b"></i>
-              </div>
-              <span class="nav-link-text ms-1">Profile</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- sidebar: create property and history track section-->
-      <div class="sidenav-footer mx-3">
-        <div
-          class="card card-background shadow-none card-background-mask-secondary"
-          id="sidenavCard"
-        >
-          <div
-            class="full-background"
-            style="
-              background-image: url('../../template/assets/img/curved-images/white-curved.jpg');
-            "
-          ></div>
-          <div class="card-body text-start p-3 w-100">
-            <div class="docs-info">
-              <h6 class="text-white up mb-0">Want to keep track?</h6>
-              <p class="text-xs">
-                View your successfully connected properties here.
-              </p>
-              <a
-                href="../seller/history-seller.html"
-                target="_self"
-                class="btn btn-white btn-sm w-100 mb-0"
-                >History</a
-              >
-            </div>
-          </div>
-        </div>
-        <a
-          class="btn bg-gradient-primary mt-3 w-100"
-          href="../seller/create-property.html"
-          >Create Property</a
-        >
-      </div>
-    </aside>
+    <header>
+      <jsp:include page="/WEB-INF/views/seller/sidebar-seller.jsp" />
+    </header>
     <!-- END SIDEBAR -->
 
-    <!-- START RIGHT SIDE-->
     <main
-      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+      class="no-dash main-content position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-      <!-- START: Top Navbar -->
-      <nav
-        class="card navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl mt-4 px-2"
-        id="navbarBlur"
-        navbar-scroll="true"
-      >
-        <!--left side: page title-->
-        <div class="container-fluid py-1 px-3">
-          <nav aria-label="breadcrumb">
-            <ol
-              class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
-            >
-              <li class="breadcrumb-item text-sm">
-                <a class="opacity-5 text-dark" href="javascript:;">Pages</a>
-              </li>
-              <li
-                class="breadcrumb-item text-sm text-dark active"
-                aria-current="page"
-              >
-                Create Property
-              </li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Create Property</h6>
-          </nav>
-
-          <!-- right side: search & profile-->
-          <div
-            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
-            id="navbar"
-          >
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group">
-                <span class="input-group-text text-body"
-                  ><i class="fas fa-search" aria-hidden="true"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Type here..."
-                />
-              </div>
-            </div>
-            <ul class="navbar-nav justify-content-end">
-              <li class="nav-item d-flex align-items-center">
-                <a href="#" class="nav-link text-body font-weight-bold px-0">
-                  <i class="fa fa-user me-sm-1"></i>
-                  <span class="d-sm-inline d-none">Welcome, LongND</span>
-                </a>
-              </li>
-              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                <a
-                  href="javascript:;"
-                  class="nav-link text-body p-0"
-                  id="iconNavbarSidenav"
-                >
-                  <div class="sidenav-toggler-inner">
-                    <i class="sidenav-toggler-line"></i>
-                    <i class="sidenav-toggler-line"></i>
-                    <i class="sidenav-toggler-line"></i>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <!-- END: Nav Bar -->
-
-      <!-- START: INTRODUCTION HEADER -->
+      <!-- START: FORM CREATE PROPERTY-->
       <section class="min-vh-100 mb-8">
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url('../../template/assets/img/curved-images/create-property-background.jpeg');
+            background-image: url('<c:url value='/template/assets/img/curved-images/create-property-background.jpeg'/>');
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
@@ -218,18 +70,20 @@
             <div class="col-12 col-xl-11 mx-auto">
               <div class="card z-index-0">
                 <div class="card-header text-center pt-4">
-                  <h5>Validation Request Form</h5>
+                  <h5>Property Validation Request Form</h5>
                 </div>
 
                 <div class="card-body">
-                  <form role="form text-left" name="property-information">
+                  <form role="form text-left" name="property-information" action="${pageContext.request.contextPath}/dashboard-seller" method="GET">
                     <div class="mb-3 row">
                       <div class="col-lg-2 col-sm-2"><label> Name:</label></div>
                       <div class="col-lg-10 col-sm-10">
                         <input
                           type="text"
+                          name="prop-name"
                           class="form-control form-create-control col-10"
                           placeholder="your property's name"
+                          required
                         />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
@@ -247,8 +101,10 @@
                       <div class="col-lg-10 col-sm-10">
                         <input
                           type="text"
+                          name="prop-address"
                           class="form-control form-create-control col-10"
                           placeholder="your property's adress"
+                          required
                         />
                       </div>
                     </div>
@@ -260,8 +116,10 @@
                       <div class="col-lg-10 col-sm-10">
                         <input
                           type="text"
+                          name="prop-desc"
                           class="form-control form-create-control col-10"
                           placeholder="your property's description (i.e interior/exterior features)"
+                          required
                         />
                       </div>
                     </div>
@@ -271,71 +129,71 @@
                       <div class="col-sm-3">
                         <input
                           type="number"
+                          name="prop-area"
                           class="form-control form-create-control col-10"
                           placeholder="your property's area"
                           min="1"
+                          required
                         />
                       </div>
                       <div class="col-sm-1"><label>m²</label></div>
 
                       <div class="col-sm-2"><label>Price:</label></div>
-                      <div class="col-sm-3">
+                      <div class="col-3">
                         <input
                           type="number"
-                          class="form-control form-create-control col-10"
+                          name="prop-price"
+                          class="form-control form-create-control"
                           placeholder="your property's price"
                           min="1"
+                          required
                         />
                       </div>
                       <div class="col-sm-1"><label>VND</label></div>
                     </div>
 
-                    <div class="mb-3 row">
-                      <div class="col-lg-2 col-sm-2">
+                    <!-- To upload images for Property -->
+                    <div class="row mb-3">
+                      <div class="col-2"><label>Images:</label></div>
+                      <div class="col-4">
+                        <input
+                          type="file"
+                          class="form-control form-create-control col-10"
+                          placeholder="number"
+                          multiple
+                          required
+                        />
+                      </div>
+
+                      <!-- To Choose property type - shows corresponding information to fill in next -->
+                      <div class="col-2">
                         <label>Property Type:</label>
                       </div>
-                      <div class="col-lg-10 col-sm-10">
-                        <select class="form-control form-create-control col-10">
-                          <option value="" disabled selected>
-                            Select type
-                          </option>
+                      <div class="col-4">
+                        <select
+                          class="form-control form-create-control"
+                          onchange="showPropertyTypeSection(this)"
+                          required
+                        >
+                          <option value="" selected>Select type</option>
                           <option value="land">Land</option>
                           <option value="house">House</option>
                         </select>
                       </div>
                     </div>
 
-                    <!-- To upload images for Property -->
-                    <div class="row">
-                      <div class="col-sm-1"><label>Images:</label></div>
-                      <div class="col-sm-2">
-                        <input
-                          type="image"
-                          class="form-control form-create-control col-10"
-                          placeholder="number"
-                          min="1"
-                        />
-                      </div>
-                      <div class="col-sm-1"><label>room(s)</label></div>
-                    </div>
-
                     <!-- Only fields for land -->
-                    <div id="land-info-section">
-                      <div class="ps-1 row">
-                        <p class="text-message">
-                          Fill these fields if your property's type is "land"
-                        </p>
-                      </div>
+                    <div id="land-info-section" class="hidden">
                       <div class="mb-3 row">
                         <div class="col-sm-2">
                           <label>Land Category:</label>
                         </div>
                         <div class="col-sm-10">
                           <select
-                            class="form-control form-create-control col-10"
-                            disabled
+                            class="land form-control form-create-control col-10"
+                            required
                           >
-                            <option value="" disabled selected>
+                            <option value="" selected>
                               Select category (for Land type only)
                             </option>
                             <option value="agricultural">
@@ -350,22 +208,17 @@
                     </div>
 
                     <!-- Only fields for house -->
-                    <div id="house-info-section disabled-form">
-                      <div class="ps-1 row">
-                        <p class="text-message">
-                          Fill these fields if your property's type is "house"
-                        </p>
-                      </div>
+                    <div id="house-info-section" class="hidden">
                       <div class="mb-3 row">
                         <div class="col-sm-2">
                           <label>House Category:</label>
                         </div>
                         <div class="col-sm-10">
                           <select
-                            class="form-control form-create-control col-10"
-                            disabled
+                            class="form-control form-create-control col-10 house"
+                            required
                           >
-                            <option value="" disabled selected>
+                            <option value="" selected>
                               Select category (for House type only)
                             </option>
                             <option value="apartment">Apartment</option>
@@ -381,10 +234,10 @@
                         <div class="col-sm-2">
                           <input
                             type="number"
-                            class="form-control form-create-control col-10"
+                            class="house form-control form-create-control col-10"
                             placeholder="year"
                             min="1"
-                            disabled
+                            required
                           />
                         </div>
 
@@ -392,10 +245,10 @@
                         <div class="col-sm-2">
                           <input
                             type="number"
-                            class="form-control form-create-control col-10"
+                            class="house form-control form-create-control col-10"
                             placeholder="number"
                             min="1"
-                            disabled
+                            required
                           />
                         </div>
                         <div class="col-sm-1"><label>room(s)</label></div>
@@ -404,10 +257,10 @@
                         <div class="col-sm-2">
                           <input
                             type="number"
-                            class="form-control form-create-control col-10"
+                            class="house form-control form-create-control col-10"
                             placeholder="number"
                             min="1"
-                            disabled
+                            required
                           />
                         </div>
                         <div class="col-sm-1"><label>room(s)</label></div>
@@ -415,13 +268,20 @@
                     </div>
 
                     <!-- submit button -->
-                    <div class="text-center">
-                      <button
-                        type="button"
-                        class="btn bg-gradient-dark w-100 my-4 mb-2"
-                      >
-                        Submit Request
-                      </button>
+                    <div class="col-12 mt-1">
+                      <div class="h-100 container-fluid mt-0">
+                        <div class="row justify-content-center">
+                          <div class="col-4">
+                            <button
+                              type="button"
+                              onclick="submitRequest(event)"
+                              class="btn btn-dark w-100 my-2 mb-2"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -477,5 +337,79 @@
     <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
     <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js' />"></script>
     <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+
+    <script>
+      /* Create Property Form: only show some fields corresponding to type of property */
+      function showPropertyTypeSection(select) {
+        const landInfoSection = document.getElementById("land-info-section");
+        const houseInfoSection = document.getElementById("house-info-section");
+
+        if (select.value === "land") {
+          landInfoSection.classList.remove("hidden");
+          houseInfoSection.classList.add("hidden");
+
+          // make every houseInfoSection input not-required
+          houseInfoSection
+            .querySelectorAll("input, .house")
+            .forEach((input) => {
+              input.required = false;
+            });
+
+          //make every land InfoSection input required
+          landInfoSection
+            .querySelectorAll("input, .land")
+            .forEach((input) => {
+              input.required = true;
+            });
+        } else if (select.value === "house") {
+          landInfoSection.classList.add("hidden");
+          houseInfoSection.classList.remove("hidden");
+
+          // make every lanInfoSection input not-required
+          landInfoSection
+            .querySelectorAll("input, .land")
+            .forEach((input) => {
+              input.required = false;
+            });
+
+          // make every houseInfoSection input required
+          houseInfoSection
+            .querySelectorAll("input, .house")
+            .forEach((input) => {
+              input.required = true;
+            });
+        } else {
+          landInfoSection.classList.add("hidden");
+          houseInfoSection.classList.add("hidden");
+
+          // make none input required
+          landInfoSection
+            .querySelectorAll("input, .land")
+            .forEach((input) => {
+              input.required = false;
+            });
+          houseInfoSection
+            .querySelectorAll("input, .house")
+            .forEach((input) => {
+              input.required = false;
+            });
+        }
+      }
+
+      /* Process data & redirect back to dashboard after clicked submit */
+      function submitRequest(event) {
+        event.preventDefault(); // Ngăn chặn form từ việc submit mặc định
+
+        // Kiểm tra xem form có hợp lệ hay không
+        if (document.querySelector("form").checkValidity()) {
+          // Hiển thị thông báo "Successfully requested"
+          alert("Successfully requested");
+          document.querySelector("form").submit();
+        } else {
+          // Nếu form không hợp lệ, hiển thị thông báo lỗi mặc định của trình duyệt
+          document.querySelector("form").reportValidity();
+        }
+      }
+    </script>
   </body>
 </html>

@@ -552,6 +552,7 @@ file="/common/taglib.jsp" %>
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <script type="text/javascript">
+      
       //to show detail register request popup
       function viewDetailRegisterRequest() {
         var popup = document.getElementById("popup-register-request");
