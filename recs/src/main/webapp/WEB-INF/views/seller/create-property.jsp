@@ -6,7 +6,7 @@ file="/common/taglib.jsp" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RECS - Dashboard</title>
+    <title>RECS - Create Property</title>
 
     <!-- Link CSS -->
     <link
@@ -74,11 +74,17 @@ file="/common/taglib.jsp" %>
                 </div>
 
                 <div class="card-body">
-                  <form role="form text-left" name="property-information" action="${pageContext.request.contextPath}/dashboard-seller" method="GET">
+                  <form
+                    role="form text-left"
+                    name="property-information"
+                    action="${pageContext.request.contextPath}/dashboard-seller"
+                    method="GET"
+                  >
                     <div class="mb-3 row">
                       <div class="col-lg-2 col-sm-2"><label> Name:</label></div>
                       <div class="col-lg-10 col-sm-10">
                         <input
+                          id="prop-name"
                           type="text"
                           name="prop-name"
                           class="form-control form-create-control col-10"
@@ -87,9 +93,9 @@ file="/common/taglib.jsp" %>
                         />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
-                          class="text-danger text-error mb-0 text-center pt-1 hidden"
+                          class="error-name text-danger text-error mb-0 text-center pt-1 hidden"
                         >
-                          name should only contains 255 characters.
+                          name should only contains maximum 255 characters.
                         </p>
                       </div>
                     </div>
@@ -157,12 +163,19 @@ file="/common/taglib.jsp" %>
                       <div class="col-2"><label>Images:</label></div>
                       <div class="col-4">
                         <input
+                          id="prop-img"
                           type="file"
                           class="form-control form-create-control col-10"
                           placeholder="number"
                           multiple
                           required
                         />
+                        <!-- ERROR MESSAGE BEING HIDDEN -->
+                        <p
+                          class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
+                        >
+                          only images files accepted (ie: .png .jpeg .gif .jpg .heic)
+                        </p>
                       </div>
 
                       <!-- To Choose property type - shows corresponding information to fill in next -->
@@ -356,21 +369,17 @@ file="/common/taglib.jsp" %>
             });
 
           //make every land InfoSection input required
-          landInfoSection
-            .querySelectorAll("input, .land")
-            .forEach((input) => {
-              input.required = true;
-            });
+          landInfoSection.querySelectorAll("input, .land").forEach((input) => {
+            input.required = true;
+          });
         } else if (select.value === "house") {
           landInfoSection.classList.add("hidden");
           houseInfoSection.classList.remove("hidden");
 
           // make every lanInfoSection input not-required
-          landInfoSection
-            .querySelectorAll("input, .land")
-            .forEach((input) => {
-              input.required = false;
-            });
+          landInfoSection.querySelectorAll("input, .land").forEach((input) => {
+            input.required = false;
+          });
 
           // make every houseInfoSection input required
           houseInfoSection
@@ -383,11 +392,9 @@ file="/common/taglib.jsp" %>
           houseInfoSection.classList.add("hidden");
 
           // make none input required
-          landInfoSection
-            .querySelectorAll("input, .land")
-            .forEach((input) => {
-              input.required = false;
-            });
+          landInfoSection.querySelectorAll("input, .land").forEach((input) => {
+            input.required = false;
+          });
           houseInfoSection
             .querySelectorAll("input, .house")
             .forEach((input) => {
@@ -398,15 +405,57 @@ file="/common/taglib.jsp" %>
 
       /* Process data & redirect back to dashboard after clicked submit */
       function submitRequest(event) {
-        event.preventDefault(); // Ngăn chặn form từ việc submit mặc định
+        event.preventDefault(); //Stop form from default submitting
 
-        // Kiểm tra xem form có hợp lệ hay không
+        // Check if all fields have values
         if (document.querySelector("form").checkValidity()) {
-          // Hiển thị thông báo "Successfully requested"
+          const propertyNameInput = document.querySelector("#prop-name");
+          const propertyImageInput = document.querySelector("#prop-img");
+          const nameError = document.querySelector(".error-name");
+          const imgError = document.querySelector(".error-img");
+          const validImageTypes = [
+            "image/gif",
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+          ];
+
+          if (propertyNameInput.value.length > 255) {
+            //Check if property's name is longer than 255 characters
+            nameError.classList.remove("hidden");
+            return;
+          } else if (propertyImageInput.files.length > 0) {
+            //Check if file input is an image
+            const validImageTypes = [
+              "image/gif",
+              "image/jpeg",
+              "image/png",
+              "image/jpg",
+              "image/heic",
+            ];
+            for (var i = 0; i < propertyImageInput.files.length; i++) {
+              const file = propertyImageInput.files[i];
+              const fileType = file["type"];
+              if (!validImageTypes.includes(fileType)) {
+                // invalid file type code goes here --> shows error
+                nameError.classList.add("hidden");
+                imgError.classList.remove("hidden");
+                return;
+              } else {
+                imgError.classList.add("hidden");
+              }
+            }
+            
+          }
+
+          // No errors: Shows message "Successfully requested" & redirect back to dashboard
+          nameError.classList.add("hidden"); //clear all errors first
+          imgError.classList.add("hidden");
           alert("Successfully requested");
           document.querySelector("form").submit();
+
         } else {
-          // Nếu form không hợp lệ, hiển thị thông báo lỗi mặc định của trình duyệt
+          // If some fields are empty, show default errors
           document.querySelector("form").reportValidity();
         }
       }

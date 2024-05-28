@@ -232,6 +232,5 @@ file="/common/taglib.jsp" %>
         }
       });
     </script>
->>>>>>> 6738c16 (Profile man screen  and logout)
   </body>
 </html>
