@@ -3649,7 +3649,7 @@ textarea.form-control.is-invalid {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 85%;
+  width: 70%;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -3670,6 +3670,51 @@ textarea.form-control.is-invalid {
 
 .hidden {
   display: none;
+}
+
+.carousel {
+  height: auto; 
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #e0d8d5 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-item {
+  height: auto; 
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto; 
+  object-fit: contain; 
+}
+
+
+
+.button-validation[title] {
+  position: relative;
+}
+
+.button-validation[title]::after {
+  content: attr(title);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.button-validation[title]:hover::after {
+  opacity: 1;
 }
 
 .id-card {
