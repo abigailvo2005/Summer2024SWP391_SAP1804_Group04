@@ -70,11 +70,11 @@ file="/common/taglib.jsp" %>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        id="validationSearch"
+                        id="searchInput"
                         type="text"
                         class="form-control"
                         placeholder="Type property name here..."
-                        onkeyup="searchTable('validation')"
+                        onkeyup="searchTable()"
                       />
                     </div>
                   </div>
@@ -442,6 +442,50 @@ file="/common/taglib.jsp" %>
                     </div>
                   </div>
 
+                  <div class="row mb-3">
+                    <div class="col-sm-2">
+                      <label>Staff Assigned:</label>
+                    </div>
+                    <div class="col-sm-4">
+                      <input
+                        type="text"
+                        id="chosen-staff"
+                        name="chosen-staff"
+                        class="form-control form-create-control col-10"
+                        value="not chosen yet"
+                        disabled
+                      />
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="dropdown my-0">
+                        <button
+                          class="btn-staff dropdown-toggle"
+                          type="button"
+                          id="staffDropdown"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          Select Staff
+                        </button>
+                        <ul
+                          class="dropdown-menu"
+                          aria-labelledby="staffDropdown"
+                        >
+                          <c:forEach items="${staffList}" var="staff">
+                            <li>
+                              <a
+                                class="dropdown-item"
+                                href="#"
+                                onclick="chooseStaff('${staff.staffId} - ${staff.staffName}')"
+                                >${staff.staffId} - ${staff.staffName}</a
+                              >
+                            </li>
+                          </c:forEach>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- DEMONSTRATION IMAGES -->
                   <div class="row mb-3">
                     <div class="col-sm-2">
@@ -449,59 +493,43 @@ file="/common/taglib.jsp" %>
                     </div>
                     <div class="col-sm-9">
                       <div
-                        id="carouselExampleIndicators"
+                        id="form-property-images"
                         class="carousel slide"
                         data-bs-ride="carousel"
                       >
                         <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
+                          <c:forEach items="${imageList}" varStatus="loop">
+                            <button
+                              type="button"
+                              data-bs-target="#form-property-images"
+                              data-bs-slide-to="${loop.index}"
+                              class="${loop.index == 0 ? 'active' : ''}"
+                              aria-current="${loop.index == 0 ? 'true' : 'false'}"
+                              aria-label="Slide ${loop.index + 1}"
+                            ></button>
+                          </c:forEach>
                         </div>
                         <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../assets/img/home-decor-1.jpg"
-                              class="d-block w-100"
-                              alt="Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../assets/img/home-decor-2.jpg"
-                              class="d-block w-100"
-                              alt="Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../assets/img/home-decor-3.jpg"
-                              class="d-block w-100"
-                              alt="Image 3"
-                            />
-                          </div>
+                          <c:forEach
+                            items="${imageList}"
+                            var="image"
+                            varStatus="loop"
+                          >
+                            <div
+                              class="carousel-item ${loop.index == 0 ? 'active' : ''}"
+                            >
+                              <img
+                                src="${image.url}"
+                                class="d-block w-100"
+                                alt="${image.alt}"
+                              />
+                            </div>
+                          </c:forEach>
                         </div>
                         <button
                           class="carousel-control-prev"
                           type="button"
-                          data-bs-target="#carouselExampleIndicators"
+                          data-bs-target="#form-property-images"
                           data-bs-slide="prev"
                         >
                           <span
@@ -513,7 +541,7 @@ file="/common/taglib.jsp" %>
                         <button
                           class="carousel-control-next"
                           type="button"
-                          data-bs-target="#carouselExampleIndicators"
+                          data-bs-target="#form-property-images"
                           data-bs-slide="next"
                         >
                           <span
@@ -541,7 +569,6 @@ file="/common/taglib.jsp" %>
                       </div>
                     </div>
                   </div>
-
                 </form>
               </div>
             </div>
@@ -690,59 +717,43 @@ file="/common/taglib.jsp" %>
                       </li>
                       <li class="list-group-item border-0 ps-0 text-sm col-10">
                         <div
-                          id="carouselExampleIndicators"
+                          id="popup-property-images"
                           class="carousel slide"
                           data-bs-ride="carousel"
                         >
                           <div class="carousel-indicators">
-                            <button
-                              type="button"
-                              data-bs-target="#carouselExampleIndicators"
-                              data-bs-slide-to="0"
-                              class="active"
-                              aria-current="true"
-                              aria-label="Slide 1"
-                            ></button>
-                            <button
-                              type="button"
-                              data-bs-target="#carouselExampleIndicators"
-                              data-bs-slide-to="1"
-                              aria-label="Slide 2"
-                            ></button>
-                            <button
-                              type="button"
-                              data-bs-target="#carouselExampleIndicators"
-                              data-bs-slide-to="2"
-                              aria-label="Slide 3"
-                            ></button>
+                            <c:forEach items="${imageList}" varStatus="loop">
+                              <button
+                                type="button"
+                                data-bs-target="#popup-property-images"
+                                data-bs-slide-to="${loop.index}"
+                                class="${loop.index == 0 ? 'active' : ''}"
+                                aria-current="${loop.index == 0 ? 'true' : 'false'}"
+                                aria-label="Slide ${loop.index + 1}"
+                              ></button>
+                            </c:forEach>
                           </div>
                           <div class="carousel-inner">
-                            <div class="carousel-item active">
-                              <img
-                                src="../../assets/img/home-decor-1.jpg"
-                                class="d-block w-100"
-                                alt="Image 1"
-                              />
-                            </div>
-                            <div class="carousel-item">
-                              <img
-                                src="../../assets/img/home-decor-2.jpg"
-                                class="d-block w-100"
-                                alt="Image 2"
-                              />
-                            </div>
-                            <div class="carousel-item">
-                              <img
-                                src="../../assets/img/home-decor-3.jpg"
-                                class="d-block w-100"
-                                alt="Image 3"
-                              />
-                            </div>
+                            <c:forEach
+                              items="${imageList}"
+                              var="image"
+                              varStatus="loop"
+                            >
+                              <div
+                                class="carousel-item ${loop.index == 0 ? 'active' : ''}"
+                              >
+                                <img
+                                  src="${image.url}"
+                                  class="d-block w-100"
+                                  alt="${image.alt}"
+                                />
+                              </div>
+                            </c:forEach>
                           </div>
                           <button
                             class="carousel-control-prev"
                             type="button"
-                            data-bs-target="#carouselExampleIndicators"
+                            data-bs-target="#popup-property-images"
                             data-bs-slide="prev"
                           >
                             <span
@@ -754,7 +765,7 @@ file="/common/taglib.jsp" %>
                           <button
                             class="carousel-control-next"
                             type="button"
-                            data-bs-target="#carouselExampleIndicators"
+                            data-bs-target="#popup-property-images"
                             data-bs-slide="next"
                           >
                             <span
@@ -950,51 +961,25 @@ file="/common/taglib.jsp" %>
       }
 
       //display elements according to search value
-      function searchTable(type) {
-        if (type.includes("validation")) {
-          // Get values from input field
-          var searchReq = document
-            .getElementById("validationSearch")
-            .value.toLowerCase();
+      function searchTable() {
+        var searchReq = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
 
-          //Get all rows in table
-          var requests = document.querySelectorAll(".validate-row");
+        //Get all rows in table
+        var requests = document.querySelectorAll(".validate-row");
 
-          //Iterate through all rows and hide/show based on value
-          requests.forEach(function (row) {
-            var propName = row
-              .querySelector("#req-name")
-              .textContent.toLowerCase();
-            var manID = row
-              .querySelector("#req-manID")
-              .textContent.toLowerCase();
-            if (propName.includes(searchReq) || manID.includes(searchReq)) {
-              row.style.display = "";
-            } else {
-              row.style.display = "none";
-            }
-          });
-        } else {
-          // Get values from input field
-          var searchListing = document
-            .getElementById("listingSearch")
-            .value.toLowerCase();
-
-          //Get all rows in table
-          var listings = document.querySelectorAll(".listing-row");
-
-          //Iterate through all rows and hide/show based on value
-          listings.forEach(function (row) {
-            var propName = row
-              .querySelector("#listing-name")
-              .textContent.toLowerCase();
-            if (propName.includes(searchListing)) {
-              row.style.display = "";
-            } else {
-              row.style.display = "none";
-            }
-          });
-        }
+        //Iterate through all rows and hide/show based on value
+        requests.forEach(function (row) {
+          var propName = row
+            .querySelector("#req-name")
+            .textContent.toLowerCase();
+          if (propName.includes(searchReq)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
       }
 
       //successfully assign a property as a job for staff to validate -> redirect back to this page (hide form)
@@ -1008,6 +993,14 @@ file="/common/taglib.jsp" %>
         //execute default submit
         var form = document.getElementById("form-assign-job");
         form.submit();
+      }
+
+      function chooseStaff(selectedStaff) {
+        // Retrieve the "chosen-staff" input element
+        const chosenStaffInput = document.getElementById("chosen-staff");
+
+        // Update the value of the "chosen-staff" input
+        chosenStaffInput.value = selectedStaff;
       }
     </script>
 

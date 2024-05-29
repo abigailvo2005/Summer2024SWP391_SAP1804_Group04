@@ -3718,6 +3718,34 @@ textarea.form-control.is-invalid {
   object-fit: contain; 
 }
 
+.btn-staff {
+  background-color: #89706b; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-style: italic;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 0.75rem;
+  margin: 0.25rem 0.125rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  width: 10rem;
+  height: 2rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15); 
+}
+
+.btn-staff:hover {
+  background-color: #d8cbc6; 
+}
+
+.btn-staff:active {
+  background-color: #89706b;
+  transform: translateY(1px);
+}
+
+
 .btn {
   --bs-btn-padding-x: 1.5rem;
   --bs-btn-padding-y: 0.75rem;
