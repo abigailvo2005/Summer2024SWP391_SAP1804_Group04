@@ -14,6 +14,8 @@ public class SignInController {
             return "redirect:/dashboard-admin";
         } else if (uname.equalsIgnoreCase("seller")) {
             return "redirect:/dashboard-seller";
+        }  else if (uname.equalsIgnoreCase("staff")) {
+            return "redirect:/dashboard-staff";
         } else {
             return "redirect:/dashboard-man";
         }

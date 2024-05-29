@@ -39,7 +39,7 @@ file="/common/taglib.jsp" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/seller/sidebar-staff.jsp" />
+      <jsp:include page="/WEB-INF/views/staff/sidebar-staff.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -506,9 +506,9 @@ file="/common/taglib.jsp" %>
                       <div class="validation-only col-6 px-0">
                         <li
                           class="list-group-item border-0 ps-0 text-sm"
-                          id="handledID"
+                          id="assignedID"
                         >
-                          <strong class="text-dark">Handled by:</strong> &nbsp;
+                          <strong class="text-dark">Assigned by:</strong> &nbsp;
                           ManID
                         </li>
                       </div>

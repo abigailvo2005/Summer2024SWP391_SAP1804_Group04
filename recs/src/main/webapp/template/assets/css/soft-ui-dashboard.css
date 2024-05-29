@@ -3632,7 +3632,6 @@ textarea.form-control.is-invalid {
   z-index: 4;
 }
 
-
 .popup-container {
   position: fixed;
   z-index: 1;
@@ -3668,30 +3667,6 @@ textarea.form-control.is-invalid {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
-
-.carousel {
-  height: auto; 
-  overflow: hidden;
-  border-radius: 1rem;
-  background-color: #e0d8d5 !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-item {
-  height: auto; 
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto; 
-  object-fit: contain; 
-}
-
-
-
 .button-validation[title] {
   position: relative;
 }
@@ -3717,8 +3692,30 @@ textarea.form-control.is-invalid {
   opacity: 1;
 }
 
+.hidden {
+  display: none;
+}
+
 .id-card {
-  height: 85%;
+  height: 80%;
+}
+
+.carousel {
+  height: auto; 
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #e0d8d5 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-item {
+  height: auto; 
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto; 
+  object-fit: contain; 
 }
 
 .btn {
