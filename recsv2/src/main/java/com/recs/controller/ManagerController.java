@@ -70,4 +70,20 @@ public class ManagerController {
         model.addAttribute("currentPage", currentPage);
         return "manager/history-man";
     }
+
+    @GetMapping({ "/register-staff" })
+    public String historyView(Model model, Authentication authentication) {
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "history";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+
+        /* logic BE update db... */
+
+
+        return "manager/register-acc-man";
+    }
+
+
 }
