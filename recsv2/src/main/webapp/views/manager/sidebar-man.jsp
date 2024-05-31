@@ -229,6 +229,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </div>
                 </a>
               </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
               <li class="nav-item d-flex align-items-center">
                 <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
               </li>

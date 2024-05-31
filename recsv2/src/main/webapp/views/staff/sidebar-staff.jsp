@@ -198,6 +198,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   </div>
                 </a>
               </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
               <li class="nav-item d-flex align-items-center">
                 <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
               </li>
