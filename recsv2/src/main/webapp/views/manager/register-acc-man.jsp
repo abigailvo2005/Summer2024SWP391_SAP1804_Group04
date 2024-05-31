@@ -39,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -51,7 +51,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url(/template/assets/img/register-staff-bg.png'/>);
+            background-image: url(/template/assets/img/register-staff-bg.png);
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
@@ -488,7 +488,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>

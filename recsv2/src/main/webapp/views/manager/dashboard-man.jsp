@@ -39,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 

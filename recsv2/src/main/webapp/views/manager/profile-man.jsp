@@ -39,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -52,7 +52,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div
           class="page-header min-height-300 border-radius-xl mt-2"
           style="
-            background-image: url(/template/assets/img/curved-images/profile-background.jpeg'/>);
+            background-image: url(/template/assets/img/curved-images/profile-background.jpeg);
             background-position-y: 50%;
           "
         >
@@ -63,7 +63,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <div class="col-auto">
               <div class="avatar avatar-xl position-relative">
                 <img
-                  src="/template/assets/img/male-pfp.png'/>"
+                  src="/template/assets/img/male-pfp.png"
                   alt="profile_image"
                   class="w-100 border-radius-lg shadow-sm"
                 />

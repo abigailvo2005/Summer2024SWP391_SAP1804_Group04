@@ -49,11 +49,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/dashboard-seller"
+          href="${pageContext.request.contextPath}/manager/dashboard"
           target="_self"
         >
           <img
-            src="/template/assets/img/logos/logo-no-name.png'/>"
+            src="/template/assets/img/logos/logo-no-name.png"
             class="navbar-brand-img h-100"
             alt="main_logo"
           />
@@ -68,7 +68,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/dashboard-man"
+              href="${pageContext.request.contextPath}/manager/dashboard"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -88,7 +88,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/profile-man"
+              href="${pageContext.request.contextPath}/manager/profile"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -108,7 +108,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'register' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/register-acc-man"
+              href="${pageContext.request.contextPath}/manager/register-acc-man"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -148,7 +148,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 handled.
               </p>
               <a
-                href="${pageContext.request.contextPath}/history-man"
+                href="${pageContext.request.contextPath}/manager/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -158,7 +158,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         </div>
         <a
           class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/assign-job"
+          href="${pageContext.request.contextPath}/manager/assign-job"
           >Assign Job</a
         >
       </div>

@@ -35,8 +35,8 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute(account);
-        model.addAttribute(currentPage);
+        model.addAttribute("name", account);
+        model.addAttribute("currentPage", currentPage);
         return "admin/profile-admin";
     }
 
@@ -45,8 +45,8 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
-        model.addAttribute(account);
-        model.addAttribute(currentPage);
+        model.addAttribute("name", account);
+        model.addAttribute("currentPage", currentPage);
         return "admin/history-admin";
     }
 }
