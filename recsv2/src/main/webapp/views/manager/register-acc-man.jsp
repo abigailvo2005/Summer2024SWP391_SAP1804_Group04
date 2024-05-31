@@ -440,10 +440,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           .getElementById("reqSearch")
           .value.toLowerCase();
 
-        // Lấy tất cả các hàng trong table
+        // Retrieve all rows in a table
         var tableRows = document.querySelectorAll(".tbl-row");
 
-        // Lặp qua từng hàng và ẩn/hiện dựa trên giá trị tìm kiếm
+        // Loop through each row and hide/unhide them based on search value
         tableRows.forEach(function (row) {
           var username = row.querySelector("#uname").textContent.toLowerCase();
           if (username.includes(searchInput)) {
