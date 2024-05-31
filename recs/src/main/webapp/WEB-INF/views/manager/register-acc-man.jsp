@@ -436,7 +436,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <script type="text/javascript">
       //display elements according to search value
       function searchTable() {
-        console.log("onkeyup trigger events");
         // Lấy giá trị từ ô input
         var searchInput = document
           .getElementById("reqSearch")

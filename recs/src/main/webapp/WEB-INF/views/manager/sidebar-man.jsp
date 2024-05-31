@@ -10,8 +10,7 @@ file="/common/taglib.jsp" %>
     <title>RECS - ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
         'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
         : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-        'requests-man' ? 'Validating Requests' : (currentPage ==
-        'register' ? 'Register Staff' : '')))))}</title>
+        'register' ? 'Register Staff' : ''))))}</title>
 
     <!-- Link CSS -->
     <link
@@ -43,7 +42,7 @@ file="/common/taglib.jsp" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <aside
-      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 z-index-1 fixed-start ms-3"
       id="sidenav-main"
     >
       <!-- sidebar: menu section-->
@@ -104,26 +103,6 @@ file="/common/taglib.jsp" %>
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Profile</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link ${currentPage == 'requests' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/requests-man"
-            >
-              <div
-                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
-              >
-                <i
-                  class="fa-solid fa-code-pull-request"
-                  style="
-                    $ {
-                      currentPage!='requests'?'color: #30221b': '';
-                    }
-                  "
-                ></i>
-              </div>
-              <span class="nav-link-text ms-1">Validating Requests</span>
             </a>
           </li>
           <li class="nav-item">
@@ -212,16 +191,14 @@ file="/common/taglib.jsp" %>
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
                 'profile' ? 'View Profile' : (currentPage == 'history-man' ?
                 'View History' : (currentPage == 'assign-job' ? 'Assign Job' :
-                (currentPage == 'requests-man' ? 'Validating Requests' :
-                (currentPage == 'register' ? 'Register Account Staff' : '')))))}
+                (currentPage == 'register' ? 'Register Account Staff' : ''))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
               'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
               : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-              'requests-man' ? 'Validating Requests' : (currentPage ==
-              'register' ? 'Register Staff' : '')))))}
+              'register' ? 'Register Staff' : ''))))}
             </h6>
           </nav>
 
@@ -231,16 +208,6 @@ file="/common/taglib.jsp" %>
             id="navbar"
           >
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group">
-                <span class="input-group-text text-body"
-                  ><i class="fas fa-search" aria-hidden="true"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Type here..."
-                />
-              </div>
             </div>
             <ul class="navbar-nav justify-content-end">
               <li class="nav-item d-flex align-items-center">

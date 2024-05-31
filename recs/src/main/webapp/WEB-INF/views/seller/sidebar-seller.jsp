@@ -39,7 +39,7 @@ file="/common/taglib.jsp" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <aside
-      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 z-index-1 fixed-start ms-3"
       id="sidenav-main"
     >
       <!-- sidebar: menu section-->
@@ -184,16 +184,6 @@ file="/common/taglib.jsp" %>
             id="navbar"
           >
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group">
-                <span class="input-group-text text-body"
-                  ><i class="fas fa-search" aria-hidden="true"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Type here..."
-                />
-              </div>
             </div>
             <ul class="navbar-nav justify-content-end">
               <li class="nav-item d-flex align-items-center">
@@ -242,6 +232,5 @@ file="/common/taglib.jsp" %>
         }
       });
     </script>
->>>>>>> 6738c16 (Profile man screen  and logout)
   </body>
 </html>

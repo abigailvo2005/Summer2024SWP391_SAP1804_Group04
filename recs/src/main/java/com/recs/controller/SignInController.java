@@ -14,6 +14,8 @@ public class SignInController {
             return "redirect:/dashboard-admin";
         } else if (uname.equalsIgnoreCase("seller")) {
             return "redirect:/dashboard-seller";
+        }  else if (uname.equalsIgnoreCase("staff")) {
+            return "redirect:/dashboard-staff";
         } else {
             return "redirect:/dashboard-man";
         }
@@ -28,15 +30,15 @@ public class SignInController {
     }
     @RequestMapping(value = "/profile-seller", method = RequestMethod.GET)
     public ModelAndView viewProfile() {
-        ModelAndView mav = new ModelAndView("/seller/profile-seller");
+        ModelAndView mav = new ModelAndView("seller/profile-seller");
         mav.addObject("currentPage", "profile");
         return mav;
     }
 
-    @RequestMapping(value = "/createProperty", method = RequestMethod.GET)
+    @RequestMapping(value = "/create-property", method = RequestMethod.GET)
     public ModelAndView createProperty() {
         ModelAndView mav = new ModelAndView("/seller/create-property");
-        mav.addObject("currentPage", "createProperty");
+        mav.addObject("currentPage", "create-property");
         return mav;
     }
 

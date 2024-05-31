@@ -74,6 +74,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
+                        id="reqSearch"
                         type="text"
                         class="form-control"
                         placeholder="Type username here..."
@@ -95,7 +96,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
-                            NAME
+                            Name
                           </th>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -122,7 +123,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
 
                       <tbody>
                         <c:forEach items="${reqList}" var="req">
-                          <tr>
+                          <tr class="req-row">
                             <td class="align-middle text-center text-sm">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -141,7 +142,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                                 <div
                                   class="d-flex flex-column justify-content-start"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p id="req-uname"  class="mb-0 text-sm fw-bold text-dark">
                                     ${req.name}
                                   </p>
                                 </div>
@@ -216,7 +217,6 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
           </div>
         </div>
       </div>
-
       <!-- END LIST REGISTER REQUEST-->
 
       <!-- START: LIST ALL USERS IN SYSTEM -->
@@ -244,7 +244,8 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        type="text"
+                      id="userSearch"  
+                      type="text"
                         class="form-control"
                         placeholder="Type username here..."
                       />
@@ -310,7 +311,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                                 <div
                                   class="d-flex flex-column justify-content-start"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p id="user-uname" class="mb-0 text-sm fw-bold text-dark">
                                     ${user.name}
                                   </p>
                                 </div>
@@ -598,6 +599,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <script type="text/javascript">
+      
       //to show detail register request popup
       function viewDetailRegisterRequest(reqID, reqListStr) {
         var popup = document.getElementById("popup-register-request");
@@ -654,57 +656,58 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
           popup.classList.add("hidden");
         }
       };
+      //style table to have fixed heading and scrollable
+      function makeTableScroll() {
+        // Constant retrieved from server-side via JSP
+        var maxRows = 6;
 
-        <script type="text/javascript">
-          //to show detail register request popup
-          function viewDetailRegisterRequest() {
-            var popup = document.getElementById("popup-register-request");
-            popup.classList.remove("hidden");
+        var table = document.querySelector(".table");
+        var wrapper = table.parentNode;
+        var rowsInTable = table.rows.length;
+        var height = 20;
+
+        if (rowsInTable > maxRows) {
+          // Create a new wrapper element for the table
+          var newWrapper = document.createElement("div");
+          newWrapper.style.maxHeight = height + "rem";
+          newWrapper.style.overflowY = "scroll";
+
+          // Move the table into the new wrapper
+          wrapper.parentNode.insertBefore(newWrapper, wrapper);
+          newWrapper.appendChild(table);
+
+          // Set the header to be fixed
+          var header = table.getElementsByTagName("thead")[0];
+          header.style.position = "sticky";
+          header.style.top = "0";
+          header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
+        }
+      }
+
+      //display elements according to search value
+      function searchTable() {
+        // Lấy giá trị từ ô input
+        var searchReq = document
+          .getElementById("reqSearch")
+          .value.toLowerCase();
+
+        var searchUser = document
+          .getElementById("userSearch")
+          .value.toLowerCase();
+
+        // Lấy tất cả các hàng trong table
+        var requests = document.querySelectorAll(".req-row");
+
+        // Lặp qua từng hàng và ẩn/hiện dựa trên giá trị tìm kiếm
+        requests.forEach(function (row) {
+          var username = row.querySelector("#uname").textContent.toLowerCase();
+          if (username.includes(searchInput)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
           }
-
-          //to close detail register request popup
-          function closeDetailRegisterRequest() {
-            var popup = document.getElementById("popup-register-request");
-            popup.classList.add("hidden");
-          }
-
-          //still forcely close every popup if clicked on somewhere else than close button
-          window.onclick = function (event) {
-            var popup = document.querySelector(".popup-container");
-            if (event.target == popup) {
-              popup.classList.add("hidden");
-            }
-          };
-
-          //style table to have fixed heading and scrollable
-        <script type="text/javascript">
-          function makeTableScroll() {
-            // Constant retrieved from server-side via JSP
-            var maxRows = 6;
-
-            var table = document.querySelector(".table");
-            var wrapper = table.parentNode;
-            var rowsInTable = table.rows.length;
-            var height = 20;
-
-            if (rowsInTable > maxRows) {
-              // Create a new wrapper element for the table
-              var newWrapper = document.createElement("div");
-              newWrapper.style.maxHeight = height + "rem";
-              newWrapper.style.overflowY = "scroll";
-
-              // Move the table into the new wrapper
-              wrapper.parentNode.insertBefore(newWrapper, wrapper);
-              newWrapper.appendChild(table);
-
-              // Set the header to be fixed
-              var header = table.getElementsByTagName("thead")[0];
-              header.style.position = "sticky";
-              header.style.top = "0";
-              header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
-            }
-          }
-        </script>
-      </body>
-
-      </html>
+        });
+      }
+    </script>
+  </body>
+</html>
