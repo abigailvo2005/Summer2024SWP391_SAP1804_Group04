@@ -25,8 +25,28 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "dashboard";
+        model.addAttribute("name", account);
+        model.addAttribute("currentPage", currentPage);
+        return "admin/dashboard-admin";
+    }
+
+    @GetMapping({"/profile"})
+    public String profileView(Model model, Authentication authentication){
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "profile";
         model.addAttribute(account);
         model.addAttribute(currentPage);
-        return "admin/dashboard-admin";
+        return "admin/profile-admin";
+    }
+
+    @GetMapping({"/history"})
+    public String historyView(Model model, Authentication authentication){
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "history";
+        model.addAttribute(account);
+        model.addAttribute(currentPage);
+        return "admin/history-admin";
     }
 }

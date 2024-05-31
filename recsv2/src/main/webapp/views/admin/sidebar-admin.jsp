@@ -90,7 +90,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/admin/profile-admin"
+              href="${pageContext.request.contextPath}/admin/profile"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -150,7 +150,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 handled.
               </p>
               <a
-                href="${pageContext.request.contextPath}/admin/history-admin"
+                href="${pageContext.request.contextPath}/admin/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
