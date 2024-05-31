@@ -1,5 +1,6 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
+<%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +11,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -18,7 +19,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -48,7 +49,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           target="_self"
         >
           <img
-            src="<c:url value='/template/assets/img/logos/logo-no-name.png'/>"
+            src="/template/assets/img/logos/logo-no-name.png'/>"
             class="navbar-brand-img h-100"
             alt="main_logo"
           />
@@ -112,7 +113,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url(<c:url value='/template/assets/img/curved-images/white-curved.jpg'/>);
+              background-image: url(/template/assets/img/curved-images/white-curved.jpg'/>);
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
@@ -221,11 +222,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </main>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>

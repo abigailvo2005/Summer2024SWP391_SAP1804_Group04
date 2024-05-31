@@ -58,10 +58,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <p class="mb-0">Enter your email and password to sign in</p>
                   </div>
 
-                  <!-- Form to Login: 
-                    + retrieve param through id
-                    + redirect to a post method in action
-                  -->
+                  <!-- Form to Login -->
                   <div class="card-body">
                     <form role="form" action="${pageContext.request.contextPath}/login" method="post">
                       <label>Username</label>
@@ -162,7 +159,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             </a>
             <!--optional function: introduce team member-->
             <a
-              href="javascript:;"
+              href=""
               target="_blank"
               class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2"
             >

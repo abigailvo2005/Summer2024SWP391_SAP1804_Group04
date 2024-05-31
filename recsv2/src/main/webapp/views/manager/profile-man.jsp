@@ -1,5 +1,7 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
+<%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +12,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -18,7 +20,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -37,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -50,7 +52,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div
           class="page-header min-height-300 border-radius-xl mt-2"
           style="
-            background-image: url('../../template/assets/img/curved-images/profile-background.jpeg');
+            background-image: url(/template/assets/img/curved-images/profile-background.jpeg'/>);
             background-position-y: 50%;
           "
         >
@@ -61,7 +63,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <div class="col-auto">
               <div class="avatar avatar-xl position-relative">
                 <img
-                  src="../../template/assets/img/male-pfp.png"
+                  src="/template/assets/img/male-pfp.png'/>"
                   alt="profile_image"
                   class="w-100 border-radius-lg shadow-sm"
                 />
@@ -71,7 +73,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <div class="h-100">
                 <h5 class="mb-1">Nguyễn Đức Long</h5>
                 <p class="mb-0 font-weight-bold text-sm">
-                  Seller / Property Owner
+                  Manager
                 </p>
               </div>
             </div>
@@ -108,8 +110,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <strong class="text-dark">Gender:</strong> &nbsp; Male
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
-                      <strong class="text-dark">Address:</strong> &nbsp; đường
-                      số 1, phường Tân Phong, Quận 7, TP HCM, Việt Nam.
+                      <strong class="text-dark">Address:</strong> &nbsp; Đường Tây 
+                      Hòa, Phước Long A, Quận 9, Thàn phố Hồ Chí Minh
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
                       <strong class="text-dark">Birthday:</strong> &nbsp;
@@ -214,7 +216,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
-    </main>
     <!--END: Profile-->
 
     <!-- START FOOTER-->
@@ -249,13 +250,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       </div>
     </footer>
     <!-- END: FOOTER -->
+  </main>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>

@@ -24,7 +24,9 @@ public class AdminController {
     public String dashboardView(Model model, Authentication authentication){
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
+        String currentPage = "dashboard";
         model.addAttribute(account);
+        model.addAttribute(currentPage);
         return "admin/dashboard-admin";
     }
 }

@@ -1,5 +1,6 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
+<%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -19,7 +20,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -38,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -50,7 +51,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url(<c:url value='/template/assets/img/register-staff-bg.png'/>);
+            background-image: url(/template/assets/img/register-staff-bg.png'/>);
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
@@ -272,8 +273,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     ></span>
                     <input
                       type="text"
+                      id="reqSearch"
                       class="form-control"
                       placeholder="Type username here..."
+                      onkeyup="searchTable()"
                     />
                   </div>
                 </div>
@@ -282,7 +285,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+                <table class="register-req-table table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th
@@ -319,8 +322,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <% for(int i = 0; i < 15; i+=1) { %>
-                    <tr>
+                    <% for(int i = 0; i < 20; i+=1) { %>
+                    <tr class="tbl-row">
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
                           <div
@@ -333,7 +336,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">
+                            <p
+                              class="mb-0 text-sm fw-bold text-dark"
+                            >
                               Hoàng Việt Hùng
                             </p>
                           </div>
@@ -342,7 +347,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">HungVH</p>
+                            <p 
+                            id="uname" class="mb-0 text-sm fw-bold text-dark">HungVH</p>
                           </div>
                         </div>
                       </td>
@@ -426,8 +432,29 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <!-- END: FOOTER -->
     </main>
 
-    <!-- make table scrollable & fixed header -->
     <script type="text/javascript">
+      //display elements according to search value
+      function searchTable() {
+        // Lấy giá trị từ ô input
+        var searchInput = document
+          .getElementById("reqSearch")
+          .value.toLowerCase();
+
+        // Lấy tất cả các hàng trong table
+        var tableRows = document.querySelectorAll(".tbl-row");
+
+        // Lặp qua từng hàng và ẩn/hiện dựa trên giá trị tìm kiếm
+        tableRows.forEach(function (row) {
+          var username = row.querySelector("#uname").textContent.toLowerCase();
+          if (username.includes(searchInput)) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+
+      //make table scrollable & fixed header
       function makeTableScroll() {
         // Constant retrieved from server-side via JSP
         var maxRows = 6;
@@ -457,11 +484,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </script>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>
