@@ -1,5 +1,6 @@
 package com.recs.controller;
 
+
 import com.recs.models.entities.Account;
 import com.recs.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_MANAGER')")
-@RequestMapping("/manager")
-public class ManagerController {
-
+@PreAuthorize("hasRole('ROLE_STAFF')")
+@RequestMapping("/staff")
+public class StaffController {
     @Autowired
     private AccountService accountService;
-
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, Authentication authentication) {
@@ -28,37 +27,17 @@ public class ManagerController {
         String currentPage = "dashboard";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
-        return "manager/dashboard-man";
+        return "staff/dashboard-staff";
     }
 
-    @GetMapping({ "/profile" })
-    public String profileView(Model model, Authentication authentication) {
+    /* @GetMapping({ "/create-property" })
+    public String dashboardView(Model model, Authentication authentication) {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
-        String currentPage = "profile";
-        model.addAttribute("name", name);
+        String currentPage = "create-property";
+        model.addAttribute("name", account);
         model.addAttribute("currentPage", currentPage);
-        return "manager/profile-man";
-    }
-
-    @GetMapping({ "/assign-job" })
-    public String assignJobView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "assign-job";
-        model.addAttribute("name", name);
-        model.addAttribute("currentPage", currentPage);
-        return "manager/assign-job";
-    }
-
-    @GetMapping({ "/register-acc-man" })
-    public String registerStaffView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "register";
-        model.addAttribute("name", name);
-        model.addAttribute("currentPage", currentPage);
-        return "manager/register-acc-man";
+        return "staff/create-property";
     }
 
     @GetMapping({ "/history" })
@@ -66,8 +45,20 @@ public class ManagerController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
-        model.addAttribute("name", name);
+        model.addAttribute("name", account);
         model.addAttribute("currentPage", currentPage);
-        return "manager/history-man";
+        return "staff/history-staff";
     }
+
+    @GetMapping({ "/profile" })
+    public String profileView(Model model, Authentication authentication) {
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "profile";
+        model.addAttribute("name", account);
+        model.addAttribute("currentPage", currentPage);
+        return "staff/profile-staff";
+    } */
 }
+
+

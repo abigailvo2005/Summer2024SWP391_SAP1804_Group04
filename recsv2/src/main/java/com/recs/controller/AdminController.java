@@ -25,7 +25,7 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "dashboard";
-        model.addAttribute("name", account);
+        model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/dashboard-admin";
     }
@@ -35,9 +35,19 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", account);
+        model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/profile-admin";
+    }
+
+    @GetMapping({"/property-tracking"})
+    public String propTrackingView(Model model, Authentication authentication){
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "tracking";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "admin/property-tracking";
     }
 
     @GetMapping({"/history"})
@@ -45,7 +55,7 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
-        model.addAttribute("name", account);
+        model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/history-admin";
     }

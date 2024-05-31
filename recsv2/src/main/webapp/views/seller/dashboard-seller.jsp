@@ -39,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/seller/sidebar-seller.jsp" />
+      <jsp:include page="/views/seller/sidebar-seller.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
