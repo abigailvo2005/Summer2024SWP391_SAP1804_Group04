@@ -1,5 +1,5 @@
 <%@ include file="/common/taglib.jsp" %> <%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include  
 file="/common/taglib.jsp" %> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fn"
 uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -656,7 +656,6 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
           popup.classList.add("hidden");
         }
       };
-
       //style table to have fixed heading and scrollable
       function makeTableScroll() {
         // Constant retrieved from server-side via JSP
