@@ -7,6 +7,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
     Member findByAccountId(int accountId);
-    @Query("SELECT m FROM Members m JOIN Account a ON s.accountId = a.accountId WHERE m.username = :username")
-    Member findByAccountUsername(@Param("username") String username);
 }

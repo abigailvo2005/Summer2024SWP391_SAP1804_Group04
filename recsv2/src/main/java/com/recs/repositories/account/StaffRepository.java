@@ -7,7 +7,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface StaffRepository extends JpaRepository<Staff, String> {
     Staff findByAccountId(int accountId);
-
-    @Query("SELECT s FROM Staff s JOIN Account a ON s.accountId = a.accountId WHERE a.username = :username")
-    Staff findByAccountUsername(@Param("username") String username);
 }

@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public List<Account> getAllAccount() {
         List<Account> list = accountRepository.findAll();
-        System.out.println("List all accounts size :"+ list);
+        System.out.println("List all accounts size :"+ list.size());
         return list;
     }
 

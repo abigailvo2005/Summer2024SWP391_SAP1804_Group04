@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class ApiController {
 
-    @Autowired
     private AccountService accountService;
+
+    @Autowired
+    public ApiController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @PostMapping("/user/new")
     public String addNewAccount(@RequestBody Account account) {

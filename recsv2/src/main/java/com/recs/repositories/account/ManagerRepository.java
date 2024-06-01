@@ -7,7 +7,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface ManagerRepository extends JpaRepository<Manager, String> {
     Manager findByAccountId(int accountId);
-
-    @Query("SELECT m FROM Manager m JOIN Account a ON s.accountId = a.accountId WHERE m.username = :username")
-    Manager findByAccountUsername(@Param("username") String username);
 }

@@ -8,7 +8,4 @@ import org.springframework.data.repository.query.Param;
 public interface SellerRepository extends JpaRepository<Seller, String> {
     Seller findByAccountId(int accountId);
 
-    @Query("SELECT s FROM Seller s JOIN Account a ON s.accountId = a.accountId WHERE a.username = :username")
-    Seller findByAccountUsername(@Param("username") String username);
-
 }
