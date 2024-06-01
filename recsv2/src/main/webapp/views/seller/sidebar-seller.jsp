@@ -1,5 +1,6 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
+<%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +11,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -18,7 +19,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -44,11 +45,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/dashboard-seller"
+          href="${pageContext.request.contextPath}/seller/dashboard"
           target="_self"
         >
           <img
-            src="<c:url value='/template/assets/img/logos/logo-no-name.png'/>"
+            src="/template/assets/img/logos/logo-no-name.png"
             class="navbar-brand-img h-100"
             alt="main_logo"
           />
@@ -63,7 +64,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/dashboard-seller"
+              href="${pageContext.request.contextPath}/seller/dashboard"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -83,7 +84,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'profile-seller' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/profile-seller"
+              href="${pageContext.request.contextPath}/seller/profile"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -112,7 +113,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url(<c:url value='/template/assets/img/curved-images/white-curved.jpg'/>);
+              background-image: url(/template/assets/img/curved-images/white-curved.jpg);
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
@@ -122,7 +123,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 View your successfully connected properties here.
               </p>
               <a
-                href="${pageContext.request.contextPath}/history-seller"
+                href="${pageContext.request.contextPath}/seller/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -132,7 +133,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         </div>
         <a
           class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/create-property"
+          href="${pageContext.request.contextPath}/seller/create-property"
           >Create Property</a
         >
       </div>
@@ -197,7 +198,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">
                   <i class="fa fa-user me-sm-1"></i>
-                  <span class="d-sm-inline d-none">Welcome, ${username}</span>
+                  <span class="d-sm-inline d-none">Welcome, ${name}</span>
                 </a>
               </li>
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -213,6 +214,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </div>
                 </a>
               </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+              <li class="nav-item d-flex align-items-center">
+                <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
+              </li>
             </ul>
           </div>
         </div>
@@ -221,11 +226,23 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </main>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script>
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          var userConfirmation = confirm("Are you sure you want to sign out?");
+          if (userConfirmation) {
+            window.location.href = "${pageContext.request.contextPath}/logout";
+          } else {
+            alert("Logout canceled.");
+          }
+        });
+    </script>
   </body>
 </html>

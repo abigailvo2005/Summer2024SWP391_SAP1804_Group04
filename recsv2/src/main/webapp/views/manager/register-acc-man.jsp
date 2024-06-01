@@ -1,5 +1,5 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -19,7 +19,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -50,7 +50,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url(<c:url value='/template/assets/img/register-staff-bg.png'/>);
+            background-image: url(/template/assets/img/register-staff-bg.png);
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
@@ -74,31 +74,39 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 </div>
 
                 <div class="card-body">
-                  <form role="form text-left" name="register-staff-form">
+                  <form
+                    role="form text-left"
+                    name="register-staff-form"
+                    action="${pageContext.request.contextPath}/manager/register-staff"
+                  >
                     <div class="mb-3 row">
-                      <div class="col-sm-2"><label>Full Name:</label></div>
+                      <div class="col-sm-2">
+                        <label for="fullName">Full Name:</label>
+                      </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
+                          id="fullName"
                           name="fullName"
                           class="form-control form-create-control col-10"
                           placeholder="Enter full name"
                           required
                         />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
-                        <!-- <p
-                  class="text-danger text-error mb-0 text-center pt-1 hidden"
-                >
-                  name should only contains 255 characters.
-                </p> -->
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-name hidden"
+                        >
+                          name should only contains maximum 255 characters.
+                        </p>
                       </div>
 
                       <div class="col-sm-2">
-                        <label>Gender:</label>
+                        <label for="gender">Gender:</label>
                       </div>
                       <div class="col-sm-4">
                         <select
                           class="form-control form-create-control col-10"
+                          id="gender"
                           name="gender"
                           required
                         >
@@ -112,48 +120,67 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     </div>
 
                     <div class="mb-3 row">
-                      <div class="col-sm-2"><label>Date of Birth:</label></div>
+                      <div class="col-sm-2">
+                        <label for="birthday">Date of Birth:</label>
+                      </div>
                       <div class="col-sm-4">
                         <input
                           type="date"
+                          id="birthday"
                           name="birthday"
                           class="form-control form-create-control col-10"
                           required
+                          onchange="validateDateOfBirth()"
                         />
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-bday hidden"
+                        >
+                          birthday has to be before current day.
+                        </p>
                       </div>
                       <div class="col-sm-2">
-                        <label> Email:</label>
+                        <label for="email"> Email:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="email"
+                          id="email"
                           name="emai"
                           class="form-control form-create-control col-10"
                           placeholder="Enter work email"
                           required
                         />
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-email hidden"
+                        >
+                          email is not in the correct format. (ie:
+                          example@domain.com)
+                        </p>
                       </div>
                     </div>
 
                     <div class="mb-3 row">
                       <div class="col-sm-2">
-                        <label> Phone:</label>
+                        <label for="phone"> Phone:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="number"
+                          id="phone"
                           name="phone"
                           class="form-control form-create-control col-10"
                           placeholder="Enter phone number"
+                          min="1"
                           required
                         />
                       </div>
                       <div class="col-sm-2">
-                        <label> Address:</label>
+                        <label for="address"> Address:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
+                          id="address"
                           name="address"
                           class="form-control form-create-control col-10"
                           placeholder="your property's adress"
@@ -163,22 +190,36 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     </div>
 
                     <div class="mb-3 row">
-                      <div class="col-sm-2"><label>Password:</label></div>
+                      <div class="col-sm-2">
+                        <label for="password">Password:</label>
+                      </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
+                          id="password"
                           name="password"
                           class="form-control form-create-control col-10"
                           placeholder="Enter expected password"
                           required
                         />
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-pw hidden"
+                        >
+                          password must be: <br />
+                          Minimum length of 8 characters.<br />
+                          At least one lowercase letter.<br />
+                          At least one uppercase letter.<br />
+                          At least one digit.<br />
+                          At least one special character from the set: @$!%*?&.
+                        </p>
                       </div>
                       <div class="col-sm-2">
-                        <label> ID Card No. :</label>
+                        <label for="idCardNo"> ID Card No. :</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="number"
+                          id="idCardNo"
                           name="address"
                           class="form-control form-create-control col-10"
                           placeholder="Enter ID card number"
@@ -190,36 +231,54 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
                     <div class="mb-3 row">
                       <div class="col-sm-2">
-                        <label> ID Card (Front):</label>
+                        <label for="frontID"> ID Card (Front):</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           class="form-control form-create-control col-10"
+                          id="frontID"
                           type="file"
                           name="frontID"
+                          required
                         />
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-id-front hidden"
+                        >
+                          only accept .gif .jpeg .png .jpg .heic
+                        </p>
                       </div>
 
                       <div class="col-sm-2">
-                        <label> ID Card (Back):</label>
+                        <label for="backID"> ID Card (Back):</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           class="form-control form-create-control col-10"
+                          id="backID"
                           type="file"
                           name="backID"
+                          required
                         />
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-id-back hidden"
+                        >
+                          only accept .gif .jpeg .png .jpg .heic
+                        </p>
                       </div>
                     </div>
 
                     <div class="mb-3 row">
-                      <div class="col-sm-2"><label> Role:</label></div>
+                      <div class="col-sm-2">
+                        <label for="role"> Role:</label>
+                      </div>
                       <div class="col-sm-2">
                         <input
                           type="text"
+                          id="role"
                           class="form-control form-create-control col-10"
                           value="Staff"
                           disabled
+                          required
                         />
                       </div>
 
@@ -231,6 +290,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                             <button
                               type="button"
                               class="btn bg-gradient-dark w-100 my-4 mb-2"
+                              onclick="submitRegister()"
                             >
                               Submit Request
                             </button>
@@ -272,8 +332,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     ></span>
                     <input
                       type="text"
+                      id="reqSearch"
                       class="form-control"
                       placeholder="Type username here..."
+                      onkeyup="searchTable()"
                     />
                   </div>
                 </div>
@@ -282,7 +344,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
-                <table class="table align-items-center mb-0">
+                <table class="register-req-table table align-items-center mb-0">
                   <thead>
                     <tr>
                       <th
@@ -319,8 +381,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <% for(int i = 0; i < 15; i+=1) { %>
-                    <tr>
+                    <% for(int i = 0; i < 20; i+=1) { %>
+                    <tr class="tbl-row">
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
                           <div
@@ -333,7 +395,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">
+                            <p
+                              id="fname"
+                              class="mb-0 text-sm fw-bold text-dark"
+                            >
                               Hoàng Việt Hùng
                             </p>
                           </div>
@@ -342,7 +407,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">HungVH</p>
+                            <p
+                              id="uname"
+                              class="mb-0 text-sm fw-bold text-dark"
+                            >
+                              HungVH
+                            </p>
                           </div>
                         </div>
                       </td>
@@ -426,8 +496,148 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <!-- END: FOOTER -->
     </main>
 
-    <!-- make table scrollable & fixed header -->
     <script type="text/javascript">
+      //validate birthday of staff
+      function validateDateOfBirth() {
+        const birthdayInput = document.getElementById("birthday");
+        const birthDate = new Date(birthdayInput.value);
+        const currentDate = new Date();
+
+        if (birthDate.getTime() >= currentDate.getTime()) {
+          document.querySelector(".error-bday").classList.remove("hidden"); //show errors
+          birthdayInput.value = ""; // Delete bday value if invalid
+        } else {
+          document.querySelector(".error-bday").classList.add("hidden"); //hide errors
+        }
+      }
+
+      //submit register new staff request to admin
+      function submitRegister() {
+        event.preventDefault(); //Stop form from default submitting
+
+        // Check if all fields have values
+        if (document.querySelector("form").checkValidity()) {
+          const staffName = document.querySelector("#fullName");
+          const frontID = document.querySelector("#frontID");
+          const backID = document.querySelector("#backID");
+          const emailInput = document.querySelector("#email");
+          const passwordInput = document.querySelector("#password");
+          const nameError = document.querySelector(".error-name");
+          const idFrontError = document.querySelector(".error-id-front");
+          const idBackError = document.querySelector(".error-id-back");
+          const emailError = document.querySelector(".error-email");
+          const pwError = document.querySelector(".error-pw");
+
+          const validImageTypes = [
+            "image/gif",
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/heic",
+          ];
+
+          if (staffName.value.length > 255) {
+            //Check if property's name is longer than 255 characters
+            nameError.classList.remove("hidden");
+            return;
+          } else {
+            nameError.classList.add("hidden");
+          }
+
+          if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
+            // Check if email is valid
+            emailError.classList.remove("hidden");
+            return;
+          } else {
+            emailError.classList.add("hidden");
+          }
+
+          if (
+            !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+              passwordInput.value
+            )
+          ) {
+            // Check if password is valid
+            pwError.classList.remove("hidden");
+            return;
+          } else {
+            pwError.classList.add("hidden");
+          }
+
+          idFrontError.classList.add("hidden");
+          idBackError.classList.add("hidden");
+          // Check if front ID and back ID are valid image types
+          for (let i = 0; i < 2; i++) {
+            const fileInput = i == 0 ? frontID : backID;
+            var err = 0;
+            const file = fileInput.files[0];
+            const fileType = file ? file.type : "";
+            if (!validImageTypes.includes(fileType)) {
+              if (i == 0) {
+                err++;
+                idFrontError.classList.remove("hidden");
+              }
+              if (i == 1) {
+                err++;
+                idBackError.classList.remove("hidden");
+              }
+            }
+            if (err > 0) {
+              return;
+            }
+          }
+
+          // Ẩn tất cả các thông báo lỗi
+          nameError.classList.add("hidden");
+          idFrontError.classList.add("hidden");
+          idBackError.classList.add("hidden");
+          emailError.classList.add("hidden");
+          pwError.classList.add("hidden");
+
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully requested to register a new Staff!");
+            document.querySelector("form").submit();
+          });
+
+        } else {
+          // If some fields are empty, show default errors
+          document.querySelector("form").reportValidity();
+        }
+      }
+
+      //display elements according to search value
+      function searchTable() {
+        // Lấy giá trị từ ô input
+        var searchInput = document
+          .getElementById("reqSearch")
+          .value.toLowerCase();
+
+        // Retrieve all rows in a table
+        var tableRows = document.querySelectorAll(".tbl-row");
+
+        // Loop through each row and hide/unhide them based on search value
+        tableRows.forEach(function (row) {
+          var username = row.querySelector("#uname").textContent.toLowerCase();
+          var fullname = row.querySelector("#fname").textContent.toLowerCase();
+          if (
+            username.includes(searchInput) ||
+            fullname.includes(searchInput)
+          ) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+
+      //make table scrollable & fixed header
       function makeTableScroll() {
         // Constant retrieved from server-side via JSP
         var maxRows = 6;
@@ -457,11 +667,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </script>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>

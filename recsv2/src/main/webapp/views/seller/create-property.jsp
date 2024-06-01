@@ -1,6 +1,7 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
-file="/common/taglib.jsp" %>
+<%@ page language="java"
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,7 +12,7 @@ file="/common/taglib.jsp" %>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -19,7 +20,7 @@ file="/common/taglib.jsp" %>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -38,7 +39,7 @@ file="/common/taglib.jsp" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/seller/sidebar-seller.jsp" />
+      <jsp:include page="/views/seller/sidebar-seller.jsp" />
     </header>
     <!-- END SIDEBAR -->
 
@@ -50,7 +51,7 @@ file="/common/taglib.jsp" %>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url('<c:url value='/template/assets/img/curved-images/create-property-background.jpeg'/>');
+            background-image: url('/template/assets/img/curved-images/create-property-background.jpeg'/>');
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
@@ -344,12 +345,12 @@ file="/common/taglib.jsp" %>
     </main>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
     <script>
       /* Create Property Form: only show some fields corresponding to type of property */

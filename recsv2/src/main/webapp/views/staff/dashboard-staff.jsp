@@ -1,6 +1,7 @@
-<%@ include file="/common/taglib.jsp" %> <%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ include
-file="/common/taglib.jsp" %>
+<%@ page language="java"
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ file="/common/taglib.jsp" %>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
       rel="stylesheet"
     />
 
@@ -20,7 +21,7 @@ file="/common/taglib.jsp" %>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -39,7 +40,7 @@ file="/common/taglib.jsp" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/staff/sidebar-staff.jsp" />
+      <jsp:include page="/views/staff/sidebar-staff.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -606,21 +607,21 @@ file="/common/taglib.jsp" %>
                           <div class="carousel-inner">
                             <div class="carousel-item active">
                               <img
-                                src="../../assets/img/home-decor-1.jpg"
+                                src="../../template/assets/img/home-decor-1.jpg"
                                 class="d-block w-100"
                                 alt="Image 1"
                               />
                             </div>
                             <div class="carousel-item">
                               <img
-                                src="../../assets/img/home-decor-2.jpg"
+                                src="../../template/assets/img/home-decor-2.jpg"
                                 class="d-block w-100"
                                 alt="Image 2"
                               />
                             </div>
                             <div class="carousel-item">
                               <img
-                                src="../../assets/img/home-decor-3.jpg"
+                                src="../../template/assets/img/home-decor-3.jpg"
                                 class="d-block w-100"
                                 alt="Image 3"
                               />
@@ -920,11 +921,11 @@ file="/common/taglib.jsp" %>
     </script>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>

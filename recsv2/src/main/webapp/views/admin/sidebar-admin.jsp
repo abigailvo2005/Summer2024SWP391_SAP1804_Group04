@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +17,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <!-- Link CSS -->
     <link
       id="pagestyle"
-      href="<c:url value='/template/assets/css/soft-ui-dashboard.css?v=1.0.7' />"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7'"
       rel="stylesheet"
     />
 
@@ -26,7 +25,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <link
       rel="icon"
       type="image/png"
-      href="<c:url value='/template/assets/img/logos/logo-no-name.png' />"
+      href="/template/assets/img/logos/logo-no-name.png"
     />
 
     <!-- Fonts-->
@@ -52,11 +51,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/dashboard-admin"
+          href="${pageContext.request.contextPath}/dashboard"
           target="_self"
         >
           <img
-            src="<c:url value='/template/assets/img/logos/logo-no-name.png'/>"
+            src="/template/assets/img/logos/logo-no-name.png"
             class="navbar-brand-img h-100"
             alt="main_logo"
           />
@@ -71,7 +70,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/dashboard-admin"
+              href="${pageContext.request.contextPath}/admin/dashboard"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -80,7 +79,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   class="fa-solid fa-table-columns"
                   style="
                     $ {
-                      currentpage!='dashboard'? 'color: #30221b;' : '';
+                      currentpage!='dashboard'?'color: #30221b;': '';
                     }
                   "
                 ></i>
@@ -91,7 +90,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/profile-admin"
+              href="${pageContext.request.contextPath}/admin/profile"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -111,7 +110,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'tracking' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/property-tracking"
+              href="${pageContext.request.contextPath}/admin/property-tracking"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -140,7 +139,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url(<c:url value='/template/assets/img/curved-images/white-curved.jpg'/>);
+              background-image: url('/template/assets/img/curved-images/white-curved.jpg');
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
@@ -151,7 +150,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 handled.
               </p>
               <a
-                href="${pageContext.request.contextPath}/history-admin"
+                href="${pageContext.request.contextPath}/admin/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -160,10 +159,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </div>
         </div>
         <a
-              class="btn bg-gradient-primary mt-3 w-100"
-              href="${pageContext.request.contextPath}/create-account"
-              >Create Account</a
-            >
+          class="btn bg-gradient-primary mt-3 w-100"
+          href="${pageContext.request.contextPath}/admin/create-account"
+          >Create Account</a
+        >
       </div>
     </aside>
     <!-- END SIDEBAR -->
@@ -180,60 +179,62 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       >
         <!--left side: page title-->
         <div class="container-fluid py-1 px-3">
-            <nav aria-label="breadcrumb">
-              <ol
-                class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
-              >
-                <li class="breadcrumb-item text-sm">
-                  <a class="opacity-5 text-dark" href="javascript:;">Pages</a>
-                </li>
-                <li
-                  class="breadcrumb-item text-sm text-dark active"
-                  aria-current="page"
-                >
-                  ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                  'profile' ? 'View Profile' : (currentPage == 'history-admin' ?
-                  'View History' : (currentPage == 'tracking' ? 'System Property
-                  Tracking' : '')))}
-                </li>
-              </ol>
-              <h6 class="font-weight-bolder mb-0">
-                ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'Profile' : (currentPage == 'history-admin' ?
-                'History' : (currentPage == 'tracking' ? 'Property Tracking' :
-                '')))}
-              </h6>
-            </nav>
-
-            <!-- right side: search & profile-->
-            <div
-              class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
-              id="navbar"
+          <nav aria-label="breadcrumb">
+            <ol
+              class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
             >
-              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              </div>
-              <ul class="navbar-nav justify-content-end">
-                <li class="nav-item d-flex align-items-center">
-                  <a href="#" class="nav-link text-body font-weight-bold px-0">
-                    <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none">Welcome, ${username}</span>
-                  </a>
-                </li>
-                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                  <a
-                    href="javascript:;"
-                    class="nav-link text-body p-0"
-                    id="iconNavbarSidenav"
-                  >
-                    <div class="sidenav-toggler-inner">
-                      <i class="sidenav-toggler-line"></i>
-                      <i class="sidenav-toggler-line"></i>
-                      <i class="sidenav-toggler-line"></i>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
+              <li class="breadcrumb-item text-sm">
+                <a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+              </li>
+              <li
+                class="breadcrumb-item text-sm text-dark active"
+                aria-current="page"
+              >
+                ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
+                'profile' ? 'View Profile' : (currentPage == 'history-admin' ?
+                'View History' : (currentPage == 'tracking' ? 'System Property
+                Tracking' : '')))}
+              </li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">
+              ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
+              'profile' ? 'Profile' : (currentPage == 'history-admin' ?
+              'History' : (currentPage == 'tracking' ? 'Property Tracking' :
+              '')))}
+            </h6>
+          </nav>
+
+          <!-- right side: search & profile-->
+          <div
+            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+            id="navbar"
+          >
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item d-flex align-items-center">
+                <a href="#" class="nav-link text-body font-weight-bold px-0">
+                  <i class="fa fa-user me-sm-1"></i>
+                  <span class="d-sm-inline d-none">Welcome, ${name}</span>
+                </a>
+              </li>
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="iconNavbarSidenav"
+                >
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                  </div>
+                </a>
+              </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+              <li class="nav-item d-flex align-items-center">
+                <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -241,11 +242,24 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </main>
 
     <!--   Core JS Files   -->
-    <script src="<c:url value='/template/assets/js/core/popper.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/core/bootstrap.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/perfect-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/smooth-scrollbar.min.js' />"></script>
-    <script src="<c:url value='/template/assets/js/plugins/chartjs.min.js'/>"></script>
-    <script src="<c:url value='/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7' />"></script>
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+
+    <script>
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          var userConfirmation = confirm("Are you sure you want to sign out?");
+          if (userConfirmation) {
+            window.location.href = "${pageContext.request.contextPath}/logout";
+          } else {
+            alert("Logout canceled.");
+          }
+        });
+    </script>
   </body>
 </html>
