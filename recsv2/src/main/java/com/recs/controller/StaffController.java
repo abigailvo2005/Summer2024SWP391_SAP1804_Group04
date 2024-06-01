@@ -30,6 +30,16 @@ public class StaffController {
         return "staff/dashboard-staff";
     }
 
+    @GetMapping({ "/history" })
+    public String historyView(Model model, Authentication authentication) {
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "history";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "staff/history-staff";
+    }
+
     /* @GetMapping({ "/create-property" })
     public String dashboardView(Model model, Authentication authentication) {
         String name = authentication.getName();
@@ -40,15 +50,7 @@ public class StaffController {
         return "staff/create-property";
     }
 
-    @GetMapping({ "/history" })
-    public String historyView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "history";
-        model.addAttribute("name", account);
-        model.addAttribute("currentPage", currentPage);
-        return "staff/history-staff";
-    }
+   
 
     @GetMapping({ "/profile" })
     public String profileView(Model model, Authentication authentication) {
