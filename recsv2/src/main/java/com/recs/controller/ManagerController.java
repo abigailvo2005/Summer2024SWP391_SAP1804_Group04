@@ -1,15 +1,13 @@
 package com.recs.controller;
 
-import com.recs.models.entities.Account;
-import com.recs.services.AccountService;
+import com.recs.models.entities.account.Account;
+import com.recs.services.accountsvc.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -72,7 +70,7 @@ public class ManagerController {
     }
 
     @GetMapping({ "/register-staff" })
-    public String historyView(Model model, Authentication authentication) {
+    public String registerStaff(Model model, Authentication authentication) {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";

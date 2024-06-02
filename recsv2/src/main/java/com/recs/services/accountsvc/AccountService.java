@@ -1,6 +1,6 @@
-package com.recs.services;
+package com.recs.services.accountsvc;
 
-import com.recs.models.entities.Account;
+import com.recs.models.entities.account.Account;
 
 import java.util.List;
 
@@ -16,4 +16,6 @@ public interface AccountService {
     public boolean deleteAccount(String accountId);
 
     public Account getByUserName(String username);
+
+    public List<Account> getApprovingAccount();
 }

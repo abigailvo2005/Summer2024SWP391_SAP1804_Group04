@@ -1,11 +1,21 @@
-package com.recs.models.entities;
+package com.recs.models.entities.account;
 
-import jakarta.persistence.*;
-import lombok.*;
 
-@Setter
-@Getter
-@ToString
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Table;
+import java.util.Date;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -14,7 +24,7 @@ public class Account {
 
     @Id
     @Column(name = "accountId")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int accountId;
 
     @Column(name = "username")
@@ -31,6 +41,10 @@ public class Account {
 
     @Column(name = "gender")
     private int gender;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birthDate")
+    private Date birthDate;
 
     @Column(name = "email")
     private String email;

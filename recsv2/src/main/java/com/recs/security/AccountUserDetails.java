@@ -1,6 +1,6 @@
 package com.recs.security;
 
-import com.recs.models.entities.Account;
+import com.recs.models.entities.account.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
