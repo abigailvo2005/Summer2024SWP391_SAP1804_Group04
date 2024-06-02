@@ -1,16 +1,14 @@
 package com.recs.controller;
 
 
-import com.recs.models.entities.Account;
-import com.recs.services.AccountService;
+import com.recs.models.entities.account.Account;
+import com.recs.services.accountsvc.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -30,6 +28,16 @@ public class StaffController {
         return "staff/dashboard-staff";
     }
 
+    @GetMapping({ "/history" })
+    public String historyView(Model model, Authentication authentication) {
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "history";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "staff/history-staff";
+    }
+
     /* @GetMapping({ "/create-property" })
     public String dashboardView(Model model, Authentication authentication) {
         String name = authentication.getName();
@@ -40,15 +48,7 @@ public class StaffController {
         return "staff/create-property";
     }
 
-    @GetMapping({ "/history" })
-    public String historyView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "history";
-        model.addAttribute("name", account);
-        model.addAttribute("currentPage", currentPage);
-        return "staff/history-staff";
-    }
+   
 
     @GetMapping({ "/profile" })
     public String profileView(Model model, Authentication authentication) {

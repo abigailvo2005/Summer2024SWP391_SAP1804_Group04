@@ -12,7 +12,7 @@ CREATE TABLE AccountRole(
 CREATE TABLE Account(
 	accountId int AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	username VARCHAR(32) NOT NULL,
-	password VARCHAR(32) NOT NULL,
+	password VARCHAR(128) NOT NULL,
 	roleId VARCHAR(16) NOT NULL,
 	fullName NVARCHAR(32) NOT NULL,
 	gender INT,
@@ -22,7 +22,8 @@ CREATE TABLE Account(
 	idCard VARCHAR(16),
 	status VARCHAR(16)
 	);
-	
+
+ALTER TABLE Account ADD COLUMN birthDate DATE;
 ALTER TABLE Account ADD FOREIGN KEY (roleId) REFERENCES AccountRole(roleId);
 
 CREATE TABLE Seller(
@@ -48,6 +49,11 @@ CREATE TABLE Staff(
     FOREIGN KEY (accountId) REFERENCES Account(accountId)
 );
 
+ALTER TABLE Staff
+ADD managerId VARCHAR(36) NOT NULL;
+
+ALTER TABLE Staff ADD FOREIGN KEY (managerId) REFERENCES Manager(managerId);
+
 CREATE TABLE Agency(
 	agencyId VARCHAR(32),
 	accountId INT,
@@ -66,6 +72,12 @@ CREATE TABLE Members(
     CONSTRAINT PK_Member PRIMARY KEY (memberId,accountId),
     FOREIGN KEY (accountId) REFERENCES Account(accountId)
 	);
+
+ALTER TABLE Members
+ADD agencyId VARCHAR(36) NOT NULL;
+
+ALTER TABLE Members ADD FOREIGN KEY (agencyId) REFERENCES Agency(agencyId);
+
 
 -- Real Estate
 
@@ -178,7 +190,7 @@ CREATE TABLE BuyerRequest(
 	message NVARCHAR(512),
 	createTimestamp BIGINT,
 	status VARCHAR(16),
-	memberId VARCHAR(32), 
+	memberId VARCHAR(32),
 	realEstateId VARCHAR(64) NOT NULL,
 	FOREIGN KEY (realEstateId) REFERENCES RealEstate(realEstateId),
 	FOREIGN KEY (memberId) REFERENCES Members(memberId)

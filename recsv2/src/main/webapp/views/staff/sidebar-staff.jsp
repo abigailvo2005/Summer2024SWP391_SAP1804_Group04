@@ -159,15 +159,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-seller' ?
+                'profile' ? 'View Profile' : (currentPage == 'history' ?
                 'View History' : (currentPage == 'create-property' ? 'Create
                 Property' : '')))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-seller' ?
-              'History' : (currentPage == 'create-property' ? 'Create Property'
+              'profile' ? 'Profile' : (currentPage == 'history' ?
+              'History Job  ' : (currentPage == 'create-property' ? 'Create Property'
               : '')))}
             </h6>
           </nav>
@@ -198,6 +198,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   </div>
                 </a>
               </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
               <li class="nav-item d-flex align-items-center">
                 <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
               </li>

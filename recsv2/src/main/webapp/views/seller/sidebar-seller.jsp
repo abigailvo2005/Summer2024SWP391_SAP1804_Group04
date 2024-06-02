@@ -38,7 +38,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <aside
-      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 z-index-1 fixed-start ms-3"
       id="sidenav-main"
     >
       <!-- sidebar: menu section-->
@@ -214,6 +214,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </div>
                 </a>
               </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+              <li class="nav-item d-flex align-items-center">
+                <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
+              </li>
             </ul>
           </div>
         </div>
@@ -228,5 +232,17 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script>
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          var userConfirmation = confirm("Are you sure you want to sign out?");
+          if (userConfirmation) {
+            window.location.href = "${pageContext.request.contextPath}/logout";
+          } else {
+            alert("Logout canceled.");
+          }
+        });
+    </script>
   </body>
 </html>

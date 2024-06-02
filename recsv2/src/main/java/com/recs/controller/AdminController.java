@@ -1,16 +1,16 @@
 package com.recs.controller;
 
-import com.recs.models.entities.Account;
-import com.recs.services.AccountService;
+import com.recs.models.entities.account.Account;
+import com.recs.services.accountsvc.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,9 +24,13 @@ public class AdminController {
     public String dashboardView(Model model, Authentication authentication){
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
+        List<Account> registerList = accountService.getApprovingAccount();
+        List<Account> allAccounts = accountService.getAllAccount();
         String currentPage = "dashboard";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("registerList", registerList);
+        model.addAttribute("allAccounts", allAccounts);
         return "admin/dashboard-admin";
     }
 

@@ -1,7 +1,7 @@
 package com.recs.security;
 
-import com.recs.models.entities.Account;
-import com.recs.repositories.AccountRepository;
+import com.recs.models.entities.account.Account;
+import com.recs.repositories.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
