@@ -78,6 +78,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     role="form text-left"
                     name="register-staff-form"
                     action="${pageContext.request.contextPath}/manager/register-staff"
+                    method="post"
                   >
                     <div class="mb-3 row">
                       <div class="col-sm-2">
@@ -145,7 +146,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <input
                           type="email"
                           id="email"
-                          name="emai"
+                          name="email"
                           class="form-control form-create-control col-10"
                           placeholder="Enter work email"
                           required
@@ -220,7 +221,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <input
                           type="number"
                           id="idCardNo"
-                          name="address"
+                          name="idCardNo"
                           class="form-control form-create-control col-10"
                           placeholder="Enter ID card number"
                           min="1"
