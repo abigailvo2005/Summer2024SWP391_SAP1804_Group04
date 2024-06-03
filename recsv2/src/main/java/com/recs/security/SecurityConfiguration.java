@@ -1,5 +1,14 @@
 package com.recs.security;
 
+import com.recs.models.dto.account.UserInfo;
+import com.recs.models.entities.account.Account;
+import com.recs.models.entities.account.Agency;
+import com.recs.models.entities.account.Manager;
+import com.recs.models.entities.account.Member;
+import com.recs.models.entities.account.Seller;
+import com.recs.models.entities.account.Staff;
+import com.recs.services.accountsvc.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,6 +30,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
+
     @Bean
     public UserDetailsService userDetailsService(){
 //        UserDetails admin = User.withUsername("admin")
@@ -72,17 +82,27 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
         return (request, response, authentication) -> {
+            String name = authentication.getName();
             String role = authentication.getAuthorities().iterator().next().getAuthority();
-            if (role.equals("ROLE_ADMIN")) {
-                response.sendRedirect("/admin");
-            } else if (role.equals("ROLE_MANAGER")) {
-                response.sendRedirect("/manager");
-            } else if (role.equals("ROLE_STAFF")) {
-                response.sendRedirect("/staff");
-            } else if (role.equals("ROLE_AGENCY")) {
-                response.sendRedirect("/agency");
-            } else if (role.equals("ROLE_SELLER")) {
-                response.sendRedirect("/seller");
+            switch (role) {
+                case "ROLE_ADMIN" -> {
+                    response.sendRedirect("/admin");
+                }
+                case "ROLE_MANAGER" -> {
+                    response.sendRedirect("/manager");
+                }
+                case "ROLE_STAFF" -> {
+                    response.sendRedirect("/staff");
+                }
+                case "ROLE_AGENCY" -> {
+                    response.sendRedirect("/agency");
+                }
+                case "ROLE_SELLER" -> {
+                    response.sendRedirect("/seller");
+                }
+                case "ROLE_MEMBER" -> {
+                    response.sendRedirect("/member");
+                }
             }
         };
     }

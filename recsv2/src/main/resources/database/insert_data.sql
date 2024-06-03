@@ -59,5 +59,7 @@ INSERT INTO Agency (agencyId, accountId, company, yearsOfExperience, completedPr
 (UUID(), (SELECT accountId FROM Account WHERE username = 'agency.user5'), 'Agency Company 5', 9, 70, 'Agency Description 5'),
 (UUID(), (SELECT accountId FROM Account WHERE username = 'agency.user6'), 'Agency Company 6', 10, 75, 'Agency Description 6');
 
+SELECT s FROM Seller s JOIN Account a ON s.accountId = a.accountId WHERE a.username = 'seller.user'
+
 
 
