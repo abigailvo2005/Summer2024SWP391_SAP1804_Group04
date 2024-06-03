@@ -40,7 +40,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/staff/sidebar-staff.jsp" />
+      <jsp:include page="/views/staff/sidebar-staff.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -607,21 +607,21 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           <div class="carousel-inner">
                             <div class="carousel-item active">
                               <img
-                                src="../../assets/img/home-decor-1.jpg"
+                                src="../../template/assets/img/home-decor-1.jpg"
                                 class="d-block w-100"
                                 alt="Image 1"
                               />
                             </div>
                             <div class="carousel-item">
                               <img
-                                src="../../assets/img/home-decor-2.jpg"
+                                src="../../template/assets/img/home-decor-2.jpg"
                                 class="d-block w-100"
                                 alt="Image 2"
                               />
                             </div>
                             <div class="carousel-item">
                               <img
-                                src="../../assets/img/home-decor-3.jpg"
+                                src="../../template/assets/img/home-decor-3.jpg"
                                 class="d-block w-100"
                                 alt="Image 3"
                               />
@@ -925,7 +925,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   </body>
 </html>

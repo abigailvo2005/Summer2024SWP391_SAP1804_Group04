@@ -11356,7 +11356,6 @@ fieldset:disabled .btn {
 
   .d-sm-inline {
     display: inline !important;
-    margin-right: 30px;
   }
 
   .d-sm-inline-block {
@@ -23780,11 +23779,11 @@ html {
 }
 
 .navbar-vertical .navbar-nav .nav-item .nav-link .icon i {
-  color: #141727;
+  color: #30221b;
 }
 
 .navbar-vertical .navbar-nav .nav-item .nav-link .icon i {
-  color: #fff;
+  color: #30221b;
 }
 
 .nav.nav-pills {

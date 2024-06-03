@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +45,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/dashboard-seller"
+          href="${pageContext.request.contextPath}/staff/dashboard"
           target="_self"
         >
           <img
-            src="/template/assets/img/logos/logo-no-name.png'/>"
+            src="/template/assets/img/logos/logo-no-name.png"
             class="navbar-brand-img h-100"
             alt="main_logo"
           />
@@ -65,7 +64,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/dashboard-seller"
+              href="${pageContext.request.contextPath}/staff/dashboard"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -74,7 +73,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   class="fa-solid fa-table-columns"
                   style="
                     $ {
-                      currentpage!='dashboard'?'color: #30221b' : '';
+                      currentpage!='dashboard'?'color: #30221b': '';
                     }
                   "
                 ></i>
@@ -85,7 +84,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/profile-seller"
+              href="${pageContext.request.contextPath}/staff/profile"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -114,7 +113,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url(/template/assets/img/curved-images/white-curved.jpg'/>);
+              background-image: url(/template/assets/img/curved-images/white-curved.jpg);
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
@@ -124,7 +123,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 View your successfully connected properties here.
               </p>
               <a
-                href="${pageContext.request.contextPath}/history-seller"
+                href="${pageContext.request.contextPath}/staff/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -132,11 +131,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             </div>
           </div>
         </div>
-        <a
-          class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/create-property"
-          >Create Property</a
-        >
       </div>
     </aside>
     <!-- END SIDEBAR -->
@@ -165,15 +159,15 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-seller' ?
+                'profile' ? 'View Profile' : (currentPage == 'history' ?
                 'View History' : (currentPage == 'create-property' ? 'Create
                 Property' : '')))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-seller' ?
-              'History' : (currentPage == 'create-property' ? 'Create Property'
+              'profile' ? 'Profile' : (currentPage == 'history' ?
+              'History Job  ' : (currentPage == 'create-property' ? 'Create Property'
               : '')))}
             </h6>
           </nav>
@@ -188,7 +182,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">
                   <i class="fa fa-user me-sm-1"></i>
-                  <span class="d-sm-inline d-none">Welcome, ${username}</span>
+                  <span class="d-sm-inline d-none">Welcome, ${name}</span>
                 </a>
               </li>
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -204,6 +198,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </div>
                 </a>
               </li>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
               <li class="nav-item d-flex align-items-center">
                 <i id="logoutButton" class="fa-solid fa-right-from-bracket"></i>
               </li>
@@ -219,7 +214,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script>
       document

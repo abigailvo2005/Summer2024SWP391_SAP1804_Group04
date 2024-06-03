@@ -74,7 +74,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         id="reqSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type username here..."
+                        placeholder="Type username/full name/role here..."
+                        onkeyup="searchTable('req')"
                       />
                     </div>
                   </div>
@@ -128,7 +129,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p
+                                    id="req-uname"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
                                     ${req.id}
                                   </p>
                                 </div>
@@ -140,7 +144,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-start"
                                 >
                                   <p
-                                    id="req-uname"
+                                    id="req-fname"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
                                     ${req.name}
@@ -155,7 +159,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p
+                                    id="req-role"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
                                     ${req.role}
                                   </p>
                                 </div>
@@ -196,7 +203,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailRegisterRequest('${req.id}', reqListJson)"
+                                    onclick="viewDetailRegisterRequest('${req.id}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -243,7 +250,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         id="userSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type username here..."
+                        placeholder="Type username or full name here..."
+                        onkeyup="searchTable('user')"
                       />
                     </div>
                   </div>
@@ -253,7 +261,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                       <thead>
-                        <tr>
+                        <tr class="user-row">
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
@@ -296,7 +304,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p
+                                    id="user-uname"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
                                     ${user.id}
                                   </p>
                                 </div>
@@ -308,7 +319,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-start"
                                 >
                                   <p
-                                    id="user-uname"
+                                    id="user-fname"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
                                     ${user.name}
@@ -323,7 +334,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p
+                                    id="user-role"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
                                     ${user.role}
                                   </p>
                                 </div>
@@ -684,28 +698,65 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       }
 
       //display elements according to search value
-      function searchTable() {
-        // Lấy giá trị từ ô input
-        var searchReq = document
-          .getElementById("reqSearch")
-          .value.toLowerCase();
+      function searchTable(type) {
+        //search for request register accounts
+        if (type.includes("req")) {
+          //Get values from input search
+          var searchReq = document
+            .getElementById("reqSearch")
+            .value.toLowerCase();
 
-        var searchUser = document
-          .getElementById("userSearch")
-          .value.toLowerCase();
+          // Get all rows in table
+          var requests = document.querySelectorAll(".req-row");
 
-        // Lấy tất cả các hàng trong table
-        var requests = document.querySelectorAll(".req-row");
+          requests.forEach(function (row) {
+            var username = row
+              .querySelector("#req-uname")
+              .textContent.toLowerCase();
+            var name = row
+              .querySelector("#req-fname")
+              .textContent.toLowerCase();
+            var role = row.querySelector("#req-role").textContent.toLowerCase();
+            if (
+              username.includes(searchInput) ||
+              name.includes(searchInput) ||
+              role.includes(searchInput)
+            ) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        } else {
+          //Get values from input search
+          var searchReq = document
+            .getElementById("userSearch")
+            .value.toLowerCase();
 
-        // Lặp qua từng hàng và ẩn/hiện dựa trên giá trị tìm kiếm
-        requests.forEach(function (row) {
-          var username = row.querySelector("#uname").textContent.toLowerCase();
-          if (username.includes(searchInput)) {
-            row.style.display = "";
-          } else {
-            row.style.display = "none";
-          }
-        });
+          // Get all rows in table
+          var requests = document.querySelectorAll(".user-row");
+
+          requests.forEach(function (row) {
+            var username = row
+              .querySelector("#user-uname")
+              .textContent.toLowerCase();
+            var name = row
+              .querySelector("#user-fname")
+              .textContent.toLowerCase();
+            var role = row
+              .querySelector("#user-role")
+              .textContent.toLowerCase();
+            if (
+              username.includes(searchInput) ||
+              name.includes(searchInput) ||
+              role.includes(searchInput)
+            ) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        }
       }
     </script>
   </body>

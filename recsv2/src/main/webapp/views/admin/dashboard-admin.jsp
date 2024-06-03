@@ -133,7 +133,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-uname"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.id}
+                                    ${req.accountId}
                                   </p>
                                 </div>
                               </div>
@@ -147,7 +147,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-fname"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.name}
+                                    ${req.fullName}
                                   </p>
                                 </div>
                               </div>
@@ -163,7 +163,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-role"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.role}
+                                    ${req.roleId}
                                   </p>
                                 </div>
                               </div>
@@ -176,7 +176,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.dateCreated}
                                   </p>
                                 </div>
                               </div>
@@ -203,7 +202,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailRegisterRequest('${req.id}')"
+                                    onclick="viewDetailRegisterRequest('${req.accountId}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>

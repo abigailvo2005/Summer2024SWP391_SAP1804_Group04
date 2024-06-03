@@ -39,7 +39,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/seller/sidebar-seller.jsp" />
+      <jsp:include page="/views/seller/sidebar-seller.jsp" />
     </header>
     <!-- END SIDEBAR -->
 
@@ -79,7 +79,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     role="form text-left"
                     name="property-information"
                     action="${pageContext.request.contextPath}/dashboard-seller"
-                    method="GET"
+                    method="post"
                   >
                     <div class="mb-3 row">
                       <div class="col-lg-2 col-sm-2"><label> Name:</label></div>

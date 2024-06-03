@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +38,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/WEB-INF/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -69,9 +68,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       ><i class="fas fa-search" aria-hidden="true"></i
                     ></span>
                     <input
+                      id="jobSearch"
                       type="text"
                       class="form-control"
-                      placeholder="Type name here..."
+                      placeholder="Type name/status here..."
+                      onkeyup="searchTable('job')"
                     />
                   </div>
                 </div>
@@ -119,7 +120,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
                     <!-- row 1: example request just submitted -->
-                    <tr>
+                    <tr class="job-row">
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
                           <div
@@ -132,7 +133,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">
+                            <p
+                              id="job-name"
+                              class="mb-0 text-sm fw-bold text-dark"
+                            >
                               Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
                               City Tây Mỗ
                             </p>
@@ -155,7 +159,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-warning">
+                            <p
+                              id="job-status"
+                              class="mb-0 text-sm fw-bold text-warning"
+                            >
                               Submitted
                             </p>
                           </div>
@@ -214,9 +221,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       ><i class="fas fa-search" aria-hidden="true"></i
                     ></span>
                     <input
+                      id="propSearch"
                       type="text"
                       class="form-control"
-                      placeholder="Type name here..."
+                      placeholder="Type name/status here..."
+                      onkeyup="searchTable('prop')"
                     />
                   </div>
                 </div>
@@ -263,7 +272,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
                     <!-- row 1: example property has been posted & available -->
-                    <tr>
+                    <tr class="prop-row">
                       <td class="align-middle text-center text-sm">
                         <div class="d-flex px-2 py-1 justify-content-center">
                           <div
@@ -276,7 +285,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <td>
                         <div class="d-flex justify-content-start">
                           <div class="d-flex flex-column justify-content-start">
-                            <p class="mb-0 text-sm fw-bold text-dark">
+                            <p
+                              id="prop-name"
+                              class="mb-0 text-sm fw-bold text-dark"
+                            >
                               Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
                               City Tây Mỗ
                             </p>
@@ -299,7 +311,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           <div
                             class="d-flex flex-column justify-content-center"
                           >
-                            <p class="mb-0 text-sm fw-bold text-muted">
+                            <p
+                              id="prop-status"
+                              class="mb-0 text-sm fw-bold text-muted"
+                            >
                               Available
                             </p>
                           </div>
@@ -398,6 +413,62 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           header.style.position = "sticky";
           header.style.top = "0";
           header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
+        }
+      }
+
+      //display elements according to search value
+      function searchTable(type) {
+        //search for request register accounts
+        if (type.includes("job")) {
+          //Get values from input search
+          var searchReq = document
+            .getElementById("jobSearch")
+            .value.toLowerCase();
+
+          // Get all rows in table
+          var jobs = document.querySelectorAll(".job-row");
+
+          jobs.forEach(function (row) {
+            var propName = row
+              .querySelector("#job-name")
+              .textContent.toLowerCase();
+            var status = row
+              .querySelector("#job-status")
+              .textContent.toLowerCase();
+            if (
+              propName.includes(searchInput) ||
+              status.includes(searchInput)
+            ) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        } else {
+          //Get values from input search
+          var searchReq = document
+            .getElementById("propSearch")
+            .value.toLowerCase();
+
+          // Get all rows in table
+          var props = document.querySelectorAll(".prop-row");
+
+          props.forEach(function (row) {
+            var propName = row
+              .querySelector("#prop-name")
+              .textContent.toLowerCase();
+            var status = row
+              .querySelector("#prop-status")
+              .textContent.toLowerCase();
+            if (
+              propName.includes(searchInput) ||
+              status.includes(searchInput)
+            ) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
         }
       }
     </script>
