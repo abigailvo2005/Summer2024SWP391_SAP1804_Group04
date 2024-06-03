@@ -29,7 +29,7 @@ public class AdminController {
         String currentPage = "dashboard";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("registerList", registerList);
+        model.addAttribute("reqList", registerList);
         model.addAttribute("allAccounts", allAccounts);
         return "admin/dashboard-admin";
     }
