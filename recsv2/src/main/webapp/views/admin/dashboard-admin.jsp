@@ -440,7 +440,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
     <!-- end: core js files -->
@@ -548,7 +548,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         &nbsp;
                         <img
                           class="id-card card-img mt-2"
-                          src="/template/assets/img/id-front-demo.jpeg'/>"
+                          src="/template/assets/img/id-front-demo.jpeg"
                           alt="id-front"
                         />
                       </li>
@@ -559,7 +559,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         &nbsp;
                         <img
                           class="id-card card-img mt-2"
-                          src="/template/assets/img/id-back-demo.jpeg'/>"
+                          src="/template/assets/img/id-back-demo.jpeg"
                           alt="id-back"
                         />
                       </li>

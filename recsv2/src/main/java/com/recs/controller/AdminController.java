@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -62,5 +63,21 @@ public class AdminController {
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/history-admin";
+    }
+
+    @GetMapping("/account/approve")
+    public String approveAccount(@RequestParam(name = "") String id, Model model){
+        Account account = accountService.approveAccount(id);
+        System.out.println("Approved account:"+account);
+        model.addAttribute("msg","Account approved!");
+        return ":/admin";
+    }
+
+    @GetMapping("/account/deny")
+    public String denyAccount(@RequestParam(name = "") String id, Model model){
+        Account account = accountService.denyAccount(id);
+        System.out.println("Denied account:"+account);
+        model.addAttribute("msg","Account denied!");
+        return "redirect:/admin";
     }
 }
