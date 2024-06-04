@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -51,7 +52,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> getAllAccount() {
-        List<Account> list = accountRepository.findAll();
+        List<Account> list = accountRepository.findAll().stream()
+                .sorted(Comparator.comparing(Account::getStatus)).toList();
         System.out.println("List all accounts size :" + list.size());
         return list;
     }
@@ -91,7 +93,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<Account> getApprovingAccount() {
-        List<Account> list = accountRepository.findByStatus("APPROVING");
+        List<Account> list = accountRepository.findByStatus("APPROVING")
+                .stream().sorted(
+                        Comparator.comparing(Account::getAccountId)
+                        .thenComparing(Account::getAccountId))
+                .toList();
         System.out.println("list registering account size: " + list.size());
         return list;
     }
