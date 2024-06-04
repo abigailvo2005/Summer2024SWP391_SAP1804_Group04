@@ -175,8 +175,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                  </p>
+                                  <p class="mb-0 text-sm fw-bold text-dark"></p>
                                 </div>
                               </div>
                             </td>
@@ -233,7 +232,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${userList.size()} user(s)</span
+                        >${allAccounts.size()} user(s)</span
                       >
                       in system
                     </p>
@@ -294,7 +293,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach items="${userList}" var="user">
+                        <c:forEach items="${allAccounts}" var="user">
                           <tr>
                             <td class="align-middle text-center text-sm">
                               <div
@@ -307,7 +306,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="user-uname"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${user.id}
+                                    ${user.accountId}
                                   </p>
                                 </div>
                               </div>
@@ -321,7 +320,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="user-fname"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${user.name}
+                                    ${user.fullName}
                                   </p>
                                 </div>
                               </div>
@@ -337,7 +336,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="user-role"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${user.role}
+                                    ${user.roleId}
                                   </p>
                                 </div>
                               </div>
@@ -612,46 +611,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
     <script type="text/javascript">
       //to show detail register request popup
-      function viewDetailRegisterRequest(reqID, reqListStr) {
+      function viewDetailRegisterRequest(userID) {
         var popup = document.getElementById("popup-register-request");
 
-        // Translate reqList from a JSON String into an Array (reqList being passed in as a JSON String in JSP)
-        //var reqList = JSON.stringify(reqListStr);
-
-        //retrieve request from corresponding id received
-        // Check if reqListStr is a valid JSON string
-        try {
-          var reqList = JSON.parse(reqListStr);
-
-          var item = reqList.find(function (item) {
-            return item.id === reqID;
-          });
-
-          if (item) {
-            //load information on popup - sample data
-            document.getElementById("username").innerText =
-              "Username: &nbsp;" + item.id;
-            document.getElementById("registered-name").innerText = item.name;
-            document.getElementById("role").innerText =
-              "Role: &nbsp;" + item.role;
-            document.getElementById("dateCreated").innerText =
-              "Created on: &nbsp;" + item.dateCreated;
-            document.getElementById("status").innerText =
-              "Status: &nbsp;" + item.status;
-            document.getElementById("password").innerText = "Password: ";
-            document.getElementById("email").innerText = "Email: ";
-            document.getElementById("gender").innerText = "Gender: ";
-            document.getElementById("birthday").innerText = "Birthday: ";
-            document.getElementById("idNum").innerText = "ID Number: ";
-
-            popup.classList.remove("hidden");
-          } else {
-            console.log("item does not exists");
-          }
-        } catch (e) {
-          // If the JSON parse fails, try to use reqListStr as an array directly
-          console.error("Error parsing reqListJson:", e);
-        }
+        //api get user with same reqID
+        popup.classList.remove("hidden");
       }
 
       //to close detail register request popup
