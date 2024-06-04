@@ -5,12 +5,14 @@ com/recs/RecsApplication.class
 com/recs/repositories/account/StaffRepository.class
 com/recs/config/WebConfiguration.class
 com/recs/repositories/account/ManagerRepository.class
+com/recs/utils/AccountUtils.class
 com/recs/security/AccountUserDetails.class
 com/recs/ServletInitializer.class
 com/recs/services/accountsvc/AccountServiceImpl.class
 com/recs/controller/AdminController.class
 com/recs/api/ApiController.class
 com/recs/models/entities/account/Seller.class
+com/recs/models/dto/account/RegisterStaffDTO.class
 com/recs/models/entities/account/Account.class
 com/recs/repositories/account/SellerRepository.class
 com/recs/models/dto/account/SellerDTO.class
@@ -24,7 +26,6 @@ com/recs/controller/HomeController.class
 com/recs/models/dto/account/UserInfo.class
 com/recs/models/dto/account/AgencyDTO.class
 com/recs/models/dto/account/MemberDTO.class
-com/recs/models/dto/account/registerStaffDTO.class
 com/recs/services/accountsvc/AccountService.class
 com/recs/security/SecurityConfiguration.class
 com/recs/models/dto/account/ManagerDTO.class

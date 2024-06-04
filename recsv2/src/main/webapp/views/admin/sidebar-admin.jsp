@@ -169,7 +169,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
     <!-- START RIGHT SIDE-->
     <main
-      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg mt-3"
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg mt-3  z-index-1"
     >
       <!-- START: Top Navbar -->
       <nav

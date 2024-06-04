@@ -89,7 +89,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
-                            ID
+                            accID
                           </th>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
@@ -441,6 +441,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- end: core js files -->
 
@@ -451,12 +452,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         <div class="popup-header row mx-1">
           <div class="col-11">
             <h4
-              id="registered-name"
+              id="popup-full-name"
               class="card-header font-weight-bolder mb-0"
-            >
-              <!-- full name -->
-              Hoàng Việt Hùng
-            </h4>
+            ></h4>
           </div>
           <div class="col-1">
             <i
@@ -475,67 +473,67 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <div class="container-fluid">
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="createID" class="text-dark"
-                          >Created by:</strong
-                        >
-                        &nbsp; ManID
+                        <strong class="text-dark">Superior ID:</strong>
+                        <p id="popup-superior-id"></p>
                       </li>
-
                       <li class="list-group-item border-0 ps-0 text-sm">
-                        <strong id="status" class="text-dark">Status:</strong>
-                        &nbsp; Reviewing
+                        <strong class="text-dark">Status:</strong>
+                        <p id="popup-status"></p>
                       </li>
                     </div>
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="username" class="text-dark"
-                          >Username:</strong
-                        >
-                        &nbsp; HungVH
+                        <strong class="text-dark">Username:</strong>
+                        <p id="popup-username"></p>
                       </li>
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="password" class="text-dark"
-                          >Password:</strong
-                        >
-                        &nbsp; 123456
+                        <strong class="text-dark">Email:</strong>
+                        <p id="popup-email"></p>
                       </li>
                     </div>
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="email" class="text-dark">Email:</strong>
-                        &nbsp; hoangviethung@gmail.com
+                        <strong class="text-dark">Gender:</strong>
+                        <p id="popup-gender"></p>
                       </li>
-
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="gender" class="text-dark">Gender:</strong>
-                        &nbsp; Male
+                        <strong class="text-dark">Created on:</strong>
+                        <p id="dateCreated">NaN</p>
                       </li>
                     </div>
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="birthday" class="text-dark"
-                          >Birthday:</strong
-                        >
-                        &nbsp; 01/02/2003
+                        <strong class="text-dark">Company ID:</strong>
+                        <p id="popup-company-id"></p>
                       </li>
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Phone:</strong> &nbsp;
-                        09128382948
+                        <strong class="text-dark">role id</strong>
+                        <p id="popup-id"></p>
                       </li>
                     </div>
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="role" class="text-dark">Role:</strong>
-                        &nbsp; Staff
+                        <strong class="text-dark">Birth Date:</strong>
+                        <p id="popup-birth-date"></p>
                       </li>
+                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <strong class="text-dark">Phone:</strong>
+                        <p id="popup-phone"></p>
+                      </li>
+                    </div>
 
+                    <div class="row">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <strong class="text-dark">Role ID:</strong>
+                        <p id="popup-role-id"></p>
+                      </li>
                       <li class="list-group-item border-0 ps-0 text-sm">
-                        <strong id="idNum" class="text-dark">ID Number:</strong>
-                        &nbsp; 0013349227592
+                        <strong class="text-dark">ID Card:</strong>
+                        <p id="popup-id-card"></p>
                       </li>
                     </div>
 
@@ -561,15 +559,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           src="/template/assets/img/id-back-demo.jpeg"
                           alt="id-back"
                         />
-                      </li>
-                    </div>
-
-                    <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong id="dateCreated" class="text-dark"
-                          >Created on:</strong
-                        >
-                        &nbsp; HungVH
                       </li>
                     </div>
                   </div>
@@ -610,15 +599,41 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <script type="text/javascript">
-      //to show detail register request popup
       function viewDetailRegisterRequest(userID) {
+        console.log(userID);
         var popup = document.getElementById("popup-register-request");
 
-        //api get user with same reqID
-        popup.classList.remove("hidden");
+        // Send GET Request API to retrieve single user information
+        $.ajax({
+          url: "http://localhost:8085/api/user/" + userID,
+          type: "GET",
+          success: function (data) {
+            // Update popup với information chosen User
+            $("#popup-username").text(data.username);
+            $("#popup-role-id").text(data.roleId);
+            $("#popup-full-name").text(data.fullName);
+            $("#popup-gender").text(data.gender);
+            $("#popup-email").text(data.email);
+            $("#popup-phone").text(data.phone);
+            $("#popup-address").text(data.address);
+            $("#popup-id-card").text(data.idCard);
+            $("#popup-status").text(data.status);
+            $("#popup-birth-date").text(
+              "Birthday: " + new Date(data.birthDate).toLocaleDateString()
+            );
+            $("#popup-superior-id").text(data.superiorId);
+            $("#popup-member-id").text(data.memberId);
+            $("#popup-company-id").text(data.companyId);
+
+            popup.classList.remove("hidden");
+          },
+          error: function () {
+            //Error when sending request
+            console.error("Error fetching register request details");
+          },
+        });
       }
 
-      //to close detail register request popup
       function closeDetailRegisterRequest() {
         var popup = document.getElementById("popup-register-request");
         popup.classList.add("hidden");
@@ -637,27 +652,30 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         // Constant retrieved from server-side via JSP
         var maxRows = 6;
 
-        var table = document.querySelector(".table");
-        var wrapper = table.parentNode;
-        var rowsInTable = table.rows.length;
-        var height = 20;
+        var tables = document.querySelectorAll(".table");
 
-        if (rowsInTable > maxRows) {
-          // Create a new wrapper element for the table
-          var newWrapper = document.createElement("div");
-          newWrapper.style.maxHeight = height + "rem";
-          newWrapper.style.overflowY = "scroll";
+        tables.forEach(function (table) {
+          var wrapper = table.parentNode;
+          var rowsInTable = table.rows.length;
+          var height = 20;
 
-          // Move the table into the new wrapper
-          wrapper.parentNode.insertBefore(newWrapper, wrapper);
-          newWrapper.appendChild(table);
+          if (rowsInTable > maxRows) {
+            // Create a new wrapper element for the table
+            var newWrapper = document.createElement("div");
+            newWrapper.style.maxHeight = height + "rem";
+            newWrapper.style.overflowY = "scroll";
 
-          // Set the header to be fixed
-          var header = table.getElementsByTagName("thead")[0];
-          header.style.position = "sticky";
-          header.style.top = "0";
-          header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
-        }
+            // Move the table into the new wrapper
+            wrapper.parentNode.insertBefore(newWrapper, wrapper);
+            newWrapper.appendChild(table);
+
+            // Set the header to be fixed
+            var header = table.getElementsByTagName("thead")[0];
+            header.style.position = "sticky";
+            header.style.top = "0";
+            header.style.backgroundColor = "#fff"; // Set a background color to make the header visible
+          }
+        });
       }
 
       //display elements according to search value

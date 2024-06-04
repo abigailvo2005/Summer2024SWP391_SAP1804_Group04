@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +77,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <form
                     role="form text-left"
                     name="property-information"
-                    action="${pageContext.request.contextPath}/dashboard-seller"
+                    action="${pageContext.request.contextPath}/"
                     method="post"
                   >
                     <div class="mb-3 row">
@@ -96,7 +95,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         <p
                           class="error-name text-danger text-error mb-0 text-center pt-1 hidden"
                         >
-                          name should only contains maximum 255 characters.
+                          name should only contains maximum 32 characters.
                         </p>
                       </div>
                     </div>
@@ -163,19 +162,15 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <div class="row mb-3">
                       <div class="col-2"><label>Images:</label></div>
                       <div class="col-4">
-                        <input
-                          id="prop-img"
-                          type="file"
-                          class="form-control form-create-control col-10"
-                          placeholder="number"
-                          multiple
-                          required
-                        />
+                        <input id="prop-img" type="text" class="form-control
+                        form-create-control col-10" placeholder="your Google
+                        Drive Folder link contains property's images" //multiple
+                        required />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
                         >
-                          only images files accepted (ie: .png .jpeg .gif .jpg .heic)
+                          only accept Google Drive Folder links.
                         </p>
                       </div>
 
@@ -185,6 +180,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       </div>
                       <div class="col-4">
                         <select
+                          id="prop-type"
                           class="form-control form-create-control"
                           onchange="showPropertyTypeSection(this)"
                           required
@@ -202,7 +198,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         <div class="col-sm-2">
                           <label>Land Category:</label>
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
                           <select
                             class="land form-control form-create-control col-10"
                             required
@@ -218,6 +214,20 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                             </option>
                           </select>
                         </div>
+
+                        <div class="col-2"><label>Paperwork:</label></div>
+                        <div class="col-4">
+                          <input id="prop-pw-land" type="text"
+                          class="form-control form-create-control col-10"
+                          placeholder="your Google Drive Folder link contains
+                          property's paperwork" //multiple required />
+                          <!-- ERROR MESSAGE BEING HIDDEN -->
+                          <p
+                            class="error-pw-land text-danger text-error mb-0 text-center pt-1 hidden"
+                          >
+                            only accept Google Drive Folder links.
+                          </p>
+                        </div>
                       </div>
                     </div>
 
@@ -227,7 +237,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         <div class="col-sm-2">
                           <label>House Category:</label>
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
                           <select
                             class="form-control form-create-control col-10 house"
                             required
@@ -240,6 +250,19 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                             <option value="mansion">Mansion, Villa</option>
                             <option value="bungalow">Bungalow</option>
                           </select>
+                        </div>
+                        <div class="col-2"><label>Paperwork:</label></div>
+                        <div class="col-4">
+                          <input id="prop-pw-house" type="text"
+                          class="form-control form-create-control col-10"
+                          placeholder="your Google Drive Folder link contains
+                          property's paperwork" //multiple required />
+                          <!-- ERROR MESSAGE BEING HIDDEN -->
+                          <p
+                            class="error-pw-house text-danger text-error mb-0 text-center pt-1 hidden"
+                          >
+                            only accept Google Drive Folder links.
+                          </p>
                         </div>
                       </div>
 
@@ -410,10 +433,16 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
         // Check if all fields have values
         if (document.querySelector("form").checkValidity()) {
+          const type = document.querySelector("#prop-type").value;
           const propertyNameInput = document.querySelector("#prop-name");
-          const propertyImageInput = document.querySelector("#prop-img");
+          const propertyImageInput = document.querySelector("#prop-img").value;
+          const propertyLandPW = document.querySelector("#prop-pw-land").value;
+          const propertyHousePW =
+            document.querySelector("#prop-pw-house").value;
           const nameError = document.querySelector(".error-name");
           const imgError = document.querySelector(".error-img");
+          const pwLandError = document.querySelector(".error-pw-land");
+          const pwHouseError = document.querySelector(".error-pw-house");
           const validImageTypes = [
             "image/gif",
             "image/jpeg",
@@ -421,40 +450,54 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             "image/jpg",
           ];
 
-          if (propertyNameInput.value.length > 255) {
-            //Check if property's name is longer than 255 characters
+          // No errors on start up
+          nameError.classList.add("hidden"); //clear all errors first
+          imgError.classList.add("hidden");
+          pwHouseError.classList.add("hidden");
+          pwLandError.classList.add("hidden");
+
+          if (propertyNameInput.value.length > 32) {
+            //Check if property's name is longer than 32 characters
             nameError.classList.remove("hidden");
             return;
-          } else if (propertyImageInput.files.length > 0) {
-            //Check if file input is an image
-            const validImageTypes = [
-              "image/gif",
-              "image/jpeg",
-              "image/png",
-              "image/jpg",
-              "image/heic",
-            ];
-            for (var i = 0; i < propertyImageInput.files.length; i++) {
-              const file = propertyImageInput.files[i];
-              const fileType = file["type"];
-              if (!validImageTypes.includes(fileType)) {
-                // invalid file type code goes here --> shows error
-                nameError.classList.add("hidden");
-                imgError.classList.remove("hidden");
-                return;
-              } else {
-                imgError.classList.add("hidden");
-              }
-            }
-            
+          } else if (
+            !/^https?:\/\/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/.test(
+              propertyImageInput
+            )
+          ) {
+            //if link is not a google drive link
+            console.log("img error");
+            console.log(propertyImageInput);
+            //test: https://drive.google.com/drive/folders/1-1irfDNhMuJTOLEmkVxaLlYJ5iy4jsbW?usp=drive_link
+            imgError.classList.remove("hidden");
+            return;
+          } else if (
+            type.includes("house") &&
+            !/^https?:\/\/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/.test(
+              propertyHousePW
+            )
+          ) {
+            pwHouseError.classList.remove("hidden");
+            console.log("house pw error");
+            console.log(propertyHousePW);
+            return;
+          } else if (
+            type.includes("land") &&
+            !/^https?:\/\/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/.test(
+              propertyLandPW
+            )
+          ) {
+            pwLandError.classList.remove("hidden");
+            console.log("land pw error");
+            console.log(propertyLandPW);
+            return;
           }
 
           // No errors: Shows message "Successfully requested" & redirect back to dashboard
-          nameError.classList.add("hidden"); //clear all errors first
-          imgError.classList.add("hidden");
-          alert("Successfully requested");
-          document.querySelector("form").submit();
-
+          setTimeout(function () {
+            alert("Successfully requested");
+            document.querySelector("form").submit();
+          }, 500);
         } else {
           // If some fields are empty, show default errors
           document.querySelector("form").reportValidity();
