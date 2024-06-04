@@ -65,6 +65,16 @@ public class AdminController {
         return "admin/history-admin";
     }
 
+    @GetMapping({"/create-account"})
+    public String createAccount(Model model, Authentication authentication){
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "create-account";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "admin/create-account";
+    }
+
     @GetMapping("/account/approve")
     public String approveAccount(@RequestParam(name = "") String id, Model model){
         Account account = accountService.approveAccount(id);

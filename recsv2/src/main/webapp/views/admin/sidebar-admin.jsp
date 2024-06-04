@@ -193,14 +193,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
                 'profile' ? 'View Profile' : (currentPage == 'history-admin' ?
                 'View History' : (currentPage == 'tracking' ? 'System Property
-                Tracking' : '')))}
+                Tracking' : (currentPage == 'create-account' ? 'Create Account' : ''))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
               'profile' ? 'Profile' : (currentPage == 'history-admin' ?
               'History' : (currentPage == 'tracking' ? 'Property Tracking' :
-              '')))}
+              (currentPage == 'create-account' ? 'Create Account' : ''))))}
             </h6>
           </nav>
 

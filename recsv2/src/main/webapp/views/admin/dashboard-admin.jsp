@@ -699,9 +699,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               .textContent.toLowerCase();
             var role = row.querySelector("#req-role").textContent.toLowerCase();
             if (
-              username.includes(searchInput) ||
-              name.includes(searchInput) ||
-              role.includes(searchInput)
+              username.includes(searchReq) ||
+              name.includes(searchReq) ||
+              role.includes(searchReq)
             ) {
               row.style.display = "";
             } else {
@@ -728,9 +728,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               .querySelector("#user-role")
               .textContent.toLowerCase();
             if (
-              username.includes(searchInput) ||
-              name.includes(searchInput) ||
-              role.includes(searchInput)
+              username.includes(searchReq) ||
+              name.includes(searchReq) ||
+              role.includes(searchReq)
             ) {
               row.style.display = "";
             } else {
