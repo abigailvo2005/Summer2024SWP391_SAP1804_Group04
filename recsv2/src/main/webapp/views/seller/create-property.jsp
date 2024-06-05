@@ -162,15 +162,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <div class="row mb-3">
                       <div class="col-2"><label>Images:</label></div>
                       <div class="col-4">
-                        <input id="prop-img" type="text" class="form-control
-                        form-create-control col-10" placeholder="your Google
-                        Drive Folder link contains property's images" //multiple
+                        <input id="prop-img" type="file" class="form-control
+                        form-create-control col-10" multiple
                         required />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
                         >
-                          only accept Google Drive Folder links.
+                          only accept image formats (.heic .png .jpg .jpeg .gif)
                         </p>
                       </div>
 
@@ -220,7 +219,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input id="prop-pw-land" type="text"
                           class="form-control form-create-control col-10"
                           placeholder="your Google Drive Folder link contains
-                          property's paperwork" //multiple required />
+                          property's paperwork" required />
                           <!-- ERROR MESSAGE BEING HIDDEN -->
                           <p
                             class="error-pw-land text-danger text-error mb-0 text-center pt-1 hidden"
@@ -256,7 +255,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input id="prop-pw-house" type="text"
                           class="form-control form-create-control col-10"
                           placeholder="your Google Drive Folder link contains
-                          property's paperwork" //multiple required />
+                          property's paperwork" required />
                           <!-- ERROR MESSAGE BEING HIDDEN -->
                           <p
                             class="error-pw-house text-danger text-error mb-0 text-center pt-1 hidden"
@@ -435,7 +434,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         if (document.querySelector("form").checkValidity()) {
           const type = document.querySelector("#prop-type").value;
           const propertyNameInput = document.querySelector("#prop-name");
-          const propertyImageInput = document.querySelector("#prop-img").value;
+          const propertyImageInput = document.querySelector("#prop-img");
           const propertyLandPW = document.querySelector("#prop-pw-land").value;
           const propertyHousePW =
             document.querySelector("#prop-pw-house").value;
@@ -448,6 +447,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             "image/jpeg",
             "image/png",
             "image/jpg",
+            "image/heic"
           ];
 
           // No errors on start up
@@ -459,17 +459,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           if (propertyNameInput.value.length > 32) {
             //Check if property's name is longer than 32 characters
             nameError.classList.remove("hidden");
-            return;
-          } else if (
-            !/^https?:\/\/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/.test(
-              propertyImageInput
-            )
-          ) {
-            //if link is not a google drive link
-            console.log("img error");
-            console.log(propertyImageInput);
-            //test: https://drive.google.com/drive/folders/1-1irfDNhMuJTOLEmkVxaLlYJ5iy4jsbW?usp=drive_link
-            imgError.classList.remove("hidden");
             return;
           } else if (
             type.includes("house") &&

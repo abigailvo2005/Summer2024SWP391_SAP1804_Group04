@@ -44,7 +44,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <aside
-      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 z-index-1 fixed-start ms-3"
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 z-index-2 fixed-start ms-3"
       id="sidenav-main"
     >
       <!-- sidebar: menu section-->

@@ -46,180 +46,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-      <!-- START: LIST REGISTER REQUEST -->
-      <div class="container-fluid">
-        <div class="row my-4">
-          <div class="mb-md-0 mb-4">
-            <div class="card">
-              <div class="card-header pb-0">
-                <div class="row">
-                  <div class="col-lg-8 col-9">
-                    <h6>All Register Requests</h6>
-                    <p class="text-sm mb-0">
-                      <i class="fa-solid fa-house-user"></i>
-                      <span class="font-weight-bold ms-1"
-                        >${reqList.size()} request(s)</span
-                      >
-                      in total
-                    </p>
-                  </div>
-                  <div
-                    class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
-                  >
-                    <div class="input-group">
-                      <span class="input-group-text text-body"
-                        ><i class="fas fa-search" aria-hidden="true"></i
-                      ></span>
-                      <input
-                        id="reqSearch"
-                        type="text"
-                        class="form-control"
-                        placeholder="Type username/full name/role here..."
-                        onkeyup="searchTable('req')"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card-body px-0 pb-2">
-                  <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                      <thead>
-                        <tr>
-                          <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            accID
-                          </th>
-                          <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
-                          >
-                            Name
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                          >
-                            Role
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                          >
-                            Date Created
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            Status
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            View Details
-                          </th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        <c:forEach items="${reqList}" var="req">
-                          <tr class="req-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="req-uname"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${req.accountId}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex justify-content-start">
-                                <div
-                                  class="d-flex flex-column justify-content-start"
-                                >
-                                  <p
-                                    id="req-fname"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${req.fullName}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="req-role"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${req.roleId}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-dark"></p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${req.status}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <a
-                                    class="show-detail"
-                                    onclick="viewDetailRegisterRequest('${req.accountId}')"
-                                    ><i class="fa-solid fa-eye"></i
-                                  ></a>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END LIST REGISTER REQUEST-->
-
       <!-- START: LIST ALL USERS IN SYSTEM -->
       <div class="container-fluid">
         <div class="row my-4">
@@ -375,7 +201,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <a
-                                    onclick="viewDetailUser()"
+                                    onclick="viewDetail(`${user.accountId}`)"
                                     class="show-detail"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
@@ -434,19 +260,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     </main>
     <!-- END DASHBOARD MAIN CONTENT -->
 
-    <!--   Core JS Files   -->
-    <script src="/template/assets/js/core/popper.min.js"></script>
-    <script src="/template/assets/js/core/bootstrap.min.js"></script>
-    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
-    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- end: core js files -->
-
     <!--------------------START: POPUP SECTIONS-------------------- -->
-    <div id="popup-register-request" class="popup-container hidden z-index-3">
+    <div id="popup-user-request" class="popup-container hidden z-index-3">
       <div class="popup-content container-fluid">
         <!-- Header -->
         <div class="popup-header row mx-1">
@@ -473,10 +288,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <div class="container-fluid">
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Superior ID:</strong>
-                        <p id="popup-superior-id"></p>
+                        <strong class="text-dark">User ID: </strong>
+                        <p id="popup-id"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6">
                         <strong class="text-dark">Status:</strong>
                         <p id="popup-status"></p>
                       </li>
@@ -505,13 +320,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 company hidden"
+                      >
                         <strong class="text-dark">Company ID:</strong>
                         <p id="popup-company-id"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">role id</strong>
-                        <p id="popup-id"></p>
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 superior hidden"
+                      >
+                        <strong class="text-dark">Superior ID:</strong>
+                        <p id="popup-superior-id"></p>
                       </li>
                     </div>
 
@@ -598,10 +417,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     </div>
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
+    <!--   Core JS Files   -->
+    <script src="/template/assets/js/core/popper.min.js"></script>
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
+    <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- end: core js files -->
+
     <script type="text/javascript">
-      function viewDetailRegisterRequest(userID) {
-        console.log(userID);
-        var popup = document.getElementById("popup-register-request");
+      function viewDetail(userID) {
+        var popup = document.getElementById("popup-user-request");
+        var superior = document.querySelector(".superior");
+        var company = document.querySelector(".company");
 
         // Send GET Request API to retrieve single user information
         $.ajax({
@@ -609,6 +439,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           type: "GET",
           success: function (data) {
             // Update popup với information chosen User
+            $("#popup-id").text(data.accountId);
             $("#popup-username").text(data.username);
             $("#popup-role-id").text(data.roleId);
             $("#popup-full-name").text(data.fullName);
@@ -619,11 +450,26 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-id-card").text(data.idCard);
             $("#popup-status").text(data.status);
             $("#popup-birth-date").text(
-              "Birthday: " + new Date(data.birthDate).toLocaleDateString()
+              new Date(data.birthDate).toLocaleDateString()
             );
-            $("#popup-superior-id").text(data.superiorId);
-            $("#popup-member-id").text(data.memberId);
-            $("#popup-company-id").text(data.companyId);
+
+            //only shows company data if is agency/member
+            if (
+              data.roleId === "ROLE_AGENCY" ||
+              data.roleId === "ROLE_MEMBER"
+            ) {
+              $("#popup-company-id").text(data.companyId);
+              company.classList.remove("hidden");
+            }
+
+            //only shows superior data if is member/staff
+            if (data.roleId === "ROLE_STAFF") {
+              $("#popup-superior-id").text(data.managerId);
+              superior.classList.remove("hidden");
+            } else if (data.roleId === "ROLE_MEMBER") {
+              $("#popup-superior-id").text(data.agencyId);
+              superior.classList.remove("hidden");
+            }
 
             popup.classList.remove("hidden");
           },
@@ -635,7 +481,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       }
 
       function closeDetailRegisterRequest() {
-        var popup = document.getElementById("popup-register-request");
+        var popup = document.getElementById("popup-user-request");
         popup.classList.add("hidden");
       }
 

@@ -3645,10 +3645,10 @@ textarea.form-control.is-invalid {
 
 .popup-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 70%;
+  width: 80%;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -3700,12 +3700,14 @@ textarea.form-control.is-invalid {
   height: 80%;
 }
 
+/* FOR CAROUSEL IMG */
 .carousel {
   height: auto; 
   overflow: hidden;
   border-radius: 1rem;
   background-color: #e0d8d5 !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  padding: 0;
 }
 
 .carousel-item {
@@ -3716,6 +3718,76 @@ textarea.form-control.is-invalid {
   width: 100%;
   height: auto; 
   object-fit: contain; 
+}
+
+/* FOR LIST CONFIRMATION ON SELLER POPUP */
+/* Agency Profiles Table */
+#agency-list .table, #buyer-list .table {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+}
+
+#agency-list th,
+#agency-list td,
+#buyer-list th, 
+#buyer-list td 
+ {
+  padding: 12px 15px;
+  border-color: #ddd;
+}
+
+.confirm-agency, .confirm-buyer {
+  font-size: 10px !important;
+  padding: 7px 0px !important;
+  margin-top: 10px;
+  width: 20%;
+}
+
+.title-table {
+  font-size: 14px;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive > .table {
+  margin-bottom: 0;
+}
+
+/* #agency-list .table-responsive th,
+#agency-list .table-responsive td:not(.description) {
+  width: 8%;
+  text-align: center;
+} */
+
+#agency-list .table-responsive td.description{
+  white-space: normal;
+  word-wrap: break-word;
+  width: 60% !important;
+}
+
+#agency-list .table-responsive th,
+#agency-list .table-responsive td:not(.description) {
+  width: 8% !important;
+  text-align: center;
+}
+
+#buyer-list .table-responsive td.message{
+  white-space: normal;
+  word-wrap: break-word;
+  width: 70% !important;
+}
+
+#buyer-list .table-responsive th,
+#buyer-list .table-responsive td:not(.message) {
+  width: 10% !important;
+  text-align: center;
 }
 
 .btn-staff {
