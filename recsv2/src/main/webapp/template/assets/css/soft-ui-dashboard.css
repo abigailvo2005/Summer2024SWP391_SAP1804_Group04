@@ -24906,7 +24906,7 @@ th, td {
 
 html * {
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: var(--bs-gray);
 }
 
 body {
