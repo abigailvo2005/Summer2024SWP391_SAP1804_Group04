@@ -50,7 +50,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url('/template/assets/img/curved-images/create-property-background.jpeg'/>');
+            background-image: url('/template/assets/img/curved-images/create-property-background.jpeg/>');
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
