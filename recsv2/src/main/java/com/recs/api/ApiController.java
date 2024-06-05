@@ -1,8 +1,10 @@
 package com.recs.api;
 
 import com.recs.models.dto.account.UserInfo;
+import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.services.accountsvc.AccountService;
+import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,12 @@ public class ApiController {
 
     private AccountService accountService;
 
+    private RealEstateService realEstateService;
+
     @Autowired
-    public ApiController(AccountService accountService) {
+    public ApiController(AccountService accountService, RealEstateService realEstateService) {
         this.accountService = accountService;
+        this.realEstateService = realEstateService;
     }
 
     @PostMapping("/user/new")
@@ -33,5 +38,10 @@ public class ApiController {
     public ResponseEntity<UserInfo> getUserInfo(@PathVariable(name = "id") String id) {
         UserInfo user = accountService.getUserInfo(Integer.parseInt(id));
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping(path = "/real-estate/{id}", produces = "application/json")
+    public ResponseEntity<RealEstateInfo> getRealEstateInfo(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(realEstateService.getRealEstateInfo(id));
     }
 }

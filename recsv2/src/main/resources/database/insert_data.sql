@@ -46,11 +46,11 @@ INSERT INTO Account (username, password, roleId, fullName, gender, email, phone,
 ('agency.user6', '$2a$10$fWhqL7BWTvVkZl6CyMNPTegbrSM7IJVQLpVgcKXocXiCI1IKU8wnq', 'ROLE_AGENCY', 'Agency User 6', 1, 'agency6@example.com', '1234567890', '124 Agency St', 'ID123456794', 'APPROVING', '1988-04-04');
 
 INSERT INTO Staff (staffId, accountId, managerId) VALUES
-(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user2'), (SELECT managerId FROM Manager WHERE accountId = (SELECT accountId FROM Account WHERE username = 'manager.user'))),
-(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user3'), (SELECT managerId FROM Manager WHERE accountId = (SELECT accountId FROM Account WHERE username = 'manager.user'))),
-(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user4'), (SELECT managerId FROM Manager WHERE accountId = (SELECT accountId FROM Account WHERE username = 'manager.user'))),
-(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user5'), (SELECT managerId FROM Manager WHERE accountId = (SELECT accountId FROM Account WHERE username = 'manager.user'))),
-(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user6'), (SELECT managerId FROM Manager WHERE accountId = (SELECT accountId FROM Account WHERE username = 'manager.user')));
+(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user2'), '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user3'), '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user4'), '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user5'), '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), (SELECT accountId FROM Account WHERE username = 'staff.user6'), '1229dfa1-22f1-11ef-99c9-2c4d54675fbe');
 
 INSERT INTO Agency (agencyId, accountId, company, yearsOfExperience, completedProject, description) VALUES
 (UUID(), (SELECT accountId FROM Account WHERE username = 'agency.user2'), 'Agency Company 2', 6, 55, 'Agency Description 2'),
@@ -59,7 +59,67 @@ INSERT INTO Agency (agencyId, accountId, company, yearsOfExperience, completedPr
 (UUID(), (SELECT accountId FROM Account WHERE username = 'agency.user5'), 'Agency Company 5', 9, 70, 'Agency Description 5'),
 (UUID(), (SELECT accountId FROM Account WHERE username = 'agency.user6'), 'Agency Company 6', 10, 75, 'Agency Description 6');
 
-SELECT s FROM Seller s JOIN Account a ON s.accountId = a.accountId WHERE a.username = 'seller.user'
+
+INSERT INTO Account (username, password, roleId, fullName, gender, email, phone, address, idCard, status, birthDate) VALUES
+('seller1', '$2a$10$fWhqL7BWTvVkZl6CyMNPTegbrSM7IJVQLpVgcKXocXiCI1IKU8wnq', 'ROLE_SELLER', 'Seller One', 0, 'seller1@example.com', '1234567890', '123 Seller St', 'S123456', 'ACTIVE', '1990-01-01'),
+('seller2', '$2a$10$fWhqL7BWTvVkZl6CyMNPTegbrSM7IJVQLpVgcKXocXiCI1IKU8wnq', 'ROLE_SELLER', 'Seller Two', 1, 'seller2@example.com', '1234567891', '124 Seller St', 'S123457', 'ACTIVE', '1991-02-02'),
+('manager1', '$2a$10$fWhqL7BWTvVkZl6CyMNPTegbrSM7IJVQLpVgcKXocXiCI1IKU8wnq', 'ROLE_MANAGER', 'Manager One', 0, 'manager1@example.com', '1234567892', '125 Manager St', 'M123456', 'ACTIVE', '1992-03-03'),
+('manager2', '$2a$10$fWhqL7BWTvVkZl6CyMNPTegbrSM7IJVQLpVgcKXocXiCI1IKU8wnq', 'ROLE_MANAGER', 'Manager Two', 1, 'manager2@example.com', '1234567893', '126 Manager St', 'M123457', 'ACTIVE', '1993-04-04');
+
+
+
+INSERT INTO Seller (sellerId, accountId, company) VALUES
+(UUID(), 23, 'Company One'),
+(UUID(), 24, 'Company Two');
+
+INSERT INTO Manager (managerId, accountId, yearsOfExperience) VALUES
+(UUID(), 25, 10),
+(UUID(), 26, 15);
+
+
+-- Insert data into RealEstate table with status
+INSERT INTO RealEstate (realEstateId, name, realEstateType, description, address, area, price, status, displayable, createTimestamp, updateTimestamp, sellerId, managerId) VALUES
+(UUID(), 'Villa with Garden', 1, 'Luxurious villa with beautiful garden', '123 Main St', 3500.00, 1000000, 'reviewing', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Downtown Apartment', 2, 'Modern apartment in the heart of the city', '456 Elm St', 1000.00, 500000, 'reviewing', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Country Mansion', 1, 'Grand mansion in the countryside', '789 Oak St', 8000.00, 2000000, 'reviewing', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Cottage by the Lake', 2, 'Charming cottage with lake view', '101 Pine St', 800.00, 300000, 'validating', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Beach Condo', 2, 'Stylish condo by the beach', '321 Beach Blvd', 1500.00, 700000, 'validating', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Green Acres', 1, 'Scenic land for agriculture', '10 Farm Rd', 5000.00, 500000, 'validating', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Commercial Plot', 2, 'Prime commercial land', '15 Business Ave', 2000.00, 1000000, 'success', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Forest Retreat', 1, 'Serene land amidst the forest', '20 Woods Ln', 7000.00, 800000, 'success', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Rural Farm', 2, 'Farm land with countryside views', '25 Country Rd', 6000.00, 400000, 'fail', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe'),
+(UUID(), 'Lakefront Property', 2, 'Beautiful land by the lake', '30 Lakeview Dr', 2000.00, 600000, 'fail', 1, UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), '15c25832-22f1-11ef-99c9-2c4d54675fbe', '1229dfa1-22f1-11ef-99c9-2c4d54675fbe');
+
+-- Insert data into PropertyHouse table
+INSERT INTO PropertyHouse (houseId, realEstateId, bedroom, bath, houseType, builtIn) VALUES
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Villa with Garden'), 5, 4, 'Villa', 2005),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Downtown Apartment'), 2, 2, 'Apartment', 2010),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Country Mansion'), 8, 6, 'Mansion', 1990),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Cottage by the Lake'), 3, 2, 'Cottage', 1985),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Beach Condo'), 4, 3, 'Condo', 2015);
+
+-- Insert data into PropertyLand table
+INSERT INTO PropertyLand (landId, realEstateId, landType) VALUES
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Green Acres'), 'Agricultural'),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Commercial Plot'), 'Commercial'),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Forest Retreat'), 'Residential'),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Rural Farm'), 'Agricultural'),
+(UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Lakefront Property'), 'Residential');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
