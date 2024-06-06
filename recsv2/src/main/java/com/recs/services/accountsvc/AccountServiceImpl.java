@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -216,5 +217,15 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public UserInfo getMemberToUserInfo(String memberId) {
         return null;
+    }
+
+    @Override
+    public List<UserInfo> getListStaffByManager(String managerId) {
+        List<Staff> list = staffRepository.findAllByManagerId(managerId);
+        List<UserInfo> staffList = list.stream().map( staff ->
+                getStaffToUserInfo(staff.getStaffId())
+        ).toList();
+        System.out.println("List staff info by manager "+ managerId + " size " +staffList.size());
+        return List.of();
     }
 }
