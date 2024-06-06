@@ -77,8 +77,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <form
                     role="form text-left"
                     name="property-information"
-                    action="${pageContext.request.contextPath}/"
-                    method="post"
+                    action="${pageContext.request.contextPath}/seller/create-property"
+                    method="POST"
+                    modelAttribute="request"
                   >
                     <div class="mb-3 row">
                       <div class="col-lg-2 col-sm-2"><label> Name:</label></div>
@@ -86,7 +87,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <input
                           id="prop-name"
                           type="text"
-                          name="prop-name"
+                          name="name"
                           class="form-control form-create-control col-10"
                           placeholder="your property's name"
                           required
@@ -107,7 +108,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-lg-10 col-sm-10">
                         <input
                           type="text"
-                          name="prop-address"
+                          name="address"
                           class="form-control form-create-control col-10"
                           placeholder="your property's adress"
                           required
@@ -122,7 +123,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-lg-10 col-sm-10">
                         <input
                           type="text"
-                          name="prop-desc"
+                          name="description"
                           class="form-control form-create-control col-10"
                           placeholder="your property's description (i.e interior/exterior features)"
                           required
@@ -135,7 +136,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-sm-3">
                         <input
                           type="number"
-                          name="prop-area"
+                          name="area"
                           class="form-control form-create-control col-10"
                           placeholder="your property's area"
                           min="1"
@@ -148,7 +149,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-3">
                         <input
                           type="number"
-                          name="prop-price"
+                          name="price"
                           class="form-control form-create-control"
                           placeholder="your property's price"
                           min="1"
@@ -162,9 +163,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <div class="row mb-3">
                       <div class="col-2"><label>Images:</label></div>
                       <div class="col-4">
-                        <input id="prop-img" type="file" class="form-control
-                        form-create-control col-10" multiple
-                        required />
+                        <input
+                          name="images"
+                          id="prop-img"
+                          type="file"
+                          class="form-control form-create-control col-10"
+                          multiple
+                          required
+                        />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
@@ -180,6 +186,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-4">
                         <select
                           id="prop-type"
+                          name="propertyType"
                           class="form-control form-create-control"
                           onchange="showPropertyTypeSection(this)"
                           required
@@ -200,6 +207,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-4">
                           <select
                             class="land form-control form-create-control col-10"
+                            name="landCategory"
                             required
                           >
                             <option value="" selected>
@@ -216,10 +224,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                         <div class="col-2"><label>Paperwork:</label></div>
                         <div class="col-4">
-                          <input id="prop-pw-land" type="text"
-                          class="form-control form-create-control col-10"
-                          placeholder="your Google Drive Folder link contains
-                          property's paperwork" required />
+                          <input
+                            id="prop-pw-land"
+                            name="paperwork"
+                            type="text"
+                            class="form-control form-create-control col-10"
+                            placeholder="your Google Drive Folder link contains
+                          property's paperwork"
+                            required
+                          />
                           <!-- ERROR MESSAGE BEING HIDDEN -->
                           <p
                             class="error-pw-land text-danger text-error mb-0 text-center pt-1 hidden"
@@ -239,6 +252,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-4">
                           <select
                             class="form-control form-create-control col-10 house"
+                            name="houseCategory"
                             required
                           >
                             <option value="" selected>
@@ -252,10 +266,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </div>
                         <div class="col-2"><label>Paperwork:</label></div>
                         <div class="col-4">
-                          <input id="prop-pw-house" type="text"
-                          class="form-control form-create-control col-10"
-                          placeholder="your Google Drive Folder link contains
-                          property's paperwork" required />
+                          <input
+                            id="prop-pw-house"
+                            type="text"
+                            name="paperwork"
+                            class="form-control form-create-control col-10"
+                            placeholder="your Google Drive Folder link contains
+                          property's paperwork"
+                            required
+                          />
                           <!-- ERROR MESSAGE BEING HIDDEN -->
                           <p
                             class="error-pw-house text-danger text-error mb-0 text-center pt-1 hidden"
@@ -270,8 +289,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-2">
                           <input
                             type="number"
+                            name="builtYear"
                             class="house form-control form-create-control col-10"
                             placeholder="year"
+                            value="1"
                             min="1"
                             required
                           />
@@ -281,9 +302,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-2">
                           <input
                             type="number"
+                            name="bedrooms"
                             class="house form-control form-create-control col-10"
                             placeholder="number"
                             min="1"
+                            value="1"
                             required
                           />
                         </div>
@@ -293,9 +316,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-2">
                           <input
                             type="number"
+                            name="bathrooms"
                             class="house form-control form-create-control col-10"
                             placeholder="number"
                             min="1"
+                            value="1"
                             required
                           />
                         </div>
@@ -426,6 +451,50 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
+      /* Convert image file into BASE64 */
+      const imgInput = document.querySelector("#prop-img");
+      const imgList = [];
+      imgInput.addEventListener("change", (e) => {
+        const files = imgInput.files;
+        const imgError = document.querySelector(".error-img");
+        const validImageTypes = [
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/jpg",
+          "image/heic",
+        ];
+
+        console.log("image change!");
+
+        // Duyệt qua từng file được chọn
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          // Kiểm tra xem file có phải là hình ảnh hay không
+          if (validImageTypes.includes(file.type)) {
+            imgError.classList.add("hidden");
+
+            console.log("this file is image!");
+            const reader = new FileReader();
+            reader.addEventListener("load", () => {
+              
+              console.log(reader.result);
+              
+            });
+            // Thêm base64 của file vào danh sách
+            imgList.push(reader.result);
+            reader.readAsDataURL(file);
+          } else {
+            // Hiển thị lỗi nếu file không phải là hình ảnh
+            imgError.classList.remove("hidden");
+            console.log("this file is not image!");
+            // Xóa giá trị của input
+            imgInput.value = "";
+            return;
+          }
+        }
+      });
+
       /* Process data & redirect back to dashboard after clicked submit */
       function submitRequest(event) {
         event.preventDefault(); //Stop form from default submitting
@@ -434,25 +503,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         if (document.querySelector("form").checkValidity()) {
           const type = document.querySelector("#prop-type").value;
           const propertyNameInput = document.querySelector("#prop-name");
-          const propertyImageInput = document.querySelector("#prop-img");
           const propertyLandPW = document.querySelector("#prop-pw-land").value;
           const propertyHousePW =
             document.querySelector("#prop-pw-house").value;
           const nameError = document.querySelector(".error-name");
-          const imgError = document.querySelector(".error-img");
           const pwLandError = document.querySelector(".error-pw-land");
           const pwHouseError = document.querySelector(".error-pw-house");
-          const validImageTypes = [
-            "image/gif",
-            "image/jpeg",
-            "image/png",
-            "image/jpg",
-            "image/heic"
-          ];
 
           // No errors on start up
           nameError.classList.add("hidden"); //clear all errors first
-          imgError.classList.add("hidden");
           pwHouseError.classList.add("hidden");
           pwLandError.classList.add("hidden");
 

@@ -48,6 +48,8 @@ public class SellerController {
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("reqList", validatingList);
+        model.addAttribute("propList", allRealEstate);
         return "seller/dashboard-seller";
     }
 
@@ -73,7 +75,7 @@ public class SellerController {
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         //add message, redirect, any cai lon gi cung dc
-        return "seller/create-property";
+        return "redirect:/seller";
     }
 
     @GetMapping({ "/history" })

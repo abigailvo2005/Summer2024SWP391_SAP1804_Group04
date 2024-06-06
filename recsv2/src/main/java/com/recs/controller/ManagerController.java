@@ -38,12 +38,13 @@ public class ManagerController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstate> reviewingList = realEstateService.getReviewingListByManager(userInfo.getManagerId());
+
         List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId());
-//        Todo() tự nhét
+        // Todo() tự nhét
         String currentPage = "dashboard";
-        model.addAttribute("name", userInfo.getFullName()); //can get userInfo by using $sessionScope in jsp
+        model.addAttribute("name", userInfo.getFullName()); // can get userInfo by using $sessionScope in jsp
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("valList", validatingList);
         return "manager/dashboard-man";
     }
 
@@ -58,12 +59,15 @@ public class ManagerController {
     }
 
     @GetMapping({ "/assign-job" })
-    public String assignJobView(Model model, Authentication authentication) {
+    public String assignJobView(Authentication authentication, Model model,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<RealEstate> reviewingList = realEstateService.getReviewingListByManager(userInfo.getManagerId());
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "assign-job";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("reqList", reviewingList);
         return "manager/assign-job";
     }
 
@@ -97,9 +101,7 @@ public class ManagerController {
 
         /* logic BE update db... */
 
-
         return "manager/register-acc-man";
     }
-
 
 }

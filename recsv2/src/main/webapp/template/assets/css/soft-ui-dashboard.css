@@ -3759,13 +3759,6 @@ textarea.form-control.is-invalid {
 .table-responsive > .table {
   margin-bottom: 0;
 }
-
-/* #agency-list .table-responsive th,
-#agency-list .table-responsive td:not(.description) {
-  width: 8%;
-  text-align: center;
-} */
-
 #agency-list .table-responsive td.description{
   white-space: normal;
   word-wrap: break-word;
@@ -3788,6 +3781,12 @@ textarea.form-control.is-invalid {
 #buyer-list .table-responsive td:not(.message) {
   width: 10% !important;
   text-align: center;
+}
+
+/* FOR PROPERTY POPUP */
+.list-group-item p, .list-group-item a  {
+  font-size: 14px !important;
+  padding-left: 5px !important;
 }
 
 .btn-staff {

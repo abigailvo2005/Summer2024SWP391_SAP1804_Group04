@@ -55,7 +55,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <h6>Jobs On Hold</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-hourglass-start"></i>
-                    <span class="font-weight-bold ms-1">4 requests</span>
+                    <span class="font-weight-bold ms-1"
+                      >${valList.size()} request(s)</span
+                    >
                     pending
                   </p>
                 </div>
@@ -87,7 +89,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <th
                         class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
-                        ID
+                        Staff
                       </th>
                       <th
                         class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
@@ -117,78 +119,80 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </th>
                     </tr>
                   </thead>
-                  <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <!-- row 1: example request just submitted -->
-                    <tr class="job-row">
-                      <td class="align-middle text-center text-sm">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">01</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex justify-content-start">
-                          <div class="d-flex flex-column justify-content-start">
-                            <p
-                              id="job-name"
-                              class="mb-0 text-sm fw-bold text-dark"
+                    <c:forEach items="${propList}" var="prop">
+                      <tr class="job-row">
+                        <td class="align-middle text-center text-sm">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
                             >
-                              Căn hộ studio 30m full đồ sang xịn ở Vinhome Smart
-                              City Tây Mỗ
-                            </p>
+                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              1.75 tỷ
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p
-                              id="job-status"
-                              class="mb-0 text-sm fw-bold text-warning"
+                        </td>
+                        <td>
+                          <div class="d-flex justify-content-start">
+                            <div
+                              class="d-flex flex-column justify-content-start"
                             >
-                              Submitted
-                            </p>
+                              <p
+                                id="job-name"
+                                class="mb-0 text-sm fw-bold text-dark"
+                              >
+                                Căn hộ studio 30m full đồ sang xịn ở Vinhome
+                                Smart City Tây Mỗ
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <p class="mb-0 text-sm fw-bold text-dark">
-                              20/05/2024
-                            </p>
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                1.75 tỷ
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex px-2 py-1 justify-content-center">
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <a href="#"><i class="fa-solid fa-eye"></i></a>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p
+                                id="job-status"
+                                class="mb-0 text-sm fw-bold text-warning"
+                              >
+                                Submitted
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                20/05/2024
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <a href="#"><i class="fa-solid fa-eye"></i></a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </c:forEach>
                   </tbody>
                 </table>
               </div>
@@ -199,7 +203,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       <!-- END LIST 1-->
 
       <!-- START: List Processing Properties -->
-      
+
       <!-- END LIST 2-->
 
       <!-- START FOOTER-->

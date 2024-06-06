@@ -142,7 +142,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
     <!-- START RIGHT SIDE-->
     <main
-      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg mt-3"
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg mt-3 z-index-0"
     >
       <!-- START: Top Navbar -->
       <nav
@@ -183,16 +183,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             id="navbar"
           >
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group">
-                <span class="input-group-text text-body"
-                  ><i class="fas fa-search" aria-hidden="true"></i
-                ></span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Type here..."
-                />
-              </div>
             </div>
             <ul class="navbar-nav justify-content-end">
               <li class="nav-item d-flex align-items-center">

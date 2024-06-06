@@ -1,6 +1,6 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %> <%@
+taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,11 +56,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <div class="col-lg-8 col-9">
                     <h6>Properties Validation Required</h6>
                     <p class="text-sm mb-0">
-                      <i class="fa-regular fa-comment-dots"></i>
+                      <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${reqList.size()} validation request(s)</span
+                        >${reqList.size()} request(s)</span
                       >
-                      to be validated in total
+                      in total
                     </p>
                   </div>
                   <div
@@ -71,11 +71,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        id="searchInput"
+                        id="propSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type property name here..."
-                        onkeyup="searchTable()"
+                        placeholder="Type id/name/type here..."
+                        onkeyup="searchTable('req')"
                       />
                     </div>
                   </div>
@@ -89,7 +89,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
-                            ReqID
+                            SELLER
                           </th>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
@@ -97,7 +97,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                             PROPERTY NAME
                           </th>
                           <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                           >
                             TYPE
                           </th>
@@ -121,7 +121,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
                       <tbody>
                         <c:forEach items="${reqList}" var="req">
-                          <tr class="validate-row">
+                          <tr class="req-row">
                             <td class="align-middle text-center text-sm">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -129,8 +129,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.id}
+                                  <p
+                                    id="req-id"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
+                                    ${req.sellerId}
                                   </p>
                                 </div>
                               </div>
@@ -156,10 +159,37 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.type}
+                                  <p
+                                    id="req-price"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
+                                    ${req.realEstateType == 1 ? 'House' :
+                                    'Land'}
                                   </p>
                                 </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <div
+                                class="d-flex px-2 py-1 justify-content-center"
+                              >
+                                <!-- <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <% long createTimestamp = 1717560719;
+                                  pageContext.setAttribute("createTimestamp",
+                                  createTimestamp); %>
+
+                                  <p
+                                    id="req-type"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
+                                    <fmt:formatDate
+                                      value="${req.createTimestamp * 1000}"
+                                      pattern="yyyy-MM-dd HH:mm:ss"
+                                    />
+                                  </p>
+                                </div> -->
                               </div>
                             </td>
                             <td class="align-middle">
@@ -169,20 +199,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.dateCreated}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-muted">
+                                  <p
+                                    id="req-status"
+                                    class="mb-0 text-sm fw-bold text-muted"
+                                  >
                                     ${req.status}
                                   </p>
                                 </div>
@@ -197,7 +217,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${req.id}')"
+                                    onclick="viewDetailProperty('${req.realEstateId}', 'req')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -239,7 +259,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="propName"
                         class="form-control form-create-control col-10"
                         value="chosen property name"
-                        disabled
+
                       />
                     </div>
                     <div class="col-sm-2">
@@ -251,7 +271,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="propAddress"
                         class="form-control form-create-control col-10"
                         value="chosen property adress"
-                        disabled
+
                       />
                     </div>
                   </div>
@@ -263,7 +283,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="propDesc"
                         class="form-control form-create-control"
                         rows="5"
-                        disabled
                       >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea
                       >
@@ -280,7 +299,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="propType"
                         class="form-control form-create-control col-10"
                         value="land"
-                        disabled
                       />
                     </div>
                     <div class="col-sm-2">
@@ -292,7 +310,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="propAddress"
                         class="form-control form-create-control col-10"
                         value="500000000"
-                        disabled
                       />
                     </div>
                     <div class="col-sm-1">
@@ -310,7 +327,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="propArea"
                         class="form-control form-create-control col-10"
                         value="2300"
-                        disabled
                       />
                     </div>
                     <div class="col-sm-1">
@@ -328,7 +344,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         name="landType"
                         class="form-control form-create-control col-10"
                         value="Agricultural"
-                        disabled
                       />
                     </div>
                     <div class="col-sm-2">
@@ -339,7 +354,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         type="file"
                         name="landPaperwork"
                         class="form-control form-create-control col-10"
-                        disabled
                         hidden
                       />
                       <script>
@@ -367,7 +381,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           name="houseType"
                           class="form-control form-create-control col-10"
                           value="Bungalow"
-                          disabled
                         />
                       </div>
                       <div class="col-sm-2">
@@ -379,7 +392,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           name="housePaperwork"
                           class="form-control form-create-control col-10"
                           disabled
-                          hidden
                         />
                         <script>
                           fileInput = document.querySelector(
@@ -622,11 +634,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <div class="popup-header row mx-1">
           <div class="col-11">
             <h4
-              id="registered-name"
+              id="popup-name"
               class="card-header font-weight-bolder mb-0"
-            >
-              [Property Name]
-            </h4>
+            ></h4>
           </div>
           <div class="col-1">
             <i
@@ -649,8 +659,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           class="list-group-item border-0 ps-0 text-sm"
                           id="handledID"
                         >
-                          <strong class="text-dark">Owner:</strong> &nbsp;
-                          [SellerID]
+                          <strong class="text-dark">Owner:</strong>
                         </li>
                       </div>
                       <li
@@ -875,6 +884,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
     <!-- JS MODIFY POPUP -->
     <script>
+      //URL REAL ESTATE API
+      const urlRealEstate = "http://localhost:8085/api/real-estate/";
+
       //to show detail register request popup
       function viewDetail(id) {
         var popup = document.getElementById("popup-detail");
@@ -892,9 +904,62 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           popup.querySelector("#house-info").classList.remove("hidden");
         }
 
-        /* CODE TO LOAD INFO OF CHOSEN PROPERTY INTO POPUP  */
-
         popup.classList.remove("hidden");
+
+        /*  var popup = document.querySelector("#popup-property-request");
+        var landSection = document.querySelector(".land-info-section");
+        var houseSection = document.querySelector(".house-info-section");
+        var agencyList = document.querySelector("#agency-list");
+        var buyerList = document.querySelector("#buyer-list");
+
+        // Send GET Request API to retrieve single property information
+        $.ajax({
+          url: urlRealEstate + propID,
+          type: "GET",
+          success: function (data) {
+            // Update popup với information chosen Property
+            $("#popup-name").text(data.name);
+            $("#popup-status").text(data.status);
+            $("#popup-desc").text(data.description);
+            $("#popup-type").text(
+              data.realEstateType == "1" ? "Land" : "House"
+            );
+            $("#popup-address").text(data.address);
+            $("#popup-area").text(data.area + " m²");
+            $("#popup-price").text(data.price + " VND");
+            $("#popup-manager").text(data.managerInfo.username);
+            console.log(data.realEstateType);
+
+            //only show land/house fields according to type
+            if (data.realEstateType == "land") {
+              landSection.classList.remove("hidden");
+              houseSection.classList.add("hidden");
+              $("#popup-land-type").text(data.propertyLand.landType);
+              $("#popup-land-pw").text(data.url);
+            } else {
+              houseSection.classList.remove("hidden");
+              landSection.classList.add("hidden");
+              $("#popup-house-type").text(data.propertyHouse.houseType);
+              $("#popup-house-pw").text(data.url);
+              $("#popup-builtIn").text(data.propertyHouse.builtIn);
+              $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
+              $("#popup-bath").text(data.propertyHouse.bath + " rooms");
+            }
+
+            //only show list of Agency/Buyer Profiles if it's list of owned Properties
+            if (data.status.toLowerCase() == "hasAgency") {
+              agencyList.classList.remove("hidden");
+            } else if (data.status.toLowerCase() == "hasBuyer") {
+              buyerList.classList.remove("hidden");
+            }
+
+            popup.classList.remove("hidden");
+          },
+          error: function () {
+            //Error when sending request
+            console.error("Error fetching property details");
+          },
+        }); */
       }
 
       //to show form confirming job assigning for a staff
@@ -1012,6 +1077,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script></script>
   </body>

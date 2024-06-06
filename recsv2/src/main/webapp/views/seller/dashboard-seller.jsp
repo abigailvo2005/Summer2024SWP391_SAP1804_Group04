@@ -74,7 +74,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         type="text"
                         class="form-control"
                         placeholder="Type id/name/type here..."
-                        onkeyup="searchTable('own')"
+                        onkeyup="searchTable('prop')"
                       />
                     </div>
                   </div>
@@ -119,7 +119,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${propList}" var="own">
+                        <c:forEach items="${propList}" var="prop">
                           <tr class="prop-row">
                             <td class="align-middle text-center text-sm">
                               <div
@@ -178,7 +178,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="prop-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${prop.realEstateType}
+                                    ${prop.realEstateType == 2 ? 'House' :
+                                    'Land'}
                                   </p>
                                 </div>
                               </div>
@@ -208,7 +209,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${prop.accountId}', 'prop')"
+                                    onclick="viewDetailProperty('${prop.realEstateId}', 'prop')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -226,6 +227,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         </div>
       </div>
       <!-- END LIST OWNED PROPERTIES (1)-->
+
       <!-- START: LIST VALIDATING REQUEST (2)-->
       <div class="container-fluid">
         <div class="row my-4">
@@ -255,7 +257,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         type="text"
                         class="form-control"
                         placeholder="Type id/name/type here..."
-                        onkeyup="searchTable('prop')"
+                        onkeyup="searchTable('req')"
                       />
                     </div>
                   </div>
@@ -266,11 +268,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            REID
-                          </th>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
@@ -300,24 +297,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${reqList}" var="prop">
+                        <c:forEach items="${reqList}" var="req">
                           <tr class="req-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="req-id"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${req.realEstateId}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
+                           
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -359,7 +341,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType}
+                                    ${req.realEstateType == 1 ? 'House' :
+                                    'Land'}
                                   </p>
                                 </div>
                               </div>
@@ -389,7 +372,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${req.accountId}', 'req')"
+                                    onclick="viewDetailProperty('${req.realEstateId}', 'req')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -447,7 +430,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     </main>
 
     <!-- START POPUP REQUESTS -->
-    <div id="popup-property-request" class="popup-container z-index-3">
+    <div id="popup-property-request" class="popup-container hidden z-index-3">
       <div class="popup-content container-fluid">
         <!-- Header -->
         <div class="popup-header row mx-1">
@@ -473,11 +456,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 <ul class="list-group">
                   <div class="container-fluid">
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Status:</strong>
                         <p id="popup-status"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Handled by: </strong>
                         <p id="popup-manager"></p>
                       </li>
@@ -565,67 +548,67 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-12">
+                      <li class="list-group-item border-0 ps-0 text-sm col-12 d-flex">
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Type:</strong>
                         <p id="popup-type"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Address:</strong>
                         <p id="popup-address"></p>
                       </li>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Area:</strong>
                         <p id="popup-area"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Price:</strong>
                         <p id="popup-price"></p>
                       </li>
                     </div>
 
                     <div class="row land-info-section hidden">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Land Type: </strong>
                         <p id="popup-land-type"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Paperwork: </strong>
-                        <a id="popup-land-pw"></a>
+                        <a id="popup-land-pw" target="_blank"></a>
                       </li>
                     </div>
 
                     <div class="house-info-section hidden">
                       <div class="row">
-                        <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                           <strong class="text-dark">House Type: </strong>
                           <p id="popup-house-type"></p>
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm col-6">
+                        <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                           <strong class="text-dark">Paperwork: </strong>
-                          <a id="popup-house-pw"></a>
+                          <a id="popup-house-pw" target="_blank"></a>
                         </li>
                       </div>
 
-                      <div id="buyer-list" class="row">
-                        <li class="list-group-item border-0 ps-0 text-sm col-4">
+                      <div class="row">
+                        <li class="list-group-item border-0 ps-0 text-sm col-4 d-flex">
                           <strong class="text-dark">Built in: </strong>
-                          <p id="popup-year-built"></p>
+                          <p id="popup-builtIn"></p>
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm col-4">
+                        <li class="list-group-item border-0 ps-0 text-sm col-4 d-flex">
                           <strong class="text-dark">Bedrooms: </strong>
                           <p id="popup-bed"></p>
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm col-4">
+                        <li class="list-group-item border-0 ps-0 text-sm col-4 d-flex">
                           <strong class="text-dark">Bathrooms: </strong>
                           <p id="popup-bath"></p>
                         </li>
@@ -633,7 +616,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <!-- Table shows list of Agency wants to handle this property -->
-                    <div id="agency-list" class="row">
+                    <div id="agency-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Agency Profiles</strong>
                       </div>
@@ -680,7 +663,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <!-- Table shows list of Buyer wants to handle this property -->
-                    <div id="buyer-list" class="row">
+                    <div id="buyer-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Buyer Profiles</strong>
                       </div>
@@ -744,6 +727,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
     <!-- Internal JS -->
     <script>
+      //URL REAL ESTATE API
+      const urlRealEstate = "http://localhost:8085/api/real-estate/";
+
       // Automatically disable other choices in agency table when 1 is clicked
       $(".agency-checkbox").change(function () {
         if (this.checked) {
@@ -755,7 +741,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
-        var agencyList = $("#agency-list");
 
         e.preventDefault();
 
@@ -788,7 +773,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
       // Submit chosen Agency Profile to system
       function confirmBuyer(e) {
-        var buyerList = $("#buyer-list");
         e.preventDefault();
 
         // Get all checkboxes values in table
@@ -821,40 +805,55 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
       /* View Popup detail of each property */
       function viewDetailProperty(propID, type) {
-        console.log(userID);
-        var popup = $("#popup-property-request");
+        var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
+        var agencyList = document.querySelector("#agency-list");
+        var buyerList = document.querySelector("#buyer-list");
 
         // Send GET Request API to retrieve single property information
         $.ajax({
-          url: "http://localhost:8085/api/" + propID,
+          url: urlRealEstate + propID,
           type: "GET",
           success: function (data) {
             // Update popup với information chosen Property
             $("#popup-name").text(data.name);
             $("#popup-status").text(data.status);
-            $("#popup-desc").text(data.desc);
-            $("#popup-type").text(data.realEstateType);
+            $("#popup-desc").text(data.description);
+            $("#popup-type").text(
+              data.realEstateType == "1" ? "Land" : "House"
+            );
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.price + " VND");
-            $("#popup-manager").text(data.manUsername);
+            $("#popup-manager").text(data.managerInfo.username);
+            console.log(data.realEstateType);
+
             //only show land/house fields according to type
-            if (data.realEstateType.toLowerCase() === "land") {
+            if (data.realEstateType == 'land') {
               landSection.classList.remove("hidden");
-              $("#popup-land-type").text(data.landType);
-              $("#popup-land-pw").text(data.url);
+              houseSection.classList.add("hidden");
+              $("#popup-land-type").text(data.propertyLand.landType);
+              $("#popup-land-pw").text("sample-gg-drive-link");
+              document.querySelector("#popup-land-pw").setAttribute('href', 'https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link');
+              
             } else {
               houseSection.classList.remove("hidden");
-              $("#popup-house-type").text(data.houseType);
-              $("#popup-house-pw").text(data.url);
-              $("#popup-builtIn").text(data.builtIn);
-              $("#popup-bed").text(data.bedroom + " rooms");
-              $("#popup-bath").text(data.bath + " rooms");
+              landSection.classList.add("hidden");
+              $("#popup-house-type").text(data.propertyHouse.houseType);
+              $("#popup-house-pw").text("sample-gg-drive-link");
+              document.querySelector("#popup-house-pw").setAttribute('href', 'https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link');
+              $("#popup-builtIn").text(data.propertyHouse.builtIn);
+              $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
+              $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
+            if (data.status.toLowerCase() == "hasAgency") {
+                agencyList.classList.remove("hidden");
+            } else if (data.status.toLowerCase() == "hasBuyer") {
+              buyerList.classList.remove("hidden");
+            }
 
             popup.classList.remove("hidden");
           },
@@ -866,7 +865,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       }
 
       function closeDetail() {
-       document.getElementById("popup-property-request").classList.add("hidden");
+        document
+          .getElementById("popup-property-request")
+          .classList.add("hidden");
       }
 
       //still forcely close every popup if clicked on somewhere else than close button
@@ -915,7 +916,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         //search for request register accounts
         if (type.includes("prop")) {
           //Get values from input search
-          var searchReq = document
+          var searchInput = document
             .getElementById("propSearch")
             .value.toLowerCase();
 
@@ -938,7 +939,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           });
         } else {
           //Get values from input search
-          var searchReq = document
+          var searchInput = document
             .getElementById("ownSearch")
             .value.toLowerCase();
 
