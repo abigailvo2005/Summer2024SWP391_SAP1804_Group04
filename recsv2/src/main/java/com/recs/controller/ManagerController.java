@@ -63,6 +63,7 @@ public class ManagerController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         List<RealEstate> reviewingList = realEstateService.getReviewingListByManager(userInfo.getManagerId());
         String name = authentication.getName();
+        List<UserInfo> staffList = accountService.getListStaffByManager(userInfo.getManagerId());
         Account account = accountService.getByUserName(name);
         String currentPage = "assign-job";
         model.addAttribute("name", name);

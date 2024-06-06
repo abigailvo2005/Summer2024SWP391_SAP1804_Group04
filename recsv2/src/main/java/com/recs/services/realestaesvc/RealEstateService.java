@@ -29,4 +29,8 @@ public interface RealEstateService {
     public RealEstateInfo getRealEstateInfo(String realEstateId);
 
     public RealEstate createRealEstate(String sellerId, CreateRealEstateRequestDTO request);
+
+    public RealEstate update(RealEstate realEstate);
+
+    public RealEstate updateStatus(String realEstateId, String status);
 }

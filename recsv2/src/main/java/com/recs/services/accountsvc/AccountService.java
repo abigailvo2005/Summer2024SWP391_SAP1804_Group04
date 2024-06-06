@@ -50,4 +50,6 @@ public interface AccountService {
     public UserInfo getAgencyToUserInfo(String agencyId);
 
     public UserInfo getMemberToUserInfo(String memberId);
+
+    public List<UserInfo> getListStaffByManager(String managerId);
 }

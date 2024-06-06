@@ -185,6 +185,23 @@ public class RealEstateServiceImpl implements RealEstateService{
         return realEstate;
     }
 
+    @Override
+    public RealEstate update(RealEstate realEstate) {
+        //Todo() define list field can update directly
+        return null;
+    }
+
+    @Override
+    public RealEstate updateStatus(String realEstateId, String status) {
+        RealEstate realEstate = realEstateRepository.getReferenceById(realEstateId);
+        if(realEstate != null) {
+            realEstate.setStatus(status);
+            realEstate.setUpdateTimestamp(Clock.systemUTC().millis());
+            realEstateRepository.save(realEstate);
+        }
+        return realEstate;
+    }
+
     private RealEstate convertToRealEstate(String sellerId, CreateRealEstateRequestDTO dto) {
         return new RealEstate(
                 UUID.randomUUID().toString(),
@@ -220,4 +237,6 @@ public class RealEstateServiceImpl implements RealEstateService{
         System.out.println("Suitable manager: "+ managerWithMinRe);
         return managerWithMinRe.getManagerId();
     }
+
+
 }
