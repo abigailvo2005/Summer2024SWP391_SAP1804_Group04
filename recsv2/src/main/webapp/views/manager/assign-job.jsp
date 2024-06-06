@@ -160,7 +160,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="req-price"
+                                    id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
                                     ${req.realEstateType == 1 ? 'House' :
@@ -173,23 +173,12 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
                               >
-                                <!-- <div
-                                  class="d-flex flex-column justify-content-center"
+                                <p
+                                  id="req-createDate"
+                                  class="mb-0 text-sm fw-bold text-dark"
                                 >
-                                  <% long createTimestamp = 1717560719;
-                                  pageContext.setAttribute("createTimestamp",
-                                  createTimestamp); %>
-
-                                  <p
-                                    id="req-type"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    <fmt:formatDate
-                                      value="${req.createTimestamp * 1000}"
-                                      pattern="yyyy-MM-dd HH:mm:ss"
-                                    />
-                                  </p>
-                                </div> -->
+                                  ${req.createTimestamp}
+                                </p>
                               </div>
                             </td>
                             <td class="align-middle">
@@ -217,7 +206,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${req.realEstateId}', 'req')"
+                                    onclick="viewDetail('${req.realEstateId}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -256,10 +245,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-4">
                       <input
                         type="text"
-                        name="propName"
+                        name="name"
                         class="form-control form-create-control col-10"
                         value="chosen property name"
-
+                        disabled
                       />
                     </div>
                     <div class="col-sm-2">
@@ -268,10 +257,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-4">
                       <input
                         type="text"
-                        name="propAddress"
+                        name="address"
                         class="form-control form-create-control col-10"
                         value="chosen property adress"
-
+                        disabled
                       />
                     </div>
                   </div>
@@ -280,9 +269,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-2"><label>Description:</label></div>
                     <div class="col-sm-10">
                       <textarea
-                        name="propDesc"
+                        name="description"
                         class="form-control form-create-control"
                         rows="5"
+                        disabled
                       >
   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea
                       >
@@ -296,9 +286,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-4">
                       <input
                         type="text"
-                        name="propType"
+                        name="propertyType"
                         class="form-control form-create-control col-10"
                         value="land"
+                        disabled
                       />
                     </div>
                     <div class="col-sm-2">
@@ -307,9 +298,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-3">
                       <input
                         type="text"
-                        name="propAddress"
+                        name="price"
                         class="form-control form-create-control col-10"
                         value="500000000"
+                        disabled
                       />
                     </div>
                     <div class="col-sm-1">
@@ -324,9 +316,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-3">
                       <input
                         type="number"
-                        name="propArea"
+                        name="area"
                         class="form-control form-create-control col-10"
                         value="2300"
+                        disabled
                       />
                     </div>
                     <div class="col-sm-1">
@@ -341,9 +334,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-4">
                       <input
                         type="text"
-                        name="landType"
+                        name="landCategory"
                         class="form-control form-create-control col-10"
                         value="Agricultural"
+                        disabled
                       />
                     </div>
                     <div class="col-sm-2">
@@ -352,19 +346,16 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-4">
                       <input
                         type="file"
-                        name="landPaperwork"
+                        name="paperwork"
                         class="form-control form-create-control col-10"
+                        disabled
                         hidden
                       />
-                      <script>
-                        var fileInput = document.querySelector(
-                          'input[name="landPaperwork"]'
-                        );
-                        fileInput.value = "path/to/your/zip/file.zip";
-                      </script>
                       <label
-                        ><a href="path/to/your/zip/file.zip" download
-                          ><i>Download Zip: Land Paperwork</i></a
+                        ><a
+                          href="https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                          target="_blank"
+                          ><i>Google Drive Folder: Land Paperwork</i></a
                         ></label
                       >
                     </div>
@@ -378,9 +369,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="houseType"
+                          name="houseCategory"
                           class="form-control form-create-control col-10"
                           value="Bungalow"
+                          disabled
                         />
                       </div>
                       <div class="col-sm-2">
@@ -389,19 +381,17 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <div class="col-sm-4">
                         <input
                           type="file"
-                          name="housePaperwork"
+                          name="paperwork"
                           class="form-control form-create-control col-10"
                           disabled
+                          hidden
                         />
-                        <script>
-                          fileInput = document.querySelector(
-                            'input[name="housePaperwork"]'
-                          );
-                          fileInput.value = "path/to/your/zip/file.zip";
-                        </script>
+
                         <label
-                          ><a href="path/to/your/zip/file.zip" download
-                            ><i>Download Zip: House Paperwork</i></a
+                          ><a
+                            href="https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                            target="_blank"
+                            ><i>Google Drive Folder: Land Paperwork</i></a
                           ></label
                         >
                       </div>
@@ -446,7 +436,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          name="bedrooms"
+                          name="builtYear"
                           class="form-control form-create-control col-10"
                           value="1997"
                           disabled
@@ -888,10 +878,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
 
       //to show detail register request popup
-      function viewDetail(id) {
-        var popup = document.getElementById("popup-detail");
+      function viewDetail(propID) {
+        // var popup = document.getElementById("popup-detail");
 
-        var propType = popup
+        /* var propType = popup
           .querySelector("#type")
           .textContent.toLowerCase()
           .trim();
@@ -904,13 +894,15 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           popup.querySelector("#house-info").classList.remove("hidden");
         }
 
-        popup.classList.remove("hidden");
+        popup.classList.remove("hidden"); */
 
-        /*  var popup = document.querySelector("#popup-property-request");
-        var landSection = document.querySelector(".land-info-section");
-        var houseSection = document.querySelector(".house-info-section");
-        var agencyList = document.querySelector("#agency-list");
-        var buyerList = document.querySelector("#buyer-list");
+        /*  var popup = document.getElementById("popup-detail");
+        var propType = popup
+          .querySelector("#type")
+          .textContent.toLowerCase()
+          .trim();
+        var landSection = popup.querySelector("#land-info");
+        var houseSection = popup.querySelector("#house-info");
 
         // Send GET Request API to retrieve single property information
         $.ajax({

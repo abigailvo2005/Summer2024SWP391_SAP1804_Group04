@@ -107,6 +107,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                       <div class="col-lg-10 col-sm-10">
                         <input
+                        id="address"
                           type="text"
                           name="address"
                           class="form-control form-create-control col-10"
@@ -122,6 +123,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                       <div class="col-lg-10 col-sm-10">
                         <input
+                        id="desc"
                           type="text"
                           name="description"
                           class="form-control form-create-control col-10"
@@ -135,6 +137,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-sm-2"><label> Area:</label></div>
                       <div class="col-sm-3">
                         <input
+                        id="area"
                           type="number"
                           name="area"
                           class="form-control form-create-control col-10"
@@ -148,6 +151,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-sm-2"><label>Price:</label></div>
                       <div class="col-3">
                         <input
+                        id="price"
                           type="number"
                           name="price"
                           class="form-control form-create-control"
@@ -164,6 +168,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-2"><label>Images:</label></div>
                       <div class="col-4">
                         <input
+                        id="img"
                           name="images"
                           id="prop-img"
                           type="file"
@@ -206,6 +211,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </div>
                         <div class="col-sm-4">
                           <select
+                          id="land-category"
                             class="land form-control form-create-control col-10"
                             name="landCategory"
                             required
@@ -251,6 +257,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </div>
                         <div class="col-sm-4">
                           <select
+                          id="house-category"
                             class="form-control form-create-control col-10 house"
                             name="houseCategory"
                             required
@@ -288,6 +295,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-2"><label> Built Year:</label></div>
                         <div class="col-sm-2">
                           <input
+                          id="builtYear"
                             type="number"
                             name="builtYear"
                             class="house form-control form-create-control col-10"
@@ -301,6 +309,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-1"><label>Bedroom:</label></div>
                         <div class="col-sm-2">
                           <input
+                          id="bedrooms"
                             type="number"
                             name="bedrooms"
                             class="house form-control form-create-control col-10"
@@ -315,6 +324,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-1"><label>Bathroom:</label></div>
                         <div class="col-sm-2">
                           <input
+                          id="bathrooms"
                             type="number"
                             name="bathrooms"
                             class="house form-control form-create-control col-10"
