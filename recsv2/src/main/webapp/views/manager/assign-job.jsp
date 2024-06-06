@@ -829,9 +829,15 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         });
       }
 
-      //to show form confirming job assigning for a staff
-      function showFormAssignJob(propID) {
+      //to show form confirming job assigning after confirmed on popup & form is already loaded
+      function showFormAssignJob() {
+        document.getElementById('form-assign-job-container').classList.remove('hidden');
         closeDetail();
+
+      }
+
+      //to LOAD INFORMATION to form confirming job assigning for a staff
+      function loadFormAssignJob(propID) {
 
         var formAssignJob = document.getElementById(
           "form-assign-job-container"
@@ -889,8 +895,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
 
-            //show form to confirm assigning job to staff
-        formAssignJob.classList.remove("hidden");
           },
           error: function () {
             //Error when sending request
