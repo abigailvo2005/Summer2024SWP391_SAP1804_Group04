@@ -1,9 +1,13 @@
 package com.recs.controller;
 
 import com.recs.models.dto.account.UserInfo;
+import com.recs.models.dto.recsbusiness.AssignJobRequest;
+import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.entities.recsbusiness.AssignJobStaff;
 import com.recs.services.accountsvc.AccountService;
+import com.recs.services.businesssvc.RecsBusinessService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,10 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.time.Clock;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_MANAGER')")
@@ -29,6 +36,9 @@ public class ManagerController {
     @Autowired
     private RealEstateService realEstateService;
 
+    @Autowired
+    private RecsBusinessService recsBusinessService;
+
     @ModelAttribute(name = "LOGIN_USER")
     public UserInfo getLoginUser(Authentication authentication) {
         String name = authentication.getName();
@@ -38,6 +48,15 @@ public class ManagerController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+
+        List<ValidationJobInfo> allJob = recsBusinessService.getListByManager(userInfo.getManagerId());
+
+        List<ValidationJobInfo> validatingJobList = recsBusinessService.
+                getListByManagerAndStatus(userInfo.getManagerId(), "validating");
+
+        List<ValidationJobInfo> successJobList = recsBusinessService.
+                getListByManagerAndStatus(userInfo.getManagerId(), "success");
+
 
         List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId());
         // Todo() tự nhét
@@ -70,6 +89,26 @@ public class ManagerController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", reviewingList);
         return "manager/assign-job";
+    }
+
+    @PostMapping("/assign-job")
+    public String assignJob(
+            @ModelAttribute(name = "request")AssignJobRequest request,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+            ) {
+        AssignJobStaff entity = new AssignJobStaff(
+                UUID.randomUUID().toString(),
+                request.getRealEstateId(),
+                Clock.systemUTC().millis(),
+                1,
+                "validating",
+                request.getStaffId(),
+                userInfo.getManagerId()
+        );
+
+        recsBusinessService.createAssignJobStaff(entity);
+
+        return "redirect:/assign-job";
     }
 
     @GetMapping({ "/register-acc-man" })
