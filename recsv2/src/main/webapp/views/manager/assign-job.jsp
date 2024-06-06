@@ -163,7 +163,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType == 1 ? 'House' :
+                                    ${req.realEstateType == 2 ? 'House' :
                                     'Land'}
                                   </p>
                                 </div>
@@ -226,7 +226,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       <!-- END LIST VALIDATION REQUEST-->
 
       <!-- START: FORM TO ASSIGN JOB TO A STAFF -->
-      <div id="form-assign-job-container" class="container hidden">
+      <div id="form-assign-job-container" class="container">
         <div class="row">
           <div class="col-12 col-xl-11 mx-auto">
             <div class="card z-index-0">
@@ -240,111 +240,93 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   name="assign-job-form"
                   action=""
                 >
+                  <input id="reID" type="text" name="realEstateId" hidden />
+                  
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Property Name:</label></div>
                     <div class="col-sm-4">
                       <input
+                        id="form-name"
                         type="text"
                         name="name"
                         class="form-control form-create-control col-10"
-                        value="chosen property name"
                         disabled
                       />
                     </div>
-                    <div class="col-sm-2">
-                      <label>Address:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Address:</label></div>
                     <div class="col-sm-4">
                       <input
+                        id="form-address"
                         type="text"
                         name="address"
                         class="form-control form-create-control col-10"
-                        value="chosen property adress"
                         disabled
                       />
                     </div>
                   </div>
-
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Description:</label></div>
                     <div class="col-sm-10">
                       <textarea
+                        id="form-description"
                         name="description"
                         class="form-control form-create-control"
                         rows="5"
                         disabled
-                      >
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea
-                      >
+                      ></textarea>
                     </div>
                   </div>
-
                   <div class="mb-3 row">
-                    <div class="col-sm-2">
-                      <label> Property Type:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Property Type:</label></div>
                     <div class="col-sm-4">
                       <input
+                        id="form-propertyType"
                         type="text"
                         name="propertyType"
                         class="form-control form-create-control col-10"
-                        value="land"
                         disabled
                       />
                     </div>
-                    <div class="col-sm-2">
-                      <label> Price:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Price:</label></div>
                     <div class="col-sm-3">
                       <input
+                        id="form-price"
                         type="text"
                         name="price"
                         class="form-control form-create-control col-10"
-                        value="500000000"
                         disabled
                       />
                     </div>
-                    <div class="col-sm-1">
-                      <label>VND</label>
-                    </div>
+                    <div class="col-sm-1"><label>VND</label></div>
                   </div>
-
                   <div class="mb-3 row">
-                    <div class="col-sm-2">
-                      <label> Area:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Area:</label></div>
                     <div class="col-sm-3">
                       <input
+                        id="form-area"
                         type="number"
                         name="area"
                         class="form-control form-create-control col-10"
-                        value="2300"
                         disabled
                       />
                     </div>
-                    <div class="col-sm-1">
-                      <label> m²</label>
-                    </div>
+                    <div class="col-sm-1"><label>m²</label></div>
                   </div>
-
                   <div id="land-info" class="mb-3 row">
-                    <div class="col-sm-2">
-                      <label> Land Type:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Land Type:</label></div>
                     <div class="col-sm-4">
                       <input
+                        id="form-landCategory"
                         type="text"
                         name="landCategory"
                         class="form-control form-create-control col-10"
-                        value="Agricultural"
                         disabled
                       />
                     </div>
-                    <div class="col-sm-2">
-                      <label> Land Paperwork:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Land Paperwork:</label></div>
                     <div class="col-sm-4">
                       <input
+                        id="form-paperwork"
                         type="file"
                         name="paperwork"
                         class="form-control form-create-control col-10"
@@ -355,107 +337,89 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         ><a
                           href="https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
                           target="_blank"
-                          ><i>Google Drive Folder: Land Paperwork</i></a
+                          ><i>sample-paperwork-gg-drive-link</i></a
                         ></label
                       >
                     </div>
                   </div>
-
                   <div id="house-info">
                     <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label> House Type:</label>
-                      </div>
+                      <div class="col-sm-2"><label>House Type:</label></div>
                       <div class="col-sm-4">
                         <input
+                          id="form-houseCategory"
                           type="text"
                           name="houseCategory"
                           class="form-control form-create-control col-10"
-                          value="Bungalow"
                           disabled
                         />
                       </div>
                       <div class="col-sm-2">
-                        <label> House Paperwork:</label>
+                        <label>House Paperwork:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
+                          id="form-housePaperwork"
                           type="file"
                           name="paperwork"
                           class="form-control form-create-control col-10"
                           disabled
                           hidden
                         />
-
                         <label
                           ><a
                             href="https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
                             target="_blank"
-                            ><i>Google Drive Folder: Land Paperwork</i></a
+                            ><i>sample-paperwork-gg-drive-link</i></a
                           ></label
                         >
                       </div>
                     </div>
                     <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label> Bedrooms:</label>
-                      </div>
+                      <div class="col-sm-2"><label>Bedrooms:</label></div>
                       <div class="col-sm-2">
                         <input
+                          id="form-bedrooms"
                           type="text"
                           name="bedrooms"
                           class="form-control form-create-control col-10"
-                          value="3"
                           disabled
                         />
                       </div>
-                      <div class="col-sm-2">
-                        <label>room(s)</label>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <label> Bathrooms:</label>
-                      </div>
+                      <div class="col-sm-2"><label>room(s)</label></div>
+                      <div class="col-sm-2"><label>Bathrooms:</label></div>
                       <div class="col-sm-2">
                         <input
+                          id="form-bathrooms"
                           type="text"
                           name="bathrooms"
                           class="form-control form-create-control col-10"
-                          value="3"
                           disabled
                         />
                       </div>
-                      <div class="col-sm-2">
-                        <label>room(s)</label>
-                      </div>
+                      <div class="col-sm-2"><label>room(s)</label></div>
                     </div>
                     <div class="row mb-3">
-                      <div class="col-sm-2">
-                        <label> Year Built:</label>
-                      </div>
+                      <div class="col-sm-2"><label>Year Built:</label></div>
                       <div class="col-sm-4">
                         <input
+                          id="form-builtYear"
                           type="text"
                           name="builtYear"
                           class="form-control form-create-control col-10"
-                          value="1997"
                           disabled
                         />
                       </div>
                     </div>
                   </div>
-
                   <div class="row mb-3">
-                    <div class="col-sm-2">
-                      <label>Staff Assigned:</label>
-                    </div>
+                    <div class="col-sm-2"><label>Staff Assigned:</label></div>
                     <div class="col-sm-4">
                       <input
+                        id="form-chosen-staff"
                         type="text"
-                        id="chosen-staff"
                         name="chosen-staff"
                         class="form-control form-create-control col-10"
-                        value="not chosen yet"
                         disabled
                       />
                     </div>
@@ -488,75 +452,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       </div>
                     </div>
                   </div>
-
-                  <!-- DEMONSTRATION IMAGES -->
-                  <div class="row mb-3">
-                    <div class="col-sm-2">
-                      <label>Images: </label>
-                    </div>
-                    <div class="col-sm-9">
-                      <div
-                        id="form-property-images"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
-                      >
-                        <div class="carousel-indicators">
-                          <c:forEach items="${imageList}" varStatus="loop">
-                            <button
-                              type="button"
-                              data-bs-target="#form-property-images"
-                              data-bs-slide-to="${loop.index}"
-                              class="${loop.index == 0 ? 'active' : ''}"
-                              aria-current="${loop.index == 0 ? 'true' : 'false'}"
-                              aria-label="Slide ${loop.index + 1}"
-                            ></button>
-                          </c:forEach>
-                        </div>
-                        <div class="carousel-inner">
-                          <c:forEach
-                            items="${imageList}"
-                            var="image"
-                            varStatus="loop"
-                          >
-                            <div
-                              class="carousel-item ${loop.index == 0 ? 'active' : ''}"
-                            >
-                              <img
-                                src="${image.url}"
-                                class="d-block w-100"
-                                alt="${image.alt}"
-                              />
-                            </div>
-                          </c:forEach>
-                        </div>
-                        <button
-                          class="carousel-control-prev"
-                          type="button"
-                          data-bs-target="#form-property-images"
-                          data-bs-slide="prev"
-                        >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                          class="carousel-control-next"
-                          type="button"
-                          data-bs-target="#form-property-images"
-                          data-bs-slide="next"
-                        >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
                   <!-- submit button -->
                   <div class="text-center container">
                     <div class="row">
@@ -646,201 +541,200 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="row">
                       <div class="validation-only col-6 px-0">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm"
-                          id="handledID"
+                          class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
                           <strong class="text-dark">Owner:</strong>
+                          <p id="owner"></p>
                         </li>
                       </div>
+
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="dateCreated"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
-                        <strong class="text-dark">Created on:</strong> &nbsp;
-                        [Date Created]
+                        <strong class="text-dark">Created on:</strong>
+                        <p id="popup-dateCreated"></p>
                       </li>
                     </div>
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="address"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
-                        <strong class="text-dark">Address:</strong> &nbsp;
-                        [Address]
+                        <strong class="text-dark">Address:</strong>
+                        <p id="popup-address"></p>
                       </li>
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="area"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
-                        <strong class="text-dark">Area:</strong> &nbsp; [Area]
+                        <strong class="text-dark">Area:</strong>
+                        <p id="popup-area"></p>
                       </li>
                     </div>
+
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="price"
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                       >
-                        <strong class="text-dark">Price:</strong> &nbsp; [Price]
+                        <strong class="text-dark">Price:</strong>
+                        <p id="popup-price"></p>
                       </li>
 
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="type"
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                       >
-                        <strong class="text-dark">Property Type:</strong> &nbsp;
-                        House/land
+                        <strong class="text-dark">Property Type:</strong>
+                        <p id="popup-type"></p>
+                      </li>
+
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                      >
+                        <strong class="text-dark">Status:</strong>
+                        <p id="popup-status"></p>
                       </li>
                     </div>
+
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12"
-                        id="description"
+                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
                       >
-                        <strong class="text-dark">Description:</strong> &nbsp;
-                        [Description] - Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor
-                        in reprehenderit in voluptate velit esse cillum dolore
-                        eu fugiat nulla pariatur. Excepteur sint occaecat
-                        cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.
+                        <strong class="text-dark">Description:</strong>
+                        <p id="popup-desc"></p>
                       </li>
                     </div>
-                    <div class="row mb-2">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-2"
-                        id="images"
+
+                    <!-- image section for popup -->
+                    <div class="row mb-3">
+                      <div
+                        id="image-section"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
                       >
-                        <strong class="text-dark">Images:</strong>
-                      </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-10">
-                        <div
-                          id="popup-property-images"
-                          class="carousel slide"
-                          data-bs-ride="carousel"
-                        >
-                          <div class="carousel-indicators">
-                            <c:forEach items="${imageList}" varStatus="loop">
-                              <button
-                                type="button"
-                                data-bs-target="#popup-property-images"
-                                data-bs-slide-to="${loop.index}"
-                                class="${loop.index == 0 ? 'active' : ''}"
-                                aria-current="${loop.index == 0 ? 'true' : 'false'}"
-                                aria-label="Slide ${loop.index + 1}"
-                              ></button>
-                            </c:forEach>
-                          </div>
-                          <div class="carousel-inner">
-                            <c:forEach
-                              items="${imageList}"
-                              var="image"
-                              varStatus="loop"
-                            >
-                              <div
-                                class="carousel-item ${loop.index == 0 ? 'active' : ''}"
-                              >
-                                <img
-                                  src="${image.url}"
-                                  class="d-block w-100"
-                                  alt="${image.alt}"
-                                />
-                              </div>
-                            </c:forEach>
-                          </div>
+                        <!-- buttons to directly see an image -->
+                        <div class="carousel-indicators">
                           <button
-                            class="carousel-control-prev"
                             type="button"
-                            data-bs-target="#popup-property-images"
-                            data-bs-slide="prev"
-                          >
-                            <span
-                              class="carousel-control-prev-icon"
-                              aria-hidden="true"
-                            ></span>
-                            <span class="visually-hidden">Previous</span>
-                          </button>
+                            data-bs-target="#image-section"
+                            data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                          ></button>
                           <button
-                            class="carousel-control-next"
                             type="button"
-                            data-bs-target="#popup-property-images"
-                            data-bs-slide="next"
-                          >
-                            <span
-                              class="carousel-control-next-icon"
-                              aria-hidden="true"
-                            ></span>
-                            <span class="visually-hidden">Next</span>
-                          </button>
+                            data-bs-target="#image-section"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#image-section"
+                            data-bs-slide-to="2"
+                            aria-label="Slide 3"
+                          ></button>
                         </div>
-                      </li>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img
+                              src="../../template/assets/img/home-decor-1.jpg"
+                              class="d-block w-100 rounded"
+                              alt="Real Estate Image 1"
+                            />
+                          </div>
+                          <div class="carousel-item">
+                            <img
+                              src="../../template/assets/img/home-decor-2.jpg"
+                              class="d-block w-100 rounded"
+                              alt="Real Estate Image 2"
+                            />
+                          </div>
+                          <div class="carousel-item">
+                            <img
+                              src="../../template/assets/img/home-decor-3.jpg"
+                              class="d-block w-100 rounded"
+                              alt="Real Estate Image 3"
+                            />
+                          </div>
+                        </div>
+                        <!-- button fd/backwards -->
+                        <button
+                          class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                     </div>
+
                     <div id="land-info" class="row hidden">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-4"
-                        id="landType"
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                       >
-                        <strong class="text-dark">Land Type:</strong> &nbsp;
-                        [Land Type]
+                        <strong class="text-dark">Land Type:</strong>
+                        <p id="popup-land-type"></p>
                       </li>
                       <div class="validation-only col-8 px-0">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm"
-                          id="landPaperwork"
+                          class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
                           <strong class="text-dark">Land Paperwork:</strong>
-                          &nbsp;
-                          <a href="path/to/your/zip/file.zip" download
-                            ><i>Download Zip: Land Paperwork</i></a
-                          >
+                          <a id="popup-land-pw" target="_blank"></a>
                         </li>
                       </div>
                     </div>
                     <div id="house-info" class="hidden">
                       <div class="row">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="houseType"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">House Type:</strong> &nbsp;
-                          [House Type]
+                          <strong class="text-dark">House Type:</strong>
+                          <p id="popup-house-type"></p>
                         </li>
                         <div class="validation-only col-8 px-0">
                           <li
                             class="list-group-item border-0 ps-0 text-sm"
                             id="housePaperwork"
                           >
-                            <strong class="text-dark">Land Paperwork:</strong>
-                            &nbsp;
-                            <a href="path/to/your/zip/file.zip" download
-                              ><i>Download Zip: House Paperwork</i></a
-                            >
+                            <strong class="text-dark">House Paperwork:</strong>
+                            <a id="popup-house-pw" target="_blank"></a>
                           </li>
                         </div>
                       </div>
                       <div class="row">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="bedrooms"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">Bedrooms:</strong> &nbsp;
-                          [Num Bedrooms]
+                          <strong class="text-dark">Bedrooms:</strong>
+                          <p id="popup-bed"></p>
                         </li>
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="bathrooms"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">Bathrooms:</strong> &nbsp;
-                          [Num Bathrooms]
+                          <strong class="text-dark">Bathrooms:</strong>
+                          <p id="popup-bath"></p>
                         </li>
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="yearBuilt"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">Year Built:</strong> &nbsp;
-                          [Year Built]
+                          <strong class="text-dark">Year Built:</strong>
+                          <p id="popup-builtIn"></p>
                         </li>
                       </div>
                     </div>
@@ -852,7 +746,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                             <button
                               title="Validate Successfully. Added as Listing"
                               type="button"
-                              onclick="showFormAssignJob('${req.type}')"
+                              onclick="showFormAssignJob()"
                               class="btn btn-dark w-100 my-2 mb-2 btn-validation"
                             >
                               Assign To Staff
@@ -879,28 +773,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
       //to show detail register request popup
       function viewDetail(propID) {
-        // var popup = document.getElementById("popup-detail");
-
-        /* var propType = popup
-          .querySelector("#type")
-          .textContent.toLowerCase()
-          .trim();
-
-        if (propType.includes("land")) {
-          popup.querySelector("#land-info").classList.remove("hidden");
-        }
-
-        if (propType.includes("house")) {
-          popup.querySelector("#house-info").classList.remove("hidden");
-        }
-
-        popup.classList.remove("hidden"); */
-
-        /*  var popup = document.getElementById("popup-detail");
-        var propType = popup
-          .querySelector("#type")
-          .textContent.toLowerCase()
-          .trim();
+        var popup = document.getElementById("popup-detail");
         var landSection = popup.querySelector("#land-info");
         var houseSection = popup.querySelector("#house-info");
 
@@ -910,39 +783,41 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           type: "GET",
           success: function (data) {
             // Update popup với information chosen Property
+            $("#owner").text(data.sellerInfo.sellerId);
             $("#popup-name").text(data.name);
             $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
-            $("#popup-type").text(
-              data.realEstateType == "1" ? "Land" : "House"
-            );
+            $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.price + " VND");
-            $("#popup-manager").text(data.managerInfo.username);
-            console.log(data.realEstateType);
 
             //only show land/house fields according to type
             if (data.realEstateType == "land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
-              $("#popup-land-pw").text(data.url);
+              $("#popup-land-pw").text("sample-gg-drive-link-land");
+              document
+                .querySelector("#popup-land-pw")
+                .setAttribute(
+                  "href",
+                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                );
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-house-pw").text(data.url);
+              $("#popup-house-pw").text("sample-gg-drive-link-house");
+              document
+                .querySelector("#popup-house-pw")
+                .setAttribute(
+                  "href",
+                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                );
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
-            }
-
-            //only show list of Agency/Buyer Profiles if it's list of owned Properties
-            if (data.status.toLowerCase() == "hasAgency") {
-              agencyList.classList.remove("hidden");
-            } else if (data.status.toLowerCase() == "hasBuyer") {
-              buyerList.classList.remove("hidden");
             }
 
             popup.classList.remove("hidden");
@@ -951,29 +826,77 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             //Error when sending request
             console.error("Error fetching property details");
           },
-        }); */
+        });
       }
 
       //to show form confirming job assigning for a staff
-      function showFormAssignJob(type) {
+      function showFormAssignJob(propID) {
         closeDetail();
 
         var formAssignJob = document.getElementById(
           "form-assign-job-container"
         );
-
+/* 
         if (type.includes("land")) {
           formAssignJob.querySelector("#house-info").classList.add("hidden");
           formAssignJob.querySelector("#land-info").classList.remove("hidden");
         } else {
           formAssignJob.querySelector("#land-info").classList.add("hidden");
           formAssignJob.querySelector("#house-info").classList.remove("hidden");
-        }
+        } */
 
-        //show form to confirm assigning job to staff
+        
+
+        // Send GET Request API to retrieve single property information
+        $.ajax({
+          url: urlRealEstate + propID,
+          type: "GET",
+          success: function (data) {
+            // Update popup with information of chosen property
+            $("#form-name").setAttribute('value', data.name);
+            $("#popup-status").text(data.status);
+            $("#popup-desc").text(data.description);
+            $("#popup-type").text(data.realEstateType);
+            $("#popup-address").text(data.address);
+            $("#popup-area").text(data.area + " m²");
+            $("#popup-price").text(data.price + " VND");
+
+            //only show land/house fields according to type
+            if (data.realEstateType == "land") {
+              landSection.classList.remove("hidden");
+              houseSection.classList.add("hidden");
+              $("#popup-land-type").text(data.propertyLand.landType);
+              $("#popup-land-pw").text("sample-gg-drive-link-land");
+              document
+                .querySelector("#popup-land-pw")
+                .setAttribute(
+                  "href",
+                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                );
+            } else {
+              houseSection.classList.remove("hidden");
+              landSection.classList.add("hidden");
+              $("#popup-house-type").text(data.propertyHouse.houseType);
+              $("#popup-house-pw").text("sample-gg-drive-link-house");
+              document
+                .querySelector("#popup-house-pw")
+                .setAttribute(
+                  "href",
+                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                );
+              $("#popup-builtIn").text(data.propertyHouse.builtIn);
+              $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
+              $("#popup-bath").text(data.propertyHouse.bath + " rooms");
+            }
+
+            //show form to confirm assigning job to staff
         formAssignJob.classList.remove("hidden");
-
-        /* CODE TO LOAD CONTENT OF CHOSEN PROPERTY INTO THIS FORM */
+          },
+          error: function () {
+            //Error when sending request
+            console.error("Error fetching property details");
+          },
+        });
       }
 
       //to close detail validation request popup

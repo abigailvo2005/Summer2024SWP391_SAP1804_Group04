@@ -167,7 +167,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
     <!-- START RIGHT SIDE-->
     <main
-      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg mt-3"
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg z-index-0 mt-3"
     >
       <!-- START: Top Navbar -->
       <nav

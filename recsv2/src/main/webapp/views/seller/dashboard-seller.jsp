@@ -341,7 +341,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType == 1 ? 'House' :
+                                    ${req.realEstateType == 2 ? 'House' :
                                     'Land'}
                                   </p>
                                 </div>
@@ -821,7 +821,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
             $("#popup-type").text(
-              data.realEstateType == "1" ? "Land" : "House"
+              data.realEstateType 
             );
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");

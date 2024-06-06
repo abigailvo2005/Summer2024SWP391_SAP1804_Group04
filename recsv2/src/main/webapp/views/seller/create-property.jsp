@@ -219,11 +219,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <option value="" selected>
                               Select category (for Land type only)
                             </option>
-                            <option value="agricultural">
+                            <option value="Agricultural">
                               Agricultural Land
                             </option>
-                            <option value="non-agricultural">
-                              Non-agricultural Land
+                            <option value="Commercial">
+                              Commercial Land
+                            </option>
+                            <option value="Residential">
+                              Residential Land
                             </option>
                           </select>
                         </div>
@@ -265,10 +268,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <option value="" selected>
                               Select category (for House type only)
                             </option>
-                            <option value="apartment">Apartment</option>
-                            <option value="townhouse">Townhouse</option>
-                            <option value="mansion">Mansion, Villa</option>
-                            <option value="bungalow">Bungalow</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Townhouse">Townhouse</option>
+                            <option value="Mansion">Mansion</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Cottage">Cottage</option>
+                            <option value="Bungalow">Bungalow</option>
+                            <option value="Condo">Condo</option>
                           </select>
                         </div>
                         <div class="col-2"><label>Paperwork:</label></div>
