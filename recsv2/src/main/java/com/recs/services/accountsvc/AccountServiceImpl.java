@@ -178,4 +178,43 @@ public class AccountServiceImpl implements AccountService {
             default -> UserInfo.fromAccount(account);
         };
     }
+
+    @Override
+    public UserInfo getSellerToUserInfo(String sellerId) {
+        Seller seller = sellerRepository.getReferenceById(sellerId);
+        Account account = accountRepository.getReferenceById(String.valueOf(seller.getAccountId()));
+        UserInfo info = UserInfo.fromSeller(account, seller);
+        System.out.println("get seller info: "+info);
+        return info;
+    }
+
+    @Override
+    public UserInfo getManagerToUserInfo(String managerId) {
+        Manager manager = managerRepository.getReferenceById(managerId);
+        Account account = accountRepository.getReferenceById(String.valueOf(manager.getAccountId()));
+        UserInfo info = UserInfo.fromManager(account, manager);
+        System.out.println("get manager info: "+info);
+        return info;
+    }
+
+    @Override
+    public UserInfo getStaffToUserInfo(String staffId) {
+        Staff staff = staffRepository.getReferenceById(staffId);
+        Account account = accountRepository.getReferenceById(String.valueOf(staff.getAccountId()));
+        UserInfo info = UserInfo.fromStaff(account, staff);
+        System.out.println("get staff info: "+info);
+        return info;    }
+
+    @Override
+    public UserInfo getAgencyToUserInfo(String agencyId) {
+        Agency agency = agencyRepository.getReferenceById(agencyId);
+        Account account = accountRepository.getReferenceById(String.valueOf(agency.getAccountId()));
+        UserInfo info = UserInfo.fromAgency(account, agency);
+        System.out.println("get agency info: "+info);
+        return info;    }
+
+    @Override
+    public UserInfo getMemberToUserInfo(String memberId) {
+        return null;
+    }
 }

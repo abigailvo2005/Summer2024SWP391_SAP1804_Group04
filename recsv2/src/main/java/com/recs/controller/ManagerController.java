@@ -1,30 +1,48 @@
 package com.recs.controller;
 
+import com.recs.models.dto.account.UserInfo;
 import com.recs.models.entities.account.Account;
+import com.recs.models.entities.realestate.RealEstate;
 import com.recs.services.accountsvc.AccountService;
+import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import java.util.List;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_MANAGER')")
 @RequestMapping("/manager")
+@SessionAttributes(names = "LOGIN_USER")
 public class ManagerController {
 
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private RealEstateService realEstateService;
 
-    @GetMapping({ "", "/dashboard" })
-    public String dashboardView(Model model, Authentication authentication) {
+    @ModelAttribute(name = "LOGIN_USER")
+    public UserInfo getLoginUser(Authentication authentication) {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
+        return accountService.getUserInfo(account.getAccountId());
+    }
+
+    @GetMapping({ "", "/dashboard" })
+    public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<RealEstate> reviewingList = realEstateService.getReviewingListByManager(userInfo.getManagerId());
+        List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId());
+//        Todo() tự nhét
         String currentPage = "dashboard";
-        model.addAttribute("name", name);
+        model.addAttribute("name", userInfo.getFullName()); //can get userInfo by using $sessionScope in jsp
         model.addAttribute("currentPage", currentPage);
         return "manager/dashboard-man";
     }
