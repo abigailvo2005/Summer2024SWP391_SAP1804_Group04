@@ -1,7 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +57,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <p class="text-sm mb-0">
                       <i class="fa-regular fa-comment-dots"></i>
                       <span class="font-weight-bold ms-1"
-                        >${reqList.size()} request(s)</span
+                        >${jobList.size()} request(s)</span
                       >
                       in total
                     </p>
@@ -72,11 +70,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        id="validationSearch"
+                        id="jobSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type property name or manID here..."
-                        onkeyup="searchTable('validation')"
+                        placeholder="Type property name/type here..."
+                        onkeyup="searchTable('job')"
                       />
                     </div>
                   </div>
@@ -88,11 +86,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <thead>
                         <tr>
                           <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            ReqID
-                          </th>
-                          <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
                             PROPERTY NAME
@@ -101,11 +94,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
                             TYPE
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            ManID
                           </th>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -126,21 +114,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${reqList}" var="req">
+                        <c:forEach items="${jobList}" var="job">
                           <tr class="validate-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.id}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -150,7 +125,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                     id="req-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.name}
+                                    ${job.realEstateInfo.name}
                                   </p>
                                 </div>
                               </div>
@@ -163,27 +138,13 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.type}
+                                    ${job.realEstateInfo.realEstateType == 2 ? 'House' :
+                                    'Land'}
                                   </p>
                                 </div>
                               </div>
                             </td>
-                            <td>
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="req-manID"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${req.manID}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
+                            
                             <td class="align-middle">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -192,7 +153,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.dateCreated}
+                                    ${job.createTimeStamp}
                                   </p>
                                 </div>
                               </div>
@@ -205,7 +166,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${req.status}
+                                    ${job.status}
                                   </p>
                                 </div>
                               </div>
@@ -217,13 +178,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <script>
-                                    var reqListJson =
-                                      '<c:out value="${reqListJson}" />';
-                                  </script>
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${req.id}','validation')"
+                                    onclick="viewDetail('${job.realEstateInfo.realEstateId}','job')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -282,11 +239,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            ListingID
-                          </th>
+                          
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
@@ -323,19 +276,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <tbody>
                         <c:forEach items="${listingList}" var="listing">
                           <tr class="listing-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.id}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
+                            
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -345,7 +286,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                     id="listing-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.name}
+                                    ${listing.realEstateInfo.name}
                                   </p>
                                 </div>
                               </div>
@@ -358,7 +299,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.type}
+                                    ${listing.realEstateInfo.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -374,7 +315,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                     id="listing-manID"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.price}
+                                    ${listing.realEstateInfo.price}
                                   </p>
                                 </div>
                               </div>
@@ -387,7 +328,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.dateCreated}
+                                    ${listing.createTimeStamp}
                                   </p>
                                 </div>
                               </div>
@@ -412,10 +353,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <!--  <script>
-                                    var reqListJson =
-                                      '<c:out value="${reqListJson}" />';
-                                  </script> -->
                                   <a
                                     class="show-detail"
                                     onclick="viewDetail('${listing.id}', 'list')"
@@ -476,17 +413,15 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </main>
 
     <!--------------------START: POPUP SECTIONS-------------------- -->
-    <div id="popup-detail" class="popup-container hidden z-index-3">
+    <div id="popup-detail" class="popup-container z-index-3">
       <div class="popup-content container-fluid">
         <!-- Header -->
         <div class="popup-header row mx-1">
           <div class="col-11">
             <h4
-              id="registered-name"
+              id="popup-name"
               class="card-header font-weight-bolder mb-0"
-            >
-              [Property Name]
-            </h4>
+            ></h4>
           </div>
           <div class="col-1">
             <i
@@ -506,180 +441,171 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <div class="row">
                       <div class="validation-only col-6 px-0">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm"
-                          id="assignedID"
+                          class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
-                          <strong class="text-dark">Assigned by:</strong> &nbsp;
-                          ManID
+                          <strong class="text-dark">Assigned by:</strong>
+                          <p id="manager"></p>
                         </li>
                       </div>
+
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="dateCreated"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
-                        <strong class="text-dark">Created on:</strong> &nbsp;
-                        [Date Created]
+                        <strong class="text-dark">Created on:</strong>
+                        <p id="popup-dateCreated"></p>
                       </li>
                     </div>
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="address"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
-                        <strong class="text-dark">Address:</strong> &nbsp;
-                        [Address]
+                        <strong class="text-dark">Address:</strong>
+                        <p id="popup-address"></p>
                       </li>
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="area"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
-                        <strong class="text-dark">Area:</strong> &nbsp; [Area]
+                        <strong class="text-dark">Area:</strong>
+                        <p id="popup-area"></p>
                       </li>
                     </div>
+
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="price"
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                       >
-                        <strong class="text-dark">Price:</strong> &nbsp; [Price]
+                        <strong class="text-dark">Price:</strong>
+                        <p id="popup-price"></p>
+                      </li>
+
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                      >
+                        <strong class="text-dark">Property Type:</strong>
+                        <p id="popup-type"></p>
+                      </li>
+
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                      >
+                        <strong class="text-dark">Status:</strong>
+                        <p id="popup-status"></p>
                       </li>
                     </div>
+
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12"
-                        id="description"
+                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
                       >
-                        <strong class="text-dark">Description:</strong> &nbsp;
-                        [Description]
+                        <strong class="text-dark">Description:</strong>
+                        <p id="popup-desc"></p>
                       </li>
                     </div>
-                    <div class="row mb-2">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="status"
+
+                    <!-- image section for popup -->
+                    <div class="row mb-3">
+                      <div
+                        id="image-section"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
                       >
-                        <strong class="text-dark">Status:</strong> &nbsp;
-                        [Status]
-                      </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6"
-                        id="type"
-                      >
-                        <strong class="text-dark">Property Type:</strong> &nbsp;
-                        House/land
-                      </li>
-                    </div>
-                    <div class="row mb-2">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-2"
-                        id="images"
-                      >
-                        <strong class="text-dark">Images:</strong>
-                      </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-10">
-                        <div
-                          id="carouselExampleIndicators"
-                          class="carousel slide"
-                          data-bs-ride="carousel"
-                        >
-                          <div class="carousel-indicators">
-                            <button
-                              type="button"
-                              data-bs-target="#carouselExampleIndicators"
-                              data-bs-slide-to="0"
-                              class="active"
-                              aria-current="true"
-                              aria-label="Slide 1"
-                            ></button>
-                            <button
-                              type="button"
-                              data-bs-target="#carouselExampleIndicators"
-                              data-bs-slide-to="1"
-                              aria-label="Slide 2"
-                            ></button>
-                            <button
-                              type="button"
-                              data-bs-target="#carouselExampleIndicators"
-                              data-bs-slide-to="2"
-                              aria-label="Slide 3"
-                            ></button>
-                          </div>
-                          <div class="carousel-inner">
-                            <div class="carousel-item active">
-                              <img
-                                src="../../template/assets/img/home-decor-1.jpg"
-                                class="d-block w-100"
-                                alt="Image 1"
-                              />
-                            </div>
-                            <div class="carousel-item">
-                              <img
-                                src="../../template/assets/img/home-decor-2.jpg"
-                                class="d-block w-100"
-                                alt="Image 2"
-                              />
-                            </div>
-                            <div class="carousel-item">
-                              <img
-                                src="../../template/assets/img/home-decor-3.jpg"
-                                class="d-block w-100"
-                                alt="Image 3"
-                              />
-                            </div>
-                          </div>
+                        <!-- buttons to directly see an image -->
+                        <div class="carousel-indicators">
                           <button
-                            class="carousel-control-prev"
                             type="button"
-                            data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev"
-                          >
-                            <span
-                              class="carousel-control-prev-icon"
-                              aria-hidden="true"
-                            ></span>
-                            <span class="visually-hidden">Previous</span>
-                          </button>
+                            data-bs-target="#image-section"
+                            data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true"
+                            aria-label="Slide 1"
+                          ></button>
                           <button
-                            class="carousel-control-next"
                             type="button"
-                            data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next"
-                          >
-                            <span
-                              class="carousel-control-next-icon"
-                              aria-hidden="true"
-                            ></span>
-                            <span class="visually-hidden">Next</span>
-                          </button>
+                            data-bs-target="#image-section"
+                            data-bs-slide-to="1"
+                            aria-label="Slide 2"
+                          ></button>
+                          <button
+                            type="button"
+                            data-bs-target="#image-section"
+                            data-bs-slide-to="2"
+                            aria-label="Slide 3"
+                          ></button>
                         </div>
-                      </li>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img
+                              src="../../template/assets/img/home-decor-1.jpg"
+                              class="d-block w-100 rounded"
+                              alt="Real Estate Image 1"
+                            />
+                          </div>
+                          <div class="carousel-item">
+                            <img
+                              src="../../template/assets/img/home-decor-2.jpg"
+                              class="d-block w-100 rounded"
+                              alt="Real Estate Image 2"
+                            />
+                          </div>
+                          <div class="carousel-item">
+                            <img
+                              src="../../template/assets/img/home-decor-3.jpg"
+                              class="d-block w-100 rounded"
+                              alt="Real Estate Image 3"
+                            />
+                          </div>
+                        </div>
+                        <!-- button fd/backwards -->
+                        <button
+                          class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                     </div>
+
                     <div id="land-info" class="row hidden">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-4"
-                        id="landType"
+                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                       >
-                        <strong class="text-dark">Land Type:</strong> &nbsp;
-                        [Land Type]
+                        <strong class="text-dark">Land Type:</strong>
+                        <p id="popup-land-type"></p>
                       </li>
                       <div class="validation-only col-8 px-0">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm"
-                          id="landPaperwork"
+                          class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
                           <strong class="text-dark">Land Paperwork:</strong>
-                          &nbsp; [Zip of Land Paperwork to Download]
+                          <a id="popup-land-pw" target="_blank"></a>
                         </li>
                       </div>
                     </div>
                     <div id="house-info" class="hidden">
                       <div class="row">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="houseType"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">House Type:</strong> &nbsp;
-                          [House Type]
+                          <strong class="text-dark">House Type:</strong>
+                          <p id="popup-house-type"></p>
                         </li>
                         <div class="validation-only col-8 px-0">
                           <li
@@ -687,60 +613,55 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                             id="housePaperwork"
                           >
                             <strong class="text-dark">House Paperwork:</strong>
-                            &nbsp; [Zip of House Paperwork to Download]
+                            <a id="popup-house-pw" target="_blank"></a>
                           </li>
                         </div>
                       </div>
                       <div class="row">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="bedrooms"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">Bedrooms:</strong> &nbsp;
-                          [Num Bedrooms]
+                          <strong class="text-dark">Bedrooms:</strong>
+                          <p id="popup-bed"></p>
                         </li>
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="bathrooms"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">Bathrooms:</strong> &nbsp;
-                          [Num Bathrooms]
+                          <strong class="text-dark">Bathrooms:</strong>
+                          <p id="popup-bath"></p>
                         </li>
                         <li
-                          class="list-group-item border-0 ps-0 text-sm col-4"
-                          id="yearBuilt"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">Year Built:</strong> &nbsp;
-                          [Year Built]
+                          <strong class="text-dark">Year Built:</strong>
+                          <p id="popup-builtIn"></p>
                         </li>
                       </div>
                     </div>
-                    <div class="validation-only">
-                      <!-- Buttons to decide if wanted to approve user or not -->
-                      <div class="col-12 mt-1">
-                        <div class="h-100 container-fluid mt-0">
-                          <div class="row justify-content-center">
-                            <div class="col-auto">
-                              <button
-                                title="Validate Successfully. Added as Listing"
-                                type="button"
-                                onclick="adminResponse()"
-                                class="btn btn-success w-100 my-2 mb-2 btn-validation"
-                              >
-                                Approve
-                              </button>
-                            </div>
-
-                            <div class="col-auto">
-                              <button
-                                title="Validate Fail."
-                                type="button"
-                                onclick="adminResponse()"
-                                class="btn btn-danger w-100 my-2 mb-2 btn-validation"
-                              >
-                                Decline
-                              </button>
-                            </div>
+                    <!-- Buttons to decide if property is appropriate or not -->
+                    <div class="col-12 mt-1">
+                      <div class="h-100 container-fluid mt-0">
+                        <div class="row justify-content-center">
+                          <div class="col-auto">
+                            <button
+                              title="Validate Successfully. Added as Listing"
+                              type="button"
+                              onclick="validate('sucessfully')"
+                              class="btn btn-success w-100 my-2 mb-2 btn-validation"
+                            >
+                              Approve
+                            </button>
+                          </div>
+  
+                          <div class="col-auto">
+                            <button
+                              title="Validate Fail."
+                              type="button"
+                              onclick="validate('fail')"
+                              class="btn btn-danger w-100 my-2 mb-2 btn-validation"
+                            >
+                              Decline
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -753,80 +674,72 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
+
+    <!-- ---------------- END POPUP SECTION --------------------- -->
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <!-- JS MODIFY POPUP -->
     <script>
-      //to show detail register request popup
-      function viewDetail(id, type) {
+      //URL REAL ESTATE API
+      const urlJobValidation = "http://localhost:8085/api/job/validation/";
+
+      //to show detail job or listings popup
+      function viewDetail(propID) {
         var popup = document.getElementById("popup-detail");
+        var landSection = popup.querySelector("#land-info");
+        var houseSection = popup.querySelector("#house-info");
 
-        if (type.includes("list")) {
-          popup
-            .querySelectorAll(".validation-only")
-            .forEach(function (element) {
-              element.classList.add("hidden");
-            });
-        } else {
-          popup
-            .querySelectorAll(".validation-only")
-            .forEach(function (element) {
-              element.classList.remove("hidden");
-            });
-        }
+        // Send GET Request API to retrieve single property information
+        $.ajax({
+          url: urlJobValidation + propID,
+          type: "GET",
+          success: function (data) {
+            // Update popup với information chosen Property
+            $("#manager").text(data.managerInfo.username);
+            $("#popup-name").text(data.realEstateInfo.name);
+            $("#popup-status").text(data.status);
+            $("#popup-desc").text(data.realEstateInfo.description);
+            $("#popup-type").text(data.realEstateInfo.realEstateType);
+            $("#popup-address").text(data.realEstateInfo.address);
+            $("#popup-area").text(data.realEstateInfo.area + " m²");
+            $("#popup-price").text(data.realEstateInfo.price + " VND");
 
-        var propType = popup
-          .querySelector("#type")
-          .textContent.toLowerCase()
-          .trim();
-
-        if (propType.includes("land")) {
-          popup.querySelector("#land-info").classList.remove("hidden");
-        }
-
-        if (propType.includes("house")) {
-          popup.querySelector("#house-info").classList.remove("hidden");
-        }
-
-        // Translate reqList from a JSON String into an Array (reqList being passed in as a JSON String in JSP)
-        //var reqList = JSON.stringify(reqListStr);
-
-        //retrieve request from corresponding id received
-        // Check if reqListStr is a valid JSON string
-        /* try {
-          var reqList = JSON.parse(reqListStr);
-
-          var item = reqList.find(function (item) {
-            return item.id === reqID;
-          });
-
-          if (item) {
-            //load information on popup - sample data
-            document.getElementById("username").innerText =
-              "Username: &nbsp;" + item.id;
-            document.getElementById("registered-name").innerText = item.name;
-            document.getElementById("role").innerText =
-              "Role: &nbsp;" + item.role;
-            document.getElementById("dateCreated").innerText =
-              "Created on: &nbsp;" + item.dateCreated;
-            document.getElementById("status").innerText =
-              "Status: &nbsp;" + item.status;
-            document.getElementById("password").innerText = "Password: ";
-            document.getElementById("email").innerText = "Email: ";
-            document.getElementById("gender").innerText = "Gender: ";
-            document.getElementById("birthday").innerText = "Birthday: ";
-            document.getElementById("idNum").innerText = "ID Number: ";
-
+            //only show land/house fields according to type
+            if (data.realEstateInfo.realEstateType == "land") {
+              landSection.classList.remove("hidden");
+              houseSection.classList.add("hidden");
+              $("#popup-land-type").text(data.realEstateInfo.propertyLand.landType);
+              $("#popup-land-pw").text("sample-gg-drive-link-land");
+              document
+                .querySelector("#popup-land-pw")
+                .setAttribute(
+                  "href",
+                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                );
+            } else {
+              houseSection.classList.remove("hidden");
+              landSection.classList.add("hidden");
+              $("#popup-house-type").text(data.realEstateInfo.propertyHouse.houseType);
+              $("#popup-house-pw").text("sample-gg-drive-link-house");
+              document
+                .querySelector("#popup-house-pw")
+                .setAttribute(
+                  "href",
+                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                );
+              $("#popup-builtIn").text(data.realEstateInfo.propertyHouse.builtIn);
+              $("#popup-bed").text(data.realEstateInfo.propertyHouse.bedroom + " rooms");
+              $("#popup-bath").text(data.realEstateInfo.propertyHouse.bath + " rooms");
+            }
+            //also load form with same data
+            loadFormAssignJob(data);
             popup.classList.remove("hidden");
-          } else {
-            console.log("item does not exists");
-          }
-        } catch (e) {
-          // If the JSON parse fails, try to use reqListStr as an array directly
-          console.error("Error parsing reqListJson:", e);
-        }
- */
-        popup.classList.remove("hidden");
+          },
+          error: function () {
+            //Error when sending request
+            console.error("Error fetching property details");
+          },
+        });
       }
 
       //to close detail validation request popup

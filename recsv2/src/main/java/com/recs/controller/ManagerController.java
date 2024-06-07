@@ -58,12 +58,12 @@ public class ManagerController {
                 getListByManagerAndStatus(userInfo.getManagerId(), "success");
 
 
-        List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId());
+        /* List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId()); */
         // Todo() tự nhét
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName()); // can get userInfo by using $sessionScope in jsp
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("valList", validatingList);
+        model.addAttribute("valList", validatingJobList);
         return "manager/dashboard-man";
     }
 
@@ -88,6 +88,7 @@ public class ManagerController {
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", reviewingList);
+        model.addAttribute("staffList", staffList);
         return "manager/assign-job";
     }
 

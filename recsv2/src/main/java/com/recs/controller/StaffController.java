@@ -42,11 +42,13 @@ public class StaffController {
 
         List<ValidationJobInfo> allJobList = recsBusinessService.getListByStaff(userInfo.getStaffId());
 
-        List<ValidationJobInfo> validatingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), "validating");
+        List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), "success");
 
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("jobList", allJobList);
+        model.addAttribute("listingList", listingList);
         return "staff/dashboard-staff";
     }
 

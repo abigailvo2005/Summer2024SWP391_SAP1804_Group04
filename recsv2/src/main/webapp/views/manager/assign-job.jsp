@@ -206,7 +206,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${req.realEstateId}')"
+                                    onclick="viewDetail('${req.realEstateId}', '${staffList}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -226,7 +226,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       <!-- END LIST VALIDATION REQUEST-->
 
       <!-- START: FORM TO ASSIGN JOB TO A STAFF -->
-      <div id="form-assign-job-container" class="container">
+      <div id="form-assign-job-container" class="container hidden">
         <div class="row">
           <div class="col-12 col-xl-11 mx-auto">
             <div class="card z-index-0">
@@ -238,10 +238,11 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   id="form-assign-job"
                   role="form text-left"
                   name="assign-job-form"
-                  action=""
+                  action="${pageContext.request.contextPath}/manager/assign-job"
+                  method="post"
                 >
                   <input id="reID" type="text" name="realEstateId" hidden />
-                  
+
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Property Name:</label></div>
                     <div class="col-sm-4">
@@ -267,13 +268,14 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Description:</label></div>
                     <div class="col-sm-10">
-                      <textarea
+                      <input
                         id="form-description"
                         name="description"
+                        type="text"
                         class="form-control form-create-control"
                         rows="5"
                         disabled
-                      ></textarea>
+                      />
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -326,7 +328,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-2"><label>Land Paperwork:</label></div>
                     <div class="col-sm-4">
                       <input
-                        id="form-paperwork"
+                        id="form-land-pw"
                         type="file"
                         name="paperwork"
                         class="form-control form-create-control col-10"
@@ -359,7 +361,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       </div>
                       <div class="col-sm-4">
                         <input
-                          id="form-housePaperwork"
+                          id="form-house-pw"
                           type="file"
                           name="paperwork"
                           class="form-control form-create-control col-10"
@@ -443,8 +445,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                               <a
                                 class="dropdown-item"
                                 href="#"
-                                onclick="chooseStaff('${staff.staffId} - ${staff.staffName}')"
-                                >${staff.staffId} - ${staff.staffName}</a
+                                onclick="chooseStaff('${staff.staffId}')"
+                                >${staff.staffId}</a
                               >
                             </li>
                           </c:forEach>
@@ -772,7 +774,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
 
       //to show detail register request popup
-      function viewDetail(propID) {
+      function viewDetail(propID, staffList) {
+        console.log(staffList);
         var popup = document.getElementById("popup-detail");
         var landSection = popup.querySelector("#land-info");
         var houseSection = popup.querySelector("#house-info");
@@ -819,7 +822,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
-
+            //also load form with same data
+            loadFormAssignJob(data);
             popup.classList.remove("hidden");
           },
           error: function () {
@@ -831,76 +835,80 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
       //to show form confirming job assigning after confirmed on popup & form is already loaded
       function showFormAssignJob() {
-        document.getElementById('form-assign-job-container').classList.remove('hidden');
+        document
+          .getElementById("form-assign-job-container")
+          .classList.remove("hidden");
         closeDetail();
 
+        //load list staff for manager to choose
       }
 
       //to LOAD INFORMATION to form confirming job assigning for a staff
-      function loadFormAssignJob(propID) {
-
+      function loadFormAssignJob(data) {
         var formAssignJob = document.getElementById(
           "form-assign-job-container"
         );
-/* 
-        if (type.includes("land")) {
-          formAssignJob.querySelector("#house-info").classList.add("hidden");
-          formAssignJob.querySelector("#land-info").classList.remove("hidden");
-        } else {
-          formAssignJob.querySelector("#land-info").classList.add("hidden");
-          formAssignJob.querySelector("#house-info").classList.remove("hidden");
-        } */
 
+        var landSection = formAssignJob.querySelector("#land-info");
+        var houseSection = formAssignJob.querySelector("#house-info");
+
+        // Update popup with information of chosen property
+        document.querySelector("#form-name").setAttribute("value", data.name);
+        document
+          .querySelector("#form-description")
+          .setAttribute("value", data.description);
+        document
+          .querySelector("#form-propertyType")
+          .setAttribute("value", data.realEstateType);
+        document
+          .querySelector("#form-address")
+          .setAttribute("value", data.address);
+        document.querySelector("#form-area").setAttribute("value", data.area);
+        document.querySelector("#form-price").setAttribute("value", data.price);
         
 
-        // Send GET Request API to retrieve single property information
-        $.ajax({
-          url: urlRealEstate + propID,
-          type: "GET",
-          success: function (data) {
-            // Update popup with information of chosen property
-            $("#form-name").setAttribute('value', data.name);
-            $("#popup-status").text(data.status);
-            $("#popup-desc").text(data.description);
-            $("#popup-type").text(data.realEstateType);
-            $("#popup-address").text(data.address);
-            $("#popup-area").text(data.area + " m²");
-            $("#popup-price").text(data.price + " VND");
-
-            //only show land/house fields according to type
-            if (data.realEstateType == "land") {
-              landSection.classList.remove("hidden");
-              houseSection.classList.add("hidden");
-              $("#popup-land-type").text(data.propertyLand.landType);
-              $("#popup-land-pw").text("sample-gg-drive-link-land");
-              document
-                .querySelector("#popup-land-pw")
-                .setAttribute(
-                  "href",
-                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-                );
-            } else {
-              houseSection.classList.remove("hidden");
-              landSection.classList.add("hidden");
-              $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-house-pw").text("sample-gg-drive-link-house");
-              document
-                .querySelector("#popup-house-pw")
-                .setAttribute(
-                  "href",
-                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-                );
-              $("#popup-builtIn").text(data.propertyHouse.builtIn);
-              $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
-              $("#popup-bath").text(data.propertyHouse.bath + " rooms");
-            }
-
-          },
-          error: function () {
-            //Error when sending request
-            console.error("Error fetching property details");
-          },
-        });
+        if (data.realEstateType == "land") {
+          
+          landSection.classList.remove("hidden");
+          houseSection.classList.add("hidden");
+          document
+            .querySelector("#form-landCategory")
+            .setAttribute("value", data.propertyLand.landType);
+          document
+            .querySelector("#form-land-pw")
+            .setAttribute("value", "sample-gg-drive-link-land");
+          document
+            .querySelector("#form-land-pw")
+            .setAttribute(
+              "href",
+              "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+            );
+            
+        } else {
+          houseSection.classList.remove("hidden");
+          landSection.classList.add("hidden");
+          document
+            .querySelector("#form-houseCategory")
+            .setAttribute("value", data.propertyHouse.houseType);
+          document
+            .querySelector("#form-house-pw")
+            .setAttribute("value", "sample-gg-drive-link-house");
+          document
+            .querySelector("#form-house-pw")
+            .setAttribute(
+              "href",
+              "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+            );
+          document
+            .querySelector("#form-builtYear")
+            .setAttribute("value", data.propertyHouse.builtIn);
+          document
+            .querySelector("#form-bedrooms")
+            .setAttribute("value", data.propertyHouse.bedroom + " rooms");
+          document
+            .querySelector("#form-bathrooms")
+            .setAttribute("value", data.propertyHouse.bath + " rooms");
+        }
       }
 
       //to close detail validation request popup

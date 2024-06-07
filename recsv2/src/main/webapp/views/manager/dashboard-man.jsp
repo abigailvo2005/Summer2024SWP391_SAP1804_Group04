@@ -56,7 +56,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-hourglass-start"></i>
                     <span class="font-weight-bold ms-1"
-                      >${valList.size()} request(s)</span
+                      >${valList.size()} job(s)</span
                     >
                     pending
                   </p>
@@ -89,7 +89,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <th
                         class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
-                        Staff
+                        STAFF
                       </th>
                       <th
                         class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
@@ -99,35 +99,35 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                       >
-                        Price
+                        TYPE
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                       >
-                        Status
+                        STATUS
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                       >
-                        Date Created
+                        DATE CREATED
                       </th>
 
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
-                        View Details
+                        VIEW DETAILS
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach items="${propList}" var="prop">
+                    <c:forEach items="${valList}" var="val">
                       <tr class="job-row">
                         <td class="align-middle text-center text-sm">
                           <div class="d-flex px-2 py-1 justify-content-center">
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                              <p class="mb-0 text-sm fw-bold text-dark">${val.staffInfo.username}</p>
                             </div>
                           </div>
                         </td>
@@ -140,8 +140,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 id="job-name"
                                 class="mb-0 text-sm fw-bold text-dark"
                               >
-                                Căn hộ studio 30m full đồ sang xịn ở Vinhome
-                                Smart City Tây Mỗ
+                                ${val.realEstateInfo.name}
                               </p>
                             </div>
                           </div>
@@ -152,7 +151,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                1.75 tỷ
+                                ${val.realEstateInfo.price}
                               </p>
                             </div>
                           </div>
@@ -166,7 +165,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 id="job-status"
                                 class="mb-0 text-sm fw-bold text-warning"
                               >
-                                Submitted
+                              ${val.status}
                               </p>
                             </div>
                           </div>
@@ -177,7 +176,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                20/05/2024
+                                ${val.createTimeStamp}
                               </p>
                             </div>
                           </div>
