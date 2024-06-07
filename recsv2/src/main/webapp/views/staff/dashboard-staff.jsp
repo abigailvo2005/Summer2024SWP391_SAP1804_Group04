@@ -138,8 +138,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${job.realEstateInfo.realEstateType == 2 ? 'House' :
-                                    'Land'}
+                                    ${job.realEstateInfo.realEstateType}
                                   </p>
                                 </div>
                               </div>

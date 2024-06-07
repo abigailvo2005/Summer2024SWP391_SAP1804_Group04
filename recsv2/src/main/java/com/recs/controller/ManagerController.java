@@ -84,6 +84,8 @@ public class ManagerController {
         String name = authentication.getName();
         List<UserInfo> staffList = accountService.getListStaffByManager(userInfo.getManagerId());
         Account account = accountService.getByUserName(name);
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!Assign Job Controller: " + staffList +"\nManagerID: " + (userInfo.getManagerId()));
         String currentPage = "assign-job";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
@@ -109,7 +111,7 @@ public class ManagerController {
 
         recsBusinessService.createAssignJobStaff(entity);
 
-        return "redirect:/assign-job";
+        return "manager/assign-job";
     }
 
     @GetMapping({ "/register-acc-man" })
