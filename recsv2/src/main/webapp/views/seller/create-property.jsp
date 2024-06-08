@@ -107,7 +107,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                       <div class="col-lg-10 col-sm-10">
                         <input
-                        id="address"
+                          id="address"
                           type="text"
                           name="address"
                           class="form-control form-create-control col-10"
@@ -123,7 +123,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                       <div class="col-lg-10 col-sm-10">
                         <input
-                        id="desc"
+                          id="desc"
                           type="text"
                           name="description"
                           class="form-control form-create-control col-10"
@@ -137,7 +137,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-sm-2"><label> Area:</label></div>
                       <div class="col-sm-3">
                         <input
-                        id="area"
+                          id="area"
                           type="number"
                           name="area"
                           class="form-control form-create-control col-10"
@@ -151,7 +151,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-sm-2"><label>Price:</label></div>
                       <div class="col-3">
                         <input
-                        id="price"
+                          id="price"
                           type="number"
                           name="price"
                           class="form-control form-create-control"
@@ -168,14 +168,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-2"><label>Images:</label></div>
                       <div class="col-4">
                         <input
-                        id="img"
-                          name="images"
                           id="prop-img"
+                          onchange="checkImage()"
                           type="file"
                           class="form-control form-create-control col-10"
                           multiple
                           required
                         />
+                        <select hidden id="img-container" name="images">
+                          <!-- <option></option> -->
+                        </select>
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
@@ -211,7 +213,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </div>
                         <div class="col-sm-4">
                           <select
-                          id="land-category"
+                            id="land-category"
                             class="land form-control form-create-control col-10"
                             name="landCategory"
                             required
@@ -222,9 +224,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <option value="Agricultural">
                               Agricultural Land
                             </option>
-                            <option value="Commercial">
-                              Commercial Land
-                            </option>
+                            <option value="Commercial">Commercial Land</option>
                             <option value="Residential">
                               Residential Land
                             </option>
@@ -235,18 +235,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-4">
                           <input
                             id="prop-pw-land"
-                            name="paperwork"
-                            type="text"
+                            type="file"
                             class="form-control form-create-control col-10"
-                            placeholder="your Google Drive Folder link contains
-                          property's paperwork"
+                            onchange="checkPaperwork('land')"
                             required
                           />
-                          <!-- ERROR MESSAGE BEING HIDDEN -->
+                          <input
+                            id="land-pw-container"
+                            name="paperwork"
+                            type="text"
+                            hidden
+                          />
                           <p
                             class="error-pw-land text-danger text-error mb-0 text-center pt-1 hidden"
                           >
-                            only accept Google Drive Folder links.
+                            only accept .zip or .pdf files.
                           </p>
                         </div>
                       </div>
@@ -260,7 +263,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </div>
                         <div class="col-sm-4">
                           <select
-                          id="house-category"
+                            id="house-category"
                             class="form-control form-create-control col-10 house"
                             name="houseCategory"
                             required
@@ -281,18 +284,22 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-4">
                           <input
                             id="prop-pw-house"
-                            type="text"
-                            name="paperwork"
+                            type="file"
                             class="form-control form-create-control col-10"
-                            placeholder="your Google Drive Folder link contains
-                          property's paperwork"
+                            onchange="checkPaperwork('house')"
                             required
+                          />
+                          <input
+                            id="house-pw-container"
+                            name="paperwork"
+                            type="text"
+                            hidden
                           />
                           <!-- ERROR MESSAGE BEING HIDDEN -->
                           <p
                             class="error-pw-house text-danger text-error mb-0 text-center pt-1 hidden"
                           >
-                            only accept Google Drive Folder links.
+                            only accept .zip of .pdf files.
                           </p>
                         </div>
                       </div>
@@ -301,7 +308,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-2"><label> Built Year:</label></div>
                         <div class="col-sm-2">
                           <input
-                          id="builtYear"
+                            id="builtYear"
                             type="number"
                             name="builtYear"
                             class="house form-control form-create-control col-10"
@@ -315,7 +322,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-1"><label>Bedroom:</label></div>
                         <div class="col-sm-2">
                           <input
-                          id="bedrooms"
+                            id="bedrooms"
                             type="number"
                             name="bedrooms"
                             class="house form-control form-create-control col-10"
@@ -330,7 +337,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="col-sm-1"><label>Bathroom:</label></div>
                         <div class="col-sm-2">
                           <input
-                          id="bathrooms"
+                            id="bathrooms"
                             type="number"
                             name="bathrooms"
                             class="house form-control form-create-control col-10"
@@ -467,12 +474,42 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-      /* Convert image file into BASE64 */
-      const imgInput = document.querySelector("#prop-img");
-      const imgList = [];
-      imgInput.addEventListener("change", (e) => {
+      /* Convert paperwork into URL link */
+      function checkPaperwork(type) {
+        const pwInput = document.getElementById("prop-pw-" + type);
+        const file = pwInput.files[0];
+        const pwError = document.querySelector(".error-pw-" + type);
+        const pwContainer = document.getElementById(type + "-pw-container");
+        const validTypes = ["application/pdf", "application/zip"];
+
+        pwContainer.value = "";
+
+        //check if file is PDF or ZIP file 
+        if (file && validTypes.includes(file.type)) {
+          pwError.classList.add("hidden");
+
+          //convert file into URL link
+          const url = window.URL.createObjectURL(file);
+
+          //Put back file url to a new input to pass into controller
+          document.getElementById(type + "-pw-container");
+          pwContainer.value = url;
+        } else {
+          // Show error if one of the file is not PDF/zip
+          pwError.classList.remove("hidden");
+          // Clear input
+          pwInput.value = "";
+          return;
+        }
+      }
+
+      /* Convert image file into URLs and save it  */
+      function checkImage() {
+        const imgInput = document.getElementById("prop-img");
+        const imgList = [];
         const files = imgInput.files;
         const imgError = document.querySelector(".error-img");
+        const imgContainer = document.getElementById("img-container");
         const validImageTypes = [
           "image/gif",
           "image/jpeg",
@@ -481,35 +518,32 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           "image/heic",
         ];
 
-        console.log("image change!");
+        imgContainer.options.length = 0;
 
-        // Duyệt qua từng file được chọn
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
-          // Kiểm tra xem file có phải là hình ảnh hay không
+          // Check if file is an image or not
           if (validImageTypes.includes(file.type)) {
             imgError.classList.add("hidden");
 
-            console.log("this file is image!");
-            const reader = new FileReader();
-            reader.addEventListener("load", () => {
-              
-              console.log(reader.result);
-              
-            });
-            // Thêm base64 của file vào danh sách
-            imgList.push(reader.result);
-            reader.readAsDataURL(file);
+            const url = window.URL.createObjectURL(file);
+
+            console.log('image ' + i + ": " + url);
+
+            //Put back img url to a new input to pass into controller
+            const item = document.createElement("option");
+            item.setAttribute("value", url);
+            item.textContent = url;
+            imgContainer.add(item);
           } else {
-            // Hiển thị lỗi nếu file không phải là hình ảnh
+            // Show error if one of the file is not img
             imgError.classList.remove("hidden");
-            console.log("this file is not image!");
-            // Xóa giá trị của input
+            // Clear input
             imgInput.value = "";
             return;
           }
         }
-      });
+      }
 
       /* Process data & redirect back to dashboard after clicked submit */
       function submitRequest(event) {
@@ -517,43 +551,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
         // Check if all fields have values
         if (document.querySelector("form").checkValidity()) {
-          const type = document.querySelector("#prop-type").value;
           const propertyNameInput = document.querySelector("#prop-name");
-          const propertyLandPW = document.querySelector("#prop-pw-land").value;
-          const propertyHousePW =
-            document.querySelector("#prop-pw-house").value;
           const nameError = document.querySelector(".error-name");
-          const pwLandError = document.querySelector(".error-pw-land");
-          const pwHouseError = document.querySelector(".error-pw-house");
 
           // No errors on start up
           nameError.classList.add("hidden"); //clear all errors first
-          pwHouseError.classList.add("hidden");
-          pwLandError.classList.add("hidden");
 
           if (propertyNameInput.value.length > 32) {
             //Check if property's name is longer than 32 characters
             nameError.classList.remove("hidden");
-            return;
-          } else if (
-            type.includes("house") &&
-            !/^https?:\/\/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/.test(
-              propertyHousePW
-            )
-          ) {
-            pwHouseError.classList.remove("hidden");
-            console.log("house pw error");
-            console.log(propertyHousePW);
-            return;
-          } else if (
-            type.includes("land") &&
-            !/^https?:\/\/drive\.google\.com\/drive\/folders\/([a-zA-Z0-9_-]+)/.test(
-              propertyLandPW
-            )
-          ) {
-            pwLandError.classList.remove("hidden");
-            console.log("land pw error");
-            console.log(propertyLandPW);
             return;
           }
 
