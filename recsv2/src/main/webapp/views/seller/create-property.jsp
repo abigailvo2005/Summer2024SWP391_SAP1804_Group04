@@ -153,6 +153,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <input
                         id="price"
                           type="number"
+                          max="100000000000"
                           name="price"
                           class="form-control form-create-control"
                           placeholder="your property's price"
