@@ -294,7 +294,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <input
                         id="form-price"
                         type="text"
-                        name="price"
+                        name="textprice"
                         class="form-control form-create-control col-10"
                         disabled
                       />
@@ -794,6 +794,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.price + " VND");
+            
 
             //only show land/house fields according to type
             if (data.realEstateType == "land") {

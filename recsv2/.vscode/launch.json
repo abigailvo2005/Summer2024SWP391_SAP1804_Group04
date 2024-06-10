@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "RealEstateUtils",
+            "request": "launch",
+            "mainClass": "com.recs.utils.RealEstateUtils",
+            "projectName": "recs"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-RecsApplication<recs>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

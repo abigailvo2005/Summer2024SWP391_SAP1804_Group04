@@ -86,11 +86,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <thead>
                         <tr>
                           <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            REID
-                          </th>
-                          <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
                             PROPERTY NAME
@@ -121,22 +116,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <tbody>
                         <c:forEach items="${propList}" var="prop">
                           <tr class="prop-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="prop-id"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${prop.realEstateId}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
