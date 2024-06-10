@@ -175,9 +175,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           multiple
                           required
                         />
-                        <select hidden id="img-container" name="images">
-                          <!-- <option></option> -->
-                        </select>
+                        <div id="img-container"></div>
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
@@ -375,7 +373,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         </div>
       </section>
       <!-- END: FORM TO CREATE PROPERTY -->
-
+      <img id="test" alt="" class="src" />
       <!-- START FOOTER-->
       <footer class="footer pt-3">
         <div class="container-fluid">
@@ -484,7 +482,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
         pwContainer.value = "";
 
-        //check if file is PDF or ZIP file 
+        //check if file is PDF or ZIP file
         if (file && validTypes.includes(file.type)) {
           pwError.classList.add("hidden");
 
@@ -518,7 +516,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           "image/heic",
         ];
 
-        imgContainer.options.length = 0;
+        let base64String = "";
+
+        //reset img options
+        imgContainer.innerHTML = "";
 
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
@@ -526,15 +527,43 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           if (validImageTypes.includes(file.type)) {
             imgError.classList.add("hidden");
 
-            const url = window.URL.createObjectURL(file);
+            let reader = new FileReader();
+            console.log("next");
 
-            console.log('image ' + i + ": " + url);
+            reader.onload = function () {
+              base64String = reader.result;
+              /* .replace("data:", "")
+                .replace(/^.+,/, "");  */
+
+              /* imageBase64Stringsep = base64String; */
+              // alert(imageBase64Stringsep);
+              console.log(base64String);
+              alert(base64String);
+            };
+            reader.readAsDataURL(file);
+            /*
+                  const url = window.URL.createObjectURL(file);
+
+                  console.log("image " + i + ": " + url); */
 
             //Put back img url to a new input to pass into controller
-            const item = document.createElement("option");
-            item.setAttribute("value", url);
-            item.textContent = url;
-            imgContainer.add(item);
+            const item = document.createElement("input");
+            item.type = "checkbox";
+            item.value = base64String;
+            item.name = "images";
+            item.checked = true;
+            var label = document.createElement("label");
+            label.textContent = base64String;
+            var checkboxWrapper = document.createElement("div");
+            checkboxWrapper.classList.add("checkbox-wrapper");
+            checkboxWrapper.appendChild(item);
+            checkboxWrapper.appendChild(label);
+
+            imgContainer.appendChild(checkboxWrapper);
+            /* const test = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" */ /* 
+            const text = "data:image/jpeg;charset=utf-8;base64," + base64String; */
+            console.log("base64string to convert: " + base64String);
+            document.getElementById("test").src = base64String;
           } else {
             // Show error if one of the file is not img
             imgError.classList.remove("hidden");

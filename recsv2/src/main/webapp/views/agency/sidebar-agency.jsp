@@ -1,16 +1,11 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RECS - ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-        'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
-        : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-        'register' ? 'Register Staff' : ''))))}</title>
+    <title>RECS - Dashboard</title>
 
     <!-- Link CSS -->
     <link
@@ -49,7 +44,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/manager/dashboard"
+          href="${pageContext.request.contextPath}/agency/dashboard"
           target="_self"
         >
           <img
@@ -68,62 +63,59 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/manager/dashboard"
+              href="${pageContext.request.contextPath}/agency/dashboard"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
               >
-                <i
-                  class="fa-solid fa-table-columns"
-                  style="
-                    $ {
-                      currentPage !='dashboard'?'color: #30221b': '';
-                    }
-                  "
-                ></i>
+                <i class="fa-solid fa-table-columns"></i>
               </div>
               <span class="nav-link-text ms-1">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/manager/profile"
+              class="nav-link ${currentPage == 'marketplace' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/seller/marketplace"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
               >
-                <i
-                  class="fa-solid fa-user"
-                  style="
-                    $ {
-                      currentPage != 'profile' ? 'color: #30221b;': '';
-                    }
-                  "
-                ></i>
+                <i class="fa-solid fa-user"></i>
               </div>
-              <span class="nav-link-text ms-1">Profile</span>
+              <span class="nav-link-text ms-1">Marketplace</span>
             </a>
           </li>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'register' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/manager/register-staff"
+              href="${pageContext.request.contextPath}/agency/register-mem"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
               >
-                <i
-                  class="fa-solid fa-pen-to-square"
-                ></i>
+                <i class="fa-solid fa-pen-to-square"></i>
               </div>
-              <span class="nav-link-text ms-1">Register Staff</span>
+              <span class="nav-link-text ms-1">Register Member</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/agency/profile"
+            >
+              <div
+                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- sidebar: assign new Job, register for a new staff and history track section-->
+      <!-- sidebar: create property and history track section-->
       <div class="sidenav-footer mx-3">
         <div
           class="card card-background shadow-none card-background-mask-secondary"
@@ -132,18 +124,17 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url(/template/assets/img/curved-images/white-curved.jpg'/>);
+              background-image: url(/template/assets/img/curved-images/white-curved.jpg);
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
             <div class="docs-info">
-              <h6 class="text-white up mb-1">Want to keep track?</h6>
+              <h6 class="text-white up mb-0">Want to keep track?</h6>
               <p class="text-xs">
-                View jobs, requests and properties you have successfully
-                handled.
+                View your successfully processed listings and deals here.
               </p>
               <a
-                href="${pageContext.request.contextPath}/manager/history"
+                href="${pageContext.request.contextPath}/agency/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a
@@ -153,8 +144,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         </div>
         <a
           class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/manager/assign-job"
-          >Assign Job</a
+          href="${pageContext.request.contextPath}/agency/assign-deal"
+          >Assign Deal</a
         >
       </div>
     </aside>
@@ -162,7 +153,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
     <!-- START RIGHT SIDE-->
     <main
-      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg z-index-0 mt-3"
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg mt-3 z-index-0"
     >
       <!-- START: Top Navbar -->
       <nav
@@ -177,23 +168,21 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
             >
               <li class="breadcrumb-item text-sm">
-                <a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                <a class="opacity-5 text-dark" >Pages</a>
               </li>
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-man' ?
-                'View History' : (currentPage == 'assign-job' ? 'Assign Job' :
-                (currentPage == 'register' ? 'Register Account Staff' : ''))))}
+                'profile' ? 'View Profile' : (currentPage == 'history' ?
+                'View History' : (currentPage == 'assign-deal' ? 'Assign Deal' : (currentPage == 'register-mem' ? 'Register Member' : (currentPage == 'marketplace' ? 'Marketplace' : '')))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
-              : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-              'register' ? 'Register Staff' : ''))))}
+                'profile' ? 'Profile' : (currentPage == 'history' ?
+                'History' : (currentPage == 'assign-deal' ? 'Assign Deal' : (currentPage == 'register-mem' ? 'Register Member' : (currentPage == 'marketplace' ? 'Marketplace' : '')))))}
             </h6>
           </nav>
 
@@ -202,8 +191,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
             id="navbar"
           >
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            </div>
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
             <ul class="navbar-nav justify-content-end">
               <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">
@@ -213,7 +201,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               </li>
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                 <a
-                  href="javascript:;"
                   class="nav-link text-body p-0"
                   id="iconNavbarSidenav"
                 >
@@ -240,17 +227,19 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
+    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script>
-      document.getElementById('logoutButton').addEventListener('click', function () {
-        var userConfirmation = confirm('Are you sure you want to sign out?');
-        if (userConfirmation) {
-          window.location.href = '${pageContext.request.contextPath}/logout';
-        } else {
-          alert('Logout canceled.');
-        }
-      });
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          var userConfirmation = confirm("Are you sure you want to sign out?");
+          if (userConfirmation) {
+            window.location.href = "${pageContext.request.contextPath}/logout";
+          } else {
+            alert("Logout canceled.");
+          }
+        });
     </script>
   </body>
 </html>

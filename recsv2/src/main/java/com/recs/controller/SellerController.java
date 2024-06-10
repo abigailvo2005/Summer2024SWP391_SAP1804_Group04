@@ -1,6 +1,5 @@
 package com.recs.controller;
 
-
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.entities.account.Account;
@@ -39,18 +38,30 @@ public class SellerController {
         return accountService.getUserInfo(account.getAccountId());
     }
 
-
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         List<RealEstate> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         List<RealEstate> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
-        //TODO() tự nhét vào
+        // TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", validatingList);
         model.addAttribute("propList", allRealEstate);
-        return "seller/dashboard-seller";
+        // return "seller/dashboard-seller";
+        return "agency/dashboard-agency"; /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
+    }
+
+    /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
+    @GetMapping({ "/marketplace" })
+    public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<RealEstate> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
+        // TODO() tự nhét vào
+        String currentPage = "marketplace";
+        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("propList", allRealEstate);
+        return "agency/marketplace";
     }
 
     @GetMapping({ "/create-property" })
@@ -63,18 +74,17 @@ public class SellerController {
         return "seller/create-property";
     }
 
-    //Todo() associate with jsp
+    // Todo() associate with jsp
     @PostMapping({ "/create-property" })
     public String createPropView(
-            @ModelAttribute(name = "request")CreateRealEstateRequestDTO request,
+            @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
-            Model model
-    ) {
+            Model model) {
         RealEstate realEstate = realEstateService.createRealEstate(userInfo.getSellerId(), request);
         String currentPage = "create-property";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        //add message, redirect, any cai lon gi cung dc
+        // add message, redirect, any cai lon gi cung dc
         return "redirect:/seller";
     }
 
@@ -98,5 +108,3 @@ public class SellerController {
         return "seller/profile-seller";
     }
 }
-
-

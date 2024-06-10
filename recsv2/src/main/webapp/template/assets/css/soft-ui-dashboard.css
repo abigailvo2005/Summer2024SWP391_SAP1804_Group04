@@ -21140,10 +21140,6 @@ fieldset:disabled .btn {
   box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
 }
 
-.card .card-header {
-  padding: 1.5rem;
-}
-
 .card .card-body {
   font-family: "Open Sans";
   padding: 1.5rem;
@@ -21155,10 +21151,29 @@ fieldset:disabled .btn {
   top: -150px;
 }
 
-.card .card-footer {
-  padding: 1.5rem;
-  background-color: transparent;
+
+.card-property-hover {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
 }
+
+.card-property-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-property-link, .card-property-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-property .card-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
 
 .author {
   display: flex;
