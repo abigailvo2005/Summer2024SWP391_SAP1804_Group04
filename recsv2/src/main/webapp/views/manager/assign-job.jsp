@@ -840,8 +840,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           .getElementById("form-assign-job-container")
           .classList.remove("hidden");
         closeDetail();
-
-        //load list staff for manager to choose
       }
 
       //to LOAD INFORMATION to form confirming job assigning for a staff
@@ -905,10 +903,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             .setAttribute("value", data.propertyHouse.builtIn);
           document
             .querySelector("#form-bedrooms")
-            .setAttribute("value", data.propertyHouse.bedroom + " rooms");
+            .setAttribute("value", data.propertyHouse.bedroom);
           document
             .querySelector("#form-bathrooms")
-            .setAttribute("value", data.propertyHouse.bath + " rooms");
+            .setAttribute("value", data.propertyHouse.bath);
         }
       }
 
@@ -989,12 +987,12 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         form.submit();
       }
 
-      function chooseStaff(selectedStaff) {
+      function chooseStaff(selectedStaffId) {
         // Retrieve the "chosen-staff" input element
-        const chosenStaffInput = document.getElementById("chosen-staff");
+        const chosenStaffInput = document.getElementById("form-chosen-staff");
 
         // Update the value of the "chosen-staff" input
-        chosenStaffInput.value = selectedStaff;
+        chosenStaffInput.setAttribute("value", selectedStaffId);
       }
     </script>
 
