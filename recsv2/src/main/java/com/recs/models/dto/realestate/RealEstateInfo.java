@@ -30,6 +30,7 @@ public class RealEstateInfo {
     private String status;
     private int displayable;
     private long createTimestamp;
+    private String createDate;
     private long updateTimestamp;
 
     private UserInfo managerInfo;
@@ -53,7 +54,9 @@ public class RealEstateInfo {
         realEstateInfo.setStatus(realestate.getStatus());
         realEstateInfo.setDisplayable(realestate.getDisplayable());
         realEstateInfo.setCreateTimestamp(realestate.getCreateTimestamp());
+        realEstateInfo.setCreateDate(RealEstateUtils.formatPrice(realestate.getCreateTimestamp()));
         realEstateInfo.setUpdateTimestamp(realestate.getUpdateTimestamp());
+        realEstateInfo.setCreateDate(RealEstateUtils.formatPrice(realestate.getUpdateTimestamp()));
         return realEstateInfo;
     }
 

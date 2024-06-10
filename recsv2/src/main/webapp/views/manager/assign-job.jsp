@@ -294,7 +294,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <input
                         id="form-price"
                         type="text"
-                        name="price"
+                        name="textprice"
                         class="form-control form-create-control col-10"
                         disabled
                       />
