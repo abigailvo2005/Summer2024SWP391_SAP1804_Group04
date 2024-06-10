@@ -6,6 +6,8 @@ import com.recs.models.entities.realestate.PropertyHouse;
 import com.recs.models.entities.realestate.PropertyImages;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.utils.RealEstateUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +26,11 @@ public class RealEstateInfo {
     private String address;
     private double area;
     private long price;
+    private String textPrice;
     private String status;
     private int displayable;
     private long createTimestamp;
+    private String createDate;
     private long updateTimestamp;
 
     private UserInfo managerInfo;
@@ -46,10 +50,13 @@ public class RealEstateInfo {
         realEstateInfo.setAddress(realestate.getAddress());
         realEstateInfo.setArea(realestate.getArea());
         realEstateInfo.setPrice(realestate.getPrice());
+        realEstateInfo.setTextPrice(RealEstateUtils.formatPrice(realestate.getPrice()));
         realEstateInfo.setStatus(realestate.getStatus());
         realEstateInfo.setDisplayable(realestate.getDisplayable());
         realEstateInfo.setCreateTimestamp(realestate.getCreateTimestamp());
+        realEstateInfo.setCreateDate(RealEstateUtils.formatPrice(realestate.getCreateTimestamp()));
         realEstateInfo.setUpdateTimestamp(realestate.getUpdateTimestamp());
+        realEstateInfo.setCreateDate(RealEstateUtils.formatPrice(realestate.getUpdateTimestamp()));
         return realEstateInfo;
     }
 

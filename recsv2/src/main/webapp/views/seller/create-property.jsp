@@ -153,6 +153,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <input
                           id="price"
                           type="number"
+                          max="100000000000"
                           name="price"
                           class="form-control form-create-control"
                           placeholder="your property's price"
@@ -174,6 +175,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           class="form-control form-create-control col-10"
                           multiple
                           required
+                          onchange="validateFileSize(this)"
                         />
                         <select hidden id="img-container" name="images">
                           <!-- <option></option> -->
@@ -423,6 +425,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
     <script>
+      //Validate file imaga < 2MB
+      function validateFileSize(input) {
+            const files = input.files;
+            const maxSize = 2 * 1024 * 1024; // 2MB
+
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > maxSize) {
+                    alert("File size exceeds 2MB limit: " + files[i].name);
+                    input.value = ''; // Clear the input
+                    return false;
+                }
+            }
+            return true;
+        }
+
       /* Create Property Form: only show some fields corresponding to type of property */
       function showPropertyTypeSection(select) {
         const landInfoSection = document.getElementById("land-info-section");
