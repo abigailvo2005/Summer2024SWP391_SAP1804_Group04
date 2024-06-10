@@ -76,7 +76,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'marketplace' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/seller/marketplace"
+              href="${pageContext.request.contextPath}/agency/marketplace"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"

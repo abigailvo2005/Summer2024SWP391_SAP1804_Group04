@@ -52,20 +52,9 @@ public class SellerController {
         model.addAttribute("reqList", validatingList);
         model.addAttribute("propList", allRealEstate);
         // return "seller/dashboard-seller";
-        return "agency/dashboard-agency"; /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
+        return "seller/dashboard-seller";
     }
 
-    /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
-    @GetMapping({ "/marketplace" })
-    public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
-        // TODO() tự nhét vào
-        String currentPage = "marketplace";
-        model.addAttribute("name", userInfo.getFullName());
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("propList", allRealEstate);
-        return "agency/marketplace";
-    }
 
     @GetMapping({ "/create-property" })
     public String createPropView(Model model, Authentication authentication) {
