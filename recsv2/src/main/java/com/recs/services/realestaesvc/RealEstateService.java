@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RealEstateService {
 
-    public List<RealEstate> getAllRealEstate();
+    public List<RealEstateInfo> getAllRealEstate();
 
     public RealEstate getById(String realEstateId);
 
@@ -16,13 +16,13 @@ public interface RealEstateService {
 
     public RealEstate update(String realEstateId, RealEstate realEstate);
 
-    public List<RealEstate> getAllBySeller(String sellerId);
+    public List<RealEstateInfo> getAllBySeller(String sellerId);
 
-    public List<RealEstate> getValidatingBySeller(String sellerId);
+    public List<RealEstateInfo> getValidatingBySeller(String sellerId);
 
-    public List<RealEstate> getReviewingListByManager(String managerId);
+    public List<RealEstateInfo> getReviewingListByManager(String managerId);
 
-    public List<RealEstate> getValidatingListByManager(String managerId);
+    public List<RealEstateInfo> getValidatingListByManager(String managerId);
 
 //    List<RealEstate> getListByManager(String managerId);
 

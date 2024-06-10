@@ -1,7 +1,9 @@
 package com.recs.controller;
 
+
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
+import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.services.accountsvc.AccountService;
@@ -38,11 +40,12 @@ public class SellerController {
         return accountService.getUserInfo(account.getAccountId());
     }
 
+
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstate> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
-        List<RealEstate> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
-        // TODO() tự nhét vào
+        List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
+        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
+        //TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
@@ -55,7 +58,7 @@ public class SellerController {
     /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstate> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
+        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
         // TODO() tự nhét vào
         String currentPage = "marketplace";
         model.addAttribute("name", userInfo.getFullName());
@@ -74,7 +77,7 @@ public class SellerController {
         return "seller/create-property";
     }
 
-    // Todo() associate with jsp
+    //Todo() associate with jsp
     @PostMapping({ "/create-property" })
     public String createPropView(
             @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,

@@ -151,7 +151,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                ${val.realEstateInfo.price}
+                                ${val.realEstateInfo.textPrice}
                               </p>
                             </div>
                           </div>
@@ -176,7 +176,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                ${val.createTimeStamp}
+                                ${val.createDate}
                               </p>
                             </div>
                           </div>

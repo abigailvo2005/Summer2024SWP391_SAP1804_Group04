@@ -133,7 +133,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     id="req-id"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.sellerId}
+                                    ${req.sellerInfo.sellerId}
                                   </p>
                                 </div>
                               </div>
@@ -163,8 +163,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType == 2 ? 'House' :
-                                    'Land'}
+                                    ${req.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -177,7 +176,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                   id="req-createDate"
                                   class="mb-0 text-sm fw-bold text-dark"
                                 >
-                                  ${req.createTimestamp}
+                                  ${req.createDate}
                                 </p>
                               </div>
                             </td>
@@ -793,7 +792,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
-            $("#popup-price").text(data.price + " VND");
+            $("#popup-price").text(data.textPrice + " VND");
             
 
             //only show land/house fields according to type
@@ -863,7 +862,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           .querySelector("#form-address")
           .setAttribute("value", data.address);
         document.querySelector("#form-area").setAttribute("value", data.area);
-        document.querySelector("#form-price").setAttribute("value", data.price);
+        document.querySelector("#form-price").setAttribute("value", data.textPrice);
         
 
         if (data.realEstateType == "land") {

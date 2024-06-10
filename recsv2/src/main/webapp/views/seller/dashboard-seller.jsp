@@ -141,7 +141,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="prop-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${prop.price}
+                                    ${prop.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -157,8 +157,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="prop-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${prop.realEstateType == 2 ? 'House' :
-                                    'Land'}
+                                    ${prop.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -304,7 +303,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.price}
+                                    ${req.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -320,8 +319,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType == 2 ? 'House' :
-                                    'Land'}
+                                    ${req.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -804,7 +802,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             );
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
-            $("#popup-price").text(data.price + " VND");
+            $("#popup-price").text(data.textPrice + " VND");
             $("#popup-manager").text(data.managerInfo.username);
             console.log(data.realEstateType);
 

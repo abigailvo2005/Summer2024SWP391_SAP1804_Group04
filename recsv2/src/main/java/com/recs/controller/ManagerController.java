@@ -1,6 +1,7 @@
 package com.recs.controller;
 
 import com.recs.models.dto.account.UserInfo;
+import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AssignJobRequest;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
@@ -80,7 +81,7 @@ public class ManagerController {
     @GetMapping({ "/assign-job" })
     public String assignJobView(Authentication authentication, Model model,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstate> reviewingList = realEstateService.getReviewingListByManager(userInfo.getManagerId());
+        List<RealEstateInfo> reviewingList = realEstateService.getReviewingListByManager(userInfo.getManagerId());
         String name = authentication.getName();
         List<UserInfo> staffList = accountService.getListStaffByManager(userInfo.getManagerId());
         Account account = accountService.getByUserName(name);

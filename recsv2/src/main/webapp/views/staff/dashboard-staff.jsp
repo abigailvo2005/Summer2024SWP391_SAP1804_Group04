@@ -314,7 +314,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-manID"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.realEstateInfo.price}
+                                    ${listing.realEstateInfo.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -701,7 +701,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-type").text(data.realEstateInfo.realEstateType);
             $("#popup-address").text(data.realEstateInfo.address);
             $("#popup-area").text(data.realEstateInfo.area + " m²");
-            $("#popup-price").text(data.realEstateInfo.price + " VND");
+            $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
 
             //only show land/house fields according to type
             if (data.realEstateInfo.realEstateType == "land") {

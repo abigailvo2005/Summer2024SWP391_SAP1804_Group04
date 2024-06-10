@@ -75,11 +75,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   ${prop.name}
                                 </p>
                                 <h5 class="font-weight-bolder mb-0">
-                                  ${prop.price} VND
+                                  ${prop.textPrice} VND
                                   <span
                                     class="text-success text-sm font-weight-bolder"
-                                    >/ ${prop.realEstateType == 2 ? 'House' :
-                                    'Land'}</span
+                                    >/ ${prop.realEstateType}</span
                                   >
                                 </h5>
                               </div>
@@ -470,7 +469,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
-            $("#popup-price").text(data.price + " VND");
+            $("#popup-price").text(data.textPrice + " VND");
             $("#popup-manager").text(data.managerInfo.username);
 
             //only show land/house fields according to type

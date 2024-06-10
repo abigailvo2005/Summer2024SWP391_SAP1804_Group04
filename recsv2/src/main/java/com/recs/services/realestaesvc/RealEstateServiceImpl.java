@@ -21,11 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
-import java.time.ZoneId;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Service
 public class RealEstateServiceImpl implements RealEstateService{
@@ -58,11 +58,12 @@ public class RealEstateServiceImpl implements RealEstateService{
     }
 
     @Override
-    public List<RealEstate> getAllRealEstate() {
-        return realEstateRepository.findAll().stream().sorted(
-                Comparator.comparing(RealEstate::getStatus)
-                        .thenComparing(RealEstate::getCreateTimestamp)
-        ).toList();
+    public List<RealEstateInfo> getAllRealEstate() {
+        List<RealEstate> list = realEstateRepository.findAll();
+        return mapListToInfo(list).stream()
+                .sorted(Comparator.comparing(RealEstateInfo::getStatus)
+                        .thenComparing(RealEstateInfo::getCreateTimestamp))
+                .toList();
     }
 
     @Override
@@ -81,31 +82,35 @@ public class RealEstateServiceImpl implements RealEstateService{
     }
 
     @Override
-    public List<RealEstate> getAllBySeller(String sellerId) {
+    public List<RealEstateInfo> getAllBySeller(String sellerId) {
         List<RealEstate> list = realEstateRepository.findAllBySellerId(sellerId);
-        System.out.println("list re by seller "+sellerId+" size "+ list.size());
-        return list;
+        List<RealEstateInfo> infoList = mapListToInfo(list);
+        System.out.println("list re by seller "+sellerId+" size "+ infoList.size());
+        return infoList;
     }
 
     @Override
-    public List<RealEstate> getValidatingBySeller(String sellerId) {
+    public List<RealEstateInfo> getValidatingBySeller(String sellerId) {
         List<RealEstate> list = realEstateRepository.findAllBySellerIdAndStatus(sellerId,"validating");
-        System.out.println("list validating by seller "+sellerId+" size "+ list.size());
-        return list;
+        List<RealEstateInfo> infoList = mapListToInfo(list);
+        System.out.println("list validating by seller "+sellerId+" size "+ infoList.size());
+        return infoList;
     }
 
     @Override
-    public List<RealEstate> getReviewingListByManager(String managerId) {
+    public List<RealEstateInfo> getReviewingListByManager(String managerId) {
         List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "reviewing");
-        System.out.println("list reviewing by manager "+ managerId + "size "+ list.size());
-        return list;
+        List<RealEstateInfo> infoList = mapListToInfo(list);
+        System.out.println("list reviewing by manager "+ managerId + "size "+ infoList.size());
+        return infoList;
     }
 
     @Override
-    public List<RealEstate> getValidatingListByManager(String managerId) {
+    public List<RealEstateInfo> getValidatingListByManager(String managerId) {
         List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "validating");
-        System.out.println("list validating by manager "+ managerId + "size "+ list.size());
-        return list;
+        List<RealEstateInfo> infoList = mapListToInfo(list);
+        System.out.println("list validating by manager "+ managerId + "size "+ infoList.size());
+        return infoList;
     }
 
 //    @Override
@@ -213,8 +218,8 @@ public class RealEstateServiceImpl implements RealEstateService{
                 dto.getPrice(),
                 "reviewing",
                 0,
-                Clock.tickMillis(ZoneId.of("Asia/Ho_Chi_Minh")).millis(),
-                Clock.tickMillis(ZoneId.of("Asia/Ho_Chi_Minh")).millis(),
+                Clock.systemUTC().millis(),
+                Clock.systemUTC().millis(),
                 sellerId,
                 getSuitableManager()
                 );
@@ -238,5 +243,26 @@ public class RealEstateServiceImpl implements RealEstateService{
         return managerWithMinRe.getManagerId();
     }
 
-
+    private List<RealEstateInfo> mapListToInfo(List<RealEstate> list) {
+        return list.stream().map(realEstate -> {
+                    List<PropertyImages> images = propertyImagesRepository.findAllByRealEstateId(realEstate.getRealEstateId());
+                    PaperWorks paperWorks = paperWorksRepository.getReferenceById(realEstate.getRealEstateId());
+                    if(realEstate.getRealEstateType() == 1 ){
+                        PropertyLand land = propertyLandRepository.getByRealEstateId(realEstate.getRealEstateId());
+                        return RealEstateInfo.fromLand(realEstate, land)
+                                .toBuilder()
+                                .setPropertyImagesList(images)
+                                .setPaperWorks(paperWorks)
+                                .build();
+                    } else {
+                        PropertyHouse house = propertyHouseRepository.getByRealEstateId(realEstate.getRealEstateId());
+                        return RealEstateInfo.fromHouse(realEstate, house)
+                                .toBuilder()
+                                .setPropertyImagesList(images)
+                                .setPaperWorks(paperWorks)
+                                .build();
+                    }
+                })
+                .toList();
+    }
 }
