@@ -83,7 +83,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'profile-seller' ? 'active' : ''}"
+              class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
               href="${pageContext.request.contextPath}/seller/profile"
             >
               <div
@@ -93,7 +93,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentpage!='profile-seller'?'color: #30221b' : '';
+                      currentpage!='profile'?'color: #30221b' : '';
                     }
                   "
                 ></i>
