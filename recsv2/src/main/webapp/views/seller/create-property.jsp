@@ -153,7 +153,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <input
                           id="price"
                           type="number"
-                          max="100000000000"
                           name="price"
                           class="form-control form-create-control"
                           placeholder="your property's price"
@@ -423,6 +422,28 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
     <script>
+
+      //validate price
+      function validatePrice() {
+        const area = document.getElementById('area').value;
+            const price = document.getElementById('price').value;
+
+            const areaNumber = parseFloat(area);
+            const priceNumber = parseFloat(price);
+
+            const minPrice = areaNumber * 20;
+            const maxPrice = areaNumber * 50;
+
+            if (priceNumber < minPrice || priceNumber > maxPrice) {
+                const confirmation = confirm(`Are you sure about this price?`);
+                if (!confirmation) {
+                    document.getElementById('price').value = '';
+                    return false;
+                }
+            }
+            return true;  
+      }
+
       //Validate file imaga < 2MB
       function validateFileSize(input) {
             const files = input.files;
@@ -436,7 +457,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 }
             }
             return true;
-        }
+      }
 
       /* Create Property Form: only show some fields corresponding to type of property */
       function showPropertyTypeSection(select) {
@@ -595,13 +616,28 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       function submitRequest(event) {
         event.preventDefault(); //Stop form from default submitting
 
+
+
         // Check if all fields have values
         if (document.querySelector("form").checkValidity()) {
           const propertyNameInput = document.querySelector("#prop-name");
           const nameError = document.querySelector(".error-name");
-
+          const area = document.getElementById('area').value;
+          const price = document.getElementById('price').value;
+          const areaNumber = parseFloat(area);
+          const priceNumber = parseFloat(price);
+          const minPrice = areaNumber * 20000000;
+          const maxPrice = areaNumber * 50000000;
           // No errors on start up
           nameError.classList.add("hidden"); //clear all errors first
+
+          if (priceNumber < minPrice || priceNumber > maxPrice) {
+                const confirmation = confirm(`Are you sure about this price?`);
+                if (!confirmation) {
+                    document.getElementById('price').value = '';
+                    return;
+                }
+            }
 
           if (propertyNameInput.value.length > 32) {
             //Check if property's name is longer than 32 characters
