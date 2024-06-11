@@ -247,10 +247,14 @@ public class RealEstateServiceImpl implements RealEstateService{
         return list.stream().map(realEstate -> {
                     List<PropertyImages> images = propertyImagesRepository.findAllByRealEstateId(realEstate.getRealEstateId());
                     PaperWorks paperWorks = paperWorksRepository.getReferenceById(realEstate.getRealEstateId());
+                    UserInfo sellerInfo = accountService.getSellerToUserInfo(realEstate.getSellerId());
+                    UserInfo managerInfo = accountService.getManagerToUserInfo(realEstate.getManagerId());
                     if(realEstate.getRealEstateType() == 1 ){
                         PropertyLand land = propertyLandRepository.getByRealEstateId(realEstate.getRealEstateId());
                         return RealEstateInfo.fromLand(realEstate, land)
                                 .toBuilder()
+                                .setManagerInfo(managerInfo)
+                                .setSellerInfo(sellerInfo)
                                 .setPropertyImagesList(images)
                                 .setPaperWorks(paperWorks)
                                 .build();
@@ -258,6 +262,8 @@ public class RealEstateServiceImpl implements RealEstateService{
                         PropertyHouse house = propertyHouseRepository.getByRealEstateId(realEstate.getRealEstateId());
                         return RealEstateInfo.fromHouse(realEstate, house)
                                 .toBuilder()
+                                .setManagerInfo(managerInfo)
+                                .setSellerInfo(sellerInfo)
                                 .setPropertyImagesList(images)
                                 .setPaperWorks(paperWorks)
                                 .build();
