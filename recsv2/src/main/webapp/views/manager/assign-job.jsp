@@ -133,7 +133,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     id="req-id"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.sellerInfo.sellerId}
+                                    ${req.sellerInfo.username}
                                   </p>
                                 </div>
                               </div>
