@@ -154,6 +154,8 @@ CREATE TABLE JobAssignMember(
     FOREIGN KEY (realEstateId) REFERENCES RealEstate(realEstateId)
 );
 
+ALTER TABLE PropertyDeal RENAME DealAssignMember;
+
 CREATE TABLE AgencyRequest(
     requestId VARCHAR(64) NOT NULL PRIMARY KEY,
     createTimestamp BIGINT,
