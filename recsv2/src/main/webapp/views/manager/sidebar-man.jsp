@@ -107,7 +107,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'register' ? 'active' : ''}"
+              class="nav-link ${currentPage == 'register-staff' ? 'active' : ''}"
               href="${pageContext.request.contextPath}/manager/register-staff"
             >
               <div

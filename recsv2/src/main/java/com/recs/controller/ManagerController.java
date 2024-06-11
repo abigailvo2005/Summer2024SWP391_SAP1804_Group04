@@ -139,7 +139,7 @@ public class ManagerController {
     public String registerStaff(Model model, Authentication authentication) {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
-        String currentPage = "history";
+        String currentPage = "register-staff";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
 
