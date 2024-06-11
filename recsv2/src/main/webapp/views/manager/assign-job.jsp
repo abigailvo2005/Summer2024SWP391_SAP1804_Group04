@@ -347,7 +347,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="mb-3 row">
                       <div class="col-sm-2"><label>House Type:</label></div>
                       <div class="col-sm-4">
-                        <input
+                        <input 
                           id="form-houseCategory"
                           type="text"
                           name="houseCategory"
@@ -425,32 +425,18 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       />
                     </div>
                     <div class="col-sm-6">
-                      <div class="dropdown my-0">
-                        <button
-                          class="btn-staff dropdown-toggle"
-                          type="button"
-                          id="staffDropdown"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          Select Staff
-                        </button>
-                        <ul
-                          class="dropdown-menu"
-                          aria-labelledby="staffDropdown"
-                        >
-                          <c:forEach items="${staffList}" var="staff">
-                            <li>
-                              <a
-                                class="dropdown-item"
-                                href="#"
-                                onclick="chooseStaff('${staff.staffId}')"
-                                >${staff.staffId}</a
-                              >
-                            </li>
-                          </c:forEach>
-                        </ul>
-                      </div>
+                      <select
+                      
+                        class="form-control form-create-control"
+                        onchange="chooseStaff(this.value)"
+                      >
+                        <option class="fs-6" value="">Choose Staff</option>
+                        <c:forEach items="${staffList}" var="staff">
+                          <option class="fs-6" value="${staff.username}">
+                            ${staff.staffId} - ${staff.username}
+                          </option>
+                        </c:forEach>
+                      </select>
                     </div>
                   </div>
                   <!-- submit button -->
@@ -774,7 +760,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
       //to show detail register request popup
       function viewDetail(propID, staffList) {
-        console.log(staffList);
+        console.log("STAFFF LISSTTTT: " + staffList);
         var popup = document.getElementById("popup-detail");
         var landSection = popup.querySelector("#land-info");
         var houseSection = popup.querySelector("#house-info");
@@ -793,7 +779,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
-            
 
             //only show land/house fields according to type
             if (data.realEstateType == "land") {
@@ -862,11 +847,11 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           .querySelector("#form-address")
           .setAttribute("value", data.address);
         document.querySelector("#form-area").setAttribute("value", data.area);
-        document.querySelector("#form-price").setAttribute("value", data.textPrice);
-        
+        document
+          .querySelector("#form-price")
+          .setAttribute("value", data.textPrice);
 
         if (data.realEstateType == "land") {
-          
           landSection.classList.remove("hidden");
           houseSection.classList.add("hidden");
           document
@@ -881,7 +866,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               "href",
               "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
             );
-            
         } else {
           houseSection.classList.remove("hidden");
           landSection.classList.add("hidden");
@@ -978,11 +962,19 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         // Prevent the default button click behavior
         event.preventDefault();
 
+        var form = document.getElementById("form-chosen-staff");
+
+        //check if no staff is chosen
+        if(form.value == "") {
+          console.log("no value");
+          alert("No staff has been chosen.");
+          return;
+        }
+
         //show success message
         alert("Job assigned successfully!");
 
         //execute default submit
-        var form = document.getElementById("form-assign-job");
         form.submit();
       }
 

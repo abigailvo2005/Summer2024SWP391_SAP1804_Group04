@@ -302,12 +302,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <strong class="text-dark">Land Type: </strong>
                         <p id="popup-land-type"></p>
                       </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Paperwork: </strong>
-                        <a id="popup-land-pw" target="_blank"></a>
-                      </li>
                     </div>
 
                     <div class="house-info-section hidden">
@@ -317,12 +311,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         >
                           <strong class="text-dark">House Type: </strong>
                           <p id="popup-house-type"></p>
-                        </li>
-                        <li
-                          class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                        >
-                          <strong class="text-dark">Paperwork: </strong>
-                          <a id="popup-house-pw" target="_blank"></a>
                         </li>
                       </div>
 

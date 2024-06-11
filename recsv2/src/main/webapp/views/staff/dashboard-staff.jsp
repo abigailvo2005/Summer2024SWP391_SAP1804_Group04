@@ -143,7 +143,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 </div>
                               </div>
                             </td>
-                            
+
                             <td class="align-middle">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -179,7 +179,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${job.realEstateInfo.realEstateId}','job')"
+                                    onclick="viewDetail('${job.jobId}','job')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -238,7 +238,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
@@ -275,7 +274,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <tbody>
                         <c:forEach items="${listingList}" var="listing">
                           <tr class="listing-row">
-                            
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -412,7 +410,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     </main>
 
     <!--------------------START: POPUP SECTIONS-------------------- -->
-    <div id="popup-detail" class="popup-container z-index-3">
+    <div id="popup-detail" class="popup-container z-index-3 hidden">
       <div class="popup-content container-fluid">
         <!-- Header -->
         <div class="popup-header row mx-1">
@@ -584,12 +582,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                     <div id="land-info" class="row hidden">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
                         <strong class="text-dark">Land Type:</strong>
                         <p id="popup-land-type"></p>
                       </li>
-                      <div class="validation-only col-8 px-0">
+                      <div class="validation-only col-6 px-0">
                         <li
                           class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
@@ -638,33 +636,82 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <!-- Buttons to decide if property is appropriate or not -->
-                    <div class="col-12 mt-1">
-                      <div class="h-100 container-fluid mt-0">
-                        <div class="row justify-content-center">
-                          <div class="col-auto">
-                            <button
-                              title="Validate Successfully. Added as Listing"
-                              type="button"
-                              onclick="validate('sucessfully')"
-                              class="btn btn-success w-100 my-2 mb-2 btn-validation"
+                    <form action="${pageContext.request.contextPath}/staff/validate-property" method="post">
+                      <div class="row">
+                        <div class="row">
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm d-flex col-6"
+                          >
+                            <strong class="text-dark"
+                              >Validation Status:</strong
                             >
-                              Approve
-                            </button>
-                          </div>
-  
-                          <div class="col-auto">
-                            <button
-                              title="Validate Fail."
-                              type="button"
-                              onclick="validate('fail')"
-                              class="btn btn-danger w-100 my-2 mb-2 btn-validation"
+                          </li>
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm d-flex col-6"
+                          >
+                            <strong class="text-dark">Notes:</strong>
+                          </li>
+                        </div>
+                        <div class="row">
+                          <ul class="list-group col-6">
+                            <li
+                              class="list-group-item border-0 ps-0 text-sm d-flex"
                             >
-                              Decline
-                            </button>
-                          </div>
+                              <select
+                                class="form-control ms-auto"
+                                id="validateStatus"
+                                name="validateStatus"
+                                onchange="showNote()"
+                              >
+                                <option value="successful">Successful</option>
+                                <option value="fail">Fail</option>
+                              </select>
+                            </li>
+                            <li
+                              id="successful-note"
+                              class="list-group-item border-0 ps-0 text-sm d-flex"
+                            >
+                              <p class="text-muted fs-6 ms-auto">
+                                The property paperwork have been successfully
+                                validated. It is now certified and posted as a
+                                Listing.
+                              </p>
+                            </li>
+                            <li
+                              id="fail-note"
+                              class="list-group-item border-0 ps-0 text-sm d-flex hidden"
+                            >
+                              <p class="text-muted fs-6 ms-auto">
+                                The property paperwork validation process
+                                encountered an issue or. It is now cancelled.
+                              </p>
+                            </li>
+                          </ul>
+
+                          <div class="col-6 border-0 ps-0 text-sm">
+                              <textarea
+                                class="form-control"
+                                id="notes"
+                                name="notes"
+                                rows="3"
+                                placeholder="Enter any additional notes here..."
+                              ></textarea>
+                            </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="row justify-content-center">
+                        <div class="col-auto">
+                          <button
+                            type="submit"
+                            onclick="alert('Successfully Confirm Property Validation!');"
+                            class="btn btn-dark w-100 my-2 mb-2 btn-validation"
+                          >
+                            Confirm
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                    <!--  -->
                   </div>
                 </ul>
               </div>
@@ -673,8 +720,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         </div>
       </div>
     </div>
-
-    <!-- ---------------- END POPUP SECTION --------------------- -->
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <!-- JS MODIFY POPUP -->
@@ -682,15 +727,30 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       //URL REAL ESTATE API
       const urlJobValidation = "http://localhost:8085/api/job/validation/";
 
+      /* Display validation status note according to chosen option */
+      function showNote() {
+        var validateStatus = document.getElementById("validateStatus").value;
+        var successfulNote = document.getElementById("successful-note");
+        var failNote = document.getElementById("fail-note");
+
+        if (validateStatus == "successful") {
+          successfulNote.classList.remove("hidden");
+          failNote.classList.add("hidden");
+        } else {
+          successfulNote.classList.add("hidden");
+          failNote.classList.remove("hidden");
+        }
+      }
+
       //to show detail job or listings popup
-      function viewDetail(propID) {
+      function viewDetail(jobID, type) {
         var popup = document.getElementById("popup-detail");
         var landSection = popup.querySelector("#land-info");
         var houseSection = popup.querySelector("#house-info");
 
         // Send GET Request API to retrieve single property information
         $.ajax({
-          url: urlJobValidation + propID,
+          url: urlJobValidation + jobID,
           type: "GET",
           success: function (data) {
             // Update popup với information chosen Property
@@ -703,11 +763,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.realEstateInfo.area + " m²");
             $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
 
-            //only show land/house fields according to type
+            //update chosen Job ID according to the chosen one
+            $("#popup-jobID").value = data.jobId;
+
+            //only show land/house fields accxording to type
             if (data.realEstateInfo.realEstateType == "land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
-              $("#popup-land-type").text(data.realEstateInfo.propertyLand.landType);
+              $("#popup-land-type").text(
+                data.realEstateInfo.propertyLand.landType
+              );
               $("#popup-land-pw").text("sample-gg-drive-link-land");
               document
                 .querySelector("#popup-land-pw")
@@ -718,7 +783,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
-              $("#popup-house-type").text(data.realEstateInfo.propertyHouse.houseType);
+              $("#popup-house-type").text(
+                data.realEstateInfo.propertyHouse.houseType
+              );
               $("#popup-house-pw").text("sample-gg-drive-link-house");
               document
                 .querySelector("#popup-house-pw")
@@ -726,12 +793,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   "href",
                   "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
                 );
-              $("#popup-builtIn").text(data.realEstateInfo.propertyHouse.builtIn);
-              $("#popup-bed").text(data.realEstateInfo.propertyHouse.bedroom + " rooms");
-              $("#popup-bath").text(data.realEstateInfo.propertyHouse.bath + " rooms");
+              $("#popup-builtIn").text(
+                data.realEstateInfo.propertyHouse.builtIn
+              );
+              $("#popup-bed").text(
+                data.realEstateInfo.propertyHouse.bedroom + " rooms"
+              );
+              $("#popup-bath").text(
+                data.realEstateInfo.propertyHouse.bath + " rooms"
+              );
             }
-            //also load form with same data
-            loadFormAssignJob(data);
+
             popup.classList.remove("hidden");
           },
           error: function () {
@@ -839,5 +911,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </body>
 </html>

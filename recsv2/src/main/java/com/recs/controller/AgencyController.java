@@ -42,11 +42,6 @@ public class AgencyController {
         List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
 
-
-        //Lấy list success cho cos
-        List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
-                .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
-
         //TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
@@ -59,12 +54,14 @@ public class AgencyController {
     /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
+         //Lấy list success cho cos
+         List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
+         .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
         // TODO() tự nhét vào
         String currentPage = "marketplace";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("propList", allRealEstate);
+        model.addAttribute("propList", validatedList);
         return "agency/marketplace";
     }
 
