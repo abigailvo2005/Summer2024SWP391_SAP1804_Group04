@@ -115,6 +115,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               >
                 <i
                   class="fa-solid fa-pen-to-square"
+                  style="
+                  $ {
+                    currentPage != 'register-staff' ? 'color: #30221b;': '';
+                  }
+                "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Register Staff</span>
