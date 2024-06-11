@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_SELLER')")
@@ -45,7 +47,7 @@ public class SellerController {
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
-        //TODO() tự nhét vào
+
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);

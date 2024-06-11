@@ -8,11 +8,13 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication()
 @ComponentScan({ "com.recs" })
 @EnableJpaRepositories(basePackages = "com.recs.repositories")
 @EntityScan(basePackages = "com.recs.models.entities")
+@EnableAsync
 public class RecsApplication {
 
 	public static void main(String[] args) {

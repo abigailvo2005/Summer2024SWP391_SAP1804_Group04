@@ -84,7 +84,8 @@ public class RealEstateServiceImpl implements RealEstateService{
     @Override
     public List<RealEstateInfo> getAllBySeller(String sellerId) {
         List<RealEstate> list = realEstateRepository.findAllBySellerId(sellerId);
-        List<RealEstateInfo> infoList = mapListToInfo(list);
+        UserInfo seller = accountService.getSellerToUserInfo(sellerId);
+        List<RealEstateInfo> infoList = mapListToInfoBySeller(list, seller);
         System.out.println("list re by seller "+sellerId+" size "+ infoList.size());
         return infoList;
     }
@@ -92,7 +93,8 @@ public class RealEstateServiceImpl implements RealEstateService{
     @Override
     public List<RealEstateInfo> getValidatingBySeller(String sellerId) {
         List<RealEstate> list = realEstateRepository.findAllBySellerIdAndStatus(sellerId,"validating");
-        List<RealEstateInfo> infoList = mapListToInfo(list);
+        UserInfo seller = accountService.getSellerToUserInfo(sellerId);
+        List<RealEstateInfo> infoList = mapListToInfoBySeller(list, seller);
         System.out.println("list validating by seller "+sellerId+" size "+ infoList.size());
         return infoList;
     }
@@ -100,7 +102,8 @@ public class RealEstateServiceImpl implements RealEstateService{
     @Override
     public List<RealEstateInfo> getReviewingListByManager(String managerId) {
         List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "reviewing");
-        List<RealEstateInfo> infoList = mapListToInfo(list);
+        UserInfo manager = accountService.getManagerToUserInfo(managerId);
+        List<RealEstateInfo> infoList = mapListToInfoByManager(list, manager);
         System.out.println("list reviewing by manager "+ managerId + "size "+ infoList.size());
         return infoList;
     }
@@ -108,7 +111,8 @@ public class RealEstateServiceImpl implements RealEstateService{
     @Override
     public List<RealEstateInfo> getValidatingListByManager(String managerId) {
         List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "validating");
-        List<RealEstateInfo> infoList = mapListToInfo(list);
+        UserInfo manager = accountService.getManagerToUserInfo(managerId);
+        List<RealEstateInfo> infoList = mapListToInfoByManager(list, manager);
         System.out.println("list validating by manager "+ managerId + "size "+ infoList.size());
         return infoList;
     }
@@ -245,29 +249,36 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     private List<RealEstateInfo> mapListToInfo(List<RealEstate> list) {
         return list.stream().map(realEstate -> {
-                    List<PropertyImages> images = propertyImagesRepository.findAllByRealEstateId(realEstate.getRealEstateId());
-                    PaperWorks paperWorks = paperWorksRepository.getReferenceById(realEstate.getRealEstateId());
                     UserInfo sellerInfo = accountService.getSellerToUserInfo(realEstate.getSellerId());
                     UserInfo managerInfo = accountService.getManagerToUserInfo(realEstate.getManagerId());
-                    if(realEstate.getRealEstateType() == 1 ){
-                        PropertyLand land = propertyLandRepository.getByRealEstateId(realEstate.getRealEstateId());
-                        return RealEstateInfo.fromLand(realEstate, land)
-                                .toBuilder()
-                                .setManagerInfo(managerInfo)
-                                .setSellerInfo(sellerInfo)
-                                .setPropertyImagesList(images)
-                                .setPaperWorks(paperWorks)
-                                .build();
-                    } else {
-                        PropertyHouse house = propertyHouseRepository.getByRealEstateId(realEstate.getRealEstateId());
-                        return RealEstateInfo.fromHouse(realEstate, house)
-                                .toBuilder()
-                                .setManagerInfo(managerInfo)
-                                .setSellerInfo(sellerInfo)
-                                .setPropertyImagesList(images)
-                                .setPaperWorks(paperWorks)
-                                .build();
-                    }
+                    return RealEstateInfo.fromRealEstate(realEstate)
+                            .toBuilder()
+                            .setSellerInfo(sellerInfo)
+                            .setManagerInfo(managerInfo)
+                            .build();
+                })
+                .toList();
+    }
+    private List<RealEstateInfo> mapListToInfoBySeller(List<RealEstate> list, UserInfo sellerInfo) {
+        UserInfo managerInfo = accountService.getManagerToUserInfo(list.get(0).getManagerId());
+        return list.stream().map(realEstate -> {
+                    return RealEstateInfo.fromRealEstate(realEstate)
+                            .toBuilder()
+                            .setSellerInfo(sellerInfo)
+                            .setManagerInfo(managerInfo)
+                            .build();
+                })
+                .toList();
+    }
+
+    private List<RealEstateInfo> mapListToInfoByManager(List<RealEstate> list, UserInfo managerInfo) {
+        return list.stream().map(realEstate -> {
+                    UserInfo sellerInfo = accountService.getSellerToUserInfo(realEstate.getSellerId());
+                    return RealEstateInfo.fromRealEstate(realEstate)
+                            .toBuilder()
+                            .setSellerInfo(sellerInfo)
+                            .setManagerInfo(managerInfo)
+                            .build();
                 })
                 .toList();
     }
