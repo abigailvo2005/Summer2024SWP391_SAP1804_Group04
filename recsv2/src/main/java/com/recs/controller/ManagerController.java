@@ -98,6 +98,7 @@ public class ManagerController {
             @ModelAttribute(name = "request")AssignJobRequest request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
             ) {
+                System.out.println(request);
         AssignJobStaff entity = new AssignJobStaff(
                 UUID.randomUUID().toString(),
                 request.getRealEstateId(),
@@ -110,7 +111,7 @@ public class ManagerController {
 
         recsBusinessService.createAssignJobStaff(entity);
 
-        return "manager/assign-job";
+        return "redirect:/manager";
     }
 
     @GetMapping({ "/register-acc-man" })

@@ -417,9 +417,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         type="text"
                         name="staffId"
                         class="form-control form-create-control col-10"
-                        disabled
+                        hidden
                       />
                     </div>
+                    
                     <div class="col-sm-6">
                       <select
                         class="form-control form-create-control"
@@ -427,8 +428,11 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       >
                         <option class="fs-6" value="">Choose Staff</option>
                         <c:forEach items="${staffList}" var="staff">
-                          <option class="fs-6" value="${staff.username}">
-                            ${staff.staffId} - ${staff.username}
+                          
+                          <option class="fs-6" value="${staff.staffId}" 
+                          >
+                          
+                          ${staff.username}
                           </option>
                         </c:forEach>
                       </select>
@@ -820,6 +824,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
         // Update popup with information of chosen property
         document.querySelector("#form-name").setAttribute("value", chosenData.name);
+        document.querySelector("#reID").setAttribute("value", chosenData.realEstateId);
         document
           .querySelector("#form-description")
           .setAttribute("value", chosenData.description);
@@ -952,7 +957,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
         //check if no staff is chosen
         if (form.value == "") {
-          console.log("no value");
           alert("No staff has been chosen.");
           return;
         }
@@ -961,15 +965,15 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         alert("Job assigned successfully!");
 
         //execute default submit
-        document.querySelector('form').submit();
+       document.querySelector('form').submit();
       }
 
-      function chooseStaff(selectedStaffId) {
+      function chooseStaff(selectedStaff) {
         // Retrieve the "chosen-staff" input element
         const chosenStaffInput = document.getElementById("form-chosen-staff");
 
         // Update the value of the "chosen-staff" input
-        chosenStaffInput.setAttribute("value", selectedStaffId);
+        chosenStaffInput.setAttribute("value", selectedStaff);
       }
     </script>
 

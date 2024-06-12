@@ -560,7 +560,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                       <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                         <strong class="text-dark">Paperwork: </strong>
-                        <a id="popup-land-pw" target="_blank"></a>
+                        <a id="popup-land-pw" target="_blank" download></a>
                       </li>
                     </div>
 
@@ -572,7 +572,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                           <strong class="text-dark">Paperwork: </strong>
-                          <a id="popup-house-pw" target="_blank"></a>
+                          <a id="popup-house-pw" target="_blank" download></a>
                         </li>
                       </div>
 
@@ -811,15 +811,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
-              $("#popup-land-pw").text("sample-gg-drive-link");
-              document.querySelector("#popup-land-pw").setAttribute('href', 'https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link');
+              $("#popup-land-pw").text("sample-pdf-land");
+              document.querySelector("#popup-land-pw").setAttribute('href', 'sample.pdf');
               
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-house-pw").text("sample-gg-drive-link");
-              document.querySelector("#popup-house-pw").setAttribute('href', 'https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link');
+              $("#popup-house-pw").text("sample-zip-house");
+              document.querySelector("#popup-house-pw").setAttribute('href', 'sample.zip');
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");

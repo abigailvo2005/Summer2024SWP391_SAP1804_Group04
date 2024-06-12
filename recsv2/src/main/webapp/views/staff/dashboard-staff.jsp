@@ -637,6 +637,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
                     <!-- Buttons to decide if property is appropriate or not -->
                     <form action="${pageContext.request.contextPath}/staff/validate-property" method="post">
+                      <input name="jobId" id="popup-jobID" class="hidden"/>
                       <div class="row">
                         <div class="row">
                           <li
