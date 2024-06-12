@@ -2,6 +2,7 @@ package com.recs.controller;
 
 
 import com.recs.models.dto.account.UserInfo;
+import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.services.accountsvc.AccountService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -52,6 +54,15 @@ public class StaffController {
         model.addAttribute("listingList", listingList);
         return "staff/dashboard-staff";
     }
+
+    @PostMapping("validate-property")
+    public String validate(@ModelAttribute(name = "request")UpdateJobStatusDTO request){
+        recsBusinessService.updateStatus(request);
+        return "redirect:/staff";
+    }
+
+
+
 
     @GetMapping({ "/history" })
     public String historyView(Model model, Authentication authentication) {

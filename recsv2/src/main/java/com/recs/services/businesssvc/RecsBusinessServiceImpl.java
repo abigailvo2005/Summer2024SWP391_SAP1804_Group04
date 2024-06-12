@@ -2,9 +2,12 @@ package com.recs.services.businesssvc;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
+import com.recs.models.enums.JobStatus;
+import com.recs.models.enums.RealEstateStatus;
 import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
@@ -27,7 +30,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Override
     public AssignJobStaff createAssignJobStaff(AssignJobStaff assignJobStaff) {
-        realEstateService.updateStatus(assignJobStaff.getRealEstateId(), "validating");
+        realEstateService.updateStatus(assignJobStaff.getRealEstateId(), RealEstateStatus.VALIDATING, "Property is validating");
         return jobAssignStaffRepository.save(assignJobStaff);
     }
 
@@ -43,7 +46,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         return new ValidationJobInfo(
                 entity.getJobId(),
                 entity.getCreateTimestamp(),
-                entity.getStatus(),
+                JobStatus.from(entity.getStatus()),
                 entity.getPriority(),
                 realEstateInfo,
                 realEstateInfo.getManagerInfo(),
@@ -92,11 +95,15 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
-    public AssignJobStaff updateStatus(String jobId, String status) {
-        AssignJobStaff job = jobAssignStaffRepository.getReferenceById(jobId);
+    public AssignJobStaff updateStatus(UpdateJobStatusDTO request) {
+        AssignJobStaff job = jobAssignStaffRepository.getReferenceById(request.getJobId());
         if (job != null) {
-            job.setStatus(status);
-            realEstateService.updateStatus(job.getRealEstateId(), status);
+            job.setStatus(request.getValidateStatus());
+            realEstateService.updateStatus(
+                    job.getRealEstateId(),
+                    RealEstateStatus.fromJobStatus(JobStatus.from(request.getValidateStatus())),
+                    request.getNotes()
+            );
             jobAssignStaffRepository.save(job);
         }
         return job;
