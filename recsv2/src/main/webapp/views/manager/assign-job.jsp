@@ -89,7 +89,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
-                            SELLER
+                            OWNER
                           </th>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
@@ -205,7 +205,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${req.realEstateId}', '${staffList}')"
+                                    onclick="viewDetail('${req.realEstateId}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -335,10 +335,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         hidden
                       />
                       <label
-                        ><a
-                          href="https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-                          target="_blank"
-                          ><i>sample-paperwork-gg-drive-link</i></a
+                        ><a href="sample.pdf" target="_blank" download
+                          ><i>sample.pdf</i></a
                         ></label
                       >
                     </div>
@@ -347,7 +345,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="mb-3 row">
                       <div class="col-sm-2"><label>House Type:</label></div>
                       <div class="col-sm-4">
-                        <input 
+                        <input
                           id="form-houseCategory"
                           type="text"
                           name="houseCategory"
@@ -368,10 +366,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                           hidden
                         />
                         <label
-                          ><a
-                            href="https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-                            target="_blank"
-                            ><i>sample-paperwork-gg-drive-link</i></a
+                          ><a href="sample.zip" target="_blank" download
+                            ><i>sample.zip</i></a
                           ></label
                         >
                       </div>
@@ -419,14 +415,13 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <input
                         id="form-chosen-staff"
                         type="text"
-                        name="chosen-staff"
+                        name="staffId"
                         class="form-control form-create-control col-10"
                         disabled
                       />
                     </div>
                     <div class="col-sm-6">
                       <select
-                      
                         class="form-control form-create-control"
                         onchange="chooseStaff(this.value)"
                       >
@@ -460,6 +455,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           </div>
         </div>
       </div>
+       <!-- END: FORM TO ASSIGN JOB TO A STAFF -->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
@@ -682,7 +678,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                           class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
                           <strong class="text-dark">Land Paperwork:</strong>
-                          <a id="popup-land-pw" target="_blank"></a>
+                          <a id="popup-land-pw" target="_blank" download></a>
                         </li>
                       </div>
                     </div>
@@ -700,7 +696,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                             id="housePaperwork"
                           >
                             <strong class="text-dark">House Paperwork:</strong>
-                            <a id="popup-house-pw" target="_blank"></a>
+                            <a id="popup-house-pw" target="_blank" download></a>
                           </li>
                         </div>
                       </div>
@@ -750,17 +746,16 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
       </div>
     </div>
-
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <!-- JS MODIFY POPUP -->
     <script>
       //URL REAL ESTATE API
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
+      var chosenData = null;
 
       //to show detail register request popup
-      function viewDetail(propID, staffList) {
-        console.log("STAFFF LISSTTTT: " + staffList);
+      function viewDetail(propID) {
         var popup = document.getElementById("popup-detail");
         var landSection = popup.querySelector("#land-info");
         var houseSection = popup.querySelector("#house-info");
@@ -771,11 +766,12 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           type: "GET",
           success: function (data) {
             // Update popup với information chosen Property
-            $("#owner").text(data.sellerInfo.sellerId);
+            $("#owner").text(data.sellerInfo.username);
             $("#popup-name").text(data.name);
             $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
             $("#popup-type").text(data.realEstateType);
+            $("#popup-dateCreated").text(data.createDate);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
@@ -785,30 +781,24 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
-              $("#popup-land-pw").text("sample-gg-drive-link-land");
+              $("#popup-land-pw").text("sample-pdf-land");
               document
                 .querySelector("#popup-land-pw")
-                .setAttribute(
-                  "href",
-                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-                );
+                .setAttribute("href", "sample.pdf");
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-house-pw").text("sample-gg-drive-link-house");
+              $("#popup-house-pw").text("sample-zip-house");
               document
                 .querySelector("#popup-house-pw")
-                .setAttribute(
-                  "href",
-                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-                );
+                .setAttribute("href", "sample.zip");
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
-            //also load form with same data
-            loadFormAssignJob(data);
+            //pass in data as global variable to load Form
+            chosenData = data;
             popup.classList.remove("hidden");
           },
           error: function () {
@@ -820,44 +810,37 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
       //to show form confirming job assigning after confirmed on popup & form is already loaded
       function showFormAssignJob() {
-        document
-          .getElementById("form-assign-job-container")
-          .classList.remove("hidden");
-        closeDetail();
-      }
-
-      //to LOAD INFORMATION to form confirming job assigning for a staff
-      function loadFormAssignJob(data) {
         var formAssignJob = document.getElementById(
           "form-assign-job-container"
         );
 
+        //to LOAD INFORMATION to form confirming job assigning for a staff
         var landSection = formAssignJob.querySelector("#land-info");
         var houseSection = formAssignJob.querySelector("#house-info");
 
         // Update popup with information of chosen property
-        document.querySelector("#form-name").setAttribute("value", data.name);
+        document.querySelector("#form-name").setAttribute("value", chosenData.name);
         document
           .querySelector("#form-description")
-          .setAttribute("value", data.description);
+          .setAttribute("value", chosenData.description);
         document
           .querySelector("#form-propertyType")
-          .setAttribute("value", data.realEstateType);
+          .setAttribute("value", chosenData.realEstateType);
         document
           .querySelector("#form-address")
-          .setAttribute("value", data.address);
-        document.querySelector("#form-area").setAttribute("value", data.area);
+          .setAttribute("value", chosenData.address);
+        document.querySelector("#form-area").setAttribute("value", chosenData.area);
         document
           .querySelector("#form-price")
-          .setAttribute("value", data.textPrice);
+          .setAttribute("value", chosenData.textPrice);
 
-        if (data.realEstateType == "land") {
+        if (chosenData.realEstateType == "land") {
           landSection.classList.remove("hidden");
           houseSection.classList.add("hidden");
           document
             .querySelector("#form-landCategory")
-            .setAttribute("value", data.propertyLand.landType);
-          document
+            .setAttribute("value", chosenData.propertyLand.landType);
+          /* document
             .querySelector("#form-land-pw")
             .setAttribute("value", "sample-gg-drive-link-land");
           document
@@ -865,14 +848,14 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             .setAttribute(
               "href",
               "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-            );
+            ); */
         } else {
           houseSection.classList.remove("hidden");
           landSection.classList.add("hidden");
           document
             .querySelector("#form-houseCategory")
-            .setAttribute("value", data.propertyHouse.houseType);
-          document
+            .setAttribute("value", chosenData.propertyHouse.houseType);
+          /*  document
             .querySelector("#form-house-pw")
             .setAttribute("value", "sample-gg-drive-link-house");
           document
@@ -880,17 +863,20 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             .setAttribute(
               "href",
               "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-            );
+            ); */
           document
             .querySelector("#form-builtYear")
-            .setAttribute("value", data.propertyHouse.builtIn);
+            .setAttribute("value", chosenData.propertyHouse.builtIn);
           document
             .querySelector("#form-bedrooms")
-            .setAttribute("value", data.propertyHouse.bedroom);
+            .setAttribute("value", chosenData.propertyHouse.bedroom);
           document
             .querySelector("#form-bathrooms")
-            .setAttribute("value", data.propertyHouse.bath);
+            .setAttribute("value", chosenData.propertyHouse.bath);
         }
+
+        formAssignJob.classList.remove("hidden");
+        closeDetail();
       }
 
       //to close detail validation request popup
@@ -965,7 +951,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         var form = document.getElementById("form-chosen-staff");
 
         //check if no staff is chosen
-        if(form.value == "") {
+        if (form.value == "") {
           console.log("no value");
           alert("No staff has been chosen.");
           return;
@@ -975,7 +961,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         alert("Job assigned successfully!");
 
         //execute default submit
-        form.submit();
+        document.querySelector('form').submit();
       }
 
       function chooseStaff(selectedStaffId) {

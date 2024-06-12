@@ -1,6 +1,7 @@
 com/recs/repositories/account/AccountRepository.class
 com/recs/services/realestaesvc/RealEstateServiceImpl.class
 com/recs/controller/ManagerController.class
+com/recs/config/AsyncConfiguration.class
 com/recs/repositories/account/StaffRepository.class
 com/recs/config/WebConfiguration.class
 com/recs/utils/AccountUtils.class

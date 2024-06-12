@@ -141,8 +141,6 @@ public class ManagerController {
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
 
-        /* logic BE update db... */
-
         return "manager/register-acc-man";
     }
 
