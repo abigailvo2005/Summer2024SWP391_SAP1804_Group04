@@ -753,8 +753,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
-    <!-- JS MODIFY POPUP -->
     <script>
+      //JS MODIFY POPUP
       //URL REAL ESTATE API
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
 
