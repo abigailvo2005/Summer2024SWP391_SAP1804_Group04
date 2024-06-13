@@ -9,6 +9,7 @@ import com.recs.models.entities.realestate.PropertyHouse;
 import com.recs.models.entities.realestate.PropertyImages;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.enums.RealEstateStatus;
 import com.recs.repositories.account.ManagerRepository;
 import com.recs.repositories.realestate.PaperWorksRepository;
 import com.recs.repositories.realestate.PropertyHouseRepository;
@@ -201,11 +202,12 @@ public class RealEstateServiceImpl implements RealEstateService{
     }
 
     @Override
-    public RealEstate updateStatus(String realEstateId, String status) {
+    public RealEstate updateStatus(String realEstateId, RealEstateStatus status, String noteMsg) {
         RealEstate realEstate = realEstateRepository.getReferenceById(realEstateId);
         if(realEstate != null) {
-            realEstate.setStatus(status);
+            realEstate.setStatus(status.getValue());
             realEstate.setUpdateTimestamp(Clock.systemUTC().millis());
+            realEstate.setNoteMsg(noteMsg);
             realEstateRepository.save(realEstate);
         }
         return realEstate;
@@ -225,7 +227,8 @@ public class RealEstateServiceImpl implements RealEstateService{
                 Clock.systemUTC().millis(),
                 Clock.systemUTC().millis(),
                 sellerId,
-                getSuitableManager()
+                getSuitableManager(),
+                StringUtils.EMPTY
                 );
     }
 

@@ -1,6 +1,7 @@
 package com.recs.services.businesssvc;
 
 
+import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
 
@@ -19,6 +20,6 @@ public interface RecsBusinessService {
 
     public List<ValidationJobInfo> getListByStaffAndStatus(String staffId, String status);
 
-    public AssignJobStaff updateStatus(String jobId, String status);
+    public AssignJobStaff updateStatus(UpdateJobStatusDTO request);
 
 }

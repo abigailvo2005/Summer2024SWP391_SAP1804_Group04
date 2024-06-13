@@ -3,6 +3,7 @@ package com.recs.services.realestaesvc;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.enums.RealEstateStatus;
 
 import java.util.List;
 
@@ -32,5 +33,5 @@ public interface RealEstateService {
 
     public RealEstate update(RealEstate realEstate);
 
-    public RealEstate updateStatus(String realEstateId, String status);
+    public RealEstate updateStatus(String realEstateId, RealEstateStatus status, String noteMsg);
 }
