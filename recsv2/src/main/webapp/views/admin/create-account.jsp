@@ -40,7 +40,7 @@
             <div class="container">
               <div class="row justify-content-center">
                 <div class="col-sm-12 col-md-8 col-lg-6 text-center mx-auto">
-                  <h2 class="text-white mb-1 mt-sm-4">Create An Accout</h2>
+                  <h2 class="text-white mb-1 mt-sm-4">Create An Account</h2>
                 </div>
               </div>
             </div>

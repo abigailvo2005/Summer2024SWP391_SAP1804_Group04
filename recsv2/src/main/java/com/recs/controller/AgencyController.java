@@ -74,4 +74,15 @@ public class AgencyController {
         return "agency/marketplace";
     }
 
+    @GetMapping({ "/create-mem"})
+    public String registerStaff(Model model, Authentication authentication) {
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "create-mem";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+
+        return "agency/create-acc-mem";
+    }
+
 }

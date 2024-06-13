@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RECS - Dashboard</title>
+    <title>RECS - Create Account Mem</title>
 
     <!-- Link CSS -->
     <link
@@ -38,7 +38,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/views/agency/sidebar-agency.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-sm-12 col-md-8 col-lg-6 text-center mx-auto">
-                <h2 class="text-white mb-1 mt-sm-4">Register New Staff</h2>
+                <h2 class="text-white mb-1 mt-sm-4">Create New Member</h2>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             <div class="col-12 col-xl-11 mx-auto">
               <div class="card z-index-0">
                 <div class="card-header text-center pt-4">
-                  <h5><b>Staff Register Form</b></h5>
+                  <h5><b>Member Create Form</b></h5>
                 </div>
 
                 <div class="card-body">
@@ -315,7 +315,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-8 col-9">
-                  <h6>Your Staff Register Requests</h6>
+                  <h6>Your Member Create Requests</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-house-user"></i>
                     <span class="font-weight-bold ms-1">1 request(s)</span>
