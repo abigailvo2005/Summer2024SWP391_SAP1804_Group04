@@ -3,6 +3,7 @@ package com.recs.controller;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
+import com.recs.models.entities.account.Agency;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,14 +57,20 @@ public class AgencyController {
     /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-         //Lấy list success cho cos
+         //List of successfully vaildated property - list of Listing. Status: Displayed
          List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
          .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
-        // TODO() tự nhét vào
+
+         //Current Agency information - for Agency Profile loading
+         Agency agency = accountService.getAgencyByAccountId(userInfo.getAccountId());
+         System.out.println("Account Agency ID: " + userInfo.getAccountId());
+        
+
         String currentPage = "marketplace";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("propList", validatedList);
+        model.addAttribute("agency", agency);
         return "agency/marketplace";
     }
 

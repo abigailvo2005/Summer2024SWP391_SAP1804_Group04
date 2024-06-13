@@ -245,9 +245,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                       <div class="col-5 ms-4" id="info-section">
                         <div class="row">
-                          
                           <li
-                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                            class="list-group-item border-0 ps-0 text-sm d-flex"
                           >
                             <strong class="text-dark">Description:</strong>
                             <p id="popup-desc"></p>
@@ -309,8 +308,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             </li>
                           </div>
 
-                          <div class="row">
-                            
+                          <div class="row mt-2">
                             <li
                               class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                             >
@@ -325,7 +323,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             </li>
                           </div>
                         </div>
-                        <div class="row justify-content-end mt-3">
+                        <div
+                          id="handle-listing-btn"
+                          class="row justify-content-end mt-3"
+                        >
                           <button
                             class="btn btn-outline-dark"
                             onclick="showAgencyForm()"
@@ -333,103 +334,112 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             Handle Listing
                           </button>
                         </div>
-
-                        <div class="agency-form-section hidden">
-                          <div class="row d-flex justify-content-center">
-                            <div class="col-12 text-center">
-                              <strong>Agency Profile</strong>
-                            </div>
-                          </div>
-                          <form id="agency-profile-form">
-                            <input
-                                  type="text"
-                                  class="hidden"
-                                  id="agency-id"
-                                  name="agencyId"
-                                />
-                            <div class="row mb-3">
-                              <div class="col-6">
-                                <label for="agency-name" class="form-label"
-                                  >Agency Name</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="agency-name"
-                                  readonly
-                                />
-                              </div>
-                              <div class="col-6">
-                                <label for="agency-contact" class="form-label"
-                                  >Company</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="agency-company"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-
-                            <div class="row mb-3">
-                              <div class="col-6">
-                                <label for="agency-name" class="form-label"
-                                  >Experienced Years</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="agency-experience"
-                                  readonly
-                                />
-                              </div>
-                              <div class="col-6">
-                                <label for="agency-contact" class="form-label"
-                                  >Completed Projects</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="agency-projects"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                            <div class="row mb-3">
-                              <div class="col-12">
-                                <label for="agency-name" class="form-label"
-                                  >Description</label
-                                >
-                                <textarea
-                                  class="form-control"
-                                  id="agency-desc"
-                                  name="agencyDescription"
-                                ></textarea>
-                              </div>
-                            </div>
-                           
-                            <div class="row justify-content-center">
-                              <div class="col-auto">
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary"
-                                  onclick="hideAgencyForm()"
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  type="button"
-                                  class="btn btn-dark"
-                                  onclick="submitAgencyProfile()"
-                                >
-                                  Submit
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
                       </div>
+                    </div>
+                    <div class="row">
+                      <form id="agency-profile-form" class="hidden">
+                        <div class="row d-flex justify-content-center mb-2">
+                          <div class="col-12 text-center">
+                            <strong>Agency Profile</strong>
+                          </div>
+                        </div>
+                        <input
+                          type="text"
+                          class="hidden"
+                          id="agency-id"
+                          name="agencyId"
+                          value="${agency.agencyId}"
+                        />
+                        <div class="row mb-3">
+                          <div class="col-6">
+                            <label for="agency-name" class="form-label"
+                              >Agency Name</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="agency-name"
+                              value="${name}"
+                              readonly
+                            />
+                          </div>
+                          <div class="col-6">
+                            <label for="agency-contact" class="form-label"
+                              >Company</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="agency-company"
+                              value="${agency.company}"
+                              readonly
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row mb-3">
+                          <div class="col-6">
+                            <label for="agency-name" class="form-label"
+                              >Experienced Years</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="agency-experience"
+                              value="${agency.yearsOfExperience}"
+                              readonly
+                            />
+                          </div>
+                          <div class="col-6">
+                            <label for="agency-contact" class="form-label"
+                              >Completed Projects</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="agency-projects"
+                              value="${agency.completedProject}"
+                              readonly
+                            />
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-12">
+                            <label for="agency-name" class="form-label"
+                              >Description/Message to Seller</label
+                            >
+                            <textarea
+                              class="form-control"
+                              id="agency-desc"
+                              name="agencyDescription"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <div class="mb-3 row justify-content-center">
+                          <label class="form-label text-center"
+                              ><i>All details will be sent to the Seller for confirmation of the Listing handling.</i></label
+                            >
+                        </div>
+
+                        <div class="row justify-content-center">
+                          <div class="col-auto">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              onclick="hideAgencyForm()"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-dark"
+                              onclick="submitAgencyProfile()"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </ul>
@@ -509,18 +519,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       /* Show form to submit agency profile to seller */
       function showAgencyForm() {
         document
-          .querySelector(".agency-form-section")
+          .querySelector("#agency-profile-form")
           .classList.remove("hidden");
-        document
-          .querySelector(".row.justify-content-end.mt-3")
-          .classList.add("hidden");
+        document.querySelector("#handle-listing-btn").classList.add("hidden");
       }
 
       /* Hide form to submit agency profile to seller */
       function hideAgencyForm() {
-        document.querySelector(".agency-form-section").classList.add("hidden");
+        document.querySelector("#agency-profile-form").classList.add("hidden");
         document
-          .querySelector(".row.justify-content-end.mt-3")
+          .querySelector("#handle-listing-btn")
           .classList.remove("hidden");
       }
 
@@ -529,7 +537,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         document
           .getElementById("popup-property-request")
           .classList.add("hidden");
-          hideAgencyForm();
+        hideAgencyForm();
       }
 
       //still forcely close every popup if clicked on somewhere else than close button
@@ -537,7 +545,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var popup = document.querySelector(".popup-container");
         if (event.target == popup) {
           popup.classList.add("hidden");
+          hideAgencyForm();
         }
+        
       };
 
       //style table to have fixed heading and scrollable
@@ -569,6 +579,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           }
         });
       }
+
       window.onload = function () {
         makeTableScroll();
       };
