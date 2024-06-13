@@ -1,4 +1,5 @@
 com/recs/repositories/account/AccountRepository.class
+com/recs/models/dto/recsbusiness/UpdateJobStatusDTO.class
 com/recs/services/realestaesvc/RealEstateServiceImpl.class
 com/recs/controller/ManagerController.class
 com/recs/config/AsyncConfiguration.class
@@ -23,6 +24,7 @@ com/recs/models/dto/recsbusiness/AssignJobRequest.class
 com/recs/models/dto/account/AgencyDTO.class
 com/recs/models/dto/account/MemberDTO.class
 com/recs/models/dto/account/ManagerDTO.class
+com/recs/models/enums/RealEstateStatus.class
 com/recs/repositories/realestate/PropertyImagesRepository.class
 com/recs/models/dto/realestate/CreateRealEstateRequestDTO.class
 com/recs/models/entities/account/Agency.class
@@ -37,6 +39,7 @@ com/recs/repositories/realestate/PropertyLandRepository.class
 com/recs/repositories/account/ManagerRepository.class
 com/recs/models/dto/recsbusiness/ValidationJobInfo.class
 com/recs/ServletInitializer.class
+com/recs/models/enums/JobStatus.class
 com/recs/models/entities/account/Seller.class
 com/recs/models/dto/account/RegisterStaffDTO.class
 com/recs/repositories/account/SellerRepository.class

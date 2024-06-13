@@ -768,7 +768,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-jobID").value = data.jobId;
 
             //only show land/house fields accxording to type
-            if (data.realEstateInfo.realEstateType == "land") {
+            if (data.realEstateInfo.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(
