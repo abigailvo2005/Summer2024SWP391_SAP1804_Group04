@@ -4,7 +4,7 @@ public enum JobStatus {
     UNKNOWN(""),
     ASSIGNED("Assigned"),
     SUCCESSFUL("Successful"),
-    FAILED("Failed");
+    FAIL("Fail");
 
     private final String value;
 

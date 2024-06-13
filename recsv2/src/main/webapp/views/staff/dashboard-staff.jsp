@@ -664,8 +664,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 name="validateStatus"
                                 onchange="showNote()"
                               >
-                                <option value="successful">Successful</option>
-                                <option value="fail">Fail</option>
+                                <option value="Successful">Successful</option>
+                                <option value="Fail">Fail</option>
                               </select>
                             </li>
                             <li
@@ -765,9 +765,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
 
             //update chosen Job ID according to the chosen one
-            $("#popup-jobID").value = data.jobId;
+            document.querySelector("#popup-jobID").setAttribute("value", data.jobId);
 
-            //only show land/house fields accxording to type
+            //only show land/house fields according to type
             if (data.realEstateInfo.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");

@@ -93,7 +93,7 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     @Override
     public List<RealEstateInfo> getValidatingBySeller(String sellerId) {
-        List<RealEstate> list = realEstateRepository.findAllBySellerIdAndStatus(sellerId,"validating");
+        List<RealEstate> list = realEstateRepository.findAllBySellerIdAndStatus(sellerId,"Validating");
         UserInfo seller = accountService.getSellerToUserInfo(sellerId);
         List<RealEstateInfo> infoList = mapListToInfoBySeller(list, seller);
         System.out.println("list validating by seller "+sellerId+" size "+ infoList.size());
@@ -102,7 +102,7 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     @Override
     public List<RealEstateInfo> getReviewingListByManager(String managerId) {
-        List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "reviewing");
+        List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "Reviewing");
         UserInfo manager = accountService.getManagerToUserInfo(managerId);
         List<RealEstateInfo> infoList = mapListToInfoByManager(list, manager);
         System.out.println("list reviewing by manager "+ managerId + "size "+ infoList.size());
@@ -111,7 +111,7 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     @Override
     public List<RealEstateInfo> getValidatingListByManager(String managerId) {
-        List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "validating");
+        List<RealEstate> list = realEstateRepository.findAllByManagerIdAndStatus(managerId, "Validating");
         UserInfo manager = accountService.getManagerToUserInfo(managerId);
         List<RealEstateInfo> infoList = mapListToInfoByManager(list, manager);
         System.out.println("list validating by manager "+ managerId + "size "+ infoList.size());

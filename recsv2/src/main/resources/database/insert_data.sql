@@ -106,6 +106,12 @@ INSERT INTO PropertyLand (landId, realEstateId, landType) VALUES
 (UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Rural Farm'), 'Agricultural'),
 (UUID(), (SELECT realEstateId FROM RealEstate WHERE name = 'Lakefront Property'), 'Residential');
 
+UPDATE JobAssignStaff SET status = 'Assigned' WHERE status = 'validating';
+UPDATE RealEstate SET status = 'Reviewing' WHERE status = 'reviewing';
+UPDATE RealEstate SET status = 'Displayed' WHERE status = 'success';
+UPDATE RealEstate SET status = 'Validating' WHERE status = 'validating';
+UPDATE RealEstate SET status = 'Unqualified' WHERE status = 'UNQUALIFIED';
+
 
 
 

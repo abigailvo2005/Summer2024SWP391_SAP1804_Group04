@@ -53,10 +53,10 @@ public class ManagerController {
         List<ValidationJobInfo> allJob = recsBusinessService.getListByManager(userInfo.getManagerId());
 
         List<ValidationJobInfo> validatingJobList = recsBusinessService.
-                getListByManagerAndStatus(userInfo.getManagerId(), "validating");
+                getListByManagerAndStatus(userInfo.getManagerId(), "Assigned");
 
         List<ValidationJobInfo> successJobList = recsBusinessService.
-                getListByManagerAndStatus(userInfo.getManagerId(), "success");
+                getListByManagerAndStatus(userInfo.getManagerId(), "Successful");
 
 
         /* List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId()); */
