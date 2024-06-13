@@ -7,6 +7,7 @@ import com.recs.models.entities.realestate.PropertyHouse;
 import com.recs.models.entities.realestate.PropertyImages;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.enums.RealEstateStatus;
 import com.recs.utils.RealEstateUtils;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class RealEstateInfo {
     private double area;
     private long price;
     private String textPrice;
-    private String status;
+    private RealEstateStatus status;
     private int displayable;
     private long createTimestamp;
     private String createDate;
@@ -43,6 +44,7 @@ public class RealEstateInfo {
     private PropertyLand propertyLand;
     private List<PropertyImages> propertyImagesList;
     private PaperWorks paperWorks;
+    private String notes;
 
     private RealEstateInfo(Builder builder) {
         this.realEstateId = builder.realEstateId;
@@ -76,7 +78,7 @@ public class RealEstateInfo {
         private double area;
         private long price;
         private String textPrice;
-        private String status;
+        private RealEstateStatus status;
         private int displayable;
         private long createTimestamp;
         private String createDate;
@@ -90,6 +92,7 @@ public class RealEstateInfo {
         private PropertyLand propertyLand;
         private List<PropertyImages> propertyImagesList;
         private PaperWorks paperWorks;
+        private String notes;
 
         public Builder setRealEstateId(String realEstateId) {
             this.realEstateId = realEstateId;
@@ -131,7 +134,7 @@ public class RealEstateInfo {
             return this;
         }
 
-        public Builder setStatus(String status) {
+        public Builder setStatus(RealEstateStatus status) {
             this.status = status;
             return this;
         }
@@ -191,6 +194,11 @@ public class RealEstateInfo {
             return this;
         }
 
+        private Builder setNotes(String notes) {
+            this.notes = notes;
+            return this;
+        }
+
         public RealEstateInfo build() {
             return new RealEstateInfo(this);
         }
@@ -200,18 +208,19 @@ public class RealEstateInfo {
         return new Builder()
                 .setRealEstateId(realestate.getRealEstateId())
                 .setName(realestate.getName())
-                .setRealEstateType(realestate.getRealEstateType() == 1 ? "land" : "house")
+                .setRealEstateType(realestate.getRealEstateType() == 1 ? "Land" : "House")
                 .setDescription(realestate.getDescription())
                 .setAddress(realestate.getAddress())
                 .setArea(realestate.getArea())
                 .setPrice(realestate.getPrice())
                 .setTextPrice(RealEstateUtils.formatPrice(realestate.getPrice()))
-                .setStatus(realestate.getStatus())
+                .setStatus(RealEstateStatus.from(realestate.getStatus()))
                 .setDisplayable(realestate.getDisplayable())
                 .setCreateTimestamp(realestate.getCreateTimestamp())
                 .setCreateDate(RealEstateUtils.formatDate(realestate.getCreateTimestamp()))
                 .setUpdateTimestamp(realestate.getUpdateTimestamp())
                 .setUpdatedDate(RealEstateUtils.formatDate(realestate.getUpdateTimestamp()))
+                .setNotes(realestate.getNoteMsg())
                 .build();
     }
 
@@ -251,6 +260,5 @@ public class RealEstateInfo {
                 .setPaperWorks(this.paperWorks);
     }
 
-    // Getters and setters omitted for brevity
 }
 

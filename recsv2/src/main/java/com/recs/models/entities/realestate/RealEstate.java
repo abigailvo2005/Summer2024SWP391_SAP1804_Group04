@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Table(name = "RealEstate")
@@ -59,4 +58,7 @@ public class RealEstate {
 
     @Column(name = "managerId")
     private String managerId;
+
+    @Column(name = "noteMsg")
+    private String noteMsg;
 }

@@ -57,14 +57,14 @@ public class AgencyController {
     /* FOR VIEW TEST ONLY - DELETE WHEN HAVE AGENCY CONTROLLER */
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-         //List of successfully vaildated property - list of Listing. Status: Displayed
+
          List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
          .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
 
          //Current Agency information - for Agency Profile loading
          Agency agency = accountService.getAgencyByAccountId(userInfo.getAccountId());
          System.out.println("Account Agency ID: " + userInfo.getAccountId());
-        
+
 
         String currentPage = "marketplace";
         model.addAttribute("name", userInfo.getFullName());
