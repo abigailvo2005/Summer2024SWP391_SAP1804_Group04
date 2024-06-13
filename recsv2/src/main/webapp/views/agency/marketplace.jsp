@@ -417,25 +417,28 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </div>
                         <div class="mb-3 row justify-content-center">
                           <label class="form-label text-center"
-                              ><i>All details will be sent to the Seller for confirmation of the Listing handling.</i></label
-                            >
+                            ><i
+                              >All details will be sent to the Seller for
+                              confirmation of the Listing handling.</i
+                            ></label
+                          >
                         </div>
 
                         <div class="row justify-content-center">
                           <div class="col-auto">
                             <button
                               type="button"
-                              class="btn btn-secondary"
-                              onclick="hideAgencyForm()"
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              type="button"
                               class="btn btn-dark"
                               onclick="submitAgencyProfile()"
                             >
                               Submit
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              onclick="hideAgencyForm()"
+                            >
+                              Cancel
                             </button>
                           </div>
                         </div>
@@ -547,7 +550,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           popup.classList.add("hidden");
           hideAgencyForm();
         }
-        
       };
 
       //style table to have fixed heading and scrollable
