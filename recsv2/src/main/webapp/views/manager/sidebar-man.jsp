@@ -107,8 +107,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'register-staff' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/manager/register-staff"
+              class="nav-link ${currentPage == 'create-staff' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/manager/create-staff"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -117,12 +117,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   class="fa-solid fa-pen-to-square"
                   style="
                   $ {
-                    currentPage != 'register-staff' ? 'color: #30221b;': '';
+                    currentPage != 'create-staff' ? 'color: #30221b;': '';
                   }
                 "
                 ></i>
               </div>
-              <span class="nav-link-text ms-1">Register Staff</span>
+              <span class="nav-link-text ms-1">Create Staff</span>
             </a>
           </li>
         </ul>
@@ -191,14 +191,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
                 'profile' ? 'View Profile' : (currentPage == 'history-man' ?
                 'View History' : (currentPage == 'assign-job' ? 'Assign Job' :
-                (currentPage == 'register' ? 'Register Account Staff' : ''))))}
+                (currentPage == 'register' ? 'Register Account Staff' : (currentPage == 'create-staff' ? 'Create Staff' : '')))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
               'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
               : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
-              'register' ? 'Register Staff' : ''))))}
+              'register' ? 'Register Staff' : (currentPage == 'create-staff' ? 'Create Staff' : '')))))}
             </h6>
           </nav>
 
