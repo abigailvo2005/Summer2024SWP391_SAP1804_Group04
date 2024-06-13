@@ -176,7 +176,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           required
                           onchange="validateFileSize(this)"
                         />
-                        <div id="img-container"></div>
+                        <div id="img-container" class="hidden"></div>
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
@@ -575,7 +575,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
               /* imageBase64Stringsep = base64String; */
               // alert(imageBase64Stringsep);
-              console.log(base64String);
               alert(base64String);
             };
             reader.readAsDataURL(file);

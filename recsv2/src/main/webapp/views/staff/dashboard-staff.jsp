@@ -592,7 +592,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
                           <strong class="text-dark">Land Paperwork:</strong>
-                          <a id="popup-land-pw" target="_blank"></a>
+                          <a id="popup-land-pw" target="_blank" download></a>
                         </li>
                       </div>
                     </div>
@@ -610,7 +610,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             id="housePaperwork"
                           >
                             <strong class="text-dark">House Paperwork:</strong>
-                            <a id="popup-house-pw" target="_blank"></a>
+                            <a id="popup-house-pw" target="_blank" download></a>
                           </li>
                         </div>
                       </div>
@@ -637,6 +637,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
                     <!-- Buttons to decide if property is appropriate or not -->
                     <form action="${pageContext.request.contextPath}/staff/validate-property" method="post">
+                      <input name="jobId" id="popup-jobID" class="hidden"/>
                       <div class="row">
                         <div class="row">
                           <li
@@ -773,12 +774,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-land-type").text(
                 data.realEstateInfo.propertyLand.landType
               );
-              $("#popup-land-pw").text("sample-gg-drive-link-land");
+              $("#popup-land-pw").text("sample-pdf-land");
               document
                 .querySelector("#popup-land-pw")
                 .setAttribute(
                   "href",
-                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                  "sample.pdf"
                 );
             } else {
               houseSection.classList.remove("hidden");
@@ -786,12 +787,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-house-type").text(
                 data.realEstateInfo.propertyHouse.houseType
               );
-              $("#popup-house-pw").text("sample-gg-drive-link-house");
+              $("#popup-house-pw").text("sample-zip-house");
               document
                 .querySelector("#popup-house-pw")
                 .setAttribute(
                   "href",
-                  "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
+                  "sample.zip"
                 );
               $("#popup-builtIn").text(
                 data.realEstateInfo.propertyHouse.builtIn

@@ -39,15 +39,17 @@ public class AgencyController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
-        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
+        //List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
+        //sample loading only
+        List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
+         .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
 
         //TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("reqList", validatingList);
-        model.addAttribute("propList", allRealEstate);
+        //model.addAttribute("reqList", validatingList);
+        model.addAttribute("propList", validatedList);
         return "agency/dashboard-agency";
     }
 

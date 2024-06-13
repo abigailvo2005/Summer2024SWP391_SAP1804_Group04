@@ -21958,6 +21958,19 @@ label,
   box-shadow: 0 0 0 2px rgba(102, 212, 50, 0.65);
 }
 
+#agency-profile-form {
+  border: 1px solid #ccc !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 20px !important;
+  background-color: #f8f9fa !important;
+  color: #333 !important;
+  margin: 20px 0 !important;
+  padding: 20px !important;
+  font-size: 16px !important;
+  max-width: 700px !important;
+  margin: 0 auto !important;
+}
+
 .footer .nav-link {
   color: #291a13;
   font-weight: 400;

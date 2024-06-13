@@ -161,259 +161,275 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 <ul class="list-group">
                   <div class="container-fluid">
                     <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Status:</strong>
-                        <p id="popup-status"></p>
-                      </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Handled by: </strong>
-                        <p id="popup-manager"></p>
-                      </li>
-                    </div>
-
-                    <!-- image carousel -->
-                    <div class="row mb-3">
-                      <div
-                        id="image-section"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
-                      >
-                        <!-- buttons to directly see an image -->
-                        <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
-                        </div>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../template/assets/img/home-decor-1.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-2.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-3.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 3"
-                            />
-                          </div>
-                        </div>
-                        <!-- button fd/backwards -->
-                        <button
-                          class="carousel-control-prev"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="prev"
-                        >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                          class="carousel-control-next"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="next"
-                        >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
-                      >
-                        <strong class="text-dark">Description:</strong>
-                        <p id="popup-desc"></p>
-                      </li>
-                    </div>
-
-                    <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Type:</strong>
-                        <p id="popup-type"></p>
-                      </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Address:</strong>
-                        <p id="popup-address"></p>
-                      </li>
-                    </div>
-
-                    <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Area:</strong>
-                        <p id="popup-area"></p>
-                      </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Price:</strong>
-                        <p id="popup-price"></p>
-                      </li>
-                    </div>
-
-                    <div class="row land-info-section hidden">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Land Type: </strong>
-                        <p id="popup-land-type"></p>
-                      </li>
-                    </div>
-
-                    <div class="house-info-section hidden">
-                      <div class="row">
-                        <li
-                          class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                        >
-                          <strong class="text-dark">House Type: </strong>
-                          <p id="popup-house-type"></p>
-                        </li>
-                      </div>
-
-                      <div class="row">
-                        <li
-                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                        >
-                          <strong class="text-dark">Built in: </strong>
-                          <p id="popup-builtIn"></p>
-                        </li>
-                        <li
-                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                        >
-                          <strong class="text-dark">Bedrooms: </strong>
-                          <p id="popup-bed"></p>
-                        </li>
-                        <li
-                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                        >
-                          <strong class="text-dark">Bathrooms: </strong>
-                          <p id="popup-bath"></p>
-                        </li>
-                      </div>
-                    </div>
-                    <div class="row justify-content-end mt-3">
-                      <button
-                        class="btn btn-outline-dark"
-                        onclick="showAgencyForm()"
-                      >
-                        Handle Listing
-                      </button>
-                    </div>
-
-                    <div class="agency-form-section hidden">
-                      <div class="row">
-                        <div class="col-12">
-                          <h5>Agency Profile</h5>
-                        </div>
-                      </div>
-                      <form id="agency-profile-form">
+                      <div class="col-6" id="img-section">
+                        <!-- image carousel -->
                         <div class="row mb-3">
-                          <div class="col-6">
-                            <label for="agency-name" class="form-label"
-                              >Agency Name</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="agency-name"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <label for="agency-contact" class="form-label"
-                              >Contact Person</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="agency-contact"
-                            />
-                          </div>
-                        </div>
-                        <div class="row mb-3">
-                          <div class="col-6">
-                            <label for="agency-phone" class="form-label"
-                              >Phone</label
-                            >
-                            <input
-                              type="tel"
-                              class="form-control"
-                              id="agency-phone"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <label for="agency-email" class="form-label"
-                              >Email</label
-                            >
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="agency-email"
-                            />
-                          </div>
-                        </div>
-                        <div class="row justify-content-end">
-                          <div class="col-auto">
+                          <div
+                            id="image-section"
+                            class="carousel slide"
+                            data-bs-ride="carousel"
+                          >
+                            <!-- buttons to directly see an image -->
+                            <div class="carousel-indicators">
+                              <button
+                                type="button"
+                                data-bs-target="#image-section"
+                                data-bs-slide-to="0"
+                                class="active"
+                                aria-current="true"
+                                aria-label="Slide 1"
+                              ></button>
+                              <button
+                                type="button"
+                                data-bs-target="#image-section"
+                                data-bs-slide-to="1"
+                                aria-label="Slide 2"
+                              ></button>
+                              <button
+                                type="button"
+                                data-bs-target="#image-section"
+                                data-bs-slide-to="2"
+                                aria-label="Slide 3"
+                              ></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img
+                                  src="../../template/assets/img/home-decor-1.jpg"
+                                  class="d-block w-100 rounded"
+                                  alt="Real Estate Image 1"
+                                />
+                              </div>
+                              <div class="carousel-item">
+                                <img
+                                  src="../../template/assets/img/home-decor-2.jpg"
+                                  class="d-block w-100 rounded"
+                                  alt="Real Estate Image 2"
+                                />
+                              </div>
+                              <div class="carousel-item">
+                                <img
+                                  src="../../template/assets/img/home-decor-3.jpg"
+                                  class="d-block w-100 rounded"
+                                  alt="Real Estate Image 3"
+                                />
+                              </div>
+                            </div>
+                            <!-- button fd/backwards -->
                             <button
+                              class="carousel-control-prev"
                               type="button"
-                              class="btn btn-secondary"
-                              onclick="hideAgencyForm()"
+                              data-bs-target="#image-section"
+                              data-bs-slide="prev"
                             >
-                              Cancel
+                              <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="visually-hidden">Previous</span>
                             </button>
                             <button
+                              class="carousel-control-next"
                               type="button"
-                              class="btn btn-dark"
-                              onclick="submitAgencyProfile()"
+                              data-bs-target="#image-section"
+                              data-bs-slide="next"
                             >
-                              Submit
+                              <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="visually-hidden">Next</span>
                             </button>
                           </div>
                         </div>
-                      </form>
+                      </div>
+                      <div class="col-5 ms-4" id="info-section">
+                        <div class="row">
+                          
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                          >
+                            <strong class="text-dark">Description:</strong>
+                            <p id="popup-desc"></p>
+                          </li>
+                        </div>
+
+                        <div class="row">
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                          >
+                            <strong class="text-dark">Type:</strong>
+                            <p id="popup-type"></p>
+                          </li>
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                          >
+                            <strong class="text-dark">Address:</strong>
+                            <p id="popup-address"></p>
+                          </li>
+                        </div>
+
+                        <div class="row">
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                          >
+                            <strong class="text-dark">Area:</strong>
+                            <p id="popup-area"></p>
+                          </li>
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                          >
+                            <strong class="text-dark">Price:</strong>
+                            <p id="popup-price"></p>
+                          </li>
+                        </div>
+
+                        <div class="row land-info-section hidden">
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                          >
+                            <strong class="text-dark">Land Type: </strong>
+                            <p id="popup-land-type"></p>
+                          </li>
+                        </div>
+
+                        <div class="house-info-section hidden">
+                          <div class="row">
+                            <li
+                              class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                            >
+                              <strong class="text-dark">House Type: </strong>
+                              <p id="popup-house-type"></p>
+                            </li>
+                            <li
+                              class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                            >
+                              <strong class="text-dark">Built in: </strong>
+                              <p id="popup-builtIn"></p>
+                            </li>
+                          </div>
+
+                          <div class="row">
+                            
+                            <li
+                              class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                            >
+                              <strong class="text-dark">Bedrooms: </strong>
+                              <p id="popup-bed"></p>
+                            </li>
+                            <li
+                              class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                            >
+                              <strong class="text-dark">Bathrooms: </strong>
+                              <p id="popup-bath"></p>
+                            </li>
+                          </div>
+                        </div>
+                        <div class="row justify-content-end mt-3">
+                          <button
+                            class="btn btn-outline-dark"
+                            onclick="showAgencyForm()"
+                          >
+                            Handle Listing
+                          </button>
+                        </div>
+
+                        <div class="agency-form-section hidden">
+                          <div class="row d-flex justify-content-center">
+                            <div class="col-12 text-center">
+                              <strong>Agency Profile</strong>
+                            </div>
+                          </div>
+                          <form id="agency-profile-form">
+                            <input
+                                  type="text"
+                                  class="hidden"
+                                  id="agency-id"
+                                  name="agencyId"
+                                />
+                            <div class="row mb-3">
+                              <div class="col-6">
+                                <label for="agency-name" class="form-label"
+                                  >Agency Name</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="agency-name"
+                                  readonly
+                                />
+                              </div>
+                              <div class="col-6">
+                                <label for="agency-contact" class="form-label"
+                                  >Company</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="agency-company"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+
+                            <div class="row mb-3">
+                              <div class="col-6">
+                                <label for="agency-name" class="form-label"
+                                  >Experienced Years</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="agency-experience"
+                                  readonly
+                                />
+                              </div>
+                              <div class="col-6">
+                                <label for="agency-contact" class="form-label"
+                                  >Completed Projects</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="agency-projects"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <div class="col-12">
+                                <label for="agency-name" class="form-label"
+                                  >Description</label
+                                >
+                                <textarea
+                                  class="form-control"
+                                  id="agency-desc"
+                                  name="agencyDescription"
+                                ></textarea>
+                              </div>
+                            </div>
+                           
+                            <div class="row justify-content-center">
+                              <div class="col-auto">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  onclick="hideAgencyForm()"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  type="button"
+                                  class="btn btn-dark"
+                                  onclick="submitAgencyProfile()"
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </ul>
@@ -452,13 +468,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           success: function (data) {
             // Update popup với information chosen Property
             $("#popup-name").text(data.name);
-            $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
             $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
-            $("#popup-manager").text(data.managerInfo.username);
 
             //only show land/house fields according to type
             if (data.realEstateType == "land") {
@@ -515,6 +529,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         document
           .getElementById("popup-property-request")
           .classList.add("hidden");
+          hideAgencyForm();
       }
 
       //still forcely close every popup if clicked on somewhere else than close button

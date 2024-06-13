@@ -92,14 +92,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         STAFF
                       </th>
                       <th
-                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-5"
+                        class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                       >
                         PROPERTY NAME
                       </th>
                       <th
-                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
                         TYPE
+                      </th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                      >
+                        PRICE
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
@@ -156,6 +161,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             </div>
                           </div>
                         </td>
+                        <td>
+                          <div class="d-flex px-2 py-1 justify-content-center">
+                            <div
+                              class="d-flex flex-column justify-content-center"
+                            >
+                              <p class="mb-0 text-sm fw-bold text-dark">
+                                ${val.realEstateInfo.realEstateType}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
                         <td class="align-middle">
                           <div class="d-flex px-2 py-1 justify-content-center">
                             <div
@@ -176,7 +192,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                ${val.createTimeStamp}
+                                ${val.realEstateInfo.createDate}
                               </p>
                             </div>
                           </div>
@@ -201,8 +217,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           </div>
         </div>
       </div>
-      <!-- END LIST-->
+      <!-- END LIST 1-->
 
+      <!-- START: List Processing Properties -->
+
+      <!-- END LIST 2-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
