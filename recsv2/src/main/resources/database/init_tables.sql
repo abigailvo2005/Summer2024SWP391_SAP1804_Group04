@@ -90,6 +90,8 @@ CREATE TABLE RealEstate(
     FOREIGN KEY (managerId) REFERENCES Manager(managerId)
 );
 
+ALTER TABLE RealEstate ADD noteMsg NVARCHAR(255)
+
 -- PropertyHouse Table
 CREATE TABLE PropertyHouse(
     houseId VARCHAR(64) NOT NULL,

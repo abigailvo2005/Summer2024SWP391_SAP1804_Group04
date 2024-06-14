@@ -33,7 +33,7 @@ public enum RealEstateStatus {
     public static RealEstateStatus fromJobStatus(JobStatus jobStatus) {
         if(jobStatus == JobStatus.SUCCESSFUL){
             return DISPLAYED;
-        } else if (jobStatus == JobStatus.FAILED) {
+        } else if (jobStatus == JobStatus.FAIL) {
             return UNQUALIFIED;
         }
         else return UNKNOWN;

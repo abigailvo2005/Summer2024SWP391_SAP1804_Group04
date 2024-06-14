@@ -167,7 +167,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                ${val.realEstateInfo.textPrice}
+                                ${val.realEstateInfo.realEstateType}
                               </p>
                             </div>
                           </div>
@@ -202,7 +202,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <a href="#"><i class="fa-solid fa-eye"></i></a>
+                              <a 
+                                class="show-detail"
+                                onclick="viewDetail('${val.realEstateInfo.realEstateId}')"><i class="fa-solid fa-eye"></i></a>
                             </div>
                           </div>
                         </td>
@@ -216,6 +218,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         </div>
       </div>
       <!-- END LIST 1-->
+
+      <!-- START: List Processing Properties -->
+
+      <!-- END LIST 2-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
@@ -255,7 +261,35 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       <!-- END: FOOTER -->
     </main>
 
+    <!--Start Popup-->
+    <div id="popup-detail" class="popup-container hidden z-index-3">
+      <div class="popup-content container-fluid">
+      </div>
+    
+    <!-- Header -->
+    <div class="popup-header row mx-1">
+      <div class="col-11">
+        <h4
+          id="popup-name"
+          class="card-header font-weight-bolder mb-0"
+        ></h4>
+      </div>
+      <div class="col-1">
+        <i
+          class="fa-solid fa-xmark close-button"
+          onclick="closeDetail()"
+        ></i>
+      </div>
+    </div>
+    </div> 
+    <!--End Popup-->
+
     <script type="text/javascript">
+
+      function viewDetail(jobId) {
+        var popup = document.getElementById("popup-detail");
+      }
+
       function makeTableScroll() {
         // Constant retrieved from server-side via JSP
         var maxRows = 6;

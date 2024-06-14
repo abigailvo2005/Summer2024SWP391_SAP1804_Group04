@@ -88,15 +88,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'register' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/agency/register-mem"
+              class="nav-link ${currentPage == 'create-mem' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/agency/create-mem"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
               >
                 <i class="fa-solid fa-pen-to-square"></i>
               </div>
-              <span class="nav-link-text ms-1">Register Member</span>
+              <span class="nav-link-text ms-1">Create Member</span>
             </a>
           </li>
           <li class="nav-item">
@@ -176,13 +176,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
                 'profile' ? 'View Profile' : (currentPage == 'history' ?
-                'View History' : (currentPage == 'assign-deal' ? 'Assign Deal' : (currentPage == 'register-mem' ? 'Register Member' : (currentPage == 'marketplace' ? 'Marketplace' : '')))))}
+                'View History' : (currentPage == 'assign-deal' ? 'Assign Deal' : 
+                (currentPage == 'register-mem' ? 'Register Member' : 
+                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-mem' ?
+                'Create Member' : ''))))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
                 'profile' ? 'Profile' : (currentPage == 'history' ?
-                'History' : (currentPage == 'assign-deal' ? 'Assign Deal' : (currentPage == 'register-mem' ? 'Register Member' : (currentPage == 'marketplace' ? 'Marketplace' : '')))))}
+                'History' : (currentPage == 'assign-deal' ? 'Assign Deal' : 
+                (currentPage == 'register-mem' ? 'Register Member' : 
+                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-mem' ?
+                'Create Member' : ''))))))}
             </h6>
           </nav>
 
