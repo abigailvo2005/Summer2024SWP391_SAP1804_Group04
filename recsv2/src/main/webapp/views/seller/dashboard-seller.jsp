@@ -803,10 +803,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
             $("#popup-manager").text(data.managerInfo.username);
-            console.log(data.realEstateType);
-
+            
             //only show land/house fields according to type
-            if (data.realEstateType == 'land') {
+            if (data.realEstateType == 'Land') {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);

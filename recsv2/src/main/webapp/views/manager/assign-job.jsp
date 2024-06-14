@@ -781,7 +781,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             $("#popup-price").text(data.textPrice + " VND");
 
             //only show land/house fields according to type
-            if (data.realEstateType == "land") {
+            if (data.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
@@ -839,7 +839,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           .querySelector("#form-price")
           .setAttribute("value", chosenData.textPrice);
 
-        if (chosenData.realEstateType == "land") {
+        if (chosenData.realEstateType == "Land") {
           landSection.classList.remove("hidden");
           houseSection.classList.add("hidden");
           document
