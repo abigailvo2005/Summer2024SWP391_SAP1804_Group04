@@ -765,7 +765,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
 
             //update chosen Job ID according to the chosen one
-            $("#popup-jobID").value = data.jobId;
+            $("#popup-jobID").setAttribute("value", data.jobId);
 
             //only show land/house fields accxording to type
             if (data.realEstateInfo.realEstateType == "Land") {

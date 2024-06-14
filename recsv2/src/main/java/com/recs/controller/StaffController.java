@@ -61,9 +61,6 @@ public class StaffController {
         return "redirect:/staff";
     }
 
-
-
-
     @GetMapping({ "/history" })
     public String historyView(Model model, Authentication authentication) {
         String name = authentication.getName();

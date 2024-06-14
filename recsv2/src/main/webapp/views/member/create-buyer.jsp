@@ -38,7 +38,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
     <!-- START INCLUDE SIDEBAR -->
     <header>
-      <jsp:include page="/views/manager/sidebar-man.jsp" />
+      <jsp:include page="/views/member/sidebar-member.jsp" />
     </header>
     <!-- END INCLUDE SIDEBAR -->
 
@@ -70,232 +70,114 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             <div class="col-12 col-xl-11 mx-auto">
               <div class="card z-index-0">
                 <div class="card-header text-center pt-4">
-                  <h5><b>Staff Register Form</b></h5>
+                  <h5><b>Buyer Profile</b></h5>
                 </div>
 
                 <div class="card-body">
                   <form
                     role="form text-left"
-                    name="register-staff-form"
-                    action="${pageContext.request.contextPath}/manager/register-staff"
+                    name="submit-buyer-profile"
+                    action="${pageContext.request.contextPath}/member/create-buyer"
                     method="post"
                   >
                     <div class="mb-3 row">
                       <div class="col-sm-2">
-                        <label for="fullName">Full Name:</label>
+                        <label for="firstname">First Name:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          id="fullName"
-                          name="fullName"
+                          id="firstname"
+                          name="firstname"
                           class="form-control form-create-control col-10"
-                          placeholder="Enter full name"
+                          placeholder="Enter last name"
                           required
                         />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
                         <p
                           class="text-danger text-error mb-0 text-center pt-1 error-name hidden"
                         >
-                          name should only contains maximum 255 characters.
+                          name should only contains maximum 32 characters.
                         </p>
                       </div>
 
                       <div class="col-sm-2">
-                        <label for="gender">Gender:</label>
+                        <label for="lastname">Last Name:</label>
                       </div>
                       <div class="col-sm-4">
-                        <select
+                        <input
+                          type="text"
+                          id="lastname"
+                          name="lastname"
                           class="form-control form-create-control col-10"
-                          id="gender"
-                          name="gender"
+                          placeholder="Enter last name"
                           required
+                        />
+                        <!-- ERROR MESSAGE BEING HIDDEN -->
+                        <p
+                          class="text-danger text-error mb-0 text-center pt-1 error-name hidden"
                         >
-                          <option value="" disabled selected>
-                            Select biological gender
-                          </option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          name should only contains maximum 32 characters.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                      <div class="col-sm-2">
+                        <label for="birthday">Introduction Message:</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <textarea
+                          id="buyer-description"
+                          name="description"
+                          class="form-control form-create-control col-10"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <!-- drop down chosen real estate to submit buyer to -->
+                    <div class="row mb-3">
+                      <div class="col-sm-2">
+                        <label>Deal Submitted To:</label>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          id="form-chosen-deal"
+                          type="text"
+                          name="dealId"
+                          class="form-control form-create-control col-10"
+                          hidden
+                        />
+                      </div>
+
+                      <div class="col-sm-6">
+                        <select
+                          class="form-control form-create-control"
+                          onchange="chooseRealEstate(this.value)"
+                        >
+                          <option class="fs-6" value="">Choose Deal</option>
+                          <c:forEach items="${dealList}" var="deal">
+                            <option class="fs-6" value="${deal.dealId}">
+                              ${deal.realEstateInfo.name}
+                            </option>
+                          </c:forEach>
                         </select>
                       </div>
                     </div>
 
-                    <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label for="birthday">Date of Birth:</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          type="date"
-                          id="birthday"
-                          name="birthday"
-                          class="form-control form-create-control col-10"
-                          required
-                          onchange="validateDateOfBirth()"
-                        />
-                        <p
-                          class="text-danger text-error mb-0 text-center pt-1 error-bday hidden"
-                        >
-                          birthday has to be before current day.
-                        </p>
-                      </div>
-                      <div class="col-sm-2">
-                        <label for="email"> Email:</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          class="form-control form-create-control col-10"
-                          placeholder="Enter work email"
-                          required
-                        />
-                        <p
-                          class="text-danger text-error mb-0 text-center pt-1 error-email hidden"
-                        >
-                          email is not in the correct format. (ie:
-                          example@domain.com)
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label for="phone"> Phone:</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          type="number"
-                          id="phone"
-                          name="phone"
-                          class="form-control form-create-control col-10"
-                          placeholder="Enter phone number"
-                          min="1"
-                          required
-                        />
-                      </div>
-                      <div class="col-sm-2">
-                        <label for="address"> Address:</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          type="text"
-                          id="address"
-                          name="address"
-                          class="form-control form-create-control col-10"
-                          placeholder="your property's adress"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label for="password">Password:</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          type="text"
-                          id="password"
-                          name="password"
-                          class="form-control form-create-control col-10"
-                          placeholder="Enter expected password"
-                          required
-                        />
-                        <p
-                          class="text-danger text-error mb-0 text-center pt-1 error-pw hidden"
-                        >
-                          password must be: <br />
-                          Minimum length of 8 characters.<br />
-                          At least one lowercase letter.<br />
-                          At least one uppercase letter.<br />
-                          At least one digit.<br />
-                          At least one special character from the set: @$!%*?&.
-                        </p>
-                      </div>
-                      <div class="col-sm-2">
-                        <label for="idCardNo"> ID Card No. :</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          type="number"
-                          id="idCardNo"
-                          name="idCardNo"
-                          class="form-control form-create-control col-10"
-                          placeholder="Enter ID card number"
-                          min="1"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label for="frontID"> ID Card (Front):</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          class="form-control form-create-control col-10"
-                          id="frontID"
-                          type="file"
-                          name="frontID"
-                          required
-                        />
-                        <p
-                          class="text-danger text-error mb-0 text-center pt-1 error-id-front hidden"
-                        >
-                          only accept .gif .jpeg .png .jpg .heic
-                        </p>
-                      </div>
-
-                      <div class="col-sm-2">
-                        <label for="backID"> ID Card (Back):</label>
-                      </div>
-                      <div class="col-sm-4">
-                        <input
-                          class="form-control form-create-control col-10"
-                          id="backID"
-                          type="file"
-                          name="backID"
-                          required
-                        />
-                        <p
-                          class="text-danger text-error mb-0 text-center pt-1 error-id-back hidden"
-                        >
-                          only accept .gif .jpeg .png .jpg .heic
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                      <div class="col-sm-2">
-                        <label for="role"> Role:</label>
-                      </div>
-                      <div class="col-sm-2">
-                        <input
-                          type="text"
-                          id="role"
-                          class="form-control form-create-control col-10"
-                          value="Staff"
-                          disabled
-                          required
-                        />
-                      </div>
-
-                      <!-- submit button -->
-                      <div class="text-center container">
-                        <div class="row">
-                          <div class="col-sm-4"></div>
-                          <div class="col-sm-4">
-                            <button
-                              type="button"
-                              class="btn bg-gradient-dark w-100 my-4 mb-2"
-                              onclick="submitRegister()"
-                            >
-                              Submit Request
-                            </button>
-                          </div>
+                    <!-- submit button -->
+                    <div class="text-center container">
+                      <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                          <button
+                            type="button"
+                            class="btn bg-gradient-dark w-100 my-4 mb-2"
+                            onclick="submitRegister()"
+                          >
+                            Submit Request
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -498,18 +380,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     </main>
 
     <script type="text/javascript">
-      //validate birthday of staff
-      function validateDateOfBirth() {
-        const birthdayInput = document.getElementById("birthday");
-        const birthDate = new Date(birthdayInput.value);
-        const currentDate = new Date();
+      //load deal ID to submit to controller
+      function chooseRealEstate(dealID) {
+        // Retrieve the "chosen-deal" input element
+        const chosenDealInput = document.getElementById("form-chosen-deal");
 
-        if (birthDate.getTime() >= currentDate.getTime()) {
-          document.querySelector(".error-bday").classList.remove("hidden"); //show errors
-          birthdayInput.value = ""; // Delete bday value if invalid
-        } else {
-          document.querySelector(".error-bday").classList.add("hidden"); //hide errors
-        }
+        // Update the value of the "chosen-deal" input
+        chosenDealInput.setAttribute("value", dealID);
       }
 
       //submit register new staff request to admin
@@ -606,7 +483,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             alert("Successfully requested to register a new Staff!");
             document.querySelector("form").submit();
           });
-
         } else {
           // If some fields are empty, show default errors
           document.querySelector("form").reportValidity();

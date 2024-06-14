@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -45,7 +44,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       <div class="sidenav-header mt-0">
         <a
           class="navbar-brand m-0"
-          href="${pageContext.request.contextPath}/seller/dashboard"
+          href="${pageContext.request.contextPath}/member/dashboard"
           target="_self"
         >
           <img
@@ -64,7 +63,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item">
             <a
               class="nav-link ${currentPage == 'dashboard' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/seller/dashboard"
+              href="${pageContext.request.contextPath}/member/dashboard"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -73,7 +72,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   class="fa-solid fa-table-columns"
                   style="
                     $ {
-                      currentpage !='dashboard'?'color: #30221b' : '';
+                      currentpage!='dashboard'?'color: #30221b' : '';
                     }
                   "
                 ></i>
@@ -83,8 +82,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'profile-seller' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/seller/profile"
+              class="nav-link ${currentPage == 'profile' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/member/profile"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -93,7 +92,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   class="fa-solid fa-user"
                   style="
                     $ {
-                      currentpage!='profile-seller'?'color: #30221b' : '';
+                      currentpage!='profile-seller'?'color: #30221b': '';
                     }
                   "
                 ></i>
@@ -133,8 +132,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         </div>
         <a
           class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/seller/create-property"
-          >Create Property</a
+          href="${pageContext.request.contextPath}/member/create-buyer"
+          >Submit Buyer Profile</a
         >
       </div>
     </aside>
@@ -164,15 +163,15 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-seller' ?
-                'View History' : (currentPage == 'create-property' ? 'Create
-                Property' : '')))}
+                'profile' ? 'View Profile' : (currentPage == 'history' ? 'View
+                History' : (currentPage == 'create-buyer' ? 'Submit Buyer
+                Profile' : '')))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-seller' ?
-              'History' : (currentPage == 'create-property' ? 'Create Property'
+              'profile' ? 'View Profile' : (currentPage == 'history' ? 'View
+              History' : (currentPage == 'create-buyer' ? 'Submit Buyer Profile'
               : '')))}
             </h6>
           </nav>
@@ -182,8 +181,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
             id="navbar"
           >
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            </div>
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
             <ul class="navbar-nav justify-content-end">
               <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">

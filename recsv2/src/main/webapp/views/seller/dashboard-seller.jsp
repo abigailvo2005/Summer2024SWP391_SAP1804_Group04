@@ -718,7 +718,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
-
         e.preventDefault();
 
         // Get all checkboxes values in table
@@ -826,9 +825,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
-            if (data.status.toLowerCase() == "hasAgency") {
+            if (data.status.toLowerCase() == "agency_approving") {
                 agencyList.classList.remove("hidden");
-            } else if (data.status.toLowerCase() == "hasBuyer") {
+            } else if (data.status.toLowerCase() == "buyer_approving") {
               buyerList.classList.remove("hidden");
             }
 
