@@ -34,4 +34,6 @@ public interface RealEstateService {
     public RealEstate update(RealEstate realEstate);
 
     public RealEstate updateStatus(String realEstateId, RealEstateStatus status, String noteMsg);
+
+    public List<RealEstateInfo> getAllByStatus(String status);
 }

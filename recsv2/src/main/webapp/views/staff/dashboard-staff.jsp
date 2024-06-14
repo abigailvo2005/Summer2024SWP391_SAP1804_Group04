@@ -352,7 +352,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${listing.id}', 'list')"
+                                    onclick="viewDetail('${listing.jobId}', 'list')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>

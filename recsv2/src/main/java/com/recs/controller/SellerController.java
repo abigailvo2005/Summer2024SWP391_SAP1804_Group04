@@ -68,7 +68,6 @@ public class SellerController {
         return "seller/create-property";
     }
 
-    //Todo() associate with jsp
     @PostMapping({ "/create-property" })
     public String createPropView(
             @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,
@@ -78,7 +77,6 @@ public class SellerController {
         String currentPage = "create-property";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        // add message, redirect, any cai lon gi cung dc
         return "redirect:/seller";
     }
 

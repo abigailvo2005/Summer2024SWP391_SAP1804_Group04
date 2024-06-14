@@ -16,4 +16,6 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, String> 
 
     public long countByManagerId(String managerId);
 
+    public List<RealEstate> findAllByStatus(String status);
+
 }

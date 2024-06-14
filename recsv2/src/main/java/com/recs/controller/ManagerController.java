@@ -7,6 +7,7 @@ import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
+import com.recs.models.enums.JobStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
 import com.recs.services.realestaesvc.RealEstateService;
@@ -104,7 +105,7 @@ public class ManagerController {
                 request.getRealEstateId(),
                 Clock.systemUTC().millis(),
                 1,
-                "validating",
+                JobStatus.ASSIGNED.getValue(),
                 request.getStaffId(),
                 userInfo.getManagerId()
         );

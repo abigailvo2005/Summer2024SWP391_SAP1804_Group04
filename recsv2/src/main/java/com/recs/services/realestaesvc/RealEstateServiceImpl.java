@@ -213,6 +213,12 @@ public class RealEstateServiceImpl implements RealEstateService{
         return realEstate;
     }
 
+    @Override
+    public List<RealEstateInfo> getAllByStatus(String status) {
+        List<RealEstate> realEstates = realEstateRepository.findAllByStatus(status);
+        return mapListToInfo(realEstates);
+    }
+
     private RealEstate convertToRealEstate(String sellerId, CreateRealEstateRequestDTO dto) {
         return new RealEstate(
                 UUID.randomUUID().toString(),
@@ -222,7 +228,7 @@ public class RealEstateServiceImpl implements RealEstateService{
                 dto.getAddress(),
                 dto.getArea(),
                 dto.getPrice(),
-                "reviewing",
+                RealEstateStatus.REVIEWING.getValue(),
                 0,
                 Clock.systemUTC().millis(),
                 Clock.systemUTC().millis(),

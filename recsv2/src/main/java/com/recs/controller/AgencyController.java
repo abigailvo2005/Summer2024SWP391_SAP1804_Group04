@@ -4,6 +4,7 @@ import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
+import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,7 @@ public class AgencyController {
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         //List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         //sample loading only
-        List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
-         .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
+        List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
 
         //TODO() tự nhét vào
         String currentPage = "dashboard";

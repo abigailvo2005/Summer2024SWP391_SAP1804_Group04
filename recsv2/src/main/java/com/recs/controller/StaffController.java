@@ -2,11 +2,15 @@ package com.recs.controller;
 
 
 import com.recs.models.dto.account.UserInfo;
+import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
+import com.recs.models.enums.JobStatus;
+import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
+import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -31,6 +35,9 @@ public class StaffController {
     @Autowired
     private RecsBusinessService recsBusinessService;
 
+    @Autowired
+    private RealEstateService realEstateService;
+
     @ModelAttribute(name = "LOGIN_USER")
     public UserInfo getLoginUser(Authentication authentication) {
         String name = authentication.getName();
@@ -44,7 +51,7 @@ public class StaffController {
 
         List<ValidationJobInfo> allJobList = recsBusinessService.getListByStaff(userInfo.getStaffId());
 
-        List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), "success");
+        List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
 
 
         String currentPage = "dashboard";
