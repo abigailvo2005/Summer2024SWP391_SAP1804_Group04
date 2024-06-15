@@ -33,6 +33,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -169,20 +173,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-4">
                         <input
                           id="prop-img"
-                          onchange="checkImage()"
                           type="file"
                           class="form-control form-create-control col-10"
+                          accept="image/png, image/jpeg, image/heic, image/jpg, image/gif"
                           multiple
                           required
-                          onchange="validateFileSize(this)"
                         />
-                        <div id="img-container" class="hidden"></div>
-                        <!-- ERROR MESSAGE BEING HIDDEN -->
-                        <p
-                          class="error-img text-danger text-error mb-0 text-center pt-1 hidden"
-                        >
-                          only accept image formats (.heic .png .jpg .jpeg .gif)
-                        </p>
+                        <!--  onchange="validateFileSize(this)" -->
+                        <div id="img-container" class=""></div>
                       </div>
 
                       <!-- To Choose property type - shows corresponding information to fill in next -->
@@ -235,21 +233,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="prop-pw-land"
                             type="file"
+                            accept="application/pdf, application/zip"
                             class="form-control form-create-control col-10"
-                            onchange="checkPaperwork('land')"
                             required
                           />
                           <input
                             id="land-pw-container"
                             name="paperwork"
                             type="text"
-                            hidden
+                            class="hidden"
+                            value="null"
                           />
-                          <p
-                            class="error-pw-land text-danger text-error mb-0 text-center pt-1 hidden"
-                          >
-                            only accept .zip or .pdf files.
-                          </p>
                         </div>
                       </div>
                     </div>
@@ -285,21 +279,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             id="prop-pw-house"
                             type="file"
                             class="form-control form-create-control col-10"
-                            onchange="checkPaperwork('house')"
+                            accept="application/pdf, application/zip"
                             required
                           />
                           <input
                             id="house-pw-container"
                             name="paperwork"
                             type="text"
-                            hidden
+                            class="hidden"
+                            value="null"
                           />
-                          <!-- ERROR MESSAGE BEING HIDDEN -->
-                          <p
-                            class="error-pw-house text-danger text-error mb-0 text-center pt-1 hidden"
-                          >
-                            only accept .zip of .pdf files.
-                          </p>
                         </div>
                       </div>
 
@@ -356,6 +345,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="row justify-content-center">
                           <div class="col-4">
                             <button
+                              id="submit-btn"
                               type="button"
                               onclick="submitRequest(event)"
                               class="btn btn-dark w-100 my-2 mb-2"
@@ -420,43 +410,44 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script type="module" src="../../template/assets/js/img-handler.js"></script>
+   
 
     <script>
-
       //validate price
       function validatePrice() {
-        const area = document.getElementById('area').value;
-            const price = document.getElementById('price').value;
+        const area = document.getElementById("area").value;
+        const price = document.getElementById("price").value;
 
-            const areaNumber = parseFloat(area);
-            const priceNumber = parseFloat(price);
+        const areaNumber = parseFloat(area);
+        const priceNumber = parseFloat(price);
 
-            const minPrice = areaNumber * 20;
-            const maxPrice = areaNumber * 50;
+        const minPrice = areaNumber * 20;
+        const maxPrice = areaNumber * 50;
 
-            if (priceNumber < minPrice || priceNumber > maxPrice) {
-                const confirmation = confirm(`Are you sure about this price?`);
-                if (!confirmation) {
-                    document.getElementById('price').value = '';
-                    return false;
-                }
-            }
-            return true;  
+        if (priceNumber < minPrice || priceNumber > maxPrice) {
+          const confirmation = confirm(`Are you sure about this price?`);
+          if (!confirmation) {
+            document.getElementById("price").value = "";
+            return false;
+          }
+        }
+        return true;
       }
 
-      //Validate file imaga < 2MB
+      //Validate file image < 2MB
       function validateFileSize(input) {
-            const files = input.files;
-            const maxSize = 2 * 1024 * 1024; // 2MB
+        const files = input.files;
+        const maxSize = 2 * 1024 * 1024; // 2MB
 
-            for (let i = 0; i < files.length; i++) {
-                if (files[i].size > maxSize) {
-                    alert("File size exceeds 2MB limit: " + files[i].name);
-                    input.value = ''; // Clear the input
-                    return false;
-                }
-            }
-            return true;
+        for (let i = 0; i < files.length; i++) {
+          if (files[i].size > maxSize) {
+            alert("File size exceeds 2MB limit: " + files[i].name);
+            input.value = ""; // Clear the input
+            return false;
+          }
+        }
+        return true;
       }
 
       /* Create Property Form: only show some fields corresponding to type of property */
@@ -510,119 +501,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-      /* Convert paperwork into URL link */
-      function checkPaperwork(type) {
-        const pwInput = document.getElementById("prop-pw-" + type);
-        const file = pwInput.files[0];
-        const pwError = document.querySelector(".error-pw-" + type);
-        const pwContainer = document.getElementById(type + "-pw-container");
-        const validTypes = ["application/pdf", "application/zip"];
-
-        pwContainer.value = "";
-
-        //check if file is PDF or ZIP file
-        if (file && validTypes.includes(file.type)) {
-          pwError.classList.add("hidden");
-
-          //convert file into URL link
-          const url = window.URL.createObjectURL(file);
-
-          //Put back file url to a new input to pass into controller
-          document.getElementById(type + "-pw-container");
-          pwContainer.value = url;
-        } else {
-          // Show error if one of the file is not PDF/zip
-          pwError.classList.remove("hidden");
-          // Clear input
-          pwInput.value = "";
-          return;
-        }
-      }
-
-      /* Convert image file into URLs and save it  */
-      function checkImage() {
-        const imgInput = document.getElementById("prop-img");
-        const imgList = [];
-        const files = imgInput.files;
-        const imgError = document.querySelector(".error-img");
-        const imgContainer = document.getElementById("img-container");
-        const validImageTypes = [
-          "image/gif",
-          "image/jpeg",
-          "image/png",
-          "image/jpg",
-          "image/heic",
-        ];
-
-        let base64String = "";
-
-        //reset img options
-        imgContainer.innerHTML = "";
-
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          // Check if file is an image or not
-          if (validImageTypes.includes(file.type)) {
-            imgError.classList.add("hidden");
-
-            let reader = new FileReader();
-            console.log("next");
-
-            reader.onload = function () {
-              base64String = reader.result;
-              /* .replace("data:", "")
-                .replace(/^.+,/, "");  */
-
-              /* imageBase64Stringsep = base64String; */
-              // alert(imageBase64Stringsep);
-              alert(base64String);
-            };
-            reader.readAsDataURL(file);
-            /*
-                  const url = window.URL.createObjectURL(file);
-
-                  console.log("image " + i + ": " + url); */
-
-            //Put back img url to a new input to pass into controller
-            const item = document.createElement("input");
-            item.type = "checkbox";
-            item.value = base64String;
-            item.name = "images";
-            item.checked = true;
-            var label = document.createElement("label");
-            label.textContent = base64String;
-            var checkboxWrapper = document.createElement("div");
-            checkboxWrapper.classList.add("checkbox-wrapper");
-            checkboxWrapper.appendChild(item);
-            checkboxWrapper.appendChild(label);
-
-            imgContainer.appendChild(checkboxWrapper);
-            /* const test = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" */ /* 
-            const text = "data:image/jpeg;charset=utf-8;base64," + base64String; */
-            console.log("base64string to convert: " + base64String);
-            document.getElementById("test").src = base64String;
-          } else {
-            // Show error if one of the file is not img
-            imgError.classList.remove("hidden");
-            // Clear input
-            imgInput.value = "";
-            return;
-          }
-        }
-      }
-
       /* Process data & redirect back to dashboard after clicked submit */
       function submitRequest(event) {
         event.preventDefault(); //Stop form from default submitting
-
-
 
         // Check if all fields have values
         if (document.querySelector("form").checkValidity()) {
           const propertyNameInput = document.querySelector("#prop-name");
           const nameError = document.querySelector(".error-name");
-          const area = document.getElementById('area').value;
-          const price = document.getElementById('price').value;
+          const area = document.getElementById("area").value;
+          const price = document.getElementById("price").value;
           const areaNumber = parseFloat(area);
           const priceNumber = parseFloat(price);
           const minPrice = areaNumber * 20000000;
@@ -631,12 +519,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           nameError.classList.add("hidden"); //clear all errors first
 
           if (priceNumber < minPrice || priceNumber > maxPrice) {
-                const confirmation = confirm(`Are you sure about this price?`);
-                if (!confirmation) {
-                    document.getElementById('price').value = '';
-                    return;
-                }
+            const confirmation = confirm(`Are you sure about this price?`);
+            if (!confirmation) {
+              document.getElementById("price").value = "";
+              return;
             }
+          }
 
           if (propertyNameInput.value.length > 32) {
             //Check if property's name is longer than 32 characters

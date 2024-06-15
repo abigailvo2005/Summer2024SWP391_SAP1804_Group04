@@ -174,7 +174,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
           <!-- right side: search & profile-->
           <div
-            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 z-index-0"
             id="navbar"
           >
             <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>

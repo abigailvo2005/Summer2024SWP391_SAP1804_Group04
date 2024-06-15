@@ -38,6 +38,7 @@ com/recs/RecsApplication.class
 com/recs/repositories/realestate/PropertyLandRepository.class
 com/recs/repositories/account/ManagerRepository.class
 com/recs/models/dto/recsbusiness/ValidationJobInfo.class
+com/recs/controller/MemberController.class
 com/recs/ServletInitializer.class
 com/recs/models/enums/JobStatus.class
 com/recs/models/entities/account/Seller.class

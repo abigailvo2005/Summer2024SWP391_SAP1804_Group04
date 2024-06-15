@@ -2,6 +2,7 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/realestate/RealEstateRepository.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/security/SecurityConfiguration.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/account/ManagerDTO.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/enums/JobStatus.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/account/MemberDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/ManagerController.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/account/StaffDTO.java
@@ -21,6 +22,7 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/HomeController.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/SellerController.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/realestate/PropertyImagesRepository.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/MemberController.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/realestaesvc/RealEstateServiceImpl.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/businesssvc/RecsBusinessServiceImpl.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/accountsvc/AccountServiceImpl.java
@@ -28,7 +30,9 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/account/AgencyDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/AdminController.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/businesssvc/RecsBusinessService.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/UpdateJobStatusDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/ValidationJobInfo.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/enums/RealEstateStatus.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/utils/AccountUtils.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/account/Seller.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/StaffController.java
