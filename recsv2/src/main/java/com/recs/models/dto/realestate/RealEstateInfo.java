@@ -32,7 +32,7 @@ public class RealEstateInfo {
     private RealEstateStatus status;
     private int displayable;
     private long createTimestamp;
-    private String createDate;
+    public String createDate;
     private long updateTimestamp;
     private String updatedDate;
 

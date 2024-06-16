@@ -85,7 +85,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <div class="table-responsive">
                     <table class="table align-items-center mb-0">
                       <thead>
-                        <tr class="user-row">
+                        <tr>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
@@ -120,7 +120,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </thead>
                       <tbody>
                         <c:forEach items="${allAccounts}" var="user">
-                          <tr>
+                          <tr class="user-row">
                             <td class="align-middle text-center text-sm">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -527,43 +527,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       //display elements according to search value
       function searchTable(type) {
         //search for request register accounts
-        if (type.includes("req")) {
-          //Get values from input search
-          var searchReq = document
-            .getElementById("reqSearch")
-            .value.toLowerCase();
 
-          // Get all rows in table
-          var requests = document.querySelectorAll(".req-row");
-
-          requests.forEach(function (row) {
-            var username = row
-              .querySelector("#req-uname")
-              .textContent.toLowerCase();
-            var name = row
-              .querySelector("#req-fname")
-              .textContent.toLowerCase();
-            var role = row.querySelector("#req-role").textContent.toLowerCase();
-            if (
-              username.includes(searchReq) ||
-              name.includes(searchReq) ||
-              role.includes(searchReq)
-            ) {
-              row.style.display = "";
-            } else {
-              row.style.display = "none";
-            }
-          });
-        } else {
           //Get values from input search
-          var searchReq = document
+          var searchUser = document
             .getElementById("userSearch")
             .value.toLowerCase();
 
           // Get all rows in table
-          var requests = document.querySelectorAll(".user-row");
+          var user = document.querySelectorAll(".user-row");
 
-          requests.forEach(function (row) {
+
+          user.forEach(function (row) {
             var username = row
               .querySelector("#user-uname")
               .textContent.toLowerCase();
@@ -573,10 +547,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             var role = row
               .querySelector("#user-role")
               .textContent.toLowerCase();
+
+              console.log("Checking row:", row, "Username:", username, "Full Name:", name);
             if (
-              username.includes(searchReq) ||
-              name.includes(searchReq) ||
-              role.includes(searchReq)
+              username.includes(searchUser) ||
+              name.includes(searchUser) ||
+              role.includes(searchUser)
             ) {
               row.style.display = "";
             } else {
@@ -584,7 +560,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
           });
         }
-      }
     </script>
   </body>
 </html>

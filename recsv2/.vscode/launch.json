@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ValidationJobInfo",
+            "request": "launch",
+            "mainClass": "com.recs.models.dto.recsbusiness.ValidationJobInfo",
+            "projectName": "recs"
+        },
+        {
+            "type": "java",
             "name": "RealEstateUtils",
             "request": "launch",
             "mainClass": "com.recs.utils.RealEstateUtils",
