@@ -14,7 +14,7 @@ public class CreateRealEstateRequestDTO {
     private String description;
     private Double area;
     private Long price;
-//    private List<MultipartFile> images;
+    private List<MultipartFile> images;
     private String propertyType;
     private String landCategory;
     private String paperwork;

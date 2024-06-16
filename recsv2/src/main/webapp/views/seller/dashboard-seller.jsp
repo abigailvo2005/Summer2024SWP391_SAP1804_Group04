@@ -173,7 +173,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="prop-status"
                                     class="mb-0 text-sm fw-bold text-muted"
                                   >
-                                    ${prop.status}
+                                    ${prop.status.value}
                                   </p>
                                 </div>
                               </div>
@@ -334,8 +334,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   <p
                                     id="req-status"
                                     class="mb-0 text-sm fw-bold text-muted"
+                                    style=""
                                   >
-                                    ${req.status}
+                                    ${req.status.value}
                                   </p>
                                 </div>
                               </div>
@@ -803,7 +804,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
             $("#popup-manager").text(data.managerInfo.username);
-            
+
             //only show land/house fields according to type
             if (data.realEstateType == 'Land') {
               landSection.classList.remove("hidden");

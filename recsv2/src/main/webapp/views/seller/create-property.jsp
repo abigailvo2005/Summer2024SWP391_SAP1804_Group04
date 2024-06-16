@@ -179,7 +179,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           multiple
                           required
                         />
-                        <!--  onchange="validateFileSize(this)" -->
                         <div id="img-container" class=""></div>
                       </div>
 
