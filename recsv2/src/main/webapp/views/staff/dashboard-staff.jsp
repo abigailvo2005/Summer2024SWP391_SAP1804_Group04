@@ -154,7 +154,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${job.createTimeStamp}
+                                    ${job.realEstateInfo.createDate}
                                   </p>
                                 </div>
                               </div>
@@ -327,7 +327,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.realEstateInfo.createTimeStamp}
+                                    ${listing.realEstateInfo.createDate}
                                   </p>
                                 </div>
                               </div>
@@ -760,6 +760,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#manager").text(data.managerInfo.username);
             $("#popup-name").text(data.realEstateInfo.name);
             $("#popup-status").text(data.status);
+            $("#popup-dateCreated").text(data.realEstateInfo.createDate)
             $("#popup-desc").text(data.realEstateInfo.description);
             $("#popup-type").text(data.realEstateInfo.realEstateType);
             $("#popup-address").text(data.realEstateInfo.address);
