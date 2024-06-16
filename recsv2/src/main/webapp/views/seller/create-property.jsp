@@ -241,7 +241,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             name="paperwork"
                             type="text"
                             class="hidden"
-                            value="null"
+                            value=""
                           />
                         </div>
                       </div>
@@ -286,7 +286,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             name="paperwork"
                             type="text"
                             class="hidden"
-                            value="null"
+                            value=""
                           />
                         </div>
                       </div>
@@ -410,7 +410,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script type="module" src="../../template/assets/js/img-handler.js"></script>
-   
+
 
     <script>
       //validate price
