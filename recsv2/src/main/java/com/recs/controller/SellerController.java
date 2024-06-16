@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_SELLER')")
@@ -77,6 +75,7 @@ public class SellerController {
         String currentPage = "create-property";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
+
         return "redirect:/seller";
     }
 

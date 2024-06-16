@@ -36,14 +36,13 @@ public class RealEstateInfo {
     private long updateTimestamp;
     private String updatedDate;
 
-
     private UserInfo managerInfo;
     private UserInfo sellerInfo;
 
     private PropertyHouse propertyHouse;
     private PropertyLand propertyLand;
-    private List<PropertyImages> propertyImagesList;
-    private PaperWorks paperWorks;
+    private List<String> propertyImagesList;
+    private String paperWorks;
     private String notes;
 
     private RealEstateInfo(Builder builder) {
@@ -90,8 +89,8 @@ public class RealEstateInfo {
 
         private PropertyHouse propertyHouse;
         private PropertyLand propertyLand;
-        private List<PropertyImages> propertyImagesList;
-        private PaperWorks paperWorks;
+        private List<String> propertyImagesList;
+        private String paperWorks;
         private String notes;
 
         public Builder setRealEstateId(String realEstateId) {
@@ -184,12 +183,12 @@ public class RealEstateInfo {
             return this;
         }
 
-        public Builder setPropertyImagesList(List<PropertyImages> propertyImagesList) {
+        public Builder setPropertyImagesList(List<String> propertyImagesList) {
             this.propertyImagesList = propertyImagesList;
             return this;
         }
 
-        public Builder setPaperWorks(PaperWorks paperWorks) {
+        public Builder setPaperWorks(String paperWorks) {
             this.paperWorks = paperWorks;
             return this;
         }
@@ -261,4 +260,3 @@ public class RealEstateInfo {
     }
 
 }
-

@@ -115,7 +115,8 @@ CREATE TABLE PropertyLand(
 
 -- PropertyImages Table
 CREATE TABLE PropertyImages(
-    realEstateId VARCHAR(64) PRIMARY KEY,
+	imageId int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    realEstateId VARCHAR(64),
     url VARCHAR(512),
     FOREIGN KEY (realEstateId) REFERENCES RealEstate(realEstateId)
 );

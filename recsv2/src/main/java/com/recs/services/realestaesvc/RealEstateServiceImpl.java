@@ -148,21 +148,30 @@ public class RealEstateServiceImpl implements RealEstateService{
         if (info != null) {
             UserInfo manager = accountService.getManagerToUserInfo(realEstate.getManagerId());
             UserInfo seller = accountService.getSellerToUserInfo(realEstate.getSellerId());
-            List<PropertyImages> images = propertyImagesRepository.findAllByRealEstateId(realEstateId);
             info.setManagerInfo(manager);
             info.setSellerInfo(seller);
-            info.setPropertyImagesList(images == null ? images : List.of());
         }
 
+        List<PropertyImages> propertyImages = propertyImagesRepository.findAllByRealEstateId(realEstateId);
+
+        List<String> images = propertyImages != null ? propertyImages.stream()
+                .map(PropertyImages::getUrl).toList()
+                : List.of();
+        String paperWorks = paperWorksRepository.getReferenceById(realEstateId)
+                .getUrl();
+
         System.out.println("Real estate info: "+info);
-        return info;
+        return info.toBuilder()
+                .setPropertyImagesList(images)
+                .setPaperWorks(paperWorks)
+                .build();
     }
 
     @Override
     public RealEstate createRealEstate(String sellerId, CreateRealEstateRequestDTO request) {
         RealEstate realEstate = convertToRealEstate(sellerId, request);
         System.out.println("realEstate entity: "+ realEstate);
-//        PropertyImages images = realEstate.
+
         if(realEstate.getRealEstateType() == 1) {
             PropertyLand land = new PropertyLand(
                     UUID.randomUUID().toString(),
@@ -190,6 +199,13 @@ public class RealEstateServiceImpl implements RealEstateService{
                 StringUtils.EMPTY,
                 request.getPaperwork()
                 );
+
+        List<PropertyImages> images = request.getImages().stream().map( image ->
+                        new PropertyImages("", realEstate.getRealEstateId(), image))
+                .toList();
+
+        propertyImagesRepository.saveAll(images);
+
         System.out.println("paperwork: "+ paperWorks);
         paperWorksRepository.save(paperWorks);
         return realEstate;
