@@ -239,9 +239,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="land-pw-container"
                             name="paperwork"
-                            type="text"
-                            class="hidden"
-                            value=""
+                            type="hidden"
                           />
                         </div>
                       </div>
@@ -284,9 +282,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="house-pw-container"
                             name="paperwork"
-                            type="text"
-                            class="hidden"
-                            value=""
+                            type="hidden"
+                            
                           />
                         </div>
                       </div>
