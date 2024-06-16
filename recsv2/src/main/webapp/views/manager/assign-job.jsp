@@ -74,8 +74,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         id="propSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type id/name/type here..."
-                        onkeyup="searchTable('req')"
+                        placeholder="Type name/type here..."
+                        onkeyup="searchTable()"
                       />
                     </div>
                   </div>
@@ -929,18 +929,21 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       //display elements according to search value
       function searchTable() {
         var searchReq = document
-          .getElementById("searchInput")
+          .getElementById("propSearch")
           .value.toLowerCase();
 
         //Get all rows in table
-        var requests = document.querySelectorAll(".validate-row");
+        var requests = document.querySelectorAll(".req-row");
 
         //Iterate through all rows and hide/show based on value
         requests.forEach(function (row) {
           var propName = row
             .querySelector("#req-name")
             .textContent.toLowerCase();
-          if (propName.includes(searchReq)) {
+          var propType = row
+            .querySelector("#req-type")
+            .textContent.toLowerCase();
+          if (propName.includes(searchReq) || propType.includes(searchReq)) {
             row.style.display = "";
           } else {
             row.style.display = "none";

@@ -319,10 +319,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
       //display elements according to search value
       function searchTable(type) {
-        //search for request register accounts
-        if (type.includes("job")) {
           //Get values from input search
-          var searchReq = document
+          var searchInput = document
             .getElementById("jobSearch")
             .value.toLowerCase();
 
@@ -330,47 +328,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var jobs = document.querySelectorAll(".job-row");
 
           jobs.forEach(function (row) {
-            var propName = row
+            var jobName = row
               .querySelector("#job-name")
               .textContent.toLowerCase();
-            var status = row
+            var jobStatus = row
               .querySelector("#job-status")
               .textContent.toLowerCase();
             if (
-              propName.includes(searchInput) ||
-              status.includes(searchInput)
+              jobName.includes(searchInput) ||
+              jobStatus.includes(searchInput)
             ) {
               row.style.display = "";
             } else {
               row.style.display = "none";
             }
           });
-        } else {
-          //Get values from input search
-          var searchReq = document
-            .getElementById("propSearch")
-            .value.toLowerCase();
-
-          // Get all rows in table
-          var props = document.querySelectorAll(".prop-row");
-
-          props.forEach(function (row) {
-            var propName = row
-              .querySelector("#prop-name")
-              .textContent.toLowerCase();
-            var status = row
-              .querySelector("#prop-status")
-              .textContent.toLowerCase();
-            if (
-              propName.includes(searchInput) ||
-              status.includes(searchInput)
-            ) {
-              row.style.display = "";
-            } else {
-              row.style.display = "none";
-            }
-          });
-        }
       }
     </script>
 
