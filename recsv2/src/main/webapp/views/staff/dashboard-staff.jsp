@@ -70,11 +70,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        id="jobSearch"
+                        id="validationSearch"
                         type="text"
                         class="form-control"
                         placeholder="Type property name/type here..."
-                        onkeyup="searchTable('job')"
+                        onkeyup="searchTable('validation')"
                       />
                     </div>
                   </div>
@@ -137,7 +137,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
+                                  <p
+                                    id="req-type" 
+                                    class="mb-0 text-sm fw-bold text-dark">
                                     ${job.realEstateInfo.realEstateType}
                                   </p>
                                 </div>
@@ -325,7 +327,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.createTimeStamp}
+                                    ${listing.realEstateInfo.createTimeStamp}
                                   </p>
                                 </div>
                               </div>
@@ -872,10 +874,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             var propName = row
               .querySelector("#req-name")
               .textContent.toLowerCase();
-            var manID = row
-              .querySelector("#req-manID")
+            var propType = row
+              .querySelector("#req-type")
               .textContent.toLowerCase();
-            if (propName.includes(searchReq) || manID.includes(searchReq)) {
+            if (propName.includes(searchReq) || propType.includes(searchReq)) {
               row.style.display = "";
             } else {
               row.style.display = "none";

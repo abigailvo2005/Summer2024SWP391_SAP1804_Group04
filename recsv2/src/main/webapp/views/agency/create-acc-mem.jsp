@@ -293,7 +293,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="btn bg-gradient-dark w-100 my-4 mb-2"
                               onclick="submitRegister()"
                             >
-                              Submit Request
+                              Create
                             </button>
                           </div>
                         </div>
