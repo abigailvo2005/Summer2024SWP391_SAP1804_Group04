@@ -283,85 +283,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <!-- image carousel -->
-                    <div class="row mb-3">
-                      <div
-                        id="image-section"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
-                      >
-                        <!-- buttons to directly see an image -->
-                        <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
-                        </div>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../template/assets/img/home-decor-1.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-2.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-3.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 3"
-                            />
-                          </div>
-                        </div>
-                        <!-- button fd/backwards -->
-                        <button
-                          class="carousel-control-prev"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="prev"
-                        >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                          class="carousel-control-next"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="next"
-                        >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
+                    <div id="image-section" class="carousel slide" data-bs-ride="carousel">
+                      <div class="carousel-indicators"></div>
+                      <div class="carousel-inner"></div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#image-section" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#image-section" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
                     </div>
+                    
 
                     <div class="row">
                       <li class="list-group-item border-0 ps-0 text-sm col-12 d-flex">

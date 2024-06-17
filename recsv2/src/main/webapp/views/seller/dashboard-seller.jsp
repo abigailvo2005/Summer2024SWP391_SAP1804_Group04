@@ -449,85 +449,39 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <!-- image carousel -->
-                    <div class="row mb-3">
-                      <div
-                        id="image-section"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
+                    <div
+                      id="image-section"
+                      class="carousel slide"
+                      data-bs-ride="carousel"
+                    >
+                      <div class="carousel-indicators"></div>
+                      <div class="carousel-inner"></div>
+                      <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#image-section"
+                        data-bs-slide="prev"
                       >
-                        <!-- buttons to directly see an image -->
-                        <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
-                        </div>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../template/assets/img/home-decor-1.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-2.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-3.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 3"
-                            />
-                          </div>
-                        </div>
-                        <!-- button fd/backwards -->
-                        <button
-                          class="carousel-control-prev"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="prev"
-                        >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                          class="carousel-control-next"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="next"
-                        >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
+                        <span
+                          class="carousel-control-prev-icon"
+                          aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#image-section"
+                        data-bs-slide="next"
+                      >
+                        <span
+                          class="carousel-control-next-icon"
+                          aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
                     </div>
+                    <!-- end: image carousel -->
 
                     <div class="row">
                       <li
@@ -901,11 +855,52 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               buyerList.classList.remove("hidden");
             }
 
+            //load images to carousel
+            const carouselInner = document.querySelector(".carousel-inner");
+            const carouselIndicators = document.querySelector(
+              ".carousel-indicators"
+            );
+
+            // Reset images to be shown everytime popup is clicked
+            carouselInner.innerHTML = "";
+            carouselIndicators.innerHTML = "";
+
+            data.propertyImagesList.forEach((image, index) => {
+              console.log(image);
+              // create slide
+              const slideElement = document.createElement("div");
+              slideElement.classList.add("carousel-item");
+              if (index === 0) {
+                slideElement.classList.add("active");
+              }
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              imgElement.classList.add("d-block", "w-100", "rounded");
+              slideElement.appendChild(imgElement);
+              carouselInner.appendChild(slideElement);
+
+              // create indexes
+              const indicatorElement = document.createElement("button");
+              indicatorElement.type = "button";
+              indicatorElement.dataset.bsTarget = "#image-section";
+              indicatorElement.dataset.bsSlideTo = index;
+              if (index === 0) {
+                indicatorElement.classList.add("active");
+                indicatorElement.setAttribute("aria-current", "true");
+              }
+              indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+              carouselIndicators.appendChild(indicatorElement);
+            });
+
+            // init Bootstrap Carousel
+            const carousel = new bootstrap.Carousel("#image-section");
+
             popup.classList.remove("hidden");
           },
-          error: function () {
-            //Error when sending request
-            console.error("Error fetching property details");
+          error: function (xhr, status, error) {
+            const errorMessage = `Error: ${xhr.status} - ${xhr.statusText}`;
+            console.error(errorMessage);
+            alert(errorMessage);
           },
         });
       }

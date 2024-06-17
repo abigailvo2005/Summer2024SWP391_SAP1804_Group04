@@ -39,68 +39,44 @@ function getPaperworkFile(e, type) {
   fileType = type;
 }
 
-document
-  .getElementById("submit-btn")
-  .addEventListener("click", uploadPaperwork);
-
 async function uploadPaperwork() {
   const file = paperwork;
-  const pwLandContainer = document.querySelector("#land-pw-container");
-  const pwHouseContainer = document.querySelector("#house-pw-container");
-  pwLandContainer.value = ""; //remove all previous options
-  pwHouseContainer.value = ""; //remove all previous options
-  var url = null;
-
-  // Storage reference for paperwork file
   const storageRef = storage.ref(`paperwork/${file.name}`);
+  const pwLandContainer = document.getElementById("land-pw-container");
+  const pwHouseContainer = document.getElementById("house-pw-container");
 
   try {
-    // Upload file to Firebase Storage
+    // Upload the file
     await storageRef.put(file);
 
-    // Get image's URL from storage
-    url = await storageRef.getDownloadURL();
-    
+    // Get the download URL
+    const url = await storageRef.getDownloadURL();
+    console.log("pw: " + url);
+
+    // Set the URL value in the form
+    if (fileType === "land") {
+      pwLandContainer.setAttribute("value", url);
+    } else {
+      pwHouseContainer.setAttribute("value", url);
+    }
   } catch (error) {
-    console.error("Error uploading zip/pdf file to storage:", error);
+    console.error("Error uploading file:", error);
   }
-
-  // Let URL be included in form for controller submission
-  if(fileType == "land") {
-    pwLandContainer.value = url;
-  } else {
-    pwHouseContainer.value = url;
-  }
-
+  console.log("successfully upload all paperwork");
 }
 
-/* Upload images to Firebase storage */
-document.getElementById("submit-btn").addEventListener("click", uploadImage);
 async function uploadImage() {
-  const files = imgFiles;
+  const files = imgFiles; // Make sure this is an array of file objects
   const imageUrls = [];
   const imgContainer = document.querySelector("#img-container");
-  imgContainer.innerHTML = ""; //remove all previous options
-  var url = null;
+  imgContainer.innerHTML = "";
 
-  for (const file of files) {
-    // Storage reference for images
+  const uploadPromises = files.map(async (file) => {
     const storageRef = storage.ref(`images/${file.name}`);
+    await storageRef.put(file);
+    const url = await storageRef.getDownloadURL();
+    imageUrls.push(url);
 
-    try {
-      // Upload file to Firebase Storage
-      await storageRef.put(file);
-
-      // Get image's URL from storage
-      url = await storageRef.getDownloadURL();
-      imageUrls.push(url);
-    } catch (error) {
-      console.error("Error pushing images to storage:", error);
-    }
-  }
-
-  // Push image URLs to form for controller submission
-  imageUrls.forEach((url) => {
     const item = document.createElement("input");
     item.type = "checkbox";
     item.value = url;
@@ -117,4 +93,198 @@ async function uploadImage() {
 
     imgContainer.appendChild(checkboxWrapper);
   });
+
+  await Promise.all(uploadPromises);
+  console.log("successfully upload all images");
 }
+
+document
+  .getElementById("submit-btn")
+  .addEventListener("click", async (event) => {
+    submitRequest(event);
+  });
+async function submitRequest(event) {
+  event.preventDefault(); //Stop form from default submitting
+
+  //disable button while uploading file
+  const submitButton = document.querySelector("#submit-btn");
+  submitButton.disabled = true;
+  console.log("disabled");
+  console.log(document.querySelector("form").checkValidity());
+  console.log(document.querySelector("form"));
+
+  // Upload images and paperwork
+  await Promise.all([uploadImage(), uploadPaperwork()]);
+  console.log("Submit to Controller");
+
+  // Check if all fields have values
+  if (document.querySelector("form").checkValidity()) {
+    console.log("after get form");
+    const propertyNameInput = document.querySelector("#prop-name");
+    const nameError = document.querySelector(".error-name");
+    const area = document.getElementById("area").value;
+    const price = document.getElementById("price").value;
+    const areaNumber = parseFloat(area);
+    const priceNumber = parseFloat(price);
+    const minPrice = areaNumber * 20000000;
+    const maxPrice = areaNumber * 50000000;
+    // No errors on start up
+    nameError.classList.add("hidden"); //clear all errors first
+    console.log("after reset form");
+
+    if (priceNumber < minPrice || priceNumber > maxPrice) {
+      Swal.fire({
+        title: "Are you sure about this price?",
+        text: "Current price might be too high or too low for this property.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          Swal.fire({
+            title: "Choose another price.",
+            icon: "success",
+          });
+          document.getElementById("price").value = "";
+        } else {
+          {
+            if (propertyNameInput.value.length > 32) {
+              //Check if property's name is longer than 32 characters
+              nameError.classList.remove("hidden");
+              return;
+            }
+
+            //await Promise.all([uploadImage(), uploadPaperwork()]);
+
+            // Submit form
+            document.querySelector("form").submit();
+          }
+        }
+      });
+    } else {
+      document.querySelector("form").reportValidity();
+    }
+  }
+}
+
+/* document
+  .getElementById("submit-btn")
+  .addEventListener("click", async (event) => {
+    submitRequest(event);
+  });
+
+async function submitRequest(event) {
+  event.preventDefault(); //Stop form from default submitting
+
+  //disable button while uploading file
+  const submitButton = document.querySelector("#submit-btn");
+  submitButton.disabled = true;
+  console.log("after disabled"); 
+
+  // Check if all fields have values
+  if (document.querySelector("#create-prop-form").checkValidity()) {
+    const propertyNameInput = document.querySelector("#prop-name");
+    const nameError = document.querySelector(".error-name");
+    const area = document.getElementById("area").value;
+    const price = document.getElementById("price").value;
+    const areaNumber = parseFloat(area);
+    const priceNumber = parseFloat(price);
+    const minPrice = areaNumber * 20000000;
+    const maxPrice = areaNumber * 50000000;
+    // No errors on start up
+    nameError.classList.add("hidden"); //clear all errors first
+
+    if (priceNumber < minPrice || priceNumber > maxPrice) {
+      Swal.fire({
+        title: "Are you sure about this price?",
+        text: "Current price might be too high or too low for this property.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then(async (result) => {
+        if (!result.isConfirmed) {
+          Swal.fire({
+            title: "Choose another price.",
+            icon: "success",
+          });
+          document.getElementById("price").value = "";
+        } else {
+          {
+            if (propertyNameInput.value.length > 32) {
+              //Check if property's name is longer than 32 characters
+              nameError.classList.remove("hidden");
+              return;
+            }
+
+            // Upload images and paperwork
+            const file = paperwork;
+            const storageRef = storage.ref(`paperwork/${file.name}`);
+            const pwLandContainer =
+              document.getElementById("land-pw-container");
+            const pwHouseContainer =
+              document.getElementById("house-pw-container");
+              console.log("here");
+
+            try {
+              // Upload the file
+              await storageRef.put(file);
+              // Get the download URL
+              const pwUrl = await storageRef.getDownloadURL();
+              console.log("pw: " + pwUrl);
+              // Set the URL value in the form
+              if (fileType === "land") {
+                pwLandContainer.setAttribute("value", pwUrl);
+              } else {
+                pwHouseContainer.setAttribute("value", pwUrl);
+              }
+
+              const files = imgFiles; // Make sure this is an array of file objects
+              const imageUrls = [];
+              const imgContainer = document.querySelector("#img-container");
+              imgContainer.innerHTML = "";
+
+              const uploadPromises = files.map(async (file) => {
+                const storageRef = storage.ref(`images/${file.name}`);
+                await storageRef.put(file);
+                const imgUrl = await storageRef.getDownloadURL();
+                imageUrls.push(imgUrl);
+
+                const item = document.createElement("input");
+                item.type = "checkbox";
+                item.value = imgUrl;
+                item.name = "images";
+                item.checked = true;
+
+                console.log("image url: " + imgUrl);
+                const label = document.createElement("label");
+                label.textContent = imgUrl;
+
+                const checkboxWrapper = document.createElement("div");
+                checkboxWrapper.classList.add("checkbox-wrapper");
+                checkboxWrapper.appendChild(item);
+                checkboxWrapper.appendChild(label);
+
+                imgContainer.appendChild(checkboxWrapper);
+              });
+
+              await Promise.all(uploadPromises);
+              console.log("successfully upload all images and paperwork");
+
+              // Submit form
+              document.querySelector("#create-prop-form").submit();
+            } catch (error) {
+              console.error("Error uploading file:", error);
+            }
+          }
+        }
+      });
+    } else {
+      document.querySelector("form").reportValidity();
+    }
+  }
+}
+ */

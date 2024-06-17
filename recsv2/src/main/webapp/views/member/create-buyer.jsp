@@ -465,7 +465,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
           }
 
-          // Ẩn tất cả các thông báo lỗi
           nameError.classList.add("hidden");
           idFrontError.classList.add("hidden");
           idBackError.classList.add("hidden");

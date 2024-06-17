@@ -35,7 +35,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     />
 
     <!--Alert Custom-->
-    <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/template/assets/css/sweetalert2.css"
+    />
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
@@ -82,6 +86,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                 <div class="card-body">
                   <form
+                  id="create-prop-form"
                     role="form text-left"
                     name="property-information"
                     action="${pageContext.request.contextPath}/seller/create-property"
@@ -182,7 +187,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           multiple
                           required
                         />
-                        <div id="img-container" class="hidden"></div>
+                        <div id="img-container" class=""></div>
                       </div>
 
                       <!-- To Choose property type - shows corresponding information to fill in next -->
@@ -242,7 +247,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="land-pw-container"
                             name="landPw"
-                            type="hidden"
+                            type="text"
                           />
                         </div>
                       </div>
@@ -285,8 +290,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="house-pw-container"
                             name="homePw"
-                            type="hidden"
-                            
+                            type="text"
                           />
                         </div>
                       </div>
@@ -346,7 +350,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <button
                               id="submit-btn"
                               type="button"
-                              onclick="submitRequest(event);"
                               class="btn btn-dark w-100 my-2 mb-2"
                             >
                               Submit
@@ -409,10 +412,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
-    <script type="module" src="../../template/assets/js/img-handler.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
+    <script
+      type="module"
+      src="../../template/assets/js/img-handler.js"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.js"
+      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../template/assets/js/sweetalert2.js"
+    ></script>
     <script>
       //validate price
       function validatePrice() {
@@ -501,61 +513,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-      /* Process data & redirect back to dashboard after clicked submit */
-      function submitRequest(event) {
-        event.preventDefault(); //Stop form from default submitting
-
-        // Check if all fields have values
-        if (document.querySelector("form").checkValidity()) {
-          const propertyNameInput = document.querySelector("#prop-name");
-          const nameError = document.querySelector(".error-name");
-          const area = document.getElementById("area").value;
-          const price = document.getElementById("price").value;
-          const areaNumber = parseFloat(area);
-          const priceNumber = parseFloat(price);
-          const minPrice = areaNumber * 20000000;
-          const maxPrice = areaNumber * 50000000;
-          // No errors on start up
-          nameError.classList.add("hidden"); //clear all errors first
-
-          if (priceNumber < minPrice || priceNumber > maxPrice) {
-            Swal.fire({
-              title: "Are you sure about this price?",
-              text: "Current price might be too high or too low for this property.",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Yes"
-            }).then((result) => {
-              if (!result.isConfirmed) {
-                Swal.fire({
-                  title: "Choose another price.",
-                  icon: "success"
-                });
-              document.getElementById("price").value = "";
-              }
-              else {
-                if (propertyNameInput.value.length > 32) {
-                  //Check if property's name is longer than 32 characters
-                  nameError.classList.remove("hidden");
-                  return;
-                }
-
-                // No errors: Shows message "Successfully requested" & redirect back to dashboard
-                setTimeout(function () {
-                  alert("Successfully requested");
-                  document.querySelector("form").submit();
-                }, 500);
-              }
-            });
-            return;
-          }
-        } else {
-          // If some fields are empty, show default errors
-          document.querySelector("form").reportValidity();
-        }
-      }
+      
     </script>
   </body>
 </html>

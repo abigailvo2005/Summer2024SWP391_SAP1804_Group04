@@ -71,6 +71,7 @@ public class SellerController {
             @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             Model model) {
+                
         RealEstate realEstate = realEstateService.createRealEstate(userInfo.getSellerId(), request);
         String currentPage = "create-property";
         model.addAttribute("name", userInfo.getFullName());
