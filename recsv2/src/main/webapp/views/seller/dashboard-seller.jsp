@@ -171,7 +171,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <p
                                     id="prop-status"
-                                    class="mb-0 text-sm fw-bold text-muted"
+                                    class="mb-0 text-sm fw-bold text-muted status-color"
                                   >
                                     ${prop.status.value}
                                   </p>
@@ -277,7 +277,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <tbody>
                         <c:forEach items="${reqList}" var="req">
                           <tr class="req-row">
-                           
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -333,8 +332,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <p
                                     id="req-status"
-                                    class="mb-0 text-sm fw-bold text-muted"
-                                    style=""
+                                    class="mb-0 text-sm fw-bold text-muted status-color"
                                   >
                                     ${req.status.value}
                                   </p>
@@ -434,11 +432,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 <ul class="list-group">
                   <div class="container-fluid">
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Status:</strong>
                         <p id="popup-status"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Handled by: </strong>
                         <p id="popup-manager"></p>
                       </li>
@@ -526,40 +528,54 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-12 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
+                      >
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Type:</strong>
                         <p id="popup-type"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Address:</strong>
                         <p id="popup-address"></p>
                       </li>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Area:</strong>
                         <p id="popup-area"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Price:</strong>
                         <p id="popup-price"></p>
                       </li>
                     </div>
 
                     <div class="row land-info-section hidden">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Land Type: </strong>
                         <p id="popup-land-type"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
                         <strong class="text-dark">Paperwork: </strong>
                         <a id="popup-land-pw" target="_blank" download></a>
                       </li>
@@ -567,26 +583,36 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                     <div class="house-info-section hidden">
                       <div class="row">
-                        <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                        >
                           <strong class="text-dark">House Type: </strong>
                           <p id="popup-house-type"></p>
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                        >
                           <strong class="text-dark">Paperwork: </strong>
                           <a id="popup-house-pw" target="_blank" download></a>
                         </li>
                       </div>
 
                       <div class="row">
-                        <li class="list-group-item border-0 ps-0 text-sm col-4 d-flex">
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        >
                           <strong class="text-dark">Built in: </strong>
                           <p id="popup-builtIn"></p>
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm col-4 d-flex">
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        >
                           <strong class="text-dark">Bedrooms: </strong>
                           <p id="popup-bed"></p>
                         </li>
-                        <li class="list-group-item border-0 ps-0 text-sm col-4 d-flex">
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        >
                           <strong class="text-dark">Bathrooms: </strong>
                           <p id="popup-bath"></p>
                         </li>
@@ -780,6 +806,48 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         $("#popup-property-request").addClass("hidden");
       }
 
+      /* Set color for different status value */
+      const statusElements = document.querySelectorAll(".status-color");
+      statusElements.forEach((element) => {
+        element.classList.remove(
+          "status-reviewing",
+          "status-validating",
+          "status-unqualified",
+          "status-displayed",
+          "status-closed",
+          "status-handled",
+          "status-agency-approving",
+          "status-buyer-approving"
+        );
+      });
+
+      // Display colors according to status value
+      statusElements.forEach((element) => {
+        const statusValue = element.status.value;
+        switch (statusValue) {
+          case "Reviewing":
+            element.classList.add("status-reviewing");
+            break;
+          case "Validating":
+            element.classList.add("status-validating");
+            break;
+          case "Unqualified":
+            element.classList.add("status-unqualified");
+            break;
+          case "Displayed":
+          case "Closed":
+          case "Handled":
+            element.classList.add("status-displayed");
+            break;
+          case "Agency_Approving":
+          case "Buyer_Approving":
+            element.classList.add("status-agency-approving");
+            break;
+          default:
+            break;
+        }
+      });
+
       /* View Popup detail of each property */
       function viewDetailProperty(propID, type) {
         var popup = document.querySelector("#popup-property-request");
@@ -797,28 +865,29 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-name").text(data.name);
             $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
-            $("#popup-type").text(
-              data.realEstateType 
-            );
+            $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
             $("#popup-manager").text(data.managerInfo.username);
 
             //only show land/house fields according to type
-            if (data.realEstateType == 'Land') {
+            if (data.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
               $("#popup-land-pw").text("sample-pdf-land");
-              document.querySelector("#popup-land-pw").setAttribute('href', 'sample.pdf');
-              
+              document
+                .querySelector("#popup-land-pw")
+                .setAttribute("href", "sample.pdf");
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(data.propertyHouse.houseType);
               $("#popup-house-pw").text("sample-zip-house");
-              document.querySelector("#popup-house-pw").setAttribute('href', 'sample.zip');
+              document
+                .querySelector("#popup-house-pw")
+                .setAttribute("href", "sample.zip");
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
@@ -826,7 +895,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
             if (data.status.toLowerCase() == "agency_approving") {
-                agencyList.classList.remove("hidden");
+              agencyList.classList.remove("hidden");
             } else if (data.status.toLowerCase() == "buyer_approving") {
               buyerList.classList.remove("hidden");
             }

@@ -182,7 +182,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           multiple
                           required
                         />
-                        <div id="img-container" class=""></div>
+                        <div id="img-container" class="hidden"></div>
                       </div>
 
                       <!-- To Choose property type - shows corresponding information to fill in next -->
@@ -241,7 +241,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           />
                           <input
                             id="land-pw-container"
-                            name="paperwork"
+                            name="landPw"
                             type="hidden"
                           />
                         </div>
@@ -284,7 +284,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           />
                           <input
                             id="house-pw-container"
-                            name="paperwork"
+                            name="homePw"
                             type="hidden"
                             
                           />
@@ -521,17 +521,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           if (priceNumber < minPrice || priceNumber > maxPrice) {
             Swal.fire({
               title: "Are you sure about this price?",
-              text: "You can change other price!",
+              text: "Current price might be too high or too low for this property.",
               icon: "warning",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes!"
+              confirmButtonText: "Yes"
             }).then((result) => {
               if (!result.isConfirmed) {
                 Swal.fire({
-                  title: "You can change other price",
-                  text: "Please, Input more suitable price!",
+                  title: "Choose another price.",
                   icon: "success"
                 });
               document.getElementById("price").value = "";

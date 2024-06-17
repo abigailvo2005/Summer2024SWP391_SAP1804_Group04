@@ -42,10 +42,13 @@ function getPaperworkFile(e, type) {
 document
   .getElementById("submit-btn")
   .addEventListener("click", uploadPaperwork);
+
 async function uploadPaperwork() {
   const file = paperwork;
-  const pwContainer = document.querySelector("#" + fileType + "-pw-container");
-  pwContainer.innerHTML = ""; //remove all previous options
+  const pwLandContainer = document.querySelector("#land-pw-container");
+  const pwHouseContainer = document.querySelector("#house-pw-container");
+  pwLandContainer.value = ""; //remove all previous options
+  pwHouseContainer.value = ""; //remove all previous options
   var url = null;
 
   // Storage reference for paperwork file
@@ -57,12 +60,18 @@ async function uploadPaperwork() {
 
     // Get image's URL from storage
     url = await storageRef.getDownloadURL();
+    
   } catch (error) {
     console.error("Error uploading zip/pdf file to storage:", error);
   }
 
-  // Push file URLs to form for controller submission
-  pwContainer.setAttribute("value", url);
+  // Let URL be included in form for controller submission
+  if(fileType == "land") {
+    pwLandContainer.value = url;
+  } else {
+    pwHouseContainer.value = url;
+  }
+
 }
 
 /* Upload images to Firebase storage */
@@ -109,19 +118,3 @@ async function uploadImage() {
     imgContainer.appendChild(checkboxWrapper);
   });
 }
-
-/*  //Put back img url to a new input to pass into controller
-            const item = document.createElement("input");
-            item.type = "checkbox";
-            item.value = base64String;
-            item.name = "images";
-            item.checked = true;
-            var label = document.createElement("label");
-            label.textContent = base64String;
-            var checkboxWrapper = document.createElement("div");
-            checkboxWrapper.classList.add("checkbox-wrapper");
-            checkboxWrapper.appendChild(item);
-            checkboxWrapper.appendChild(label);
-
-            imgContainer.appendChild(checkboxWrapper);
-            console.log("base64string to convert: " + base64String); */
