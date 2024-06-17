@@ -19,7 +19,8 @@ public class CreateRealEstateRequestDTO {
     private List<String> images = List.of();
     private String propertyType = StringUtils.EMPTY;
     private String landCategory = StringUtils.EMPTY;
-    private String paperwork = StringUtils.EMPTY;
+    private String homePw = StringUtils.EMPTY;
+    private String landPw = StringUtils.EMPTY;
     private String houseCategory = StringUtils.EMPTY;
     private int builtYear = 0;
     private int bedrooms = 0;

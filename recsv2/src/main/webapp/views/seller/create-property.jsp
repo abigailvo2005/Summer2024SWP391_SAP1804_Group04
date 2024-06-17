@@ -35,7 +35,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     />
 
     <!--Alert Custom-->
-    <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/template/assets/css/sweetalert2.css"
+    />
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
@@ -82,6 +86,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                 <div class="card-body">
                   <form
+                  id="create-prop-form"
                     role="form text-left"
                     name="property-information"
                     action="${pageContext.request.contextPath}/seller/create-property"
@@ -241,8 +246,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           />
                           <input
                             id="land-pw-container"
-                            name="paperwork"
-                            type="hidden"
+                            name="landPw"
+                            type="text"
                           />
                         </div>
                       </div>
@@ -284,9 +289,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           />
                           <input
                             id="house-pw-container"
-                            name="paperwork"
-                            type="hidden"
-                            
+                            name="homePw"
+                            type="text"
                           />
                         </div>
                       </div>
@@ -346,7 +350,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <button
                               id="submit-btn"
                               type="button"
-                              onclick="submitRequest(event);"
                               class="btn btn-dark w-100 my-2 mb-2"
                             >
                               Submit
@@ -409,10 +412,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
-    <script type="module" src="../../template/assets/js/img-handler.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
+    <script
+      type="module"
+      src="../../template/assets/js/img-handler.js"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.js"
+      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../template/assets/js/sweetalert2.js"
+    ></script>
     <script>
       //validate price
       function validatePrice() {
@@ -557,6 +569,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           document.querySelector("form").reportValidity();
         }
       }
+      
     </script>
   </body>
 </html>
