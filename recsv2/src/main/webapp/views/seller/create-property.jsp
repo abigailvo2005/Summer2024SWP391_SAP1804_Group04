@@ -521,18 +521,18 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           if (priceNumber < minPrice || priceNumber > maxPrice) {
             Swal.fire({
               title: "Are you sure about this price?",
-              text: "You can change other price!",
-              icon: "warning",
+              text: "You can change a more suitable price to this price!",
+              icon: "question",
               showCancelButton: true,
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
-              confirmButtonText: "Yes!"
+              confirmButtonText: "Yes"
             }).then((result) => {
               if (!result.isConfirmed) {
                 Swal.fire({
                   title: "You can change other price",
                   text: "Please, Input more suitable price!",
-                  icon: "success"
+                  icon: "info"
                 });
               document.getElementById("price").value = "";
               }
