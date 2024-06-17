@@ -21972,26 +21972,26 @@ label,
 }
 
 .status-reviewing {
-  color: #6c757d; /* Màu xám đậm */
+  color: #6c757d !important; /* Màu xám đậm */
 }
 
 .status-validating {
-  color: #ffc107; /* Màu vàng */
+  color: #ffc107 !important; /* Màu vàng */
 }
 
 .status-unqualified {
-  color: #dc3545; /* Màu đỏ */
+  color: #dc3545 !important; /* Màu đỏ */
 }
 
 .status-displayed,
 .status-closed,
 .status-handled {
-  color: #28a745; /* Màu xanh lá cây */
+  color: #28a745 !important; /* Màu xanh lá cây */
 }
 
 .status-agency-approving,
 .status-buyer-approving {
-  color: #007bff; /* Màu xanh dương */
+  color: #007bff !important; /* Màu xanh dương */
 }
 
 

@@ -171,7 +171,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <p
                                     id="prop-status"
-                                    class="mb-0 text-sm fw-bold text-muted status-color"
+                                    class="mb-0 text-sm fw-bold status-color"
+                                    value="${prop.status.value}"
                                   >
                                     ${prop.status.value}
                                   </p>
@@ -332,7 +333,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <p
                                     id="req-status"
-                                    class="mb-0 text-sm fw-bold text-muted status-color"
+                                    class="mb-0 text-sm fw-bold status-color"
+                                    value="${req.status.value}"
                                   >
                                     ${req.status.value}
                                   </p>
@@ -820,10 +822,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           "status-buyer-approving"
         );
       });
-
       // Display colors according to status value
       statusElements.forEach((element) => {
-        const statusValue = element.status.value;
+        const statusValue = element.getAttribute("value");
         switch (statusValue) {
           case "Reviewing":
             element.classList.add("status-reviewing");
