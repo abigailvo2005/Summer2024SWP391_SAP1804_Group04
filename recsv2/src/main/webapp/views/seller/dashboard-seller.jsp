@@ -73,8 +73,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         id="ownSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type id/name/type here..."
-                        onkeyup="searchTable('prop')"
+                        placeholder="Type name/type here..."
+                        onkeyup="searchTable('own')"
                       />
                     </div>
                   </div>
@@ -232,10 +232,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         ><i class="fas fa-search" aria-hidden="true"></i
                       ></span>
                       <input
-                        id="propSearch"
+                        id="reqSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type id/name/type here..."
+                        placeholder="Type name/type here..."
                         onkeyup="searchTable('req')"
                       />
                     </div>
@@ -451,7 +451,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <!-- image carousel -->
                     <div
                       id="image-section"
-                      class="carousel slide"
+                      class="carousel slide mb-3"
                       data-bs-ride="carousel"
                     >
                       <div class="carousel-indicators"></div>
@@ -955,21 +955,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       //display elements according to search value
       function searchTable(type) {
         //search for request register accounts
-        if (type.includes("prop")) {
+        if (type.includes("own")) {
           //Get values from input search
           var searchInput = document
-            .getElementById("propSearch")
+            .getElementById("ownSearch")
             .value.toLowerCase();
 
           // Get all rows in table
-          var requests = document.querySelectorAll(".req-row");
+          var requests = document.querySelectorAll(".prop-row");
 
           requests.forEach(function (row) {
-            var id = row.querySelector("#req-id").textContent.toLowerCase();
-            var name = row.querySelector("#req-name").textContent.toLowerCase();
-            var type = row.querySelector("#req-type").textContent.toLowerCase();
+            var name = row.querySelector("#prop-name").textContent.toLowerCase();
+            var type = row.querySelector("#prop-type").textContent.toLowerCase();
             if (
-              id.includes(searchInput) ||
               name.includes(searchInput) ||
               type.includes(searchInput)
             ) {
@@ -981,22 +979,20 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         } else {
           //Get values from input search
           var searchInput = document
-            .getElementById("ownSearch")
+            .getElementById("reqSearch")
             .value.toLowerCase();
 
           // Get all rows in table
-          var requests = document.querySelectorAll(".prop-row");
+          var requests = document.querySelectorAll(".req-row");
 
           requests.forEach(function (row) {
-            var id = row.querySelector("#prop-id").textContent.toLowerCase();
             var name = row
-              .querySelector("#prop-name")
+              .querySelector("#req-name")
               .textContent.toLowerCase();
             var type = row
-              .querySelector("#prop-type")
+              .querySelector("#req-type")
               .textContent.toLowerCase();
             if (
-              id.includes(searchInput) ||
               name.includes(searchInput) ||
               type.includes(searchInput)
             ) {
