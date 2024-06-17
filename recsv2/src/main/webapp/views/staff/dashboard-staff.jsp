@@ -440,7 +440,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <div class="row">
                       <div class="validation-only col-6 px-0">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm d-flex"
+                          class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                         >
                           <strong class="text-dark">Assigned by:</strong>
                           <p id="manager"></p>
@@ -760,7 +760,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#manager").text(data.managerInfo.username);
             $("#popup-name").text(data.realEstateInfo.name);
             $("#popup-status").text(data.status);
-            $("#popup-dateCreated").text(data.realEstateInfo.createDate)
+            $("#popup-dateCreated").text(data.realEstateInfo.createTimestamp)
             $("#popup-desc").text(data.realEstateInfo.description);
             $("#popup-type").text(data.realEstateInfo.realEstateType);
             $("#popup-address").text(data.realEstateInfo.address);
