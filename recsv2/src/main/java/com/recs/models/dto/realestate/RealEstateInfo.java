@@ -66,6 +66,7 @@ public class RealEstateInfo {
         this.propertyLand = builder.propertyLand;
         this.propertyImagesList = builder.propertyImagesList;
         this.paperWorks = builder.paperWorks;
+        this.notes = builder.notes;
     }
 
     public static class Builder {
@@ -256,7 +257,8 @@ public class RealEstateInfo {
                 .setPropertyHouse(this.propertyHouse)
                 .setPropertyLand(this.propertyLand)
                 .setPropertyImagesList(this.propertyImagesList)
-                .setPaperWorks(this.paperWorks);
+                .setPaperWorks(this.paperWorks)
+                .setNotes(this.notes);
     }
 
 }
