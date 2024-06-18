@@ -197,7 +197,7 @@ public class RealEstateServiceImpl implements RealEstateService{
         PaperWorks paperWorks = new PaperWorks(
                 realEstate.getRealEstateId(),
                 StringUtils.EMPTY,
-                request.getPaperwork()
+                realEstate.getRealEstateType() == 1 ? request.getLandPw() : request.getHomePw()
                 );
 
         List<PropertyImages> images = request.getImages().stream().map( image ->
@@ -282,6 +282,10 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .setManagerInfo(managerInfo)
                             .build();
                 })
+                .sorted(
+                        Comparator.comparing(RealEstateInfo::getCreateTimestamp)
+                        .reversed()
+                )
                 .toList();
     }
     private List<RealEstateInfo> mapListToInfoBySeller(List<RealEstate> list, UserInfo sellerInfo) {
@@ -293,6 +297,10 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .setManagerInfo(managerInfo)
                             .build();
                 })
+                .sorted(
+                        Comparator.comparing(RealEstateInfo::getCreateTimestamp)
+                        .reversed()
+                )
                 .toList();
     }
 
@@ -305,6 +313,9 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .setManagerInfo(managerInfo)
                             .build();
                 })
+                .sorted(
+                        Comparator.comparing(RealEstateInfo::getCreateTimestamp)
+                        .reversed())
                 .toList();
     }
 }
