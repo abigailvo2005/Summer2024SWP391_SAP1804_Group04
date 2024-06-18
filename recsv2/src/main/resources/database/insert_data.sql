@@ -112,7 +112,11 @@ UPDATE RealEstate SET status = 'Displayed' WHERE status = 'success';
 UPDATE RealEstate SET status = 'Validating' WHERE status = 'validating';
 UPDATE RealEstate SET status = 'Unqualified' WHERE status = 'UNQUALIFIED';
 
-
+INSERT INTO DealAssignMember (
+    dealId, createTimestamp, priority, status, agencyId, memberId, realEstateId
+) VALUES (
+    UUID(), 1622547800000, 1, 'active', '99d39b8f-285a-11ef-b7aa-2c4d54675fbe', '549c6a5c-2990-11ef-99d0-2c4d54675fbe', 'c3b6fc94-2d11-11ef-99d0-2c4d54675fbe'
+);
 
 
 
