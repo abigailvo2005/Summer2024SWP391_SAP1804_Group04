@@ -289,6 +289,7 @@ public class RealEstateServiceImpl implements RealEstateService{
                 .toList();
     }
     private List<RealEstateInfo> mapListToInfoBySeller(List<RealEstate> list, UserInfo sellerInfo) {
+        if (list.isEmpty()) return List.of();
         UserInfo managerInfo = accountService.getManagerToUserInfo(list.get(0).getManagerId());
         return list.stream().map(realEstate -> {
                     return RealEstateInfo.fromRealEstate(realEstate)
