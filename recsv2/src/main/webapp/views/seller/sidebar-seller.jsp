@@ -71,11 +71,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               >
                 <i
                   class="fa-solid fa-table-columns"
-                  style="
-                    $ {
-                      currentpage !='dashboard'?'color: #30221b' : '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Dashboard</span>
@@ -91,11 +86,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               >
                 <i
                   class="fa-solid fa-user"
-                  style="
-                    $ {
-                      currentpage!='profile'?'color: #30221b' : '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Profile</span>
