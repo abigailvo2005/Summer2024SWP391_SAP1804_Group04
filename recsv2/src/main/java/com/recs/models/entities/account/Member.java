@@ -23,8 +23,8 @@ public class Member {
     @Column(name = "accountId")
     private int accountId;
 
-    @Column(name = "companyId")
-    private String companyId;
+//    @Column(name = "company")
+//    private String company;
 
     @Column(name = "agencyId")
     private String agencyId;

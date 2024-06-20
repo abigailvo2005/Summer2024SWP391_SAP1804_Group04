@@ -5,9 +5,13 @@ import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
+import com.recs.models.entities.recsbusiness.DealAssignMember;
 import com.recs.models.enums.JobStatus;
 import com.recs.models.enums.RealEstateStatus;
+import com.recs.repositories.recsbusiness.AgencyRequestRepository;
+import com.recs.repositories.recsbusiness.DealAssignMemberRepository;
 import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
@@ -27,6 +31,12 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Autowired
     private JobAssignStaffRepository jobAssignStaffRepository;
+
+    @Autowired
+    private AgencyRequestRepository agencyRequestRepository;
+
+    @Autowired
+    private DealAssignMemberRepository dealAssignMemberRepository;
 
     @Override
     public AssignJobStaff createAssignJobStaff(AssignJobStaff assignJobStaff) {
@@ -109,5 +119,24 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         return job;
     }
 
+    @Override
+    public List<AgencyRequest> getListRequestByAgencyAndStatus(String agencyId, String status) {
+        return agencyRequestRepository.getAllByAgencyIdAndStatus(agencyId, status);
+    }
+
+    @Override
+    public List<AgencyRequest> getAllRequestByAgency(String agencyId) {
+        return agencyRequestRepository.getAllByAgencyId(agencyId);
+    }
+
+    @Override
+    public List<DealAssignMember> getAllDealByMemberId(String memberId) {
+        return dealAssignMemberRepository.getByMemberId(memberId);
+    }
+
+    @Override
+    public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status) {
+        return dealAssignMemberRepository.getByMemberIdAndStatus(memberId, status);
+    }
 
 }

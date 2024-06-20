@@ -2,6 +2,8 @@ package com.recs.controller;
 
 import java.util.List;
 
+import com.recs.models.entities.recsbusiness.DealAssignMember;
+import com.recs.services.businesssvc.RecsBusinessService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +27,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-@Controller(value = "/member")
-@PreAuthorize("hasRole('ROLE_MANAGER')")
+@Controller
+@PreAuthorize("hasRole('ROLE_MEMBER')")
 @RequestMapping("/member")
+@SessionAttributes(names = "LOGIN_USER")
 public class MemberController {
     @Autowired
     private RealEstateService realEstateService;
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private RecsBusinessService recsBusinessService;
 
     @ModelAttribute(name = "LOGIN_USER")
     public UserInfo getLoginUser(Authentication authentication) {
@@ -44,13 +50,13 @@ public class MemberController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
-        List<RealEstateInfo> allRealEstate = realEstateService.getAllRealEstate();
 
+        List<DealAssignMember> dealAssignMemberList = recsBusinessService.getAllDealByMemberId(userInfo.getMemberId());
+//        System.out.println(dealAssignMemberList);
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("dealList", allRealEstate);
+        model.addAttribute("dealList", dealAssignMemberList);
         // return "seller/dashboard-seller";
         return "member/dashboard-member";
     }
