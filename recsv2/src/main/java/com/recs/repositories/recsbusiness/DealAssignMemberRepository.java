@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface DealAssignMemberRepository extends JpaRepository<DealAssignMember, String> {
 
-    List<DealAssignMember> getByMemberIdAndStatus(String memberId, String status);
+    List<DealAssignMember> getByMemberMemberIdAndStatus(String memberId, String status);
 
-    List<DealAssignMember> getByAgencyIdAndStatus(String agencyId, String status);
+    List<DealAssignMember> getByAgencyAgencyIdAndStatus(String agencyId, String status);
 
-    List<DealAssignMember> getByMemberId(String memberId);
+    List<DealAssignMember> getByMemberMemberId(String memberId);
 
-    List<DealAssignMember> getByAgencyId(String agencyId);
+    List<DealAssignMember> getByAgencyAgencyId(String agencyId);
 
 }

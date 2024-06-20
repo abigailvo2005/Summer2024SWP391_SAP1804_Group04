@@ -2,9 +2,8 @@ package com.recs.models.dto.realestate;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.recs.models.dto.account.UserInfo;
-import com.recs.models.entities.realestate.PaperWorks;
+import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.entities.realestate.PropertyHouse;
-import com.recs.models.entities.realestate.PropertyImages;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.enums.RealEstateStatus;
@@ -44,6 +43,7 @@ public class RealEstateInfo {
     private List<String> propertyImagesList;
     private String paperWorks;
     private String notes;
+    private List<AgencyRequestDTO> agencyRequests;
 
     private RealEstateInfo(Builder builder) {
         this.realEstateId = builder.realEstateId;
@@ -67,6 +67,7 @@ public class RealEstateInfo {
         this.propertyImagesList = builder.propertyImagesList;
         this.paperWorks = builder.paperWorks;
         this.notes = builder.notes;
+        this.agencyRequests = builder.agencyRequests;
     }
 
     public static class Builder {
@@ -93,6 +94,7 @@ public class RealEstateInfo {
         private List<String> propertyImagesList;
         private String paperWorks;
         private String notes;
+        private List<AgencyRequestDTO> agencyRequests;
 
         public Builder setRealEstateId(String realEstateId) {
             this.realEstateId = realEstateId;
@@ -199,6 +201,11 @@ public class RealEstateInfo {
             return this;
         }
 
+        public Builder setAgencyRequests(List<AgencyRequestDTO> agencyRequests) {
+            this.agencyRequests = agencyRequests;
+            return this;
+        }
+
         public RealEstateInfo build() {
             return new RealEstateInfo(this);
         }
@@ -221,6 +228,7 @@ public class RealEstateInfo {
                 .setUpdateTimestamp(realestate.getUpdateTimestamp())
                 .setUpdatedDate(RealEstateUtils.formatDate(realestate.getUpdateTimestamp()))
                 .setNotes(realestate.getNoteMsg())
+                .setAgencyRequests(realestate.getAgencyRequests().stream().map(AgencyRequestDTO::from).toList())
                 .build();
     }
 

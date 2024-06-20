@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AgencyRequestRepository extends JpaRepository<AgencyRequest, String> {
-    List<AgencyRequest> getAllByRealEstateId(String realEstateId);
+    List<AgencyRequest> getAllByRealEstateRealEstateId(String realEstateId);
 
-    List<AgencyRequest> getAllByRealEstateIdAndStatus(String realEstateId, String status);
+    List<AgencyRequest> getAllByRealEstateRealEstateIdAndStatus(String realEstateId, String status);
 
-    List<AgencyRequest> getAllByAgencyId(String agencyId);
+    List<AgencyRequest> getAllByAgencyAgencyId(String agencyId);
 
-    List<AgencyRequest> getAllByAgencyIdAndStatus(String agencyId, String status);
+    List<AgencyRequest> getAllByAgencyAgencyIdAndStatus(String agencyId, String status);
 }
