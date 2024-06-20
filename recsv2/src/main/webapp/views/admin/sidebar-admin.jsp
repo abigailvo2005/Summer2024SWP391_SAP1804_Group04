@@ -77,11 +77,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               >
                 <i
                   class="fa-solid fa-table-columns"
-                  style="
-                    $ {
-                      currentpage!='dashboard'?'color: #30221b;': '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Dashboard</span>
@@ -97,11 +92,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               >
                 <i
                   class="fa-solid fa-user"
-                  style="
-                    $ {
-                      currentpage!='profile'?'color: #30221b;': '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Profile</span>
@@ -117,11 +107,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               >
                 <i
                   class="fa-solid fa-pen-to-square"
-                  style="
-                    $ {
-                      currentPage!='tracking'?'color: #30221b;': '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Property Tracking</span>
