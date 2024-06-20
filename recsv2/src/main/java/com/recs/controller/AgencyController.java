@@ -4,8 +4,10 @@ import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
+import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
+import com.recs.services.businesssvc.RecsBusinessService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
@@ -31,6 +34,9 @@ public class AgencyController {
     @Autowired
     private RealEstateService realEstateService;
 
+    @Autowired
+    private RecsBusinessService recsBusinessService;
+
     @ModelAttribute(name = "LOGIN_USER")
     public UserInfo getLoginUser(Authentication authentication) {
         String name = authentication.getName();
@@ -44,13 +50,13 @@ public class AgencyController {
         //List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         //sample loading only
         List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
-
+        List<AgencyRequest> agencyRequests = recsBusinessService.getAgencyRequestsByAgencyId(userInfo.getAgencyId());
         //TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         //model.addAttribute("reqList", validatingList);
-        model.addAttribute("propList", validatedList);
+        model.addAttribute("propList", List.of());
         return "agency/dashboard-agency";
     }
 
@@ -58,8 +64,7 @@ public class AgencyController {
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-         List<RealEstateInfo> validatedList = realEstateService.getAllRealEstate().stream()
-         .filter(realEstateInfo -> realEstateInfo.getStatus().equals("success")).toList();
+         List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
 
          //Current Agency information - for Agency Profile loading
          Agency agency = accountService.getAgencyByAccountId(userInfo.getAccountId());
@@ -85,4 +90,12 @@ public class AgencyController {
         return "agency/create-acc-mem";
     }
 
+    @GetMapping("/agency-request")
+    public String createAgencyRequest(
+            @RequestParam String realEstateId,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        recsBusinessService.createAgencyRequest(realEstateId, userInfo.getAgencyId());
+        return "redirect:/marketplace";
+    }
 }

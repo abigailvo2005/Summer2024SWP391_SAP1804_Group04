@@ -6,7 +6,9 @@ import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.services.accountsvc.AccountService;
+import com.recs.services.businesssvc.RecsBusinessService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
@@ -32,6 +35,9 @@ public class SellerController {
 
     @Autowired
     private RealEstateService realEstateService;
+
+    @Autowired
+    private RecsBusinessService recsBusinessService;
 
     @ModelAttribute(name = "LOGIN_USER")
     public UserInfo getLoginUser(Authentication authentication) {
@@ -98,5 +104,15 @@ public class SellerController {
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "seller/profile-seller";
+    }
+
+    @GetMapping("/agency-request/update")
+    private String updateAgencyRequestStatus(
+            @RequestParam String agencyRequestId,
+            @RequestParam String status
+    ) {
+        recsBusinessService.updateAgencyRequestStatus(agencyRequestId, AgencyRequestStatus.from(status));
+
+        return "redirect:/seller";
     }
 }

@@ -6,6 +6,7 @@ import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
+import com.recs.models.enums.AgencyRequestStatus;
 
 import java.util.List;
 
@@ -31,4 +32,10 @@ public interface RecsBusinessService {
     public List<DealAssignMember> getAllDealByMemberId(String memberId);
 
     public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status);
+
+    public void createAgencyRequest(String realEstateId, String agencyId);
+
+    public List<AgencyRequest> getAgencyRequestsByAgencyId(String agencyId);
+
+    public void updateAgencyRequestStatus(String agencyRequestId, AgencyRequestStatus status);
 }

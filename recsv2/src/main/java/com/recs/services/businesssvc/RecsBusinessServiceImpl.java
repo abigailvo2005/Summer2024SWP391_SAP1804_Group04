@@ -8,8 +8,10 @@ import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
+import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.models.enums.JobStatus;
 import com.recs.models.enums.RealEstateStatus;
+import com.recs.repositories.account.AgencyRepository;
 import com.recs.repositories.recsbusiness.AgencyRequestRepository;
 import com.recs.repositories.recsbusiness.DealAssignMemberRepository;
 import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RecsBusinessServiceImpl implements RecsBusinessService{
@@ -37,6 +40,9 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Autowired
     private DealAssignMemberRepository dealAssignMemberRepository;
+
+    @Autowired
+    private AgencyRepository agencyRepository;
 
     @Override
     public AssignJobStaff createAssignJobStaff(AssignJobStaff assignJobStaff) {
@@ -121,22 +127,54 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Override
     public List<AgencyRequest> getListRequestByAgencyAndStatus(String agencyId, String status) {
-        return agencyRequestRepository.getAllByAgencyIdAndStatus(agencyId, status);
+        return agencyRequestRepository.getAllByAgencyAgencyIdAndStatus(agencyId, status);
     }
 
     @Override
     public List<AgencyRequest> getAllRequestByAgency(String agencyId) {
-        return agencyRequestRepository.getAllByAgencyId(agencyId);
+        return agencyRequestRepository.getAllByAgencyAgencyId(agencyId);
     }
 
     @Override
     public List<DealAssignMember> getAllDealByMemberId(String memberId) {
-        return dealAssignMemberRepository.getByMemberId(memberId);
+        return dealAssignMemberRepository.getByMemberMemberId(memberId);
     }
 
     @Override
     public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status) {
-        return dealAssignMemberRepository.getByMemberIdAndStatus(memberId, status);
+        return dealAssignMemberRepository.getByMemberMemberIdAndStatus(memberId, status);
+    }
+
+    @Override
+    public void createAgencyRequest(String realEstateId, String agencyId) {
+        AgencyRequest agencyRequest = new AgencyRequest(
+                UUID.randomUUID().toString(),
+                System.currentTimeMillis(),
+                AgencyRequestStatus.REVIEWING.getValue(),
+                agencyRepository.getReferenceById(agencyId),
+                realEstateService.getById(realEstateId)
+        );
+        realEstateService.updateStatus(realEstateId, RealEstateStatus.AGENCY_APPROVING, "");
+        agencyRequestRepository.save(agencyRequest);
+    }
+
+    @Override
+    public List<AgencyRequest> getAgencyRequestsByAgencyId(String agencyId) {
+        return agencyRequestRepository.getAllByAgencyAgencyId(agencyId);
+    }
+
+    @Override
+    public void updateAgencyRequestStatus(String agencyRequestId, AgencyRequestStatus status) {
+        AgencyRequest agencyRequest = agencyRequestRepository.getReferenceById(agencyRequestId);
+        if(agencyRequest != null) {
+            agencyRequest.setStatus(status.getValue());
+            realEstateService.updateStatus(
+                    agencyRequest.getRealEstate().getRealEstateId(),
+                    status.toRealEstateStatus(),
+                    ""
+                    );
+            agencyRequestRepository.save(agencyRequest);
+        }
     }
 
 }

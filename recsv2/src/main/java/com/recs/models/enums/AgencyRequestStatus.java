@@ -25,6 +25,12 @@ public enum AgencyRequestStatus {
         return UNKNOWN;
     }
 
+    public RealEstateStatus toRealEstateStatus() {
+        if(this == ACCEPTED) return RealEstateStatus.HANDLED;
+        else if(this == DENIED || this == REVIEWING || this == DROPPED) return RealEstateStatus.AGENCY_APPROVING;
+        return RealEstateStatus.UNKNOWN;
+    }
+
     @Override
     public String toString() {
         return value;

@@ -34,11 +34,11 @@ public class DealAssignMember {
     @Column(name = "status", length = 16)
     private String status;
 
-    @Column(name = "memberId", insertable=false, updatable=false)
-    private String memberId;
+//    @Column(name = "memberId", insertable=false, updatable=false)
+//    private String memberId;
 
-    @Column(name = "agencyId", insertable=false, updatable=false)
-    private String agencyId;
+//    @Column(name = "agencyId", insertable=false, updatable=false)
+//    private String agencyId;
 
 //    @Column(name = "realEstateId", insertable=false, updatable=false)
 //    private String realEstateId;

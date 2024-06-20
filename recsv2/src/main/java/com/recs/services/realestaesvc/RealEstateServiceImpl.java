@@ -3,12 +3,15 @@ package com.recs.services.realestaesvc;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.entities.account.Manager;
 import com.recs.models.entities.realestate.PaperWorks;
 import com.recs.models.entities.realestate.PropertyHouse;
 import com.recs.models.entities.realestate.PropertyImages;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.entities.recsbusiness.AgencyRequest;
+import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.repositories.account.ManagerRepository;
 import com.recs.repositories.realestate.PaperWorksRepository;
@@ -164,6 +167,12 @@ public class RealEstateServiceImpl implements RealEstateService{
         return info.toBuilder()
                 .setPropertyImagesList(images)
                 .setPaperWorks(paperWorks)
+                .setAgencyRequests(
+                        realEstate.getAgencyRequests().stream()
+                                .map(AgencyRequestDTO::from)
+                                .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
+                                .toList()
+                )
                 .build();
     }
 
@@ -250,7 +259,8 @@ public class RealEstateServiceImpl implements RealEstateService{
                 Clock.systemUTC().millis(),
                 sellerId,
                 getSuitableManager(),
-                StringUtils.EMPTY
+                StringUtils.EMPTY,
+                List.of()
                 );
     }
 
@@ -280,6 +290,15 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .toBuilder()
                             .setSellerInfo(sellerInfo)
                             .setManagerInfo(managerInfo)
+                            .setAgencyRequests(
+                                    realEstate.getAgencyRequests().stream()
+                                            .map(AgencyRequestDTO::from)
+//                                            .filter(request -> request.getStatus().equals(
+//                                                    AgencyRequestStatus.REVIEWING.getValue()
+//                                            )) //rat can cho nay
+                                            .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
+                                            .toList()
+                            )
                             .build();
                 })
                 .sorted(
@@ -296,6 +315,15 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .toBuilder()
                             .setSellerInfo(sellerInfo)
                             .setManagerInfo(managerInfo)
+                            .setAgencyRequests(
+                                    realEstate.getAgencyRequests().stream()
+                                            .map(AgencyRequestDTO::from)
+//                                            .filter(request -> request.getStatus().equals(
+//                                                    AgencyRequestStatus.REVIEWING.getValue()
+//                                            )) //rat can cho nay
+                                            .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
+                                            .toList()
+                            )
                             .build();
                 })
                 .sorted(
@@ -312,6 +340,15 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .toBuilder()
                             .setSellerInfo(sellerInfo)
                             .setManagerInfo(managerInfo)
+                            .setAgencyRequests(
+                                    realEstate.getAgencyRequests().stream()
+                                            .map(AgencyRequestDTO::from)
+//                                            .filter(request -> request.getStatus().equals(
+//                                                    AgencyRequestStatus.REVIEWING.getValue()
+//                                            )) //rat can cho nay
+                                            .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
+                                            .toList()
+                            )
                             .build();
                 })
                 .sorted(

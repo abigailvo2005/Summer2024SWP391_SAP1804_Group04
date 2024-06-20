@@ -1,5 +1,6 @@
 package com.recs.models.entities.realestate;
 
+import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -65,4 +66,7 @@ public class RealEstate {
 
     @Column(name = "noteMsg")
     private String noteMsg;
+
+    @OneToMany(mappedBy = "realEstate", cascade = CascadeType.ALL)
+    private List<AgencyRequest> agencyRequests = List.of();
 }

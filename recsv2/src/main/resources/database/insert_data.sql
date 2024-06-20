@@ -115,7 +115,16 @@ UPDATE RealEstate SET status = 'Unqualified' WHERE status = 'UNQUALIFIED';
 INSERT INTO DealAssignMember (
     dealId, createTimestamp, priority, status, agencyId, memberId, realEstateId
 ) VALUES (
-    UUID(), 1622547800000, 1, 'active', '99d39b8f-285a-11ef-b7aa-2c4d54675fbe', '549c6a5c-2990-11ef-99d0-2c4d54675fbe', 'c3b6fc94-2d11-11ef-99d0-2c4d54675fbe'
+    UUID(), 1622547800000, 1, 'active', '99d39b8f-285a-11ef-b7aa-2c4d54675fbe', '549c6a5c-2990-11ef-99d0-2c4d54675fbe', 'e5d4700c-0c9a-4e66-a667-80415ea7bd3c'
+);
+
+INSERT INTO DealAssignMember (
+    dealId, createTimestamp, priority, status, agencyId, memberId, realEstateId
+) VALUES (
+    UUID(), 1622547800000, 1, 'active', '99d39b8f-285a-11ef-b7aa-2c4d54675fbe', '549c6a5c-2990-11ef-99d0-2c4d54675fbe', 'bd45c3aa-a5a2-4a9b-ad53-40e21cc2aaa0'
+),
+  (
+    UUID(), 1622547800000, 1, 'active', '99d39b8f-285a-11ef-b7aa-2c4d54675fbe', '549c6a5c-2990-11ef-99d0-2c4d54675fbe', '7589e3b2-73d3-47d4-9eaf-49cfe350b3d6'
 );
 
 
