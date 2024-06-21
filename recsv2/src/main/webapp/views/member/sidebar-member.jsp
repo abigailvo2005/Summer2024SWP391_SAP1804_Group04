@@ -70,7 +70,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               >
                 <i
                   class="fa-solid fa-table-columns"
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Dashboard</span>
@@ -86,7 +85,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               >
                 <i
                   class="fa-solid fa-user"
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Profile</span>

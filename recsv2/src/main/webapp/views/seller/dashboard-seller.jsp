@@ -448,6 +448,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                     </div>
 
+                    <div class="row unqualified hidden">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                      >
+                        <strong class="text-dark">Notes:</strong>
+                        <p id="popup-note"></p>
+                      </li>
+                    </div>
+
                     <!-- image carousel -->
                     <div
                       id="image-section"
@@ -796,6 +805,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var houseSection = document.querySelector(".house-info-section");
         var agencyList = document.querySelector("#agency-list");
         var buyerList = document.querySelector("#buyer-list");
+        var unqualified = document.querySelector(".unqualified");
 
         // Send GET Request API to retrieve single property information
         $.ajax({
@@ -817,6 +827,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
+
+            //show notes when property unqualified
+            if(data.status == "UNQUALIFIED") {
+              unqualified.classList.remove("hidden");
+              $("popup-note").text(data.notes);
+            } else {
+              unqualified.classList.add("hidden");
+            }
+            
 
             //only show land/house fields according to type
             if (data.realEstateType == "Land") {

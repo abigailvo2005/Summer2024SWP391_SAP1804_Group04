@@ -75,11 +75,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               >
                 <i
                   class="fa-solid fa-table-columns"
-                  style="
-                    $ {
-                      currentPage !='dashboard'?'color: #30221b': '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Dashboard</span>
@@ -95,11 +90,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               >
                 <i
                   class="fa-solid fa-user"
-                  style="
-                    $ {
-                      currentPage != 'profile' ? 'color: #30221b;': '';
-                    }
-                  "
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Profile</span>
@@ -115,11 +105,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               >
                 <i
                   class="fa-solid fa-pen-to-square"
-                  style="
-                  $ {
-                    currentPage != 'create-staff' ? 'color: #30221b;': '';
-                  }
-                "
+
                 ></i>
               </div>
               <span class="nav-link-text ms-1">Create Staff</span>
@@ -137,7 +123,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url(/template/assets/img/curved-images/white-curved.jpg'/>);
+              background-image: url('</template/assets/img/curved-images/white-curved.jpg/>');
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
