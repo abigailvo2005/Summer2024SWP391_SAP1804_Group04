@@ -286,10 +286,18 @@ public class RealEstateServiceImpl implements RealEstateService{
         return list.stream().map(realEstate -> {
                     UserInfo sellerInfo = accountService.getSellerToUserInfo(realEstate.getSellerId());
                     UserInfo managerInfo = accountService.getManagerToUserInfo(realEstate.getManagerId());
+                    List<PropertyImages> images = propertyImagesRepository.findAllByRealEstateId(realEstate.getRealEstateId());
+                    PaperWorks paperWorks = paperWorksRepository.getReferenceById(realEstate.getRealEstateId());
                     return RealEstateInfo.fromRealEstate(realEstate)
                             .toBuilder()
                             .setSellerInfo(sellerInfo)
                             .setManagerInfo(managerInfo)
+                            .setPropertyImagesList(
+                                    images.stream().map(PropertyImages::getUrl).toList()
+                            )
+                            .setPaperWorks(
+                                    paperWorks.getUrl()
+                            )
                             .setAgencyRequests(
                                     realEstate.getAgencyRequests().stream()
                                             .map(AgencyRequestDTO::from)
