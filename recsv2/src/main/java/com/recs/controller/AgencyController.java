@@ -47,16 +47,15 @@ public class AgencyController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        //List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         //sample loading only
-        List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
-        List<AgencyRequest> agencyRequests = recsBusinessService.getAgencyRequestsByAgencyId(userInfo.getAgencyId());
+        List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.HANDLED.getValue());
+
         //TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         //model.addAttribute("reqList", validatingList);
-        model.addAttribute("propList", List.of());
+        model.addAttribute("handleList", validatedList);
         return "agency/dashboard-agency";
     }
 
@@ -64,7 +63,7 @@ public class AgencyController {
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-         List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
+        List<RealEstateInfo> listings = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
 
          //Current Agency information - for Agency Profile loading
          Agency agency = accountService.getAgencyByAccountId(userInfo.getAccountId());
@@ -74,7 +73,7 @@ public class AgencyController {
         String currentPage = "marketplace";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("propList", validatedList);
+        model.addAttribute("propList", listings);
         model.addAttribute("agency", agency);
         return "agency/marketplace";
     }

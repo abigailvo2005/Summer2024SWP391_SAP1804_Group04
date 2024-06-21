@@ -420,7 +420,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         hidden
                       />
                     </div>
-                    
+
                     <div class="col-sm-6">
                       <select
                         class="form-control form-create-control"
@@ -428,12 +428,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       >
                         <option class="fs-6" value="">Choose Staff</option>
                         <c:forEach items="${staffList}" var="staff">
-                          
-                          <option class="fs-6" value="${staff.staffId}" 
-                          >
-                          
-                          ${staff.username}
-                          </option>
+                            <option class="fs-6" value="${staff.staffId}">
+                              ${staff.username}
+                            </option>
                         </c:forEach>
                       </select>
                     </div>
@@ -459,7 +456,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           </div>
         </div>
       </div>
-       <!-- END: FORM TO ASSIGN JOB TO A STAFF -->
+      <!-- END: FORM TO ASSIGN JOB TO A STAFF -->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
@@ -753,7 +750,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <!-- ---------------- END POPUP SECTION --------------------- -->
 
     <script>
-      //JS MODIFY POPUP
       //URL REAL ESTATE API
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
       var chosenData = null;
@@ -823,8 +819,12 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         var houseSection = formAssignJob.querySelector("#house-info");
 
         // Update popup with information of chosen property
-        document.querySelector("#form-name").setAttribute("value", chosenData.name);
-        document.querySelector("#reID").setAttribute("value", chosenData.realEstateId);
+        document
+          .querySelector("#form-name")
+          .setAttribute("value", chosenData.name);
+        document
+          .querySelector("#reID")
+          .setAttribute("value", chosenData.realEstateId);
         document
           .querySelector("#form-description")
           .setAttribute("value", chosenData.description);
@@ -834,7 +834,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         document
           .querySelector("#form-address")
           .setAttribute("value", chosenData.address);
-        document.querySelector("#form-area").setAttribute("value", chosenData.area);
+        document
+          .querySelector("#form-area")
+          .setAttribute("value", chosenData.area);
         document
           .querySelector("#form-price")
           .setAttribute("value", chosenData.textPrice);
@@ -968,7 +970,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         alert("Job assigned successfully!");
 
         //execute default submit
-       document.querySelector('form').submit();
+        document.querySelector("form").submit();
       }
 
       function chooseStaff(selectedStaff) {
