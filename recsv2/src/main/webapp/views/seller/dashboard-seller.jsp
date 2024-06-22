@@ -542,30 +542,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                       >
                         <strong class="text-dark">Paperwork: </strong>
-                        <a class="landpw" id="popup-land-pw" target="_blank" download></a>
-                        <form 
-                          action="${pageContext.request.contextPath}/seller/dashboard" method="post"
-                          class="hidden change">
-                          <input name="realEstateID" id="popup-id" class="hidden"/>
-                          <input
-                            id="prop-pw-land"
-                            type="file"
-                            accept="application/pdf, application/zip"
-                            class="form-control form-create-control "
-                            name="url"
-                            required
-                          />
-                          <button class="btn btn-padding">Change</button>
-                          <input
-                            class="hidden"
-                            id="land-pw-container"
-                            name="landPw"
-                            type="text"
-                          />
-                        </form>
-                        <a class="hidden pen" onclick="changePW()">
-                          <i class="fa-solid fa-pencil"></i>
-                        </a>
+                        <a id="popup-land-pw" target="_blank" download></a>
                       </li>
                     </div>
 
@@ -706,8 +683,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         </div>
       </div>
     </div>
-
-    <!--End Form-->
+    <!-- END POPUP REQUESTS -->
 
     <!--   Core JS Files   -->
     <script src="/template/assets/js/core/popper.min.js"></script>
@@ -836,16 +812,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       });
 
-      function changePW() {
-        var form_change = document.querySelector(".change");
-        var form_download = document.querySelector(".landpw");
-        var icon = document.querySelector(".pen");
-
-        form_change.classList.remove("hidden");
-        form_download.classList.add("hidden");
-        icon.classList.add("hidden");
-      }
-
       /* View Popup detail of each property */
       function viewDetailProperty(propID, type) {
         var popup = document.querySelector("#popup-property-request");
@@ -854,7 +820,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var agencyList = document.querySelector("#agency-list");
         var buyerList = document.querySelector("#buyer-list");
         var unqualified = document.querySelector(".unqualified");
-        var pen = document.querySelector(".pen");
 
         // Send GET Request API to retrieve single property information
         $.ajax({
@@ -871,17 +836,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-price").text(data.textPrice + " VND");
             $("#popup-manager").text(data.managerInfo.username);
 
-            //update chooser realEstateID 
-            document.querySelector("#popup-id").setAttribute("value", data.realEstateId);
-
             //show notes when property unqualified
             if(data.status == "UNQUALIFIED") {
               unqualified.classList.remove("hidden");
-              pen.classList.remove("hidden");
-              $("#popup-note").text(data.notes);
+              $("popup-note").text(data.notes);
             } else {
               unqualified.classList.add("hidden");
-              pen.classList.add("hidden");
             }
             
 
