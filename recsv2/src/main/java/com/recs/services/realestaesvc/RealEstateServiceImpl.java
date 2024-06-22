@@ -239,6 +239,16 @@ public class RealEstateServiceImpl implements RealEstateService{
     }
 
     @Override
+    public PaperWorks updatePaperWork(String realEstateID, String url) {
+        PaperWorks ppw = paperWorksRepository.getReferenceById(realEstateID);
+        if(ppw != null) {
+            ppw.setUrl(url);
+            paperWorksRepository.save(ppw);
+        }
+        return ppw;      
+    }
+
+    @Override
     public List<RealEstateInfo> getAllByStatus(String status) {
         List<RealEstate> realEstates = realEstateRepository.findAllByStatus(status);
         return mapListToInfo(realEstates);
@@ -364,4 +374,6 @@ public class RealEstateServiceImpl implements RealEstateService{
                         .reversed())
                 .toList();
     }
+
+    
 }
