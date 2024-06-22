@@ -86,7 +86,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                 <div class="card-body">
                   <form
-                  id="create-prop-form"
+                    id="create-prop-form"
                     role="form text-left"
                     name="property-information"
                     action="${pageContext.request.contextPath}/seller/create-property"

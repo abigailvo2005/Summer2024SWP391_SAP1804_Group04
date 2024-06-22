@@ -2,6 +2,7 @@ package com.recs.services.realestaesvc;
 
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.entities.realestate.PaperWorks;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.enums.RealEstateStatus;
 
@@ -35,5 +36,8 @@ public interface RealEstateService {
 
     public RealEstate updateStatus(String realEstateId, RealEstateStatus status, String noteMsg);
 
+    public PaperWorks updatePaperWork(String realEstateID, String url);
+
     public List<RealEstateInfo> getAllByStatus(String status);
+    
 }
