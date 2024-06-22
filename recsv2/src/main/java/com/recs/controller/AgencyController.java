@@ -95,6 +95,7 @@ public class AgencyController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
         recsBusinessService.createAgencyRequest(realEstateId, userInfo.getAgencyId());
+        System.out.println("IN AGENCY REQUEST");
         return "redirect:/marketplace";
     }
 }

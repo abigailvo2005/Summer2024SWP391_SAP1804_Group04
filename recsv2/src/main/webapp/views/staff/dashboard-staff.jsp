@@ -138,8 +138,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="req-type" 
-                                    class="mb-0 text-sm fw-bold text-dark">
+                                    id="req-type"
+                                    class="mb-0 text-sm fw-bold text-dark"
+                                  >
                                     ${job.realEstateInfo.realEstateType}
                                   </p>
                                 </div>
@@ -492,69 +493,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                     </div>
 
+                    <!-- image section for popup -->
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-5 d-flex"
                       >
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
-                    </div>
-
-                    <!-- image section for popup -->
-                    <div class="row mb-3">
                       <div
                         id="image-section"
-                        class="carousel slide"
+                        class="carousel slide mb-3 col-7"
                         data-bs-ride="carousel"
                       >
-                        <!-- buttons to directly see an image -->
-                        <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
-                        </div>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../template/assets/img/home-decor-1.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-2.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-3.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 3"
-                            />
-                          </div>
-                        </div>
-                        <!-- button fd/backwards -->
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner"></div>
                         <button
                           class="carousel-control-prev"
                           type="button"
@@ -581,6 +534,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </button>
                       </div>
                     </div>
+                    <!-- End img section -->
 
                     <div id="land-info" class="row hidden">
                       <li
@@ -638,8 +592,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <!-- Buttons to decide if property is appropriate or not -->
-                    <form action="${pageContext.request.contextPath}/staff/validate-property" method="post">
-                      <input name="jobId" id="popup-jobID" class="hidden"/>
+                    <form
+                      action="${pageContext.request.contextPath}/staff/validate-property"
+                      method="post"
+                    >
+                      <input name="jobId" id="popup-jobID" class="hidden" />
                       <div class="row">
                         <div class="row">
                           <li
@@ -692,14 +649,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           </ul>
 
                           <div class="col-6 border-0 ps-0 text-sm">
-                              <textarea
-                                class="form-control"
-                                id="notes"
-                                name="notes"
-                                rows="3"
-                                placeholder="Enter any additional notes here..."
-                              ></textarea>
-                            </div>
+                            <textarea
+                              class="form-control"
+                              id="notes"
+                              name="notes"
+                              rows="3"
+                              placeholder="Enter any additional notes here..."
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
                       <div class="row justify-content-center">
@@ -760,7 +717,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#manager").text(data.managerInfo.username);
             $("#popup-name").text(data.realEstateInfo.name);
             $("#popup-status").text(data.status);
-            $("#popup-dateCreated").text(data.realEstateInfo.createTimestamp)
+            $("#popup-dateCreated").text(data.realEstateInfo.createTimestamp);
             $("#popup-desc").text(data.realEstateInfo.description);
             $("#popup-type").text(data.realEstateInfo.realEstateType);
             $("#popup-address").text(data.realEstateInfo.address);
@@ -768,7 +725,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
 
             //update chosen Job ID according to the chosen one
-            document.querySelector("#popup-jobID").setAttribute("value", data.jobId);
+            document
+              .querySelector("#popup-jobID")
+              .setAttribute("value", data.jobId);
 
             //only show land/house fields according to type
             if (data.realEstateInfo.realEstateType == "Land") {
@@ -777,26 +736,20 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-land-type").text(
                 data.realEstateInfo.propertyLand.landType
               );
-              $("#popup-land-pw").text("sample-pdf-land");
+              $("#popup-land-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-land-pw")
-                .setAttribute(
-                  "href",
-                  "sample.pdf"
-                );
+                .setAttribute("href", data.paperWorks);
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(
                 data.realEstateInfo.propertyHouse.houseType
               );
-              $("#popup-house-pw").text("sample-zip-house");
+              $("#popup-house-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-house-pw")
-                .setAttribute(
-                  "href",
-                  "sample.zip"
-                );
+                .setAttribute("href", data.paperWorks);
               $("#popup-builtIn").text(
                 data.realEstateInfo.propertyHouse.builtIn
               );
@@ -807,6 +760,45 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 data.realEstateInfo.propertyHouse.bath + " rooms"
               );
             }
+
+            //load images to carousel
+            const carouselInner = document.querySelector(".carousel-inner");
+            const carouselIndicators = document.querySelector(
+              ".carousel-indicators"
+            );
+
+            // Reset images to be shown everytime popup is clicked
+            carouselInner.innerHTML = "";
+            carouselIndicators.innerHTML = "";
+
+            data.realEstateInfo.propertyImagesList.forEach((image, index) => {
+              // create slide
+              const slideElement = document.createElement("div");
+              slideElement.classList.add("carousel-item");
+              if (index === 0) {
+                slideElement.classList.add("active");
+              }
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              imgElement.classList.add("d-block", "w-100", "rounded");
+              slideElement.appendChild(imgElement);
+              carouselInner.appendChild(slideElement);
+
+              // create indexes
+              const indicatorElement = document.createElement("button");
+              indicatorElement.type = "button";
+              indicatorElement.dataset.bsTarget = "#image-section";
+              indicatorElement.dataset.bsSlideTo = index;
+              if (index === 0) {
+                indicatorElement.classList.add("active");
+                indicatorElement.setAttribute("aria-current", "true");
+              }
+              indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+              carouselIndicators.appendChild(indicatorElement);
+            });
+
+            // init Bootstrap Carousel
+            const carousel = new bootstrap.Carousel("#image-section");
 
             popup.classList.remove("hidden");
           },

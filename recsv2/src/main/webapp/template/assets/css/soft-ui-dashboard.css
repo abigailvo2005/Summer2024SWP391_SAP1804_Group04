@@ -3718,8 +3718,14 @@ textarea.form-control.is-invalid {
 
 .carousel-item img {
   width: 100%;
-  height: auto; 
-  object-fit: contain; 
+  height: 250px;
+  object-fit: cover; 
+}
+
+.carousel-item img.marketplace {
+  width: 100%;
+  height: 200px; 
+  object-fit: cover; 
 }
 
 /* FOR LIST CONFIRMATION ON SELLER POPUP */
@@ -4233,6 +4239,23 @@ fieldset:disabled .btn {
   --bs-btn-focus-shadow-rgb: 211, 48, 173;
   text-decoration: none;
 }
+
+.show-btn {
+  background-color: #444;
+  border: none;
+  color: white;
+  padding: 8px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin:.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+  position: relative;
+  width: 30%;
+}
+
 
 .btn-link:hover,
 .btn-link:focus-visible {
@@ -21170,7 +21193,7 @@ fieldset:disabled .btn {
 }
 
 .card-property .card-img {
-  height: 100%;
+  height: 100px;
   width: 100%;
   object-fit: cover;
   border-radius: 0.5rem 0 0 0.5rem;

@@ -326,19 +326,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     </div>
                     <div class="col-sm-2"><label>Land Paperwork:</label></div>
                     <div class="col-sm-4">
-                      <input
-                        id="form-land-pw"
-                        type="file"
-                        name="paperwork"
-                        class="form-control form-create-control col-10"
-                        disabled
-                        hidden
-                      />
                       <label
-                        ><a href="sample.pdf" target="_blank" download
-                          ><i>sample.pdf</i></a
-                        ></label
-                      >
+                        ><a id="form-land-pw" target="_blank" download></a
+                      ></label>
                     </div>
                   </div>
                   <div id="house-info">
@@ -357,19 +347,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         <label>House Paperwork:</label>
                       </div>
                       <div class="col-sm-4">
-                        <input
-                          id="form-house-pw"
-                          type="file"
-                          name="paperwork"
-                          class="form-control form-create-control col-10"
-                          disabled
-                          hidden
-                        />
                         <label
-                          ><a href="sample.zip" target="_blank" download
-                            ><i>sample.zip</i></a
-                          ></label
-                        >
+                          ><a id="form-house-pw" target="_blank" download></a
+                        ></label>
                       </div>
                     </div>
                     <div class="mb-3 row">
@@ -411,6 +391,19 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   </div>
                   <div class="row mb-3">
                     <div class="col-sm-2"><label>Staff Assigned:</label></div>
+                    <div class="col-sm-6">
+                      <select
+                        class="form-control form-create-control"
+                        onchange="chooseStaff(this.value)"
+                      >
+                        <option class="fs-6" value="">Choose Staff</option>
+                        <c:forEach items="${staffList}" var="staff">
+                          <option class="fs-6" value="${staff.staffId}">
+                            ${staff.username}
+                          </option>
+                        </c:forEach>
+                      </select>
+                    </div>
                     <div class="col-sm-4">
                       <input
                         id="form-chosen-staff"
@@ -419,20 +412,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         class="form-control form-create-control col-10"
                         hidden
                       />
-                    </div>
-
-                    <div class="col-sm-6">
-                      <select
-                        class="form-control form-create-control"
-                        onchange="chooseStaff(this.value)"
-                      >
-                        <option class="fs-6" value="">Choose Staff</option>
-                        <c:forEach items="${staffList}" var="staff">
-                            <option class="fs-6" value="${staff.staffId}">
-                              ${staff.username}
-                            </option>
-                        </c:forEach>
-                      </select>
                     </div>
                   </div>
                   <!-- submit button -->
@@ -586,86 +565,40 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       </li>
                     </div>
 
-                    <!-- image section for popup -->
-                    <div class="row mb-3">
-                      <div
-                        id="image-section"
-                        class="carousel slide"
-                        data-bs-ride="carousel"
+                    <!-- image carousel -->
+                    <div
+                      id="image-section"
+                      class="carousel slide mb-3"
+                      data-bs-ride="carousel"
+                    >
+                      <div class="carousel-indicators"></div>
+                      <div class="carousel-inner"></div>
+                      <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#image-section"
+                        data-bs-slide="prev"
                       >
-                        <!-- buttons to directly see an image -->
-                        <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
-                        </div>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../template/assets/img/home-decor-1.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-2.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-3.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 3"
-                            />
-                          </div>
-                        </div>
-                        <!-- button fd/backwards -->
-                        <button
-                          class="carousel-control-prev"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="prev"
-                        >
-                          <span
-                            class="carousel-control-prev-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                          class="carousel-control-next"
-                          type="button"
-                          data-bs-target="#image-section"
-                          data-bs-slide="next"
-                        >
-                          <span
-                            class="carousel-control-next-icon"
-                            aria-hidden="true"
-                          ></span>
-                          <span class="visually-hidden">Next</span>
-                        </button>
-                      </div>
+                        <span
+                          class="carousel-control-prev-icon"
+                          aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#image-section"
+                        data-bs-slide="next"
+                      >
+                        <span
+                          class="carousel-control-next-icon"
+                          aria-hidden="true"
+                        ></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
                     </div>
+                    <!-- end: image carousel -->
 
                     <div id="land-info" class="row hidden">
                       <li
@@ -781,22 +714,62 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
-              $("#popup-land-pw").text("sample-pdf-land");
+              $("#popup-land-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-land-pw")
-                .setAttribute("href", "sample.pdf");
+                .setAttribute("href", data.paperWorks);
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-house-pw").text("sample-zip-house");
+              $("#popup-house-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-house-pw")
-                .setAttribute("href", "sample.zip");
+                .setAttribute("href", data.paperWorks);
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
+
+            //load images to carousel
+            const carouselInner = document.querySelector(".carousel-inner");
+            const carouselIndicators = document.querySelector(
+              ".carousel-indicators"
+            );
+
+            // Reset images to be shown everytime popup is clicked
+            carouselInner.innerHTML = "";
+            carouselIndicators.innerHTML = "";
+
+            data.propertyImagesList.forEach((image, index) => {
+              // create slide
+              const slideElement = document.createElement("div");
+              slideElement.classList.add("carousel-item");
+              if (index === 0) {
+                slideElement.classList.add("active");
+              }
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              imgElement.classList.add("d-block", "w-100", "rounded");
+              slideElement.appendChild(imgElement);
+              carouselInner.appendChild(slideElement);
+
+              // create indexes
+              const indicatorElement = document.createElement("button");
+              indicatorElement.type = "button";
+              indicatorElement.dataset.bsTarget = "#image-section";
+              indicatorElement.dataset.bsSlideTo = index;
+              if (index === 0) {
+                indicatorElement.classList.add("active");
+                indicatorElement.setAttribute("aria-current", "true");
+              }
+              indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+              carouselIndicators.appendChild(indicatorElement);
+            });
+
+            // init Bootstrap Carousel
+            const carousel = new bootstrap.Carousel("#image-section");
+
             //pass in data as global variable to load Form
             chosenData = data;
             popup.classList.remove("hidden");
@@ -847,30 +820,19 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           document
             .querySelector("#form-landCategory")
             .setAttribute("value", chosenData.propertyLand.landType);
-          /* document
-            .querySelector("#form-land-pw")
-            .setAttribute("value", "sample-gg-drive-link-land");
           document
             .querySelector("#form-land-pw")
-            .setAttribute(
-              "href",
-              "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-            ); */
+            .text = "download this file to view paperwork";
+          document
+            .querySelector("#form-land-pw")
+            .setAttribute("href", chosenData.paperWorks);
         } else {
           houseSection.classList.remove("hidden");
           landSection.classList.add("hidden");
           document
             .querySelector("#form-houseCategory")
             .setAttribute("value", chosenData.propertyHouse.houseType);
-          /*  document
-            .querySelector("#form-house-pw")
-            .setAttribute("value", "sample-gg-drive-link-house");
-          document
-            .querySelector("#form-house-pw")
-            .setAttribute(
-              "href",
-              "https://drive.google.com/drive/folders/1qXWhq9rQTjsq3ms_6NFoI_I63Dno7Acz?usp=drive_link"
-            ); */
+
           document
             .querySelector("#form-builtYear")
             .setAttribute("value", chosenData.propertyHouse.builtIn);
@@ -881,7 +843,12 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             .querySelector("#form-bathrooms")
             .setAttribute("value", chosenData.propertyHouse.bath);
         }
-
+        document
+            .querySelector("#form-house-pw")
+            .text = "download this file to view paperwork";
+        document
+          .querySelector("#form-house-pw")
+          .setAttribute("href", chosenData.paperWorks);
         formAssignJob.classList.remove("hidden");
         closeDetail();
       }

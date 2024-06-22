@@ -49,7 +49,7 @@ public class StaffController {
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        List<ValidationJobInfo> allJobList = recsBusinessService.getListByStaff(userInfo.getStaffId());
+        List<ValidationJobInfo> validatingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.ASSIGNED.getValue());
 
         List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
 
@@ -57,7 +57,7 @@ public class StaffController {
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("jobList", allJobList);
+        model.addAttribute("jobList", validatingList);
         model.addAttribute("listingList", listingList);
         return "staff/dashboard-staff";
     }

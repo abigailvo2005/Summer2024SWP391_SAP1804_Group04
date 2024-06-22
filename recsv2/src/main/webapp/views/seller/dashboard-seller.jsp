@@ -457,49 +457,48 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                     </div>
 
-                    <!-- image carousel -->
-                    <div
-                      id="image-section"
-                      class="carousel slide mb-3"
-                      data-bs-ride="carousel"
-                    >
-                      <div class="carousel-indicators"></div>
-                      <div class="carousel-inner"></div>
-                      <button
-                        class="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#image-section"
-                        data-bs-slide="prev"
-                      >
-                        <span
-                          class="carousel-control-prev-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button
-                        class="carousel-control-next"
-                        type="button"
-                        data-bs-target="#image-section"
-                        data-bs-slide="next"
-                      >
-                        <span
-                          class="carousel-control-next-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    </div>
-                    <!-- end: image carousel -->
-
+                    <!-- image section & description for popup -->
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-5 d-flex"
                       >
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
+                      <div
+                        id="image-section"
+                        class="carousel slide mb-3 col-7"
+                        data-bs-ride="carousel"
+                      >
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner"></div>
+                        <button
+                          class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                     </div>
+                    <!-- end: image carousel -->
 
                     <div class="row">
                       <li
@@ -584,8 +583,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
 
-                    <!-- Table shows list of Agency wants to handle this property -->
-                    <div id="agency-list" class="row">
+                    <!-- Button allows user hide/show list of agencies -->
+                    <div
+                      id="show-agency-permission"
+                      class="d-flex justify-content-center"
+                    >
+                      <button class="show-btn" onclick="showAgencies()">
+                        Show Agency List
+                      </button>
+                    </div>
+                     <!-- Table shows list of Agency wants to handle this property -->
+                    <div id="agency-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Agency Profiles</strong>
                       </div>
@@ -622,8 +630,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
 
-
                     <!-- Table shows list of Buyer wants to handle this property -->
+                    <div
+                      id="show-buyer-permission"
+                      class="d-flex justify-content-center"
+                    >
+                      <button class="show-btn" onclick="showBuyers()">
+                        Show Buyer List
+                      </button>
+                    </div>
                     <div id="buyer-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Buyer Profiles</strong>
@@ -643,15 +658,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <form id="buyer-form" action="" method="post">
                           <div id="selected-buyer-id" class="hidden"></div>
                           <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-secondary confirm-buyer" onclick="confirmBuyer(event)">
+                            <button
+                              type="submit"
+                              class="btn btn-secondary confirm-buyer"
+                              onclick="confirmBuyer(event)"
+                            >
                               Confirm
                             </button>
                           </div>
                         </form>
                       </div>
                     </div>
-
-
                   </div>
                 </ul>
               </div>
@@ -677,13 +694,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
 
       // Automatically disable other choices in agency table when 1 is clicked
-      $(document).on("change", ".agency-checkbox", function () {
+      /* $(document).on("change", ".agency-checkbox", function () {
         if (this.checked) {
           $(".agency-checkbox").not(this).prop("disabled", true);
         } else {
           $(".agency-checkbox").not(this).prop("disabled", false);
         }
-      });
+      }); */
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
@@ -803,8 +820,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
-        var agencyList = document.querySelector("#agency-list");
-        var buyerList = document.querySelector("#buyer-list");
+        var agencyBtn = document.querySelector("#show-agency-permission");
+        var buyerBtn = document.querySelector("#show-buyer-permission");
         var unqualified = document.querySelector(".unqualified");
 
         // Send GET Request API to retrieve single property information
@@ -829,13 +846,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-price").text(data.textPrice + " VND");
 
             //show notes when property unqualified
-            if(data.status == "UNQUALIFIED") {
+            if (data.status == "UNQUALIFIED") {
               unqualified.classList.remove("hidden");
               $("popup-note").text(data.notes);
             } else {
               unqualified.classList.add("hidden");
             }
-            
 
             //only show land/house fields according to type
             if (data.realEstateType == "Land") {
@@ -861,10 +877,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
             if (data.status.toLowerCase() == "agency_approving") {
-              agencyList.classList.remove("hidden");
+              agencyBtn.classList.remove("hidden");
             } else if (data.status.toLowerCase() == "buyer_approving") {
-              buyerList.classList.remove("hidden");
-            }
+              buyerBtn.classList.remove("hidden");
+            } 
 
             //load list of agencies for seller if any agency requested handle listing
             $("#agency-container").empty(); //clear data of previous property
@@ -948,6 +964,36 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         });
       }
 
+      var isAgencyDisplayed = false;
+      //only show list of agencies when seller click show
+      function showAgencies() {
+          if(!isAgencyDisplayed) {
+            document.querySelector("#agency-list").classList.remove("hidden");
+            document.querySelector("#show-agency-permission button").textContent = "Hide Agency List";
+            isAgencyDisplayed = true;
+
+          } else {
+            document.querySelector("#agency-list").classList.add("hidden");
+            document.querySelector("#show-agency-permission button").textContent = "Show Agency List";
+            isAgencyDisplayed = false;
+          }
+      }
+
+       //only show list of buyers when seller click show
+       var isBuyersDisplayed = false;
+       function showBuyers() {
+        if(!isBuyersDisplayed) {
+            document.querySelector("#buyer-list").classList.remove("hidden");
+            document.querySelector("#show-buyer-permission button").textContent = "Hide Buyer List";
+            isBuyersDisplayed = true;
+          } else {
+            document.querySelector("#buyer-list").classList.add("hidden");
+            document.querySelector("#show-buyer-permission button").textContent = "Show Buyer List";
+            isBuyersDisplayed = false;
+          }
+      }
+
+      //to close popup
       function closeDetail() {
         document
           .getElementById("popup-property-request")

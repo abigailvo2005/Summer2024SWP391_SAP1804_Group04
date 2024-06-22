@@ -61,7 +61,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="row no-gutters">
                           <div class="col-4">
                             <img
-                              src="${prop.propertyImagesList[0]}"
+                              src="${prop.propertyImagesList.get(0)}"
                               class="card-img"
                               alt="${prop.name}"
                             />
@@ -292,7 +292,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <div class="row">
-                      <form id="agency-profile-form" class="hidden">
+                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency-request" method="get" class="hidden">
                         <div class="row d-flex justify-content-center mb-2">
                           <div class="col-12 text-center">
                             <strong>Agency Profile</strong>
@@ -366,7 +366,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <textarea
                               class="form-control"
                               id="agency-desc"
-                              name="agencyDescription"
+                              name="agencyMessage"
                             ></textarea>
                           </div>
                         </div>
@@ -475,7 +475,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               }
               const imgElement = document.createElement("img");
               imgElement.src = image;
-              imgElement.classList.add("d-block", "w-100", "rounded");
+              imgElement.classList.add("d-block", "w-100", "rounded", "marketplace");
               slideElement.appendChild(imgElement);
               carouselInner.appendChild(slideElement);
 
@@ -511,6 +511,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         alert("Request submitted successfully!");
         closeDetail();
         hideAgencyForm();
+
+        document.querySelector("#agency-profile-form").submit();
+
       }
 
       /* Show form to submit agency profile to seller */

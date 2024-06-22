@@ -57,7 +57,6 @@ public class SellerController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", validatingList);
         model.addAttribute("propList", allRealEstate);
-        // return "seller/dashboard-seller";
         return "seller/dashboard-seller";
     }
 
