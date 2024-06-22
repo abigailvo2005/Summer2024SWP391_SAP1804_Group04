@@ -90,6 +90,17 @@ public class AgencyController {
         return "agency/create-acc-mem";
     }
 
+    @GetMapping({ "/assign-deal" })
+    public String assignDealView(Authentication authentication, Model model,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String name = authentication.getName();
+
+        String currentPage = "assign-deal";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "agency/assign-deal";
+    }
+
     @GetMapping("/agency-request")
     public String createAgencyRequest(
             @RequestParam String realEstateId,
