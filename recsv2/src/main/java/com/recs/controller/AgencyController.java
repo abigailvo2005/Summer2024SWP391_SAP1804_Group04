@@ -2,6 +2,7 @@ package com.recs.controller;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -89,12 +91,12 @@ public class AgencyController {
         return "agency/create-acc-mem";
     }
 
-    @GetMapping("/agency-request")
+    @PostMapping("/agency-request")
     public String createAgencyRequest(
-            @RequestParam String realEstateId,
+            @ModelAttribute(name = "request") AgencyRequestCreateDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
-        recsBusinessService.createAgencyRequest(realEstateId, userInfo.getAgencyId());
+        recsBusinessService.createAgencyRequest(request, userInfo.getAgencyId());
         System.out.println("IN AGENCY REQUEST");
         return "redirect:/marketplace";
     }
