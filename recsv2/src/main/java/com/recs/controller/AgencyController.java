@@ -96,7 +96,7 @@ public class AgencyController {
             @ModelAttribute(name = "request") AgencyRequestCreateDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
-        recsBusinessService.createAgencyRequest(request, userInfo.getAgencyId());
+        recsBusinessService.createAgencyRequest(request, userInfo.getAccountId());
         return "redirect:/agency/marketplace";
     }
 }
