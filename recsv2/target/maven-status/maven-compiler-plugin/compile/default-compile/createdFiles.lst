@@ -21,6 +21,7 @@ com/recs/repositories/account/MemberRepository.class
 com/recs/models/dto/realestate/RealEstateInfo.class
 com/recs/controller/HomeController.class
 com/recs/models/dto/recsbusiness/AssignJobRequest.class
+com/recs/models/dto/recsbusiness/AgencyRequestCreateDTO.class
 com/recs/models/dto/account/AgencyDTO.class
 com/recs/models/dto/account/MemberDTO.class
 com/recs/models/enums/AgencyRequestStatus.class

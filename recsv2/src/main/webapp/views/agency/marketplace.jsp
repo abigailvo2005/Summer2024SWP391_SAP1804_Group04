@@ -292,18 +292,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <div class="row">
-                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency-request" method="get" class="hidden">
+                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency/agency-request" method="post" class="hidden">
                         <div class="row d-flex justify-content-center mb-2">
                           <div class="col-12 text-center">
                             <strong>Agency Profile</strong>
                           </div>
                         </div>
                         <input
-                          type="text"
-                          class="hidden"
-                          id="agency-id"
-                          name="agencyId"
-                          value="${agency.agencyId}"
+                          type="hidden"
+                          id="realEstateId"
+                          name="realEstateId"
                         />
                         <div class="row mb-3">
                           <div class="col-6">
@@ -455,6 +453,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
+
+            //load real estate ID for submitting agency request
+            document.querySelector("#realEstateId").setAttribute("value", data.realEstateId);
 
             //load images to carousel
             const carouselInner = document.querySelector(".carousel-inner");
