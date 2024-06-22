@@ -34,6 +34,9 @@ public class AgencyRequest {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "message")
+    private String message;
+
 //    @Column(name = "agencyId")
 //    private String agencyId;
 

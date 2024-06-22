@@ -4,5 +4,5 @@ import com.recs.models.entities.account.Agency;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AgencyRepository extends JpaRepository<Agency, String> {
-    Agency findByAccountId(int accountId);
+    Agency findByAccountAccountId(int accountId);
 }
