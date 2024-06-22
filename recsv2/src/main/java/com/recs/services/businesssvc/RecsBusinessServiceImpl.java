@@ -2,8 +2,11 @@ package com.recs.services.businesssvc;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
+import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
+import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
@@ -17,6 +20,7 @@ import com.recs.repositories.recsbusiness.DealAssignMemberRepository;
 import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -146,15 +150,17 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
-    public void createAgencyRequest(String realEstateId, String agencyId) {
+    public void createAgencyRequest(AgencyRequestCreateDTO request, int accountId) {
+        Agency agency = agencyRepository.findByAccountAccountId(accountId);
         AgencyRequest agencyRequest = new AgencyRequest(
                 UUID.randomUUID().toString(),
                 System.currentTimeMillis(),
                 AgencyRequestStatus.REVIEWING.getValue(),
-                agencyRepository.getReferenceById(agencyId),
-                realEstateService.getById(realEstateId)
+                request.getAgencyMessage(),
+                agency,
+                realEstateService.getById(request.getRealEstateId())
         );
-        realEstateService.updateStatus(realEstateId, RealEstateStatus.AGENCY_APPROVING, "");
+        realEstateService.updateStatus(request.getRealEstateId(), RealEstateStatus.AGENCY_APPROVING, "");
         agencyRequestRepository.save(agencyRequest);
     }
 

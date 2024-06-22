@@ -57,7 +57,6 @@ public class SellerController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", validatingList);
         model.addAttribute("propList", allRealEstate);
-        // return "seller/dashboard-seller";
         return "seller/dashboard-seller";
     }
 
@@ -109,6 +108,7 @@ public class SellerController {
     @GetMapping("/agency-request/update")
     private String updateAgencyRequestStatus(
             @RequestParam String agencyRequestId,
+//            Todo() laays nhieuf vcl
             @RequestParam String status
     ) {
         recsBusinessService.updateAgencyRequestStatus(agencyRequestId, AgencyRequestStatus.from(status));

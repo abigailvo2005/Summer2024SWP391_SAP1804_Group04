@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${propList.size()} request(s)</span
+                        >${handleList.size()} request(s)</span
                       >
                       in total
                     </p>
@@ -114,18 +114,18 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${propList}" var="prop">
-                          <tr class="prop-row">
+                        <c:forEach items="${handleList}" var="listing">
+                          <tr class="listing-row">
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
                                   class="d-flex flex-column justify-content-start"
                                 >
                                   <p
-                                    id="prop-name"
+                                    id="listing-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${prop.name}
+                                    ${listing.name}
                                   </p>
                                 </div>
                               </div>
@@ -138,10 +138,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="prop-price"
+                                    id="listing-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${prop.textPrice}
+                                    ${listing.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -154,10 +154,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="prop-type"
+                                    id="listing-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${prop.realEstateType}
+                                    ${listing.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -170,10 +170,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="prop-status"
+                                    id="listing-status"
                                     class="mb-0 text-sm fw-bold text-muted"
                                   >
-                                    ${prop.status}
+                                    ${listing.status}
                                   </p>
                                 </div>
                               </div>
@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${prop.realEstateId}', 'listing')"
+                                    onclick="viewDetailProperty('${listing.realEstateId}', 'listing')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -446,60 +446,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                     </div>
 
-                    <!-- image carousel -->
-                    <div class="row mb-3">
+                    <!-- image section & description for popup -->
+                    <div class="row">
+                      <li
+                        class="list-group-item border-0 ps-0 text-sm col-5 d-flex"
+                      >
+                        <strong class="text-dark">Description:</strong>
+                        <p id="popup-desc"></p>
+                      </li>
                       <div
                         id="image-section"
-                        class="carousel slide"
+                        class="carousel slide mb-3 col-7"
                         data-bs-ride="carousel"
                       >
-                        <!-- buttons to directly see an image -->
-                        <div class="carousel-indicators">
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                          ></button>
-                          <button
-                            type="button"
-                            data-bs-target="#image-section"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                          ></button>
-                        </div>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img
-                              src="../../template/assets/img/home-decor-1.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 1"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-2.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 2"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              src="../../template/assets/img/home-decor-3.jpg"
-                              class="d-block w-100 rounded"
-                              alt="Real Estate Image 3"
-                            />
-                          </div>
-                        </div>
-                        <!-- button fd/backwards -->
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner"></div>
                         <button
                           class="carousel-control-prev"
                           type="button"
@@ -526,15 +487,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </button>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
-                      >
-                        <strong class="text-dark">Description:</strong>
-                        <p id="popup-desc"></p>
-                      </li>
-                    </div>
+                    <!-- end: image carousel -->
 
                     <div class="row">
                       <li
@@ -642,7 +595,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           url: urlRealEstate + propID,
           type: "GET",
           success: function (data) {
-            // Update popup với information chosen Property
+            // Update popup with information chosen Property
             $("#popup-name").text(data.name);
             $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
@@ -650,10 +603,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
-            //$("#popup-handle").text(data.memberInfo.username);
 
             //only show land/house fields according to type
-            if (data.realEstateType == "land") {
+            if (data.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
@@ -669,7 +621,46 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             //only show deal information if Deal is clicked
             if (type == "deal") {
               dealSection.classList.remove("hidden");
-            } 
+            }
+
+            //load images to carousel
+            const carouselInner = document.querySelector(".carousel-inner");
+            const carouselIndicators = document.querySelector(
+              ".carousel-indicators"
+            );
+
+            // Reset images to be shown everytime popup is clicked
+            carouselInner.innerHTML = "";
+            carouselIndicators.innerHTML = "";
+
+            data.propertyImagesList.forEach((image, index) => {
+              // create slide
+              const slideElement = document.createElement("div");
+              slideElement.classList.add("carousel-item");
+              if (index === 0) {
+                slideElement.classList.add("active");
+              }
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              imgElement.classList.add("d-block", "w-100", "rounded");
+              slideElement.appendChild(imgElement);
+              carouselInner.appendChild(slideElement);
+
+              // create indexes
+              const indicatorElement = document.createElement("button");
+              indicatorElement.type = "button";
+              indicatorElement.dataset.bsTarget = "#image-section";
+              indicatorElement.dataset.bsSlideTo = index;
+              if (index === 0) {
+                indicatorElement.classList.add("active");
+                indicatorElement.setAttribute("aria-current", "true");
+              }
+              indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+              carouselIndicators.appendChild(indicatorElement);
+            });
+
+            // init Bootstrap Carousel
+            const carousel = new bootstrap.Carousel("#image-section");
 
             popup.classList.remove("hidden");
           },
@@ -763,15 +754,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             .value.toLowerCase();
 
           // Get all rows in table
-          var requests = document.querySelectorAll(".prop-row");
+          var requests = document.querySelectorAll(".listing-row");
 
           requests.forEach(function (row) {
-            var id = row.querySelector("#prop-id").textContent.toLowerCase();
+            var id = row.querySelector("#listing-id").textContent.toLowerCase();
             var name = row
-              .querySelector("#prop-name")
+              .querySelector("#listing-name")
               .textContent.toLowerCase();
             var type = row
-              .querySelector("#prop-type")
+              .querySelector("#listing-type")
               .textContent.toLowerCase();
             if (
               id.includes(searchInput) ||

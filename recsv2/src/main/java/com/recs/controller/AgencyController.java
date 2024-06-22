@@ -2,6 +2,7 @@ package com.recs.controller;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,16 +49,15 @@ public class AgencyController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        //List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
         //sample loading only
-        List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
-        List<AgencyRequest> agencyRequests = recsBusinessService.getAgencyRequestsByAgencyId(userInfo.getAgencyId());
+        List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.HANDLED.getValue());
+
         //TODO() tự nhét vào
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         //model.addAttribute("reqList", validatingList);
-        model.addAttribute("propList", List.of());
+        model.addAttribute("handleList", validatedList);
         return "agency/dashboard-agency";
     }
 
@@ -64,7 +65,7 @@ public class AgencyController {
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-         List<RealEstateInfo> validatedList = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
+        List<RealEstateInfo> listings = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
 
          //Current Agency information - for Agency Profile loading
          Agency agency = accountService.getAgencyByAccountId(userInfo.getAccountId());
@@ -74,7 +75,7 @@ public class AgencyController {
         String currentPage = "marketplace";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("propList", validatedList);
+        model.addAttribute("propList", listings);
         model.addAttribute("agency", agency);
         return "agency/marketplace";
     }
@@ -103,10 +104,10 @@ public class AgencyController {
 
     @GetMapping("/agency-request")
     public String createAgencyRequest(
-            @RequestParam String realEstateId,
+            @ModelAttribute(name = "request") AgencyRequestCreateDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
-        recsBusinessService.createAgencyRequest(realEstateId, userInfo.getAgencyId());
-        return "redirect:/marketplace";
+        recsBusinessService.createAgencyRequest(request, userInfo.getAccountId());
+        return "redirect:/agency/marketplace";
     }
 }

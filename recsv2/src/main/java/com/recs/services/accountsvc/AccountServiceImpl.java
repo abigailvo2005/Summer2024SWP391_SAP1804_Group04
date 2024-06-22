@@ -139,7 +139,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Agency getAgencyByAccountId(int id) {
-        return agencyRepository.findByAccountId(id);
+        return agencyRepository.findByAccountAccountId(id);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class AccountServiceImpl implements AccountService {
                 yield UserInfo.fromStaff(account, staff);
             }
             case "ROLE_AGENCY" -> {
-                Agency agency = agencyRepository.findByAccountId(id);
+                Agency agency = agencyRepository.findByAccountAccountId(id);
                 yield UserInfo.fromAgency(account, agency);
             }
             case "ROLE_MEMBER" -> {
@@ -208,7 +208,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public UserInfo getAgencyToUserInfo(String agencyId) {
         Agency agency = agencyRepository.getReferenceById(agencyId);
-        Account account = accountRepository.getReferenceById(String.valueOf(agency.getAccountId()));
+        Account account = accountRepository.getReferenceById(String.valueOf(agency.getAccount().getAccountId()));
         UserInfo info = UserInfo.fromAgency(account, agency);
         System.out.println("get agency info: "+info);
         return info;    }

@@ -34,14 +34,11 @@ public class AgencyRequest {
     @Column(name = "status")
     private String status;
 
-//    @Column(name = "agencyId")
-//    private String agencyId;
-
-//    @Column(name = "realEstateId", insertable=false, updatable=false)
-//    private String realEstateId;
+    @Column(name = "message")
+    private String message;
 
     @ManyToOne
-    @JoinColumn(name = "agencyId", insertable=false, updatable=false)
+    @JoinColumn(name = "agencyId", updatable=false)
     private Agency agency;
 
     @ManyToOne

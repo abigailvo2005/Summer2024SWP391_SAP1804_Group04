@@ -434,17 +434,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 <ul class="list-group">
                   <div class="container-fluid">
                     <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
+                      <li class="list-group-item border-0 ps-0 text-sm d-flex">
                         <strong class="text-dark">Status:</strong>
                         <p id="popup-status"></p>
                       </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Handled by: </strong>
-                        <p id="popup-manager"></p>
+                    </div>
+                    <div id="note-section" class="row hidden mb-1">
+                      <li class="list-group-item border-0 ps-0 text-sm d-flex">
+                        <strong class="text-dark"
+                          >Reason Validate Fail:
+                        </strong>
+                        <p id="popup-note"></p>
                       </li>
                     </div>
 
@@ -457,49 +457,48 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                     </div>
 
-                    <!-- image carousel -->
-                    <div
-                      id="image-section"
-                      class="carousel slide mb-3"
-                      data-bs-ride="carousel"
-                    >
-                      <div class="carousel-indicators"></div>
-                      <div class="carousel-inner"></div>
-                      <button
-                        class="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#image-section"
-                        data-bs-slide="prev"
-                      >
-                        <span
-                          class="carousel-control-prev-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button
-                        class="carousel-control-next"
-                        type="button"
-                        data-bs-target="#image-section"
-                        data-bs-slide="next"
-                      >
-                        <span
-                          class="carousel-control-next-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    </div>
-                    <!-- end: image carousel -->
-
+                    <!-- image section & description for popup -->
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-5 d-flex"
                       >
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
+                      <div
+                        id="image-section"
+                        class="carousel slide mb-3 col-7"
+                        data-bs-ride="carousel"
+                      >
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner"></div>
+                        <button
+                          class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                     </div>
+                    <!-- end: image carousel -->
 
                     <div class="row">
                       <li
@@ -584,7 +583,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
 
-                    <!-- Table shows list of Agency wants to handle this property -->
+                    <!-- Button allows user hide/show list of agencies -->
+                    <div
+                      id="show-agency-permission"
+                      class="d-flex justify-content-center"
+                    >
+                      <button class="show-btn" onclick="showAgencies()">
+                        Show Agency List
+                      </button>
+                    </div>
+                     <!-- Table shows list of Agency wants to handle this property -->
                     <div id="agency-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Agency Profiles</strong>
@@ -600,79 +608,65 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <th class="text-center description">Description</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <% for (int i = 0; i < 5; i++) { %>
-                          <tr>
-                            <td>
-                              <input type="checkbox" class="agency-checkbox" />
-                            </td>
-                            <td>Agency 1</td>
-                            <td>ABC Corp</td>
-                            <td>10</td>
-                            <td>50</td>
-                            <td class="description">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Sed ut risus in velit commodo bibendum.
-                              Donec vel eros vitae magna congue rhoncus. Proin
-                              egestas mattis nulla, vel efficitur velit molestie
-                              eget.
-                            </td>
-                          </tr>
-                          <% } %>
-                        </tbody>
+                        <tbody id="agency-container"></tbody>
                       </table>
-                      <div class="d-flex justify-content-end">
-                        <button
-                          class="btn btn-secondary confirm-agency"
-                          onclick="confirmAgency(event)"
-                        >
-                          Confirm
-                        </button>
+                      <div class="row">
+                        <form id="agency-form" action="" method="post">
+                          <input
+                            id="selected-agency-id"
+                            type="hidden"
+                            value=""
+                          />
+                          <div class="d-flex justify-content-end">
+                            <button
+                              type="submit"
+                              class="btn btn-secondary confirm-agency"
+                              onclick="confirmAgency(event)"
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        </form>
                       </div>
                     </div>
 
                     <!-- Table shows list of Buyer wants to handle this property -->
+                    <div
+                      id="show-buyer-permission"
+                      class="d-flex justify-content-center"
+                    >
+                      <button class="show-btn" onclick="showBuyers()">
+                        Show Buyer List
+                      </button>
+                    </div>
                     <div id="buyer-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Buyer Profiles</strong>
                       </div>
-                      <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th class="text-center">Select</th>
-                              <th class="text-center">Buyer Name</th>
-                              <th class="text-center">Phone Number</th>
-                              <th class="text-center message">Message</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <% for (int i = 0; i < 5; i++) { %>
-                            <tr>
-                              <td class="text-center">
-                                <input type="checkbox" class="buyer-checkbox" />
-                              </td>
-                              <td class="text-center">Buyer 1</td>
-                              <td class="text-center">123-456-7890</td>
-                              <td class="message">
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Sed ut risus in velit commodo
-                                bibendum. Donec vel eros vitae magna congue
-                                rhoncus. Proin egestas mattis nulla, vel
-                                efficitur velit molestie eget.
-                              </td>
-                            </tr>
-                            <% } %>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div class="d-flex justify-content-end mt-2">
-                        <button
-                          class="btn btn-secondary confirm-buyer"
-                          onclick="confirmBuyer(event)"
-                        >
-                          Confirm
-                        </button>
+                      <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Select</th>
+                            <th class="text-center">Buyer Name</th>
+                            <th class="text-center">Phone Number</th>
+                            <th class="text-center message">Message</th>
+                          </tr>
+                        </thead>
+                        <tbody id="buyer-container"></tbody>
+                      </table>
+                      <div class="row">
+                        <form id="buyer-form" action="" method="post">
+                          <div id="selected-buyer-id" class="hidden"></div>
+                          <div class="d-flex justify-content-end">
+                            <button
+                              type="submit"
+                              class="btn btn-secondary confirm-buyer"
+                              onclick="confirmBuyer(event)"
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -700,13 +694,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
 
       // Automatically disable other choices in agency table when 1 is clicked
-      $(".agency-checkbox").change(function () {
+      /* $(document).on("change", ".agency-checkbox", function () {
         if (this.checked) {
           $(".agency-checkbox").not(this).prop("disabled", true);
         } else {
           $(".agency-checkbox").not(this).prop("disabled", false);
         }
-      });
+      }); */
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
@@ -721,6 +715,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         );
 
         if (selectedCheckbox) {
+          //add agency id to container for controller submission
+          const agencyId = $(checkbox).data("agency-id");
+          document
+            .querySelector("#chosen-agency-id")
+            .setAttribute("value", agencyId);
+
           // Only get info of buyer that is selected
           const agencyName = selectedCheckbox
             .closest("tr")
@@ -733,6 +733,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           const selectedAgency = { name: agencyName, contact: agencyContact };
 
           console.log(selectedAgency);
+
+          document.querySelector("#agency-form").submit();
         } else {
           // If no agency is selected - display error
           alert("Please select an agency.");
@@ -768,6 +770,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         alert(
           "Congratulations! You have successfully connected with the buyer. The property will be automatically hidden from the system."
         );
+
         $("#popup-property-request").addClass("hidden");
       }
 
@@ -817,8 +820,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
-        var agencyList = document.querySelector("#agency-list");
-        var buyerList = document.querySelector("#buyer-list");
+        var agencyBtn = document.querySelector("#show-agency-permission");
+        var buyerBtn = document.querySelector("#show-buyer-permission");
         var unqualified = document.querySelector(".unqualified");
 
         // Send GET Request API to retrieve single property information
@@ -828,40 +831,45 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           success: function (data) {
             // Update popup với information chosen Property
             $("#popup-name").text(data.name);
+            if (data.status == "UNQUALIFIED") {
+              document
+                .querySelector("#note-section")
+                .classList.remove("hidden");
+              $("#popup-note").text(data.notes);
+            }
             $("#popup-status").text(data.status);
+
             $("#popup-desc").text(data.description);
             $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
-            $("#popup-manager").text(data.managerInfo.username);
 
             //show notes when property unqualified
-            if(data.status == "UNQUALIFIED") {
+            if (data.status == "UNQUALIFIED") {
               unqualified.classList.remove("hidden");
               $("popup-note").text(data.notes);
             } else {
               unqualified.classList.add("hidden");
             }
-            
 
             //only show land/house fields according to type
             if (data.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
-              $("#popup-land-pw").text("sample-pdf-land");
+              $("#popup-land-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-land-pw")
-                .setAttribute("href", "sample.pdf");
+                .setAttribute("href", data.paperWorks);
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
               $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-house-pw").text("sample-zip-house");
+              $("#popup-house-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-house-pw")
-                .setAttribute("href", "sample.zip");
+                .setAttribute("href", data.paperWorks);
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
@@ -869,10 +877,43 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
             if (data.status.toLowerCase() == "agency_approving") {
-              agencyList.classList.remove("hidden");
+              agencyBtn.classList.remove("hidden");
             } else if (data.status.toLowerCase() == "buyer_approving") {
-              buyerList.classList.remove("hidden");
-            }
+              buyerBtn.classList.remove("hidden");
+            } 
+
+            //load list of agencies for seller if any agency requested handle listing
+            $("#agency-container").empty(); //clear data of previous property
+            const agencyContainer = $("#agency-container");
+            data.agencyRequests.forEach((request) => {
+              //create rows with checkboxes - for controller submission - and information to view
+              const row = $("<tr>");
+              const checkbox = $("<input>")
+                .attr("type", "checkbox")
+                .attr("data-request-id", request.requestId)
+                .attr("data-agency-id", request.agencyId)
+                .attr("data-real-estate-id", request.realEstateId)
+                .addClass("agency-checkbox");
+              row.append($("<td>").append(checkbox));
+              row.append($("<td>").text(request.requestId));
+              row.append(
+                $("<td>").text(
+                  new Date(request.createTimestamp).toLocaleString()
+                )
+              );
+              row.append($("<td>").text(request.status));
+              row.append($("<td>").text(request.agencyId));
+              row.append($("<td>").text(request.realEstateId));
+              agencyContainer.append(row);
+            });
+
+            /*suppose to have information like this: 
+            <td id="agency-name">${agency.name}</td>
+            <td id="agency-company">${agency.company}</td>
+            <td id="agency-years-of-experience">${agency.yearsOfExperience}</td>
+            <td id="agency-completed-projects">${agency.completedProjects}</td>
+            <td id="agency-description">${agency.description}</td>
+    */
 
             //load images to carousel
             const carouselInner = document.querySelector(".carousel-inner");
@@ -885,7 +926,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             carouselIndicators.innerHTML = "";
 
             data.propertyImagesList.forEach((image, index) => {
-              console.log(image);
               // create slide
               const slideElement = document.createElement("div");
               slideElement.classList.add("carousel-item");
@@ -924,6 +964,36 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         });
       }
 
+      var isAgencyDisplayed = false;
+      //only show list of agencies when seller click show
+      function showAgencies() {
+          if(!isAgencyDisplayed) {
+            document.querySelector("#agency-list").classList.remove("hidden");
+            document.querySelector("#show-agency-permission button").textContent = "Hide Agency List";
+            isAgencyDisplayed = true;
+
+          } else {
+            document.querySelector("#agency-list").classList.add("hidden");
+            document.querySelector("#show-agency-permission button").textContent = "Show Agency List";
+            isAgencyDisplayed = false;
+          }
+      }
+
+       //only show list of buyers when seller click show
+       var isBuyersDisplayed = false;
+       function showBuyers() {
+        if(!isBuyersDisplayed) {
+            document.querySelector("#buyer-list").classList.remove("hidden");
+            document.querySelector("#show-buyer-permission button").textContent = "Hide Buyer List";
+            isBuyersDisplayed = true;
+          } else {
+            document.querySelector("#buyer-list").classList.add("hidden");
+            document.querySelector("#show-buyer-permission button").textContent = "Show Buyer List";
+            isBuyersDisplayed = false;
+          }
+      }
+
+      //to close popup
       function closeDetail() {
         document
           .getElementById("popup-property-request")
@@ -984,12 +1054,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var requests = document.querySelectorAll(".prop-row");
 
           requests.forEach(function (row) {
-            var name = row.querySelector("#prop-name").textContent.toLowerCase();
-            var type = row.querySelector("#prop-type").textContent.toLowerCase();
-            if (
-              name.includes(searchInput) ||
-              type.includes(searchInput)
-            ) {
+            var name = row
+              .querySelector("#prop-name")
+              .textContent.toLowerCase();
+            var type = row
+              .querySelector("#prop-type")
+              .textContent.toLowerCase();
+            if (name.includes(searchInput) || type.includes(searchInput)) {
               row.style.display = "";
             } else {
               row.style.display = "none";
@@ -1005,16 +1076,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var requests = document.querySelectorAll(".req-row");
 
           requests.forEach(function (row) {
-            var name = row
-              .querySelector("#req-name")
-              .textContent.toLowerCase();
-            var type = row
-              .querySelector("#req-type")
-              .textContent.toLowerCase();
-            if (
-              name.includes(searchInput) ||
-              type.includes(searchInput)
-            ) {
+            var name = row.querySelector("#req-name").textContent.toLowerCase();
+            var type = row.querySelector("#req-type").textContent.toLowerCase();
+            if (name.includes(searchInput) || type.includes(searchInput)) {
               row.style.display = "";
             } else {
               row.style.display = "none";

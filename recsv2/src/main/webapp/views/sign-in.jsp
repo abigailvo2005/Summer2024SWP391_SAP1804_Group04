@@ -1,13 +1,12 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RECS - Login</title>
-    
+
     <!-- Link CSS -->
     <link
       id="pagestyle"
@@ -60,7 +59,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
                   <!-- Form to Login -->
                   <div class="card-body">
-                    <form role="form" action="${pageContext.request.contextPath}/login" method="post">
+                    <form
+                      role="form"
+                      action="${pageContext.request.contextPath}/login"
+                      method="post"
+                    >
                       <label>Username</label>
                       <div class="mb-3">
                         <input
@@ -109,7 +112,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   </div>
 
                   <!-- Reset password: optional - only add this function if have time -->
-                  <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                  <div class="text-center pt-0 px-lg-2 px-1">
                     <p class="mb-4 text-sm mx-auto">
                       Don't remember your password?
                       <a

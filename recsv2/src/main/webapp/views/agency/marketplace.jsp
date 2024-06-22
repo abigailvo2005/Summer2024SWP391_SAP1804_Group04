@@ -61,7 +61,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <div class="row no-gutters">
                           <div class="col-4">
                             <img
-                              src="../../template/assets/img/home-decor-1.jpg"
+                              src="${prop.propertyImagesList.get(0)}"
                               class="card-img"
                               alt="${prop.name}"
                             />
@@ -161,89 +161,44 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 <ul class="list-group">
                   <div class="container-fluid">
                     <div class="row">
-                      <div class="col-6" id="img-section">
+                      <div class="col-5" id="img-section">
                         <!-- image carousel -->
-                        <div class="row mb-3">
-                          <div
-                            id="image-section"
-                            class="carousel slide"
-                            data-bs-ride="carousel"
+                        <div
+                          id="image-section"
+                          class="carousel slide mb-3"
+                          data-bs-ride="carousel"
+                        >
+                          <div class="carousel-indicators"></div>
+                          <div class="carousel-inner"></div>
+                          <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#image-section"
+                            data-bs-slide="prev"
                           >
-                            <!-- buttons to directly see an image -->
-                            <div class="carousel-indicators">
-                              <button
-                                type="button"
-                                data-bs-target="#image-section"
-                                data-bs-slide-to="0"
-                                class="active"
-                                aria-current="true"
-                                aria-label="Slide 1"
-                              ></button>
-                              <button
-                                type="button"
-                                data-bs-target="#image-section"
-                                data-bs-slide-to="1"
-                                aria-label="Slide 2"
-                              ></button>
-                              <button
-                                type="button"
-                                data-bs-target="#image-section"
-                                data-bs-slide-to="2"
-                                aria-label="Slide 3"
-                              ></button>
-                            </div>
-                            <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img
-                                  src="../../template/assets/img/home-decor-1.jpg"
-                                  class="d-block w-100 rounded"
-                                  alt="Real Estate Image 1"
-                                />
-                              </div>
-                              <div class="carousel-item">
-                                <img
-                                  src="../../template/assets/img/home-decor-2.jpg"
-                                  class="d-block w-100 rounded"
-                                  alt="Real Estate Image 2"
-                                />
-                              </div>
-                              <div class="carousel-item">
-                                <img
-                                  src="../../template/assets/img/home-decor-3.jpg"
-                                  class="d-block w-100 rounded"
-                                  alt="Real Estate Image 3"
-                                />
-                              </div>
-                            </div>
-                            <!-- button fd/backwards -->
-                            <button
-                              class="carousel-control-prev"
-                              type="button"
-                              data-bs-target="#image-section"
-                              data-bs-slide="prev"
-                            >
-                              <span
-                                class="carousel-control-prev-icon"
-                                aria-hidden="true"
-                              ></span>
-                              <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button
-                              class="carousel-control-next"
-                              type="button"
-                              data-bs-target="#image-section"
-                              data-bs-slide="next"
-                            >
-                              <span
-                                class="carousel-control-next-icon"
-                                aria-hidden="true"
-                              ></span>
-                              <span class="visually-hidden">Next</span>
-                            </button>
-                          </div>
+                            <span
+                              class="carousel-control-prev-icon"
+                              aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#image-section"
+                            data-bs-slide="next"
+                          >
+                            <span
+                              class="carousel-control-next-icon"
+                              aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
                         </div>
                       </div>
-                      <div class="col-5 ms-4" id="info-section">
+                      <!-- end: image carousel -->
+
+                      <div class="col-6 ms-4" id="info-section">
                         <div class="row">
                           <li
                             class="list-group-item border-0 ps-0 text-sm d-flex"
@@ -337,18 +292,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <div class="row">
-                      <form id="agency-profile-form" class="hidden">
+                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency/agency-request" method="post" class="hidden">
                         <div class="row d-flex justify-content-center mb-2">
                           <div class="col-12 text-center">
                             <strong>Agency Profile</strong>
                           </div>
                         </div>
                         <input
-                          type="text"
-                          class="hidden"
-                          id="agency-id"
-                          name="agencyId"
-                          value="${agency.agencyId}"
+                          type="hidden"
+                          id="realEstateId"
+                          name="realEstateId"
                         />
                         <div class="row mb-3">
                           <div class="col-6">
@@ -411,7 +364,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <textarea
                               class="form-control"
                               id="agency-desc"
-                              name="agencyDescription"
+                              name="agencyMessage"
                             ></textarea>
                           </div>
                         </div>
@@ -488,7 +441,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-price").text(data.textPrice + " VND");
 
             //only show land/house fields according to type
-            if (data.realEstateType == "land") {
+            if (data.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
               $("#popup-land-type").text(data.propertyLand.landType);
@@ -500,6 +453,48 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
             }
+
+            //load real estate ID for submitting agency request
+            document.querySelector("#realEstateId").setAttribute("value", data.realEstateId);
+
+            //load images to carousel
+            const carouselInner = document.querySelector(".carousel-inner");
+            const carouselIndicators = document.querySelector(
+              ".carousel-indicators"
+            );
+
+            // Reset images to be shown everytime popup is clicked
+            carouselInner.innerHTML = "";
+            carouselIndicators.innerHTML = "";
+
+            data.propertyImagesList.forEach((image, index) => {
+              // create slide
+              const slideElement = document.createElement("div");
+              slideElement.classList.add("carousel-item");
+              if (index === 0) {
+                slideElement.classList.add("active");
+              }
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              imgElement.classList.add("d-block", "w-100", "rounded", "marketplace");
+              slideElement.appendChild(imgElement);
+              carouselInner.appendChild(slideElement);
+
+              // create indexes
+              const indicatorElement = document.createElement("button");
+              indicatorElement.type = "button";
+              indicatorElement.dataset.bsTarget = "#image-section";
+              indicatorElement.dataset.bsSlideTo = index;
+              if (index === 0) {
+                indicatorElement.classList.add("active");
+                indicatorElement.setAttribute("aria-current", "true");
+              }
+              indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+              carouselIndicators.appendChild(indicatorElement);
+            });
+
+            // init Bootstrap Carousel
+            const carousel = new bootstrap.Carousel("#image-section");
 
             popup.classList.remove("hidden");
           },
@@ -517,6 +512,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         alert("Request submitted successfully!");
         closeDetail();
         hideAgencyForm();
+
+        document.querySelector("#agency-profile-form").submit();
+
       }
 
       /* Show form to submit agency profile to seller */
