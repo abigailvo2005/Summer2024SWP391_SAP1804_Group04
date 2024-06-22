@@ -4189,7 +4189,9 @@ fieldset:disabled .btn {
   --bs-btn-disabled-border-color: #e9ecef;
   --bs-gradient: none;
 }
-
+.btn-padding {
+  padding: 3px 12px 3px;
+}
 .btn-outline-dark {
   --bs-btn-color: #30221b;
   --bs-btn-border-color: #30221b;
