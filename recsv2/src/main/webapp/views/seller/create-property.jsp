@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           multiple
                           required
                         />
-                        <div id="img-container" class=""></div>
+                        <div id="img-container" class="hidden"></div>
                       </div>
 
                       <!-- To Choose property type - shows corresponding information to fill in next -->
@@ -247,7 +247,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="land-pw-container"
                             name="landPw"
-                            type="text"
+                            type="hidden"
                           />
                         </div>
                       </div>
@@ -290,7 +290,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="house-pw-container"
                             name="homePw"
-                            type="text"
+                            type="hidden"
                           />
                         </div>
                       </div>
