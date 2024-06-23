@@ -39,5 +39,6 @@ public interface RealEstateService {
     public PaperWorks updatePaperWork(String realEstateID, String url);
 
     public List<RealEstateInfo> getAllByStatus(String status);
-    
+
+    public List<RealEstateInfo> getListing(String agencyId);
 }

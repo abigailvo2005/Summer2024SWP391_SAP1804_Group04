@@ -253,6 +253,30 @@ public class RealEstateServiceImpl implements RealEstateService{
         return mapListToInfo(realEstates);
     }
 
+    @Override
+    public List<RealEstateInfo> getListing(String agencyId) {
+        List<RealEstate> realEstates = realEstateRepository
+                .findAllByStatusIn(
+                        List.of(
+                                RealEstateStatus.DISPLAYED.getValue(),
+                                RealEstateStatus.AGENCY_APPROVING.getValue()
+                        ))
+                .stream().filter(realEstate -> {
+                    if(RealEstateStatus.DISPLAYED.getValue().equals(realEstate.getStatus()))
+                        return true;
+                    return checkAgency(realEstate, agencyId);
+                })
+                .toList();
+        return mapListToInfo(realEstates);
+    }
+
+    public boolean checkAgency(RealEstate realEstate, String agencyId) {
+        List<String> agencyIds = realEstate.getAgencyRequests().stream()
+                .map(request -> request.getAgency().getAgencyId())
+                .toList();
+        return !agencyIds.contains(agencyId);
+    }
+
     private RealEstate convertToRealEstate(String sellerId, CreateRealEstateRequestDTO dto) {
         return new RealEstate(
                 UUID.randomUUID().toString(),
