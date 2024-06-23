@@ -91,12 +91,23 @@ public class AgencyController {
         return "agency/create-acc-mem";
     }
 
-    @PostMapping("/agency-request")
+    @GetMapping({ "/assign-deal" })
+    public String assignDealView(Authentication authentication, Model model,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String name = authentication.getName();
+
+        String currentPage = "assign-deal";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "agency/assign-deal";
+    }
+
+    @GetMapping("/agency-request")
     public String createAgencyRequest(
             @ModelAttribute(name = "request") AgencyRequestCreateDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
-        recsBusinessService.createAgencyRequest(request, userInfo.getAgencyId());
+        recsBusinessService.createAgencyRequest(request, userInfo.getAccountId());
         return "redirect:/agency/marketplace";
     }
 }

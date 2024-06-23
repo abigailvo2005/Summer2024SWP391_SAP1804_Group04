@@ -21,19 +21,28 @@ com/recs/repositories/account/MemberRepository.class
 com/recs/models/dto/realestate/RealEstateInfo.class
 com/recs/controller/HomeController.class
 com/recs/models/dto/recsbusiness/AssignJobRequest.class
+<<<<<<< HEAD
+com/recs/models/dto/account/AgencyDTO.class
+com/recs/models/dto/account/MemberDTO.class
+=======
 com/recs/models/dto/recsbusiness/AgencyRequestCreateDTO.class
 com/recs/models/dto/account/AgencyDTO.class
 com/recs/models/dto/account/MemberDTO.class
 com/recs/models/enums/AgencyRequestStatus.class
 com/recs/repositories/recsbusiness/AgencyRequestRepository.class
+>>>>>>> b0a84374afc452113b182b0d1709053159862017
 com/recs/models/dto/account/ManagerDTO.class
 com/recs/models/enums/RealEstateStatus.class
 com/recs/repositories/realestate/PropertyImagesRepository.class
 com/recs/models/dto/realestate/CreateRealEstateRequestDTO.class
 com/recs/models/entities/account/Agency.class
+<<<<<<< HEAD
+com/recs/services/businesssvc/RecsBusinessService.class
+=======
 com/recs/repositories/recsbusiness/DealAssignMemberRepository.class
 com/recs/services/businesssvc/RecsBusinessService.class
 com/recs/models/entities/recsbusiness/AgencyRequest.class
+>>>>>>> b0a84374afc452113b182b0d1709053159862017
 com/recs/repositories/realestate/RealEstateRepository.class
 com/recs/models/entities/account/Manager.class
 com/recs/controller/SellerController.class
@@ -41,14 +50,20 @@ com/recs/models/entities/recsbusiness/AssignJobStaff.class
 com/recs/models/entities/account/Staff.class
 com/recs/RecsApplication.class
 com/recs/repositories/realestate/PropertyLandRepository.class
+<<<<<<< HEAD
+=======
 com/recs/models/entities/recsbusiness/DealAssignMember.class
+>>>>>>> b0a84374afc452113b182b0d1709053159862017
 com/recs/repositories/account/ManagerRepository.class
 com/recs/models/dto/recsbusiness/ValidationJobInfo.class
 com/recs/controller/MemberController.class
 com/recs/ServletInitializer.class
 com/recs/models/enums/JobStatus.class
 com/recs/models/entities/account/Seller.class
+<<<<<<< HEAD
+=======
 com/recs/models/dto/recsbusiness/AgencyRequestDTO.class
+>>>>>>> b0a84374afc452113b182b0d1709053159862017
 com/recs/models/dto/account/RegisterStaffDTO.class
 com/recs/repositories/account/SellerRepository.class
 com/recs/models/dto/account/SellerDTO.class

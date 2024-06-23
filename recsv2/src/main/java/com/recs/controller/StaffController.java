@@ -63,7 +63,7 @@ public class StaffController {
     }
 
     @PostMapping("validate-property")
-    public String validate(@ModelAttribute(name = "request") UpdateJobStatusDTO request){
+    public String validate(@ModelAttribute(name = "request")UpdateJobStatusDTO request){
         recsBusinessService.updateStatus(request);
         return "redirect:/staff";
     }

@@ -6,6 +6,7 @@ import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
+import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
@@ -149,13 +150,14 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
-    public void createAgencyRequest(AgencyRequestCreateDTO request, String agencyId) {
+    public void createAgencyRequest(AgencyRequestCreateDTO request, int accountId) {
+        Agency agency = agencyRepository.findByAccountAccountId(accountId);
         AgencyRequest agencyRequest = new AgencyRequest(
                 UUID.randomUUID().toString(),
                 System.currentTimeMillis(),
                 AgencyRequestStatus.REVIEWING.getValue(),
                 request.getAgencyMessage(),
-                agencyRepository.getReferenceById(agencyId),
+                agency,
                 realEstateService.getById(request.getRealEstateId())
         );
         realEstateService.updateStatus(request.getRealEstateId(), RealEstateStatus.AGENCY_APPROVING, "");

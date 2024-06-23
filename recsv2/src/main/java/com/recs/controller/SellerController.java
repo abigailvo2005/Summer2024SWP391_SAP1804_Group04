@@ -7,7 +7,6 @@ import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.enums.AgencyRequestStatus;
-import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
 import com.recs.services.realestaesvc.RealEstateService;
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Controller
 @PreAuthorize("hasRole('ROLE_SELLER')")
@@ -62,21 +59,6 @@ public class SellerController {
         model.addAttribute("propList", allRealEstate);
         return "seller/dashboard-seller";
     }
-
-    @PostMapping("/dashboard")
-    public String updatePW(@RequestParam("realEstateID") String realEstateID,
-                           @RequestParam("url") String url,
-                           Model model) {
-        System.out.println("ID" + realEstateID);
-        realEstateService.updateStatus(realEstateID, RealEstateStatus.REVIEWING, "");
-        realEstateService.updatePaperWork(realEstateID, url);
-        
-        String currentPage = "dashboard";
-        model.addAttribute("currentPage", currentPage);
-        return "redirect:/seller";
-    }
-   
-    
 
 
     @GetMapping({ "/create-property" })
