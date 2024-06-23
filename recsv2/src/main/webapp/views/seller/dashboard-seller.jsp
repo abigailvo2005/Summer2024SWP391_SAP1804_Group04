@@ -609,13 +609,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <!-- Button allows user hide/show list of agencies -->
                     <div
                       id="show-agency-permission"
-                      class="d-flex justify-content-center"
+                      class="d-flex justify-content-center hidden"
                     >
                       <button class="show-btn" onclick="showAgencies()">
                         Show Agency List
                       </button>
                     </div>
-                     <!-- Table shows list of Agency wants to handle this property -->
+                    <!-- Table shows list of Agency wants to handle this property -->
                     <div id="agency-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Agency Profiles</strong>
@@ -629,6 +629,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <th class="text-center">Years of Experience</th>
                             <th class="text-center">Completed Projects</th>
                             <th class="text-center description">Description</th>
+                            <th class="text-center description">
+                              View Message
+                            </th>
                           </tr>
                         </thead>
                         <tbody id="agency-container"></tbody>
@@ -656,7 +659,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <!-- Table shows list of Buyer wants to handle this property -->
                     <div
                       id="show-buyer-permission"
-                      class="d-flex justify-content-center"
+                      class="d-flex justify-content-center hidden"
                     >
                       <button class="show-btn" onclick="showBuyers()">
                         Show Buyer List
@@ -716,15 +719,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script>
       //URL REAL ESTATE API
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
-
-      // Automatically disable other choices in agency table when 1 is clicked
-      /* $(document).on("change", ".agency-checkbox", function () {
-        if (this.checked) {
-          $(".agency-checkbox").not(this).prop("disabled", true);
-        } else {
-          $(".agency-checkbox").not(this).prop("disabled", false);
-        }
-      }); */
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
@@ -920,7 +914,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               agencyBtn.classList.remove("hidden");
             } else if (data.status.toLowerCase() == "buyer_approving") {
               buyerBtn.classList.remove("hidden");
-            } 
+            }
 
             //load list of agencies for seller if any agency requested handle listing
             $("#agency-container").empty(); //clear data of previous property
@@ -928,22 +922,45 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             data.agencyRequests.forEach((request) => {
               //create rows with checkboxes - for controller submission - and information to view
               const row = $("<tr>");
+
+              //information of agencies to submit back to controller
               const checkbox = $("<input>")
                 .attr("type", "checkbox")
                 .attr("data-request-id", request.requestId)
                 .attr("data-agency-id", request.agencyId)
                 .attr("data-real-estate-id", request.realEstateId)
                 .addClass("agency-checkbox");
+
               row.append($("<td>").append(checkbox));
-              row.append($("<td>").text(request.requestId));
-              row.append(
-                $("<td>").text(
-                  new Date(request.createTimestamp).toLocaleString()
+              row.append($("<td>").text(request.agency.fullName));
+              row.append($("<td>").text(request.agency.company));
+              row.append($("<td>").text(request.agency.yearsOfExperience));
+              row.append($("<td>").text(request.agency.yearsOfExperience));
+              row.append($("<td>").text(request.agency.completedProject));
+              row.append($("<td>").text(request.agency.description));
+
+              //part to view introduction message from agency seperately
+              const viewMessageCell = $("<td>")
+                .append(
+                  $("<button>")
+                    .addClass("btn btn-primary btn-sm view-message-btn")
+                    .text("View")
+                    .attr("data-message", request.message)
                 )
-              );
-              row.append($("<td>").text(request.status));
-              row.append($("<td>").text(request.agencyId));
-              row.append($("<td>").text(request.realEstateId));
+                .addClass("text-center");
+              row.append(viewMessageCell);
+
+              //action handler for view message button
+              $(".view-message-btn").click(function () {
+                const message = $(this).data("message");
+                $("#popup-message-content").text(request.agency.message);
+                $("#popup-message").removeClass("hidden");
+              });
+
+              function closePopup(popupId) {
+                $(`#${popupId}`).addClass("hidden");
+              }
+
               agencyContainer.append(row);
             });
 
@@ -1007,30 +1024,33 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       var isAgencyDisplayed = false;
       //only show list of agencies when seller click show
       function showAgencies() {
-          if(!isAgencyDisplayed) {
-            document.querySelector("#agency-list").classList.remove("hidden");
-            document.querySelector("#show-agency-permission button").textContent = "Hide Agency List";
-            isAgencyDisplayed = true;
-
-          } else {
-            document.querySelector("#agency-list").classList.add("hidden");
-            document.querySelector("#show-agency-permission button").textContent = "Show Agency List";
-            isAgencyDisplayed = false;
-          }
+        if (!isAgencyDisplayed) {
+          document.querySelector("#agency-list").classList.remove("hidden");
+          document.querySelector("#show-agency-permission button").textContent =
+            "Hide Agency List";
+          isAgencyDisplayed = true;
+        } else {
+          document.querySelector("#agency-list").classList.add("hidden");
+          document.querySelector("#show-agency-permission button").textContent =
+            "Show Agency List";
+          isAgencyDisplayed = false;
+        }
       }
 
-       //only show list of buyers when seller click show
-       var isBuyersDisplayed = false;
-       function showBuyers() {
-        if(!isBuyersDisplayed) {
-            document.querySelector("#buyer-list").classList.remove("hidden");
-            document.querySelector("#show-buyer-permission button").textContent = "Hide Buyer List";
-            isBuyersDisplayed = true;
-          } else {
-            document.querySelector("#buyer-list").classList.add("hidden");
-            document.querySelector("#show-buyer-permission button").textContent = "Show Buyer List";
-            isBuyersDisplayed = false;
-          }
+      //only show list of buyers when seller click show
+      var isBuyersDisplayed = false;
+      function showBuyers() {
+        if (!isBuyersDisplayed) {
+          document.querySelector("#buyer-list").classList.remove("hidden");
+          document.querySelector("#show-buyer-permission button").textContent =
+            "Hide Buyer List";
+          isBuyersDisplayed = true;
+        } else {
+          document.querySelector("#buyer-list").classList.add("hidden");
+          document.querySelector("#show-buyer-permission button").textContent =
+            "Show Buyer List";
+          isBuyersDisplayed = false;
+        }
       }
 
       //to close popup
