@@ -4,9 +4,9 @@ package com.recs.controller;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
-import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
@@ -123,14 +123,11 @@ public class SellerController {
         return "seller/profile-seller";
     }
 
-    @GetMapping("/agency-request/update")
+    @PostMapping("/agency-request/approve")
     private String updateAgencyRequestStatus(
-            @RequestParam String agencyRequestId,
-//            Todo() laays nhieuf vcl
-            @RequestParam String status
-    ) {
-        recsBusinessService.updateAgencyRequestStatus(agencyRequestId, AgencyRequestStatus.from(status));
-
+            @ModelAttribute(name = "request")ApproveAgencyRequestDTO request
+            ) {
+        recsBusinessService.approveAgencyRequest(request);
         return "redirect:/seller";
     }
 }

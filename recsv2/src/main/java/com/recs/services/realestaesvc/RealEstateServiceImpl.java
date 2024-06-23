@@ -222,8 +222,7 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     @Override
     public RealEstate update(RealEstate realEstate) {
-        //Todo() define list field can update directly
-        return null;
+        return realEstateRepository.save(realEstate);
     }
 
     @Override

@@ -17,6 +17,7 @@ public class AgencyRequestDTO {
     private String status;
     private String agencyId;
     private String realEstateId;
+    private String message;
     private AgencyDTO agency;
 
     public static AgencyRequestDTO from(AgencyRequest request) {
@@ -26,6 +27,7 @@ public class AgencyRequestDTO {
                 request.getStatus(),
                 request.getAgency().getAgencyId(),
                 request.getRealEstate().getRealEstateId(),
+                request.getMessage(),
                 AgencyDTO.from(request.getAgency())
         );
     }

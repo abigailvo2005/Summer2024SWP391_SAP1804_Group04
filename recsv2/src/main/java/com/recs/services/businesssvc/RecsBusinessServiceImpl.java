@@ -4,6 +4,7 @@ import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Agency;
@@ -181,6 +182,18 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                     );
             agencyRequestRepository.save(agencyRequest);
         }
+    }
+
+    @Override
+    public void approveAgencyRequest(ApproveAgencyRequestDTO request) {
+        RealEstate realEstate = realEstateService.getById(request.getRealEstateId());
+        realEstate.getAgencyRequests().forEach(agencyRequest -> {
+            if(request.getAgencyRequestIds().contains(agencyRequest.getRequestId())) {
+                agencyRequest.setStatus(AgencyRequestStatus.ACCEPTED.getValue());
+            }
+        });
+        realEstate.setStatus(RealEstateStatus.HANDLED.getValue());
+        realEstateService.update(realEstate);
     }
 
 }
