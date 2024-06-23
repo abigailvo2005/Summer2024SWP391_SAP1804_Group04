@@ -18,6 +18,7 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/account/AccountRepository.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/account/Account.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/account/Member.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/AgencyRequestCreateDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/realestate/PropertyHouseRepository.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/realestate/RealEstateInfo.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/HomeController.java
@@ -65,4 +66,3 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/realestate/RealEstate.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/realestate/PaperWorksRepository.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/realestate/PropertyHouse.java
-
