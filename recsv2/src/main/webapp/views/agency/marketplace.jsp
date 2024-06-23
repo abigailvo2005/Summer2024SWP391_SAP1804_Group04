@@ -292,7 +292,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <div class="row">
-                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency/agency-request" method="post" class="hidden">
+                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency/agency-request" method="get" class="hidden">
                         <div class="row d-flex justify-content-center mb-2">
                           <div class="col-12 text-center">
                             <strong>Agency Profile</strong>
