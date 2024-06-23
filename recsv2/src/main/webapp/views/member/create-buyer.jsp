@@ -82,15 +82,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   >
                     <div class="mb-3 row">
                       <div class="col-sm-2">
-                        <label for="firstname">First Name:</label>
+                        <label for="firstname">Fullname:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="text"
-                          id="firstname"
+                          id="fullname"
                           name="firstname"
                           class="form-control form-create-control col-10"
-                          placeholder="Enter last name"
+                          placeholder="Enter fullname"
                           required
                         />
                         <!-- ERROR MESSAGE BEING HIDDEN -->
@@ -102,23 +102,18 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
 
                       <div class="col-sm-2">
-                        <label for="lastname">Last Name:</label>
+                        <label for="phone"> Phone:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
-                          type="text"
-                          id="lastname"
-                          name="lastname"
+                          type="number"
+                          id="phone"
+                          name="phone"
                           class="form-control form-create-control col-10"
-                          placeholder="Enter last name"
+                          placeholder="Enter phone number"
+                          min="1"
                           required
                         />
-                        <!-- ERROR MESSAGE BEING HIDDEN -->
-                        <p
-                          class="text-danger text-error mb-0 text-center pt-1 error-name hidden"
-                        >
-                          name should only contains maximum 32 characters.
-                        </p>
                       </div>
                     </div>
 
@@ -141,15 +136,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="col-sm-2">
                         <label>Deal Submitted To:</label>
                       </div>
-                      <div class="col-sm-4">
-                        <input
-                          id="form-chosen-deal"
-                          type="text"
-                          name="dealId"
-                          class="form-control form-create-control col-10"
-                          hidden
-                        />
-                      </div>
 
                       <div class="col-sm-6">
                         <select
@@ -163,6 +149,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             </option>
                           </c:forEach>
                         </select>
+                      </div>
+                      <div class="col-sm-4">
+                        <input
+                          id="form-chosen-deal"
+                          type="text"
+                          name="dealId"
+                          class="form-control form-create-control col-10"
+                          hidden
+                        />
                       </div>
                     </div>
 
