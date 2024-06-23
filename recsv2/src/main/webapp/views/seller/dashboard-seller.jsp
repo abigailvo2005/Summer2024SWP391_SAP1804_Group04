@@ -630,27 +630,40 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <!-- Table shows list of Agency wants to handle this property -->
                     <div id="agency-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
-                        <strong>Agency Profiles</strong>
+                        <strong>Pending Agency Profiles</strong>
                       </div>
                       <table class="table table-responsive">
                         <thead>
                           <tr>
                             <th class="text-center non-handled">Select</th>
                             <th class="text-center">Name</th>
+                            <th class="text-center">Phone</th>
                             <th class="text-center">Company</th>
                             <th class="text-center">Years of Experience</th>
                             <th class="text-center">Completed Projects</th>
                             <th class="text-center description">Description</th>
                             <th class="text-center description non-handled">
-                              View Message
+                              Message
                             </th>
                           </tr>
                         </thead>
                         <tbody id="agency-container"></tbody>
                       </table>
                       <div class="row">
-                        <form id="agency-form" action="" method="post">
-                          <div id="selected-agency-container" class="hidden"></div>
+                        <form
+                          id="agency-form"
+                          action=" ${pageContext.request.contextPath}/seller/agency-request/approve"
+                          method="post"
+                        >
+                          <input
+                            id="realEstateId"
+                            name="realEstateId"
+                            type="text"
+                          />
+                          <div
+                            id="selected-agency-container"
+                            class="hidden"
+                          ></div>
                           <div class="d-flex justify-content-end">
                             <button
                               type="submit"
@@ -675,7 +688,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     </div>
                     <div id="buyer-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
-                        <strong>Buyer Profiles</strong>
+                        <strong>Pending Buyer Profiles</strong>
                       </div>
                       <table class="table table-responsive">
                         <thead>
@@ -734,7 +747,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           <div class="col-12 mt-sm-1">
             <div class="card h-100">
               <div class="card-body p-3">
-                <p id="popup-message-content"></p>
+                <p id="request-message"></p>
               </div>
             </div>
           </div>
@@ -751,11 +764,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../template/assets/js/general-features.js"></script>
 
     <!-- Internal JS -->
     <script>
       //URL REAL ESTATE API
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
+      var chosenRequest = null;
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
@@ -780,14 +795,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               const item = document.createElement("input");
               item.type = "text";
               item.value = agencyId;
-              item.name = "agencyRequestId";
+              item.name = "agencyRequestIds";
 
               //append to container
               agencyContainer.append(item);
             }
           });
 
-          //document.querySelector("#agency-form").submit();
+          document.querySelector("#agency-form").submit();
         } else {
           alert("You must choose at least 1 agency to continue");
         }
@@ -826,47 +841,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         $("#popup-property-request").addClass("hidden");
       }
 
-      /* Set color for different status value */
-      const statusElements = document.querySelectorAll(".status-color");
-      statusElements.forEach((element) => {
-        element.classList.remove(
-          "status-reviewing",
-          "status-validating",
-          "status-unqualified",
-          "status-displayed",
-          "status-closed",
-          "status-handled",
-          "status-agency-approving",
-          "status-buyer-approving"
-        );
-      });
-      // Display colors according to status value
-      statusElements.forEach((element) => {
-        const statusValue = element.getAttribute("value");
-        switch (statusValue) {
-          case "Reviewing":
-            element.classList.add("status-reviewing");
-            break;
-          case "Validating":
-            element.classList.add("status-validating");
-            break;
-          case "Unqualified":
-            element.classList.add("status-unqualified");
-            break;
-          case "Displayed":
-          case "Closed":
-          case "Handled":
-            element.classList.add("status-displayed");
-            break;
-          case "Agency_Approving":
-          case "Buyer_Approving":
-            element.classList.add("status-agency-approving");
-            break;
-          default:
-            break;
-        }
-      });
-
+      //to let user update paperwork if validation fail
       function changePW() {
         var form_change = document.querySelector(".change");
         var form_download = document.querySelector(".landpw");
@@ -883,7 +858,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
         var agencyBtn = document.querySelector("#show-agency-permission");
+        agencyBtn.classList.add("hidden"); //default
         var buyerBtn = document.querySelector("#show-buyer-permission");
+        buyerBtn.classList.add("hidden"); //default
         var unqualified = document.querySelector(".unqualified");
         var pen = document.querySelector(".pen");
 
@@ -908,9 +885,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
 
-            //update chooser realEstateID
+            //update chosen realEstateID for changing pw + choosing agency
             document
               .querySelector("#popup-id")
+              .setAttribute("value", data.realEstateId);
+            document
+              .querySelector("#realEstateId")
               .setAttribute("value", data.realEstateId);
 
             //show notes when property unqualified
@@ -924,14 +904,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
 
             //only show chosen list of chosen agencies if listing is handled
-            if(data.status.toLowerCase() == "handled") {
+            if (data.status.toLowerCase() == "handled") {
               document.querySelectorAll(".non-handled").forEach((item) => {
                 item.classList.add("hidden");
               });
             }
 
             //only show chosen list of chosen buyers if listing is marketed
-            if(data.status.toLowerCase() == "handled") {
+            if (data.status.toLowerCase() == "handled") {
               document.querySelectorAll(".non-marketed").forEach((item) => {
                 item.classList.add("hidden");
               });
@@ -968,6 +948,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             //load list of agencies for seller if any agency requested handle listing
             $("#agency-container").empty(); //clear data of previous property
+
             const agencyContainer = $("#agency-container");
             data.agencyRequests.forEach((request) => {
               //create rows with checkboxes - for controller submission - and information to view
@@ -983,15 +964,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
               row.append($("<td>").append(checkbox));
               row.append($("<td>").text(request.agency.fullName));
+              row.append($("<td>").text(request.agency.phone));
               row.append($("<td>").text(request.agency.company));
               row.append($("<td>").text(request.agency.yearsOfExperience));
               row.append($("<td>").text(request.agency.completedProject));
               row.append($("<td>").text(request.agency.description));
 
-              console.log("rq message: " + request.message);
-
               //part to view introduction message from agency seperately
-              const viewMessageCell = $("<td>")
+              const viewMessageBtn = $("<td>")
                 .append(
                   $("<button>")
                     .addClass("btn btn-sm view-message-btn non-handled")
@@ -999,7 +979,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     .attr("data-message", request.message)
                 )
                 .addClass("text-center");
-              row.append(viewMessageCell);
+
+              viewMessageBtn.on("click", function () {
+                showMessage(request);
+              });
+              row.append(viewMessageBtn);
 
               function closePopup(popupId) {
                 $(`#${popupId}`).addClass("hidden");
@@ -1057,6 +1041,20 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         });
       }
 
+      //Show agency request message everytime button is clicked
+      function showMessage(request) {
+        //first clear popup
+        $("#request-message").text("");
+
+        //load message to popup
+        if (!request.message) {
+          $("#request-message").text("No messages being sent.");
+        } else {
+          $("#request-message").text(request.message);
+        }
+        $("#popup-message").removeClass("hidden");
+      }
+
       var isAgencyDisplayed = false;
       //only show list of agencies when seller click show
       function showAgencies() {
@@ -1096,11 +1094,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           "Show Buyer List";
         isBuyersDisplayed = false;
       }
-
-      //Show agency request message everytime button is clicked
-      $("body").on("click", ".view-message-btn", function () {
-        $("#popup-message").removeClass("hidden");
-      });
 
       //to close popup
       function closeDetail(id) {

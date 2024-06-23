@@ -22017,27 +22017,47 @@ label,
 }
 
 .status-reviewing {
-  color: #6c757d !important; /* Màu xám đậm */
-}
-
-.status-validating {
-  color: #ffc107 !important; /* Màu vàng */
-}
-
-.status-unqualified {
-  color: #dc3545 !important; /* Màu đỏ */
-}
-
-.status-displayed,
-.status-closed,
-.status-handled {
-  color: #28a745 !important; /* Màu xanh lá cây */
-}
-
-.status-agency-approving,
-.status-buyer-approving {
-  color: #007bff !important; /* Màu xanh dương */
-}
+  color: #7b8389 !important;
+  border: 1px solid #a2aab1 !important; 
+  background-color: #f1f3f5 !important; 
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  }
+  
+  .status-validating {
+  color: #d4b000 !important; 
+  border: 1px solid #ffde59 !important; 
+  background-color: #fff9e6 !important; 
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  }
+  
+  .status-unqualified {
+  color: #d03842 !important; 
+  border: 1px solid #e78088 !important; 
+  background-color: #f9e2e4 !important;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  }
+  
+  .status-displayed,
+  .status-closed,
+  .status-handled {
+  color: #4c9463 !important; 
+  border: 1px solid #71c386 !important;
+  background-color: #e1f3e5 !important; 
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  }
+  
+  .status-agency-approving,
+  .status-buyer-approving {
+  color: #5a9ad4 !important; 
+  border: 1px solid #92c1f0 !important; 
+  background-color: #e6f1fc !important; 
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  }
 
 
 .footer .nav-link {

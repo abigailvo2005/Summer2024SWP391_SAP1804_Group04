@@ -167,9 +167,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${job.status}
-                                  </p>
+                                <p
+                                id="job-status"
+                                class="mb-0 text-sm fw-bold status-color"
+                                value="${job.status.value}"
+                              >
+                                ${job.status.value}
+                              </p>
                                 </div>
                               </div>
                             </td>
@@ -200,179 +204,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         </div>
       </div>
       <!-- END LIST VALIDATION REQUEST-->
-
-      <!-- START: LIST LISTINGS -->
-      <div class="container-fluid">
-        <div class="row my-4">
-          <div class="mb-md-0 mb-4">
-            <div class="card">
-              <div class="card-header pb-0">
-                <div class="row">
-                  <div class="col-lg-8 col-9">
-                    <h6>Your Listings</h6>
-                    <p class="text-sm mb-0">
-                      <i class="fa-regular fa-comment-dots"></i>
-                      <span class="font-weight-bold ms-1"
-                        >${listingList.size()} listing(s)</span
-                      >
-                      in total
-                    </p>
-                  </div>
-                  <div
-                    class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
-                  >
-                    <div class="input-group">
-                      <span class="input-group-text text-body"
-                        ><i class="fas fa-search" aria-hidden="true"></i
-                      ></span>
-                      <input
-                        id="listingSearch"
-                        type="text"
-                        class="form-control"
-                        placeholder="Type listing name here..."
-                        onkeyup="searchTable('listing')"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card-body px-0 pb-2">
-                  <div class="table-responsive">
-                    <table class="table align-items-center mb-0">
-                      <thead>
-                        <tr>
-                          <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
-                          >
-                            PROPERTY NAME
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            TYPE
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            PRICE
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
-                          >
-                            DATE CREATED
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            STATUS
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            VIEW DETAILS
-                          </th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        <c:forEach items="${listingList}" var="listing">
-                          <tr class="listing-row">
-                            <td>
-                              <div class="d-flex justify-content-start">
-                                <div
-                                  class="d-flex flex-column justify-content-start"
-                                >
-                                  <p
-                                    id="listing-name"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${listing.realEstateInfo.name}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.realEstateInfo.realEstateType}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="listing-manID"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${listing.realEstateInfo.textPrice}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${listing.realEstateInfo.createDate}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${listing.status}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <a
-                                    class="show-detail"
-                                    onclick="viewDetail('${listing.jobId}', 'list')"
-                                    ><i class="fa-solid fa-eye"></i
-                                  ></a>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END LIST LISTING-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
@@ -908,5 +739,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../template/assets/js/general-features.js"></script>
   </body>
 </html>
