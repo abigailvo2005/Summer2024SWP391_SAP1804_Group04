@@ -21,7 +21,7 @@ public class RealEstateUtils {
             return price + "";
         } else if (price < 1_000_000L) {
             if (price % 1000 == 0L) {
-                return String.format("%dK", price / 1000);
+                return String.format(price/1000 + ".000");
             } else {
                 return NumberFormat.getInstance().format(price).replace(",", ".");
             }
