@@ -38,7 +38,7 @@ public class AgencyRequest {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "agencyId", updatable=false)
+    @JoinColumn(name = "agencyId")
     private Agency agency;
 
     @ManyToOne

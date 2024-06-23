@@ -187,12 +187,13 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p
-                                    id="req-status"
-                                    class="mb-0 text-sm fw-bold text-muted"
-                                  >
-                                    ${req.status}
-                                  </p>
+                                <p
+                                id="prop-status"
+                                class="mb-0 text-sm fw-bold status-color"
+                                value="${req.status.value}"
+                              >
+                                ${req.status.value}
+                              </p>
                                 </div>
                               </div>
                             </td>
@@ -556,47 +557,46 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       </li>
                     </div>
 
+                    <!-- image section & description for popup -->
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-5 d-flex"
                       >
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
-                    </div>
-
-                    <!-- image carousel -->
-                    <div
-                      id="image-section"
-                      class="carousel slide mb-3"
-                      data-bs-ride="carousel"
-                    >
-                      <div class="carousel-indicators"></div>
-                      <div class="carousel-inner"></div>
-                      <button
-                        class="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#image-section"
-                        data-bs-slide="prev"
+                      <div
+                        id="image-section"
+                        class="carousel slide mb-3 col-7"
+                        data-bs-ride="carousel"
                       >
-                        <span
-                          class="carousel-control-prev-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button
-                        class="carousel-control-next"
-                        type="button"
-                        data-bs-target="#image-section"
-                        data-bs-slide="next"
-                      >
-                        <span
-                          class="carousel-control-next-icon"
-                          aria-hidden="true"
-                        ></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner"></div>
+                        <button
+                          class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                     </div>
                     <!-- end: image carousel -->
 
@@ -820,9 +820,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           document
             .querySelector("#form-landCategory")
             .setAttribute("value", chosenData.propertyLand.landType);
-          document
-            .querySelector("#form-land-pw")
-            .text = "download this file to view paperwork";
+          document.querySelector("#form-land-pw").text =
+            "download this file to view paperwork";
           document
             .querySelector("#form-land-pw")
             .setAttribute("href", chosenData.paperWorks);
@@ -843,9 +842,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             .querySelector("#form-bathrooms")
             .setAttribute("value", chosenData.propertyHouse.bath);
         }
-        document
-            .querySelector("#form-house-pw")
-            .text = "download this file to view paperwork";
+        document.querySelector("#form-house-pw").text =
+          "download this file to view paperwork";
         document
           .querySelector("#form-house-pw")
           .setAttribute("href", chosenData.paperWorks);
@@ -957,7 +955,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script></script>
+    <script src="../../template/assets/js/general-features.js"></script>
   </body>
 </html>

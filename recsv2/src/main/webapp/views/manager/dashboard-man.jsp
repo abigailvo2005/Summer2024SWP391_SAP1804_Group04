@@ -180,10 +180,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p
-                                id="job-status"
-                                class="mb-0 text-sm fw-bold text-warning"
+                                id="val-status"
+                                class="mb-0 text-sm fw-bold status-color"
+                                value="${val.status.value}"
                               >
-                                ${val.status}
+                                ${val.status.value}
                               </p>
                             </div>
                           </div>
@@ -339,14 +340,48 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                     </div>
 
+                    <!-- image section & description for popup -->
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-12 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-5 d-flex"
                       >
                         <strong class="text-dark">Description:</strong>
                         <p id="popup-desc"></p>
                       </li>
+                      <div
+                        id="image-section"
+                        class="carousel slide mb-3 col-7"
+                        data-bs-ride="carousel"
+                      >
+                        <div class="carousel-indicators"></div>
+                        <div class="carousel-inner"></div>
+                        <button
+                          class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="prev"
+                        >
+                          <span
+                            class="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#image-section"
+                          data-bs-slide="next"
+                        >
+                          <span
+                            class="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
                     </div>
+                    <!-- end: image carousel -->
 
                     <div id="land-info" class="row hidden">
                       <li
@@ -364,81 +399,47 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </li>
                       </div>
                     </div>
-                  </div>
-                  <div id="house-info" class="hidden">
-                    <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                      >
-                        <strong class="text-dark">House Type:</strong>
-                        <p id="popup-house-type"></p>
-                      </li>
-                      <div class="col-8 px-0">
+
+                    <div id="house-info" class="hidden">
+                      <div class="row">
                         <li
-                          class="list-group-item border-0 ps-0 text-sm"
-                          id="housePaperwork"
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
                         >
-                          <strong class="text-dark">House Paperwork:</strong>
-                          <a id="popup-house-pw" target="_blank" download></a>
+                          <strong class="text-dark">House Type:</strong>
+                          <p id="popup-house-type"></p>
+                        </li>
+                        <div class="col-8 px-0">
+                          <li
+                            class="list-group-item border-0 ps-0 text-sm"
+                            id="housePaperwork"
+                          >
+                            <strong class="text-dark">House Paperwork:</strong>
+                            <a id="popup-house-pw" target="_blank" download></a>
+                          </li>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        >
+                          <strong class="text-dark">Bedrooms:</strong>
+                          <p id="popup-bed"></p>
+                        </li>
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        >
+                          <strong class="text-dark">Bathrooms:</strong>
+                          <p id="popup-bath"></p>
+                        </li>
+                        <li
+                          class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
+                        >
+                          <strong class="text-dark">Year Built:</strong>
+                          <p id="popup-builtIn"></p>
                         </li>
                       </div>
                     </div>
-                    <div class="row">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                      >
-                        <strong class="text-dark">Bedrooms:</strong>
-                        <p id="popup-bed"></p>
-                      </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                      >
-                        <strong class="text-dark">Bathrooms:</strong>
-                        <p id="popup-bath"></p>
-                      </li>
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-4 d-flex"
-                      >
-                        <strong class="text-dark">Year Built:</strong>
-                        <p id="popup-builtIn"></p>
-                      </li>
-                    </div>
                   </div>
-
-                  <!-- image carousel -->
-                  <div
-                    id="image-section"
-                    class="carousel slide mb-3"
-                    data-bs-ride="carousel"
-                  >
-                    <div class="carousel-indicators"></div>
-                    <div class="carousel-inner"></div>
-                    <button
-                      class="carousel-control-prev"
-                      type="button"
-                      data-bs-target="#image-section"
-                      data-bs-slide="prev"
-                    >
-                      <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                      ></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button
-                      class="carousel-control-next"
-                      type="button"
-                      data-bs-target="#image-section"
-                      data-bs-slide="next"
-                    >
-                      <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                      ></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-                  <!-- end: image carousel -->
                 </ul>
               </div>
             </div>
@@ -626,5 +627,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../template/assets/js/general-features.js"></script>
   </body>
 </html>

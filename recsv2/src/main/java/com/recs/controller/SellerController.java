@@ -4,9 +4,9 @@ package com.recs.controller;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
-import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
@@ -70,7 +70,7 @@ public class SellerController {
         System.out.println("ID" + realEstateID);
         realEstateService.updateStatus(realEstateID, RealEstateStatus.REVIEWING, "");
         realEstateService.updatePaperWork(realEstateID, url);
-        
+
         String currentPage = "dashboard";
         model.addAttribute("currentPage", currentPage);
         return "redirect:/seller";
@@ -94,7 +94,7 @@ public class SellerController {
             @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             Model model) {
-                
+
         RealEstate realEstate = realEstateService.createRealEstate(userInfo.getSellerId(), request);
         String currentPage = "create-property";
         model.addAttribute("name", userInfo.getFullName());
@@ -123,14 +123,11 @@ public class SellerController {
         return "seller/profile-seller";
     }
 
-    @GetMapping("/agency-request/update")
-    private String updateAgencyRequestStatus(
-            @RequestParam String agencyRequestId,
-//            Todo() laays nhieuf vcl
-            @RequestParam String status
-    ) {
-        recsBusinessService.updateAgencyRequestStatus(agencyRequestId, AgencyRequestStatus.from(status));
-
+    @PostMapping("/agency-request/approve")
+    public String updateAgencyRequestStatus(
+            @ModelAttribute(name = "request")ApproveAgencyRequestDTO request
+            ) {
+        recsBusinessService.approveAgencyRequest(request);
         return "redirect:/seller";
     }
 }

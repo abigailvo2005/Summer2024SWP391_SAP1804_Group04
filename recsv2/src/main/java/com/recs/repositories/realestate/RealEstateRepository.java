@@ -20,4 +20,6 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, String> 
 
     public List<RealEstate> findByRealEstateId(String realEstateId);
 
+    public List<RealEstate> findAllByStatusIn(List<String> statuses);
+
 }

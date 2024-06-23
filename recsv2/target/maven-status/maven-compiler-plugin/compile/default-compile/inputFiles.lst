@@ -46,6 +46,7 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/realestate/PropertyImages.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/recsbusiness/AssignJobStaff.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/recsbusiness/AgencyRequestRepository.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/ApproveAgencyRequestDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/realestaesvc/RealEstateService.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/realestate/PropertyLandRepository.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/account/StaffRepository.java

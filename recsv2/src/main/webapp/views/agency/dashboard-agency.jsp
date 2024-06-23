@@ -169,12 +169,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p
-                                    id="listing-status"
-                                    class="mb-0 text-sm fw-bold text-muted"
-                                  >
-                                    ${listing.status}
-                                  </p>
+                                <p
+                                id="listing-status"
+                                class="mb-0 text-sm fw-bold status-color"
+                                value="${listing.status.value}"
+                              >
+                                ${listing.status.value}
+                              </p>
                                 </div>
                               </div>
                             </td>
@@ -330,12 +331,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p
-                                    id="req-status"
-                                    class="mb-0 text-sm fw-bold text-muted"
-                                  >
-                                    ${req.status}
-                                  </p>
+                                <p
+                                id="req-status"
+                                class="mb-0 text-sm fw-bold status-color"
+                                value="${req.status.value}"
+                              >
+                                ${req.status.value}
+                              </p>
                                 </div>
                               </div>
                             </td>
@@ -577,6 +579,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js'/>"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../template/assets/js/general-features.js"></script>
 
     <!-- Internal JS -->
     <script>
