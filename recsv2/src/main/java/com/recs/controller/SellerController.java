@@ -70,7 +70,7 @@ public class SellerController {
         System.out.println("ID" + realEstateID);
         realEstateService.updateStatus(realEstateID, RealEstateStatus.REVIEWING, "");
         realEstateService.updatePaperWork(realEstateID, url);
-        
+
         String currentPage = "dashboard";
         model.addAttribute("currentPage", currentPage);
         return "redirect:/seller";
@@ -94,7 +94,7 @@ public class SellerController {
             @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             Model model) {
-                
+
         RealEstate realEstate = realEstateService.createRealEstate(userInfo.getSellerId(), request);
         String currentPage = "create-property";
         model.addAttribute("name", userInfo.getFullName());
@@ -124,7 +124,7 @@ public class SellerController {
     }
 
     @PostMapping("/agency-request/approve")
-    private String updateAgencyRequestStatus(
+    public String updateAgencyRequestStatus(
             @ModelAttribute(name = "request")ApproveAgencyRequestDTO request
             ) {
         recsBusinessService.approveAgencyRequest(request);
