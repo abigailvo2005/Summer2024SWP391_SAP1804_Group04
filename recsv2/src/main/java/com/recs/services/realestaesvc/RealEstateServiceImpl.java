@@ -222,8 +222,7 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     @Override
     public RealEstate update(RealEstate realEstate) {
-        //Todo() define list field can update directly
-        return null;
+        return realEstateRepository.save(realEstate);
     }
 
     @Override
@@ -239,9 +238,43 @@ public class RealEstateServiceImpl implements RealEstateService{
     }
 
     @Override
+    public PaperWorks updatePaperWork(String realEstateID, String url) {
+        PaperWorks ppw = paperWorksRepository.getReferenceById(realEstateID);
+        if(ppw != null) {
+            ppw.setUrl(url);
+            paperWorksRepository.save(ppw);
+        }
+        return ppw;      
+    }
+
+    @Override
     public List<RealEstateInfo> getAllByStatus(String status) {
         List<RealEstate> realEstates = realEstateRepository.findAllByStatus(status);
         return mapListToInfo(realEstates);
+    }
+
+    @Override
+    public List<RealEstateInfo> getListing(String agencyId) {
+        List<RealEstate> realEstates = realEstateRepository
+                .findAllByStatusIn(
+                        List.of(
+                                RealEstateStatus.DISPLAYED.getValue(),
+                                RealEstateStatus.AGENCY_APPROVING.getValue()
+                        ))
+                .stream().filter(realEstate -> {
+                    if(RealEstateStatus.DISPLAYED.getValue().equals(realEstate.getStatus()))
+                        return true;
+                    return checkAgency(realEstate, agencyId);
+                })
+                .toList();
+        return mapListToInfo(realEstates);
+    }
+
+    public boolean checkAgency(RealEstate realEstate, String agencyId) {
+        List<String> agencyIds = realEstate.getAgencyRequests().stream()
+                .map(request -> request.getAgency().getAgencyId())
+                .toList();
+        return !agencyIds.contains(agencyId);
     }
 
     private RealEstate convertToRealEstate(String sellerId, CreateRealEstateRequestDTO dto) {
@@ -364,4 +397,6 @@ public class RealEstateServiceImpl implements RealEstateService{
                         .reversed())
                 .toList();
     }
+
+    
 }

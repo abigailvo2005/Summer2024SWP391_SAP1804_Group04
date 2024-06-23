@@ -867,6 +867,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       });
 
+      function changePW() {
+        var form_change = document.querySelector(".change");
+        var form_download = document.querySelector(".landpw");
+        var icon = document.querySelector(".pen");
+
+        form_change.classList.remove("hidden");
+        form_download.classList.add("hidden");
+        icon.classList.add("hidden");
+      }
+
       /* View Popup detail of each property */
       function viewDetailProperty(propID, type) {
         var popup = document.querySelector("#popup-property-request");
@@ -875,6 +885,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var agencyBtn = document.querySelector("#show-agency-permission");
         var buyerBtn = document.querySelector("#show-buyer-permission");
         var unqualified = document.querySelector(".unqualified");
+        var pen = document.querySelector(".pen");
 
         // Send GET Request API to retrieve single property information
         $.ajax({
@@ -905,9 +916,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             //show notes when property unqualified
             if (data.status == "UNQUALIFIED") {
               unqualified.classList.remove("hidden");
-              $("popup-note").text(data.notes);
+              pen.classList.remove("hidden");
+              $("#popup-note").text(data.notes);
             } else {
               unqualified.classList.add("hidden");
+              pen.classList.add("hidden");
             }
 
             //only show chosen list of chosen agencies if listing is handled

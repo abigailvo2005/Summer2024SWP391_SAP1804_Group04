@@ -65,7 +65,7 @@ public class AgencyController {
     @GetMapping({ "/marketplace" })
     public String marketplaceView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        List<RealEstateInfo> listings = realEstateService.getAllByStatus(RealEstateStatus.DISPLAYED.getValue());
+        List<RealEstateInfo> listings = realEstateService.getListing(userInfo.getAgencyId());
 
          //Current Agency information - for Agency Profile loading
          Agency agency = accountService.getAgencyByAccountId(userInfo.getAccountId());
@@ -102,7 +102,7 @@ public class AgencyController {
         return "agency/assign-deal";
     }
 
-    @GetMapping("/agency-request")
+    @PostMapping("/agency-request")
     public String createAgencyRequest(
             @ModelAttribute(name = "request") AgencyRequestCreateDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
