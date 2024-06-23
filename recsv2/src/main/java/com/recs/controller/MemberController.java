@@ -62,7 +62,10 @@ public class MemberController {
     }
 
     @GetMapping("/create-buyer")
-    public String createBuyer(Model model) {
+    public String createBuyer(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String currentPage = "create-buyer";
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("name", userInfo.getFullName());
         return "member/create-buyer";
     }
 
