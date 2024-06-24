@@ -53,11 +53,13 @@ public class ManagerController {
 
         List<ValidationJobInfo> allJob = recsBusinessService.getListByManager(userInfo.getManagerId());
 
-        List<ValidationJobInfo> validatingJobList = recsBusinessService.
-                getListByManagerAndStatus(userInfo.getManagerId(), "Assigned");
+        List<ValidationJobInfo> validatingJobList = allJob.stream()
+                .filter(row -> JobStatus.ASSIGNED == row.getStatus())
+                .toList();
 
-        List<ValidationJobInfo> successJobList = recsBusinessService.
-                getListByManagerAndStatus(userInfo.getManagerId(), "Successful");
+        List<ValidationJobInfo> successJobList = allJob.stream()
+                .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
+                .toList();
 
 
         /* List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId()); */
