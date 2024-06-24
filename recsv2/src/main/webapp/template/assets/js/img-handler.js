@@ -18,9 +18,11 @@ var paperwork = null;
 var fileType = null;
 
 /* Get images from user */
-document.getElementById("prop-img").addEventListener("change", (event) => {
-  getImageFile(event);
-});
+if($("#prop-img")) {
+  $("#prop-img").on("change", function (event)  {
+    getImageFile(event);
+  })
+}
 
 function getImageFile(e) {
   imgFiles = Array.from(e.target.files);
@@ -33,10 +35,6 @@ $("#prop-pw-land").on("change", function (event) {
 $("#prop-pw-house").on("change", function (event) {
   getPaperworkFile(event, "house");
 });
-/* 
-document.getElementById("prop-pw-house").addEventListener("change", (event) => {
-  getPaperworkFile(event, "house");
-}); */
 
 function getPaperworkFile(e, type) {
   paperwork = e.target.files[0];
@@ -102,11 +100,13 @@ async function uploadImage() {
   console.log("successfully upload all images");
 }
 
-document
-  .getElementById("submit-btn")
-  .addEventListener("click", async (event) => {
+/* Get images from user */
+if($("#submit-btn")) {
+  $("#submit-btn").on("change", async function (event)  {
     submitRequest(event);
-  });
+  })
+}
+
 async function submitRequest(event) {
   event.preventDefault(); //Stop form from default submitting
 
@@ -167,12 +167,18 @@ async function submitRequest(event) {
   }
 }
 
-document
-  .getElementById("submit-change-btn")
-  .addEventListener("click", async (event) => {
+/* function to update paperwork */
+if($("#submit-land-btn") || $("#submit-house-btn")) {
+  $("#submit-land-btn").on("click", async function (event)  {
     changePaperwork(event);
-  });
+  })
+  $("#submit-house-btn").on("click", async function (event)  {
+    changePaperwork(event);
+  })
+}
+
 async function changePaperwork(event) {
+  console.log("changing pw");
   event.preventDefault(); //Stop form from default submitting
   const file = paperwork;
   const storageRef = storage.ref(`paperwork/${file.name}`);
@@ -190,14 +196,15 @@ async function changePaperwork(event) {
     // Set the URL value in the form
     if (fileType === "land") {
       pwLandContainer.setAttribute("value", url);
+      pwHouseContainer.setAttribute("value", "none");
 
       //submit form after save url successfully
-     // $("#form-change-land-pw").submit();
+      $("#form-change-land-pw").submit();
     } else {
       pwHouseContainer.setAttribute("value", url);
 
       //submit form after save url successfully
-     // $("#form-change-house-pw").submit();
+      $("#form-change-house-pw").submit();
     }
   } catch (error) {
     console.error("Error uploading file:", error);

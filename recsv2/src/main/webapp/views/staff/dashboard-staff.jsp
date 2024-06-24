@@ -570,7 +570,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-land-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-land-pw")
-                .setAttribute("href", data.paperWorks);
+                .setAttribute("href", data.realEstateInfo.paperWorks);
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
@@ -580,7 +580,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-house-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-house-pw")
-                .setAttribute("href", data.paperWorks);
+                .setAttribute("href", data.realEstateInfo.paperWorks);
               $("#popup-builtIn").text(
                 data.realEstateInfo.propertyHouse.builtIn
               );

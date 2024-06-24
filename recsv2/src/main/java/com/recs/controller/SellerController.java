@@ -62,16 +62,14 @@ public class SellerController {
 
     @PostMapping("/dashboard")
     public String updatePW(@RequestParam("realEstateID") String realEstateID,
-            @RequestParam("landPw") String landPw,
-            @RequestParam("housePw") String housePw,
+            @RequestParam("url") String url,
+
             Model model) {
         System.out.println("ID" + realEstateID);
         realEstateService.updateStatus(realEstateID, RealEstateStatus.REVIEWING, "");
-        if (landPw == "") {
-            realEstateService.updatePaperWork(realEstateID, housePw);
-        } else {
-            realEstateService.updatePaperWork(realEstateID, landPw);
-        }
+
+        realEstateService.updatePaperWork(realEstateID, url);
+
         String currentPage = "dashboard";
         model.addAttribute("currentPage", currentPage);
         return "redirect:/seller";

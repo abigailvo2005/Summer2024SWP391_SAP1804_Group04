@@ -33,6 +33,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll()">
@@ -435,23 +439,24 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <div class="container-fluid">
                     <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm d-flex col-6"
+                        class="list-group-item border-0 ps-0 text-sm d-flex"
                       >
                         <strong class="text-dark">Status:</strong>
                         <p id="popup-status"></p>
                       </li>
+                    </div>
 
-                      <div class="col-6 unqualified hidden">
+                    
+                      <div class="row unqualified hidden">
                         <li
                           class="list-group-item border-0 ps-0 text-sm d-flex"
                         >
                           <strong class="text-dark"
-                            >Reason validated fail:</strong
+                            >Problems:</strong
                           >
                           <p id="popup-note"></p>
                         </li>
                       </div>
-                    </div>
 
                     <!-- image section & description for popup -->
                     <div class="row">
@@ -562,7 +567,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             class="form-control form-create-control"
                             required
                           />
-                          <button id="submit-change-btn" class="btn btn-padding mt-2">Change</button>
+                          <button
+                            id="submit-land-btn"
+                            class="btn btn-padding mt-2"
+                            type="button"
+                          >
+                            Change
+                          </button>
                           <button
                             class="btn btn-padding ms-2 mt-2"
                             onclick="hideChangePW('land')"
@@ -570,9 +581,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             Cancel
                           </button>
                           <input
-                            class=""
+                            class="hidden"
                             id="land-pw-container"
-                            name="landPw"
+                            name="url"
                             type="text"
                           />
                         </form>
@@ -619,7 +630,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="form-control form-create-control"
                               required
                             />
-                            <button class="btn btn-padding mt-2">Change</button>
+                            <button
+                              id="submit-house-btn"
+                              class="btn btn-padding mt-2"
+                              type="button"
+                            >
+                              Change
+                            </button>
                             <button
                               class="btn btn-padding ms-2 mt-2"
                               onclick="hideChangePW('house')"
@@ -629,7 +646,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <input
                               class="hidden"
                               id="house-pw-container"
-                              name="housePw"
+                              name="url"
                               type="text"
                             />
                           </form>
