@@ -33,6 +33,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
   </head>
 
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll()">
@@ -57,7 +61,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${propList.size()} request(s)</span
+                        >${propList.size()} properties</span
                       >
                       in total
                     </p>
@@ -439,20 +443,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <p id="popup-status"></p>
                       </li>
                     </div>
-                    <div id="note-section" class="row hidden mb-1">
-                      <li class="list-group-item border-0 ps-0 text-sm d-flex">
-                        <strong class="text-dark"
-                          >Reason Validate Fail:
-                        </strong>
-                        <p id="popup-note"></p>
-                      </li>
-                    </div>
 
                     <div class="row unqualified hidden">
-                      <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
-                      >
-                        <strong class="text-dark">Notes:</strong>
+                      <li class="list-group-item border-0 ps-0 text-sm d-flex">
+                        <strong class="text-dark">Problems:</strong>
                         <p id="popup-note"></p>
                       </li>
                     </div>
@@ -467,7 +461,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </li>
                       <div
                         id="image-section"
-                        class="carousel slide mb-3 col-7"
+                        class="carousel slide mb-3 col-7 mt-2"
                         data-bs-ride="carousel"
                       >
                         <div class="carousel-indicators"></div>
@@ -549,9 +543,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         ></a>
                         <form
                           action="
-                          ${pageContext.request.contextPath}/seller/agency-request/update"
-                          method="get"
-                          class="hidden change"
+                          ${pageContext.request.contextPath}/seller/dashboard"
+                          method="post"
+                          class="hidden change ms-2"
+                          id="form-change-land-pw"
                         >
                           <input
                             name="realEstateID"
@@ -563,18 +558,29 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             type="file"
                             accept="application/pdf, application/zip"
                             class="form-control form-create-control"
-                            name="url"
                             required
                           />
-                          <button class="btn btn-padding">Change</button>
+                          <button
+                            id="submit-land-btn"
+                            class="btn btn-padding mt-2"
+                            type="button"
+                          >
+                            Change
+                          </button>
+                          <button
+                            class="btn btn-padding ms-2 mt-2"
+                            onclick="hideChangePW('land')"
+                          >
+                            Cancel
+                          </button>
                           <input
                             class="hidden"
                             id="land-pw-container"
-                            name="landPw"
+                            name="url"
                             type="text"
                           />
                         </form>
-                        <a class="hidden pen" onclick="changePW()">
+                        <a class="hidden pen" onclick="changePW('land')">
                           <i class="fa-solid fa-pencil"></i>
                         </a>
                       </li>
@@ -592,7 +598,54 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
                         >
                           <strong class="text-dark">Paperwork: </strong>
-                          <a id="popup-house-pw" target="_blank" download></a>
+                          <a
+                            class="housepw"
+                            id="popup-house-pw"
+                            target="_blank"
+                            download
+                          ></a>
+                          <form
+                            action="
+                          ${pageContext.request.contextPath}/seller/dashboard"
+                            method="post"
+                            class="hidden change ms-2"
+                            id="form-change-house-pw"
+                          >
+                            <input
+                              name="realEstateID"
+                              id="popup-id"
+                              class="hidden"
+                            />
+                            <input
+                              id="prop-pw-house"
+                              type="file"
+                              accept="application/pdf, application/zip"
+                              class="form-control form-create-control"
+                              required
+                            />
+                            <button
+                              id="submit-house-btn"
+                              class="btn btn-padding mt-2"
+                              type="button"
+                            >
+                              Change
+                            </button>
+                            <button
+                              class="btn btn-padding ms-2 mt-2"
+                              onclick="hideChangePW('house')"
+                            >
+                              Cancel
+                            </button>
+                            <input
+                              class="hidden"
+                              id="house-pw-container"
+                              name="url"
+                              type="text"
+                            />
+                          </form>
+                          <a class="hidden pen" onclick="changePW('house')">
+                            <i class="fa-solid fa-pencil"></i>
+                          </a>
                         </li>
                       </div>
 
@@ -627,6 +680,27 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         Show Agency List
                       </button>
                     </div>
+
+                    <!-- Table shows list of Agency that is accepted to handle this listing -->
+                    <div id="accepted-agency-list" class="row hidden">
+                      <div class="title-table mb-2 px-0">
+                        <strong>Accepted Agencies</strong>
+                      </div>
+                      <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Company</th>
+                            <th class="text-center">Years of Experience</th>
+                            <th class="text-center">Completed Projects</th>
+                            <th class="text-center description">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody id="chosen-agency-container"></tbody>
+                      </table>
+                    </div>
+
                     <!-- Table shows list of Agency wants to handle this property -->
                     <div id="agency-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
@@ -635,16 +709,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <table class="table table-responsive">
                         <thead>
                           <tr>
-                            <th class="text-center non-handled">Select</th>
+                            <th class="text-center">Select</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Phone</th>
                             <th class="text-center">Company</th>
                             <th class="text-center">Years of Experience</th>
                             <th class="text-center">Completed Projects</th>
                             <th class="text-center description">Description</th>
-                            <th class="text-center description non-handled">
-                              Message
-                            </th>
+                            <th class="text-center">Message</th>
                           </tr>
                         </thead>
                         <tbody id="agency-container"></tbody>
@@ -658,7 +730,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="realEstateId"
                             name="realEstateId"
-                            type="text"
+                            type="hidden"
                           />
                           <div
                             id="selected-agency-container"
@@ -686,6 +758,24 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         Show Buyer List
                       </button>
                     </div>
+
+                    <!-- Table shows list of Buyer that is accepted to be connected -->
+                    <div id="accepted-buyer-list" class="row hidden">
+                      <div class="title-table mb-2 px-0">
+                        <strong>Connected Buyers</strong>
+                      </div>
+                      <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Message</th>
+                          </tr>
+                        </thead>
+                        <tbody id="accepted-buyer-container"></tbody>
+                      </table>
+                    </div>
+
                     <div id="buyer-list" class="row hidden">
                       <div class="title-table mb-2 px-0">
                         <strong>Pending Buyer Profiles</strong>
@@ -715,6 +805,50 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           </div>
                         </form>
                       </div>
+
+                      <!-- section for confirm connected successfully buyer ${pageContext.request.contextPath}-->
+                      <form id="form-confirm-sold" action="" method="post">
+                        <li
+                          class="row list-group-item border-0 ps-0 text-sm d-flex"
+                        >
+                          <strong class="text-dark col-5"
+                            >Choose successfully connected Buyer:</strong
+                          >
+                          <div class="col-5">
+                            <select
+                              class="form-control form-create-control"
+                              onchange="chooseSoldBuyer(this.value)"
+                            >
+                              <option class="fs-6" value="">
+                                Choose Buyer
+                              </option>
+                              <c:forEach
+                                items="${buyerRequestList}"
+                                var="buyer"
+                              >
+                                <option class="fs-6" value="${buyer.requestId}">
+                                  ${buyer.fullName}
+                                </option>
+                              </c:forEach>
+                            </select>
+                          </div>
+
+                          <input
+                            id="form-chosen-buyer"
+                            type="hidden"
+                            name="buyerId"
+                          />
+                          <div class="col-2">
+                            <button
+                              type="button"
+                              class="btn bg-gradient-dark w-100"
+                              onclick="confirmSold(event)"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </li>
+                      </form>
                     </div>
                   </div>
                 </ul>
@@ -765,12 +899,55 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>
+    <script
+      type="module"
+      src="../../template/assets/js/img-handler.js"
+    ></script>
 
     <!-- Internal JS -->
     <script>
       //URL REAL ESTATE API
       const urlRealEstate = "http://localhost:8085/api/real-estate/";
       var chosenRequest = null;
+      var propStatus = null;
+      const chosenAgencyStatusHide = [
+        "reviewing",
+        "validating",
+        "unqualified",
+        "agency_approving",
+      ];
+      const requestingAgencyStatusHide = [
+        "reviewing",
+        "validating",
+        "unqualified",
+      ];
+      const chosenBuyerStatusHide = [
+        "reviewing",
+        "validating",
+        "unqualified",
+        "agency_approving",
+        "handled",
+        "marketed",
+        "buyer_approving",
+      ];
+      const requestBuyerStatusHide = [
+        "reviewing",
+        "validating",
+        "unqualified",
+        "agency_approving",
+        "handled",
+        "marketed",
+      ];
+      const confirmedBuyerStatusHide = [
+        "reviewing",
+        "validating",
+        "unqualified",
+        "agency_approving",
+        "handled",
+        "marketed",
+        "buyer_approving",
+        "connected",
+      ];
 
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
@@ -790,7 +967,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             if (checkbox.checked) {
               // Only get agencyId that is checked
               const agencyId = checkbox.getAttribute("data-agency-id");
-
               //create input type hidden to submit to controller
               const item = document.createElement("input");
               item.type = "text";
@@ -804,7 +980,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
           document.querySelector("#agency-form").submit();
         } else {
-          alert("You must choose at least 1 agency to continue");
+          alert("You must choose at least 1 agency to submit to system.");
         }
       }
 
@@ -812,6 +988,36 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       function confirmBuyer(e) {
         e.preventDefault();
 
+        //get container
+        var buyerContainer = $("#selected-buyer-container");
+
+        //clear list of buyer everytime reload
+        buyerContainer.html("");
+
+        // Get all checkboxes values in table
+        const checkboxes = document.querySelectorAll(".buyer-checkbox");
+
+        if (checkboxes) {
+          checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+              // Only get agencyId that is checked
+              const buyerProfileId = checkbox.getAttribute("data-profile-id");
+              //create input type hidden to submit to controller
+              const item = document.createElement("input");
+              item.type = "text";
+              item.value = buyerProfileId;
+              item.name = "buyerRequestIds";
+
+              //append to container
+              buyerContainer.append(item);
+            }
+          });
+
+          document.querySelector("#buyer-form").submit();
+        } else {
+          alert("You must choose at least 1 buyer to submit to system.");
+        }
+        /* 
         // Get all checkboxes values in table
         const checkboxes = document.querySelectorAll(".buyer-checkbox");
         const selectedBuyers = [];
@@ -838,18 +1044,48 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           "Congratulations! You have successfully connected with the buyer. The property will be automatically hidden from the system."
         );
 
-        $("#popup-property-request").addClass("hidden");
+        $("#popup-property-request").addClass("hidden"); */
+      }
+
+      //confirm last step - successfully sold property - close property
+      function chooseSoldBuyer(selectedBuyer) {
+        // Retrieve the "chosen-buyer" input element
+        const chosenBuyerInput = document.getElementById("form-chosen-buyer");
+
+        // Update the value of the "chosen-buyer" input
+        chosenBuyerInput.setAttribute("value", selectedBuyer);
       }
 
       //to let user update paperwork if validation fail
-      function changePW() {
-        var form_change = document.querySelector(".change");
-        var form_download = document.querySelector(".landpw");
-        var icon = document.querySelector(".pen");
+      function changePW(type) {
+        //show update form
+        $(".change").removeClass("hidden");
 
-        form_change.classList.remove("hidden");
-        form_download.classList.add("hidden");
-        icon.classList.add("hidden");
+        //hide old pw
+        if (type.toLowerCase() == "land") {
+          $(".landpw").addClass("hidden");
+        } else {
+          $(".housepw").addClass("hidden");
+        }
+
+        //hide pen
+        $(".pen").addClass("hidden");
+      }
+
+      //to let user cancel updating paperwork
+      function hideChangePW(type) {
+        //hide update form
+        $(".change").addClass("hidden");
+
+        //show old pw
+        if (type.toLowerCase() == "land") {
+          $(".landpw").removeClass("hidden");
+        } else {
+          $(".housepw").removeClass("hidden");
+        }
+
+        //show pen
+        $(".pen").removeClass("hidden");
       }
 
       /* View Popup detail of each property */
@@ -871,19 +1107,16 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           success: function (data) {
             // Update popup với information chosen Property
             $("#popup-name").text(data.name);
-            if (data.status == "UNQUALIFIED") {
-              document
-                .querySelector("#note-section")
-                .classList.remove("hidden");
-              $("#popup-note").text(data.notes);
-            }
-            $("#popup-status").text(data.status);
+            $("#popup-status").text(data.status.toLowerCase());
 
             $("#popup-desc").text(data.description);
             $("#popup-type").text(data.realEstateType);
             $("#popup-address").text(data.address);
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
+
+            //assign property status for future reference
+            propStatus = data.status.toLowerCase();
 
             //update chosen realEstateID for changing pw + choosing agency
             document
@@ -894,7 +1127,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               .setAttribute("value", data.realEstateId);
 
             //show notes when property unqualified
-            if (data.status == "UNQUALIFIED") {
+            if (data.status.toLowerCase() == "unqualified") {
               unqualified.classList.remove("hidden");
               pen.classList.remove("hidden");
               $("#popup-note").text(data.notes);
@@ -902,20 +1135,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               unqualified.classList.add("hidden");
               pen.classList.add("hidden");
             }
-
-            //only show chosen list of chosen agencies if listing is handled
-            if (data.status.toLowerCase() == "handled") {
-              document.querySelectorAll(".non-handled").forEach((item) => {
-                item.classList.add("hidden");
-              });
-            }
-
-            //only show chosen list of chosen buyers if listing is marketed
-            if (data.status.toLowerCase() == "handled") {
-              document.querySelectorAll(".non-marketed").forEach((item) => {
-                item.classList.add("hidden");
-              });
-            }
+            
 
             //only show land/house fields according to type
             if (data.realEstateType == "Land") {
@@ -940,10 +1160,18 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
-            if (data.status.toLowerCase() == "agency_approving") {
+            if (
+              !requestingAgencyStatusHide.includes(data.status.toLowerCase())
+            ) {
               agencyBtn.classList.remove("hidden");
-            } else if (data.status.toLowerCase() == "buyer_approving") {
+            } else if (
+              !requestBuyerStatusHide.includes(data.status.toLowerCase())
+            ) {
               buyerBtn.classList.remove("hidden");
+            } else {
+              //hide all as default
+              agencyBtn.classList.add("hidden");
+              buyerBtn.classList.add("hidden");
             }
 
             //load list of agencies for seller if any agency requested handle listing
@@ -951,46 +1179,100 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             const agencyContainer = $("#agency-container");
             data.agencyRequests.forEach((request) => {
-              //create rows with checkboxes - for controller submission - and information to view
-              const row = $("<tr>");
+              if (request.status == "Reviewing") {
+                //create rows with checkboxes - for controller submission - and information to view
+                const row = $("<tr>");
 
-              //information of agencies to submit back to controller
-              const checkbox = $("<input>")
-                .attr("type", "checkbox")
-                .attr("data-request-id", request.requestId)
-                .attr("data-agency-id", request.agencyId)
-                .attr("data-real-estate-id", request.realEstateId)
-                .addClass("agency-checkbox non-handled");
+                //information of agencies to submit back to controller
+                const checkbox = $("<input>")
+                  .attr("type", "checkbox")
+                  .attr("data-request-id", request.requestId)
+                  .attr("data-agency-id", request.requestId)
+                  .attr("data-real-estate-id", request.realEstateId)
+                  .addClass("agency-checkbox");
 
-              row.append($("<td>").append(checkbox));
-              row.append($("<td>").text(request.agency.fullName));
-              row.append($("<td>").text(request.agency.phone));
-              row.append($("<td>").text(request.agency.company));
-              row.append($("<td>").text(request.agency.yearsOfExperience));
-              row.append($("<td>").text(request.agency.completedProject));
-              row.append($("<td>").text(request.agency.description));
+                row.append($("<td>").append(checkbox));
+                row.append($("<td>").text(request.agency.fullName));
+                row.append($("<td>").text(request.agency.phone));
+                row.append($("<td>").text(request.agency.company));
+                row.append($("<td>").text(request.agency.yearsOfExperience));
+                row.append($("<td>").text(request.agency.completedProject));
+                row.append($("<td>").text(request.agency.description));
 
-              //part to view introduction message from agency seperately
-              const viewMessageBtn = $("<td>")
-                .append(
-                  $("<button>")
-                    .addClass("btn btn-sm view-message-btn non-handled")
-                    .text("View")
-                    .attr("data-message", request.message)
-                )
-                .addClass("text-center");
+                //part to view introduction message from agency seperately
+                const viewMessageBtn = $("<td>")
+                  .append(
+                    $("<button>")
+                      .addClass("btn btn-sm view-message-btn")
+                      .text("View")
+                      .attr("data-message", request.message)
+                  )
+                  .addClass("text-center");
 
-              viewMessageBtn.on("click", function () {
-                showMessage(request);
-              });
-              row.append(viewMessageBtn);
+                viewMessageBtn.on("click", function () {
+                  showMessage(request);
+                });
+                row.append(viewMessageBtn);
 
-              function closePopup(popupId) {
-                $(`#${popupId}`).addClass("hidden");
+                function closePopup(popupId) {
+                  $(`#${popupId}`).addClass("hidden");
+                }
+
+                agencyContainer.append(row);
               }
-
-              agencyContainer.append(row);
             });
+
+            //load list of chosen agencies for this property
+            $("#chosen-agency-container").empty(); //clear data of previous property
+
+            const chosenAgencyContainer = $("#chosen-agency-container");
+            data.agencyRequests.forEach((request) => {
+              if (request.status == "Accepted") {
+                //only show chosen agencies
+                //create rows with checkboxes - for controller submission - and information to view
+                const row = $("<tr>");
+
+                //information of agencies to submit back to controller
+                row.append($("<td>").text(request.agency.fullName));
+                row.append($("<td>").text(request.agency.phone));
+                row.append($("<td>").text(request.agency.company));
+                row.append($("<td>").text(request.agency.yearsOfExperience));
+                row.append($("<td>").text(request.agency.completedProject));
+                row.append($("<td>").text(request.agency.description));
+
+                function closePopup(popupId) {
+                  $(`#${popupId}`).addClass("hidden");
+                }
+
+                chosenAgencyContainer.append(row);
+              }
+            });
+
+            //load list of connected buyers for this property
+            $("#accepted-buyer-container").empty(); //clear data of previous property
+
+            const acceptedBuyerContainer = $("#accepted-buyer-container");
+            /* data.agencyRequests.forEach((request) => {
+              if (request.status == "Accepted") {
+                //only show chosen agencies
+                //create rows with checkboxes - for controller submission - and information to view
+                const row = $("<tr>");
+
+                //information of agencies to submit back to controller
+                row.append($("<td>").text(request.agency.fullName));
+                row.append($("<td>").text(request.agency.phone));
+                row.append($("<td>").text(request.agency.company));
+                row.append($("<td>").text(request.agency.yearsOfExperience));
+                row.append($("<td>").text(request.agency.completedProject));
+                row.append($("<td>").text(request.agency.description));
+
+                function closePopup(popupId) {
+                  $(`#${popupId}`).addClass("hidden");
+                }
+
+                chosenAgencyContainer.append(row);
+              }
+            }); THIS PART SUPPOSE TO BE BUYER REQUESTS */
 
             //load images to carousel
             const carouselInner = document.querySelector(".carousel-inner");
@@ -1059,9 +1341,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       //only show list of agencies when seller click show
       function showAgencies() {
         if (!isAgencyDisplayed) {
-          document.querySelector("#agency-list").classList.remove("hidden");
-          document.querySelector("#show-agency-permission button").textContent =
-            "Hide Agency List";
+          $("#agency-list").removeClass("hidden");
+
+          //only show list of chosen agencies if listing is handled
+          if (!chosenAgencyStatusHide.includes(propStatus)) {
+            $("#accepted-agency-list").removeClass("hidden");
+          }
+
+          $("#show-agency-permission button").text("Hide Agency List");
           isAgencyDisplayed = true;
         } else {
           hideAgencies();
@@ -1069,9 +1356,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       }
       //seperate function to hide agency list
       function hideAgencies() {
-        document.querySelector("#agency-list").classList.add("hidden");
-        document.querySelector("#show-agency-permission button").textContent =
-          "Show Agency List";
+        $("#agency-list").addClass("hidden");
+        $("#accepted-agency-list").addClass("hidden");
+        $("#show-agency-permission button").text("Show Agency List");
         isAgencyDisplayed = false;
       }
 
@@ -1080,8 +1367,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       function showBuyers() {
         if (!isBuyersDisplayed) {
           document.querySelector("#buyer-list").classList.remove("hidden");
-          document.querySelector("#show-buyer-permission button").textContent =
-            "Hide Buyer List";
+
+          //only show list of chosen buyers if listing is connected
+          if (!chosenBuyerStatusHide.includes(propStatus)) {
+            $("#accepted-buyer-list").classList.remove("hidden");
+          }
+
+          $("#show-buyer-permission button").text("Hide Buyer List");
           isBuyersDisplayed = true;
         } else {
           hideBuyers();
@@ -1089,9 +1381,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       }
       //seperate function to hide buyer list
       function hideBuyers() {
-        document.querySelector("#buyer-list").classList.add("hidden");
-        document.querySelector("#show-buyer-permission button").textContent =
-          "Show Buyer List";
+        $("#buyer-list").addClass("hidden");
+        $("#accepted-buyer-list").addClass("hidden");
+        $("#show-buyer-permission button").text("Show Buyer List");
         isBuyersDisplayed = false;
       }
 
@@ -1142,6 +1434,37 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           }
         });
       }
+
+      //successfully submit confirmed sold buyer to system
+      function confirmSold(event) {
+        // Prevent the default button click behavior
+        event.preventDefault();
+
+        var form = document.getElementById("form-chosen-buyer");
+
+        //check if no staff is chosen
+        if (form.value == "") {
+          alert("No buyer has been chosen.");
+          return;
+        }
+
+        //show success message
+        alert(
+          "Congratulations! You have successfully sold this property. The property will be automatically hidden from the system."
+        );
+
+        //execute default submit
+        form.submit();
+      }
+
+      function chooseStaff(selectedStaff) {
+        // Retrieve the "chosen-staff" input element
+        const chosenStaffInput = document.getElementById("form-chosen-staff");
+
+        // Update the value of the "chosen-staff" input
+        chosenStaffInput.setAttribute("value", selectedStaff);
+      }
+
       window.onload = function () {
         makeTableScroll();
       };

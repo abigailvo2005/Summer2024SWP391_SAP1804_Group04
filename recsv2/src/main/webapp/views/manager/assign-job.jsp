@@ -408,10 +408,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                     <div class="col-sm-4">
                       <input
                         id="form-chosen-staff"
-                        type="text"
+                        type="hidden"
                         name="staffId"
                         class="form-control form-create-control col-10"
-                        hidden
                       />
                     </div>
                   </div>

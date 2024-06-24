@@ -13,4 +13,6 @@ public interface AgencyRequestRepository extends JpaRepository<AgencyRequest, St
     List<AgencyRequest> getAllByAgencyAgencyId(String agencyId);
 
     List<AgencyRequest> getAllByAgencyAgencyIdAndStatus(String agencyId, String status);
+
+    List<AgencyRequest> getAllByAgencyAgencyIdAndStatusIn(String agencyId, List<String> statues);
 }
