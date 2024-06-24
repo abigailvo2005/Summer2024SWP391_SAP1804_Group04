@@ -27,12 +27,16 @@ function getImageFile(e) {
 }
 
 /* Get paperwork from user */
-document.getElementById("prop-pw-land").addEventListener("change", (event) => {
+$("#prop-pw-land").on("change", function (event) {
   getPaperworkFile(event, "land");
 });
-document.getElementById("prop-pw-house").addEventListener("change", (event) => {
+$("#prop-pw-house").on("change", function (event) {
   getPaperworkFile(event, "house");
 });
+/* 
+document.getElementById("prop-pw-house").addEventListener("change", (event) => {
+  getPaperworkFile(event, "house");
+}); */
 
 function getPaperworkFile(e, type) {
   paperwork = e.target.files[0];
@@ -161,4 +165,42 @@ async function submitRequest(event) {
       document.querySelector("form").reportValidity();
     }
   }
+}
+
+document
+  .getElementById("submit-change-btn")
+  .addEventListener("click", async (event) => {
+    changePaperwork(event);
+  });
+async function changePaperwork(event) {
+  event.preventDefault(); //Stop form from default submitting
+  const file = paperwork;
+  const storageRef = storage.ref(`paperwork/${file.name}`);
+  const pwLandContainer = document.getElementById("land-pw-container");
+  const pwHouseContainer = document.getElementById("house-pw-container");
+
+  try {
+    // Upload the file
+    await storageRef.put(file);
+
+    // Get the download URL
+    const url = await storageRef.getDownloadURL();
+    console.log("pw: " + url);
+
+    // Set the URL value in the form
+    if (fileType === "land") {
+      pwLandContainer.setAttribute("value", url);
+
+      //submit form after save url successfully
+     // $("#form-change-land-pw").submit();
+    } else {
+      pwHouseContainer.setAttribute("value", url);
+
+      //submit form after save url successfully
+     // $("#form-change-house-pw").submit();
+    }
+  } catch (error) {
+    console.error("Error uploading file:", error);
+  }
+  console.log("successfully upload all paperwork");
 }

@@ -1,6 +1,5 @@
 package com.recs.controller;
 
-
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @Controller
 @PreAuthorize("hasRole('ROLE_SELLER')")
 @RequestMapping("/seller")
@@ -49,7 +47,6 @@ public class SellerController {
         return accountService.getUserInfo(account.getAccountId());
     }
 
-
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
@@ -65,19 +62,20 @@ public class SellerController {
 
     @PostMapping("/dashboard")
     public String updatePW(@RequestParam("realEstateID") String realEstateID,
-                           @RequestParam("url") String url,
-                           Model model) {
+            @RequestParam("landPw") String landPw,
+            @RequestParam("housePw") String housePw,
+            Model model) {
         System.out.println("ID" + realEstateID);
         realEstateService.updateStatus(realEstateID, RealEstateStatus.REVIEWING, "");
-        realEstateService.updatePaperWork(realEstateID, url);
-
+        if (landPw == "") {
+            realEstateService.updatePaperWork(realEstateID, housePw);
+        } else {
+            realEstateService.updatePaperWork(realEstateID, landPw);
+        }
         String currentPage = "dashboard";
         model.addAttribute("currentPage", currentPage);
         return "redirect:/seller";
     }
-   
-    
-
 
     @GetMapping({ "/create-property" })
     public String createPropView(Model model, Authentication authentication) {
@@ -125,8 +123,7 @@ public class SellerController {
 
     @PostMapping("/agency-request/approve")
     public String updateAgencyRequestStatus(
-            @ModelAttribute(name = "request")ApproveAgencyRequestDTO request
-            ) {
+            @ModelAttribute(name = "request") ApproveAgencyRequestDTO request) {
         recsBusinessService.approveAgencyRequest(request);
         return "redirect:/seller";
     }
