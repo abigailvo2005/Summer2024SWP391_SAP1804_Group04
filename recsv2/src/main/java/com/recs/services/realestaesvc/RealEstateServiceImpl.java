@@ -396,7 +396,5 @@ public class RealEstateServiceImpl implements RealEstateService{
                         Comparator.comparing(RealEstateInfo::getCreateTimestamp)
                         .reversed())
                 .toList();
-    }
-
-    
+    }    
 }
