@@ -102,13 +102,17 @@ async function uploadImage() {
 
 /* Get images from user */
 if($("#submit-btn")) {
-  $("#submit-btn").on("change", async function (event)  {
+  $("#submit-btn").on("click", async function (event)  {
     submitRequest(event);
   })
 }
 
+
+
 async function submitRequest(event) {
   event.preventDefault(); //Stop form from default submitting
+
+  console.log("inside submit request");
 
   //disable button while uploading file
   const submitButton = document.querySelector("#submit-btn");
