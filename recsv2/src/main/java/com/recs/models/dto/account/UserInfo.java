@@ -160,7 +160,7 @@ public class UserInfo {
         if (member != null) {
             userInfo.setMemberId(member.getMemberId());
 //            userInfo.setCompanyId(member.getCompany());
-            userInfo.setSuperiorId(member.getAgencyId());
+            userInfo.setSuperiorId(member.getAgency().getAgencyId());
         }
         return userInfo;
     }

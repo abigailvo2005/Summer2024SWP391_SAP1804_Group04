@@ -69,4 +69,8 @@ public class RealEstate {
 
     @OneToMany(mappedBy = "realEstate", cascade = CascadeType.ALL)
     private List<AgencyRequest> agencyRequests = List.of();
+
+    @OneToMany
+    @JoinColumn(name = "realEstateId")
+    private List<PropertyImages> images = List.of();
 }

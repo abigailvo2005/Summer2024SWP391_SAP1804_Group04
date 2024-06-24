@@ -144,7 +144,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Member getMemberByAccountId(int id) {
-        return memberRepository.findByAccountId(id);
+        return memberRepository.findByAccountAccountId(id);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class AccountServiceImpl implements AccountService {
                 yield UserInfo.fromAgency(account, agency);
             }
             case "ROLE_MEMBER" -> {
-                Member member = memberRepository.findByAccountId(id);
+                Member member = memberRepository.findByAccountAccountId(id);
                 yield UserInfo.fromMember(account, member);
             }
             default -> UserInfo.fromAccount(account);

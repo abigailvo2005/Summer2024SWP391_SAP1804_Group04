@@ -2,6 +2,8 @@ package com.recs.api;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.services.accountsvc.AccountService;
@@ -57,5 +59,15 @@ public class ApiController {
     @GetMapping(path = "/job/validation/{id}", produces = "application/json")
     public ResponseEntity<ValidationJobInfo> getValidationJobInfo(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(recsBusinessService.getValidationJobInfo(id));
+    }
+
+    @GetMapping(path = "/deal/{id}", produces = "application/json")
+    public ResponseEntity<DealAssignMemberDTO> getDeal(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(recsBusinessService.getDealInfo(id));
+    }
+
+    @GetMapping(path = "/agency-request/{id}", produces = "application/json")
+    public ResponseEntity<AgencyRequestDTO> getAgencyRequest(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(recsBusinessService.getAgencyRequest(id));
     }
 }
