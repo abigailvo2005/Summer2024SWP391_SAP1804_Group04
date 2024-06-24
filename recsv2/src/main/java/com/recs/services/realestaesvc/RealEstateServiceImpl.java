@@ -293,6 +293,7 @@ public class RealEstateServiceImpl implements RealEstateService{
                 sellerId,
                 getSuitableManager(),
                 StringUtils.EMPTY,
+                List.of(),
                 List.of()
                 );
     }
