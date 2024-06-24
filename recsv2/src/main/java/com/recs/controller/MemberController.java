@@ -64,7 +64,9 @@ public class MemberController {
     @GetMapping("/create-buyer")
     public String createBuyer(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-buyer";
+        List<DealAssignMember> dealAssignMembers = recsBusinessService.getAllDealByMemberId(userInfo.getMemberId());
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("dealList", dealAssignMembers);
         model.addAttribute("name", userInfo.getFullName());
         return "member/create-buyer";
     }

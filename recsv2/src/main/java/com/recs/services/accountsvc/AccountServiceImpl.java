@@ -215,6 +215,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public UserInfo getMemberToUserInfo(String memberId) {
+        Member member = memberRepository.getReferenceById(memberId);
+        Account account = accountRepository.getReferenceById(String.valueOf(member.getAccountId()));
+        UserInfo info = UserInfo.fromMember(account, member);
+        System.out.println("get member info: "+info);
         return null;
     }
 
