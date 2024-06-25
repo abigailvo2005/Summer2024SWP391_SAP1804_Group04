@@ -125,7 +125,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.name}
+                                    ${listing.requestId}
                                   </p>
                                 </div>
                               </div>
@@ -141,7 +141,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.textPrice}
+                                    ${listing.createTimestamp}
                                   </p>
                                 </div>
                               </div>
@@ -157,7 +157,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.realEstateType}
+                                    ${listing.agency}
                                   </p>
                                 </div>
                               </div>
@@ -172,9 +172,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <p
                                 id="listing-status"
                                 class="mb-0 text-sm fw-bold status-color"
-                                value="${listing.status.value}"
+                                value="${listing.status}"
                               >
-                                ${listing.status.value}
+                                ${listing.status}
                               </p>
                                 </div>
                               </div>
@@ -188,7 +188,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${listing.realEstateId}', 'listing')"
+                                    onclick="viewDetailProperty('${listing.requestId}', 'listing')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -219,7 +219,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${reqList.size()} request(s)</span
+                        >${dealList.size()} request(s)</span
                       >
                       in total
                     </p>
@@ -276,7 +276,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${reqList}" var="req">
+                        <c:forEach items="${dealList}" var="deal">
                           <tr class="req-row">
                             <td>
                               <div class="d-flex justify-content-start">
@@ -287,7 +287,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.name}
+                                    ${deal.dealId}
                                   </p>
                                 </div>
                               </div>
@@ -303,7 +303,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.textPrice}
+                                    ${deal.createTimestamp}
                                   </p>
                                 </div>
                               </div>
@@ -319,7 +319,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType}
+                                    ${deal.priority}
                                   </p>
                                 </div>
                               </div>
@@ -334,9 +334,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <p
                                 id="req-status"
                                 class="mb-0 text-sm fw-bold status-color"
-                                value="${req.status.value}"
+                                value="${deal.status}"
                               >
-                                ${req.status.value}
+                                ${deal.status}
                               </p>
                                 </div>
                               </div>
@@ -350,7 +350,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${req.realEstateId}', 'deal')"
+                                    onclick="viewDetailProperty('${deal.realEstate}', 'deal')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>

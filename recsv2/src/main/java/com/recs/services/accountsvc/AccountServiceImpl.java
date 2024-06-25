@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
         List<Account> list = accountRepository.findByStatus("APPROVING")
                 .stream().sorted(
                         Comparator.comparing(Account::getAccountId)
-                        .thenComparing(Account::getAccountId))
+                                .thenComparing(Account::getAccountId))
                 .toList();
         System.out.println("list registering account size: " + list.size());
         return list;
@@ -144,7 +144,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Member getMemberByAccountId(int id) {
-        return memberRepository.findByAccountId(id);
+        return memberRepository.findByAccountAccountId(id);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class AccountServiceImpl implements AccountService {
                 yield UserInfo.fromAgency(account, agency);
             }
             case "ROLE_MEMBER" -> {
-                Member member = memberRepository.findByAccountId(id);
+                Member member = memberRepository.findByAccountAccountId(id);
                 yield UserInfo.fromMember(account, member);
             }
             default -> UserInfo.fromAccount(account);
@@ -184,7 +184,7 @@ public class AccountServiceImpl implements AccountService {
         Seller seller = sellerRepository.getReferenceById(sellerId);
         Account account = accountRepository.getReferenceById(String.valueOf(seller.getAccountId()));
         UserInfo info = UserInfo.fromSeller(account, seller);
-        System.out.println("get seller info: "+info);
+        System.out.println("get seller info: " + info);
         return info;
     }
 
@@ -193,7 +193,7 @@ public class AccountServiceImpl implements AccountService {
         Manager manager = managerRepository.getReferenceById(managerId);
         Account account = accountRepository.getReferenceById(String.valueOf(manager.getAccountId()));
         UserInfo info = UserInfo.fromManager(account, manager);
-        System.out.println("get manager info: "+info);
+        System.out.println("get manager info: " + info);
         return info;
     }
 
@@ -202,33 +202,33 @@ public class AccountServiceImpl implements AccountService {
         Staff staff = staffRepository.getReferenceById(staffId);
         Account account = accountRepository.getReferenceById(String.valueOf(staff.getAccountId()));
         UserInfo info = UserInfo.fromStaff(account, staff);
-        System.out.println("get staff info: "+info);
-        return info;    }
+        System.out.println("get staff info: " + info);
+        return info;
+    }
 
     @Override
     public UserInfo getAgencyToUserInfo(String agencyId) {
         Agency agency = agencyRepository.getReferenceById(agencyId);
         Account account = accountRepository.getReferenceById(String.valueOf(agency.getAccount().getAccountId()));
         UserInfo info = UserInfo.fromAgency(account, agency);
-        System.out.println("get agency info: "+info);
-        return info;    }
+        System.out.println("get agency info: " + info);
+        return info;
+    }
 
     @Override
     public UserInfo getMemberToUserInfo(String memberId) {
         Member member = memberRepository.getReferenceById(memberId);
-        Account account = accountRepository.getReferenceById(String.valueOf(member.getAccountId()));
+        Account account = accountRepository.getReferenceById(String.valueOf(member.getAccount().getAccountId()));
         UserInfo info = UserInfo.fromMember(account, member);
-        System.out.println("get member info: "+info);
-        return null;
+        System.out.println("get member info: " + info);
+        return info;
     }
 
     @Override
     public List<UserInfo> getListStaffByManager(String managerId) {
         List<Staff> list = staffRepository.findAllByManagerId(managerId);
-        List<UserInfo> staffList = list.stream().map( staff ->
-                getStaffToUserInfo(staff.getStaffId())
-        ).toList();
-        System.out.println("List staff info by manager "+ managerId + " size " +staffList.size());
+        List<UserInfo> staffList = list.stream().map(staff -> getStaffToUserInfo(staff.getStaffId())).toList();
+        System.out.println("List staff info by manager " + managerId + " size " + staffList.size());
         return staffList;
     }
 }

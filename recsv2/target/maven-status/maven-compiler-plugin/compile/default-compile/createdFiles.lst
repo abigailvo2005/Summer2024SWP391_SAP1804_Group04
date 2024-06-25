@@ -14,6 +14,7 @@ com/recs/controller/AdminController.class
 com/recs/api/ApiController.class
 com/recs/models/entities/realestate/PaperWorks.class
 com/recs/models/entities/account/Account.class
+com/recs/models/dto/recsbusiness/DealAssignMemberDTO.class
 com/recs/models/dto/account/StaffDTO.class
 com/recs/security/UserInfoDetailsService.class
 com/recs/controller/StaffController.class
@@ -46,6 +47,7 @@ com/recs/repositories/account/ManagerRepository.class
 com/recs/models/dto/recsbusiness/ValidationJobInfo.class
 com/recs/controller/MemberController.class
 com/recs/ServletInitializer.class
+com/recs/models/dto/realestate/RealEstateDTO.class
 com/recs/models/enums/JobStatus.class
 com/recs/models/entities/account/Seller.class
 com/recs/models/dto/recsbusiness/AgencyRequestDTO.class

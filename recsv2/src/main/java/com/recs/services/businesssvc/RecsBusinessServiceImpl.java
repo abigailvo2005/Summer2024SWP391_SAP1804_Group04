@@ -1,13 +1,18 @@
 package com.recs.services.businesssvc;
 
 import com.recs.models.dto.account.UserInfo;
+import com.recs.models.dto.realestate.RealEstateDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Agency;
+import com.recs.models.entities.realestate.PaperWorks;
+import com.recs.models.entities.realestate.PropertyHouse;
+import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
@@ -16,6 +21,9 @@ import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.models.enums.JobStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.repositories.account.AgencyRepository;
+import com.recs.repositories.realestate.PaperWorksRepository;
+import com.recs.repositories.realestate.PropertyHouseRepository;
+import com.recs.repositories.realestate.PropertyLandRepository;
 import com.recs.repositories.recsbusiness.AgencyRequestRepository;
 import com.recs.repositories.recsbusiness.DealAssignMemberRepository;
 import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
@@ -25,8 +33,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Service
 public class RecsBusinessServiceImpl implements RecsBusinessService{
@@ -48,6 +58,15 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Autowired
     private AgencyRepository agencyRepository;
+
+    @Autowired
+    private PaperWorksRepository paperWorksRepository;
+
+    @Autowired
+    private PropertyLandRepository propertyLandRepository;
+
+    @Autowired
+    private PropertyHouseRepository propertyHouseRepository;
 
     @Override
     public AssignJobStaff createAssignJobStaff(AssignJobStaff assignJobStaff) {
@@ -194,6 +213,51 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         });
         realEstate.setStatus(RealEstateStatus.HANDLED.getValue());
         realEstateService.update(realEstate);
+    }
+
+    @Override
+    public DealAssignMemberDTO getDealInfo(String id) {
+        DealAssignMember deal = dealAssignMemberRepository.getReferenceById(id);
+        RealEstateInfo realEstateInfo = realEstateService.getRealEstateInfo(deal.getRealEstate().getRealEstateId());
+        DealAssignMemberDTO dto = DealAssignMemberDTO.from(deal);
+        dto.setRealEstate(realEstateInfo);
+        return dto;
+    }
+
+    @Override
+    public AgencyRequestDTO getAgencyRequest(String id) {
+        AgencyRequest agencyRequest = agencyRequestRepository.getReferenceById(id);
+        AgencyRequestDTO dto = AgencyRequestDTO.from(agencyRequest);
+        if(dto.getRealEstate().getRealEstateType().equals("Land")) {
+            PropertyLand land = propertyLandRepository.getByRealEstateId(dto.getRealEstateId());
+            dto.setRealEstate(RealEstateDTO.fromLand(agencyRequest.getRealEstate(),land));
+        } else {
+            PropertyHouse house = propertyHouseRepository.getByRealEstateId(dto.getRealEstateId());
+            dto.setRealEstate(RealEstateDTO.fromHouse(agencyRequest.getRealEstate(),house));
+        }
+        dto.getRealEstate().setPaperWorks(paperWorksRepository.getReferenceById(dto.getRealEstateId()).getUrl());
+        return dto;
+    }
+
+    @Override
+    public List<AgencyRequestDTO> getDashBoardAgencyRequest(String agencyId) {
+        List<String> dashboardStatus = Stream.of(AgencyRequestStatus.ACCEPTED,AgencyRequestStatus.REVIEWING)
+                .map(AgencyRequestStatus::getValue)
+                .toList();
+        return agencyRequestRepository.getAllByAgencyAgencyIdAndStatusIn(agencyId, dashboardStatus)
+                .stream()
+                .map(AgencyRequestDTO::from)
+                .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
+                .toList();
+    }
+
+    @Override
+    public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId) {
+        return dealAssignMemberRepository.getByAgencyAgencyId(agencyId)
+                .stream()
+                .map(DealAssignMemberDTO::from)
+                .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
+                .toList();
     }
 
 }
