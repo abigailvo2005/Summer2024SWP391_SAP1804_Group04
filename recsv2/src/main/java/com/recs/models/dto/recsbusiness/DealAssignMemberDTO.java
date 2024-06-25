@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DealAssignMemberDTO {
     private String dealId;
+    private long createTimestamp;
     public String createDate;
     private Integer priority;
     private String status;
@@ -27,6 +28,7 @@ public class DealAssignMemberDTO {
     public static DealAssignMemberDTO from(DealAssignMember dealAssignMember) {
         return new DealAssignMemberDTO(
                 dealAssignMember.getDealId(),
+                dealAssignMember.getCreateTimestamp(),
                 RealEstateUtils.formatDate(dealAssignMember.getCreateTimestamp()),
                 dealAssignMember.getPriority(),
                 dealAssignMember.getStatus(),

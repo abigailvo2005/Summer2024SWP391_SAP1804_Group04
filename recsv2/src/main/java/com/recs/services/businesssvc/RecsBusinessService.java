@@ -49,7 +49,7 @@ public interface RecsBusinessService {
 
     public AgencyRequestDTO getAgencyRequest(String id);
 
-    public List<AgencyRequest> getDashBoardAgencyRequest(String agencyId);
+    public List<AgencyRequestDTO> getDashBoardAgencyRequest(String agencyId);
 
-    public List<DealAssignMember> getAgencyDashboardDeal(String agencyId);
+    public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId);
 }

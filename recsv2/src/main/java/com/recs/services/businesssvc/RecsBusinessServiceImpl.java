@@ -240,20 +240,23 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
-    public List<AgencyRequest> getDashBoardAgencyRequest(String agencyId) {
+    public List<AgencyRequestDTO> getDashBoardAgencyRequest(String agencyId) {
         List<String> dashboardStatus = Stream.of(AgencyRequestStatus.ACCEPTED,AgencyRequestStatus.REVIEWING)
                 .map(AgencyRequestStatus::getValue)
                 .toList();
         return agencyRequestRepository.getAllByAgencyAgencyIdAndStatusIn(agencyId, dashboardStatus)
                 .stream()
-                .sorted(Comparator.comparing(AgencyRequest::getStatus))
+                .map(AgencyRequestDTO::from)
+                .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
                 .toList();
     }
 
     @Override
-    public List<DealAssignMember> getAgencyDashboardDeal(String agencyId) {
+    public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId) {
         return dealAssignMemberRepository.getByAgencyAgencyId(agencyId)
-                .stream().sorted(Comparator.comparing(DealAssignMember::getCreateTimestamp).reversed())
+                .stream()
+                .map(DealAssignMemberDTO::from)
+                .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
                 .toList();
     }
 

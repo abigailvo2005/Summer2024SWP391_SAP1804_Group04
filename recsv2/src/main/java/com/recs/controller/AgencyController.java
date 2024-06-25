@@ -3,6 +3,8 @@ package com.recs.controller;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
+import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
@@ -52,9 +54,9 @@ public class AgencyController {
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        List<AgencyRequest> requestList = recsBusinessService.getDashBoardAgencyRequest(userInfo.getAgencyId());
+        List<AgencyRequestDTO> requestList = recsBusinessService.getDashBoardAgencyRequest(userInfo.getAgencyId());
 
-        List<DealAssignMember> dealList = recsBusinessService.getAgencyDashboardDeal(userInfo.getAgencyId());
+        List<DealAssignMemberDTO> dealList = recsBusinessService.getAgencyDashboardDeal(userInfo.getAgencyId());
 
         //TODO() tự nhét vào
         String currentPage = "dashboard";
@@ -100,7 +102,7 @@ public class AgencyController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String name = authentication.getName();
 
-        List<AgencyRequest> handledList = recsBusinessService.getDashBoardAgencyRequest(userInfo.getAgencyId())
+        List<AgencyRequestDTO> handledList = recsBusinessService.getDashBoardAgencyRequest(userInfo.getAgencyId())
                 .stream()
                 .filter(row -> AgencyRequestStatus.ACCEPTED.getValue().equals(row.getStatus()))
                 .toList();
