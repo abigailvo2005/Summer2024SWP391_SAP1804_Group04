@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {
+    private String memberId;
     private String username;
     private String fullName;
     private String phone;
@@ -17,6 +18,7 @@ public class MemberDTO {
 
     public static MemberDTO from(Member member) {
         return new MemberDTO(
+                member.getMemberId(),
                 member.getAccount().getUsername(),
                 member.getAccount().getFullName(),
                 member.getAccount().getPhone(),
