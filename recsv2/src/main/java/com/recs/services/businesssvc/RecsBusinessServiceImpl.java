@@ -260,4 +260,14 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                 .toList();
     }
 
+    @Override
+    public List<DealAssignMemberDTO> getAssignDealPageByMemberId(String memberId) {
+        return dealAssignMemberRepository.getByMemberMemberId(memberId)
+                .stream()
+                .map(DealAssignMemberDTO::from)
+                .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
+                .toList();
+    }
+    
+
 }

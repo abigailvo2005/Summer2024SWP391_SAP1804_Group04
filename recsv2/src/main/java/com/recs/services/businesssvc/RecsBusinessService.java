@@ -35,6 +35,8 @@ public interface RecsBusinessService {
 
     public List<DealAssignMember> getAllDealByMemberId(String memberId);
 
+    public List<DealAssignMemberDTO> getAssignDealPageByMemberId(String memberId);
+
     public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status);
 
     public void createAgencyRequest(AgencyRequestCreateDTO request, int accountId);
