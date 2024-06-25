@@ -1,5 +1,6 @@
 package com.recs.controller;
 
+import com.recs.models.dto.account.MemberDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
@@ -22,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -107,10 +109,13 @@ public class AgencyController {
                 .filter(row -> AgencyRequestStatus.ACCEPTED.getValue().equals(row.getStatus()))
                 .toList();
 
+        List<MemberDTO> members = accountService.getMembersByAgency(userInfo.getAgencyId());
+
         String currentPage = "assign-deal";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("handledList", handledList);
+        model.addAttribute("memberList", members);
         return "agency/assign-deal";
     }
 
@@ -121,5 +126,15 @@ public class AgencyController {
     ) {
         recsBusinessService.createAgencyRequest(request, userInfo.getAccountId());
         return "redirect:/agency/marketplace";
+    }
+
+    @PostMapping("/assign-deal")
+    public String createDeal(
+            @RequestBody String memberId,
+            @RequestBody String realEstateId,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        recsBusinessService.createDeal(realEstateId, memberId, userInfo.getAgencyId());
+        return "redirect:/agency";
     }
 }

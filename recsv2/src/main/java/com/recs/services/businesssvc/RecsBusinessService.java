@@ -54,4 +54,6 @@ public interface RecsBusinessService {
     public List<AgencyRequestDTO> getDashBoardAgencyRequest(String agencyId);
 
     public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId);
+
+    public void createDeal(String reId, String memberId, String agencyId);
 }

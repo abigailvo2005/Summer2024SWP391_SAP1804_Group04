@@ -21,6 +21,7 @@ import com.recs.models.enums.AgencyRequestStatus;
 import com.recs.models.enums.JobStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.repositories.account.AgencyRepository;
+import com.recs.repositories.account.MemberRepository;
 import com.recs.repositories.realestate.PaperWorksRepository;
 import com.recs.repositories.realestate.PropertyHouseRepository;
 import com.recs.repositories.realestate.PropertyLandRepository;
@@ -67,6 +68,9 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Autowired
     private PropertyHouseRepository propertyHouseRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public AssignJobStaff createAssignJobStaff(AssignJobStaff assignJobStaff) {
@@ -269,5 +273,17 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                 .toList();
     }
     
+    public void createDeal(String reId, String memberId, String agencyId) {
+        DealAssignMember dealAssignMember = new DealAssignMember(
+                UUID.randomUUID().toString(),
+                System.currentTimeMillis(),
+                1,
+                "Assigned",
+                agencyRepository.getReferenceById(agencyId),
+                memberRepository.getReferenceById(memberId),
+                realEstateService.getById(reId)
+        );
+        dealAssignMemberRepository.save(dealAssignMember);
+    }
 
 }
