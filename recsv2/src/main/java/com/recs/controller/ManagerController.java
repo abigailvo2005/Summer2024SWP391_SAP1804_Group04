@@ -51,15 +51,15 @@ public class ManagerController {
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        /* List<ValidationJobInfo> allJob = recsBusinessService.getListByManager(userInfo.getManagerId()); */
+        List<ValidationJobInfo> allJob = recsBusinessService.getListByManager(userInfo.getManagerId());
 
         List<ValidationJobInfo> validatingJobList = allJob.stream()
                 .filter(row -> JobStatus.ASSIGNED == row.getStatus())
                 .toList();
-
-        /* List<ValidationJobInfo> successJobList = allJob.stream()
-                .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
-                .toList(); */
+//
+//        List<ValidationJobInfo> successJobList = allJob.stream()
+//                .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
+//                .toList();
 
 
         /* List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId()); */
