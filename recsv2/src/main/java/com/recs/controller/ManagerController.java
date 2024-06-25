@@ -61,7 +61,6 @@ public class ManagerController {
 //                .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
 //                .toList();
 
-
         /* List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId()); */
         // Todo() tự nhét
         String currentPage = "dashboard";

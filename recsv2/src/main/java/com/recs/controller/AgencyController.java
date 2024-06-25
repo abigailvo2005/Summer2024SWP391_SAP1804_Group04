@@ -60,7 +60,7 @@ public class AgencyController {
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("requestList", requestList);
+        model.addAttribute("handleList", requestList);
         model.addAttribute("dealList", dealList);
         return "agency/dashboard-agency";
     }
