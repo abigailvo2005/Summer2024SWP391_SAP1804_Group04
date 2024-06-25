@@ -640,9 +640,9 @@
                 landSection.classList.remove("hidden");
                 houseSection.classList.add("hidden");
                 $("#popup-land-type").text(data.propertyLand.landType);
+                console.log(data.paperWorks);
                 $("#popup-land-pw").text("download this file to view paperwork");
                 document.querySelector("#popup-land-pw").setAttribute("href", data.paperWorks);
-                document.querySelector("#popup-land-pw").setAttribute('href', 'sample.pdf');
 
               } else {
                 houseSection.classList.remove("hidden");
