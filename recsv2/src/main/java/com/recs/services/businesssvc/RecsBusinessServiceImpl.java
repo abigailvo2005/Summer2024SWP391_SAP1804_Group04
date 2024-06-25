@@ -265,6 +265,14 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public List<DealAssignMemberDTO> getAssignDealPageByMemberId(String memberId) {
+        return dealAssignMemberRepository.getByMemberMemberId(memberId)
+                .stream()
+                .map(DealAssignMemberDTO::from)
+                .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
+                .toList();
+    }
+    
     public void createDeal(String reId, String memberId, String agencyId) {
         DealAssignMember dealAssignMember = new DealAssignMember(
                 UUID.randomUUID().toString(),

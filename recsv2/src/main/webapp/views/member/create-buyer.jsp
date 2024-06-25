@@ -30,25 +30,11 @@
       <!-- END INCLUDE SIDEBAR -->
 
       <main class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg">
-        <!-- START: INTRODUCTION HEADER -->
-        <section class="min-vh-100 mb-4">
-          <div class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg" style="
-            background-image: url(/template/assets/img/register-staff-bg.png);
-          ">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-sm-12 col-md-8 col-lg-6 text-center mx-auto">
-                  <h2 class="text-white mb-1 mt-sm-4">Create New Member Request</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- END: INTRODUCTION HEADER -->
+        
 
           <!-- START: LIST ASSIGNED DEAL -->
-        <div class="container">
-          <div class="row my-4 mt-lg-n8 mt-md-n8 mt-n7 mt-sm-n9">
+        <div class="container-fluid">
+          <div class="row my-4">
             <div class="mb-md-0 mb-4">
               <div class="card">
                 <div class="card-header pb-0">
@@ -114,7 +100,7 @@
                                 <div class="d-flex px-2 py-1 justify-content-center">
                                   <div class="d-flex flex-column justify-content-center">
                                     <p id="deal-price" class="mb-0 text-sm fw-bold text-dark">
-                                      ${deal.realEstate.price}
+                                      ${deal.realEstate.textPrice}
                                     </p>
                                   </div>
                                 </div>
@@ -160,7 +146,7 @@
         <!-- END LIST ASSIGNED DEAL -->
 
           <!-- START: FORM REQUEST BUYER-->
-          <div class="container">
+          <div class="container hidden" id="form-create-buyer-request">
             <div class="row">
               <div class="col-12 col-xl-11 mx-auto">
                 <div class="card z-index-0">
@@ -308,8 +294,14 @@
                         </li>
                       </div>
 
-                      <!-- image carousel -->
-                      <div id="image-section" class="carousel slide" data-bs-ride="carousel">
+                      <!-- image carousel & description -->
+                      <div class="row">
+                        <li class="list-group-item border-0 ps-0 text-sm col-5 d-flex">
+                          <strong class="text-dark">Description:</strong>
+                          <p id="popup-desc"></p>
+                        </li>
+                      
+                      <div id="image-section" class="carousel slide mb-3 col-7" data-bs-ride="carousel">
                         <div class="carousel-indicators"></div>
                         <div class="carousel-inner"></div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#image-section"
@@ -323,14 +315,10 @@
                           <span class="visually-hidden">Next</span>
                         </button>
                       </div>
+                    </div>
 
 
-                      <div class="row">
-                        <li class="list-group-item border-0 ps-0 text-sm col-12 d-flex">
-                          <strong class="text-dark">Description:</strong>
-                          <p id="popup-desc"></p>
-                        </li>
-                      </div>
+                      
 
                       <div class="row">
                         <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
@@ -392,6 +380,22 @@
                           </li>
                         </div>
                       </div>
+                      <div class="col-12 mt-1">
+                        <div class="h-100 container-fluid mt-0">
+                          <div class="row justify-content-center">
+                            <div class="col-auto">
+                              <button
+                                title="Validate Successfully. Added as Listing"
+                                type="button"
+                                onclick="showFormCreateBuyer();"
+                                class="btn btn-dark w-100 my-2 mb-2 btn-validation"
+                              >
+                                Create Buyer
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                       <!-- Table shows list of Buyer wants to handle this property -->
                       <div id="buyer-list" class="row hidden">
@@ -445,6 +449,14 @@
       <!-- END POPUP REQUESTS -->
 
       <script type="text/javascript">
+
+        //show form create buyer
+        function showFormCreateBuyer(){
+          var formCreatBuyer = document.getElementById("form-create-buyer-request");
+          formCreatBuyer.classList.remove("hidden");
+          closeDetail();
+        }
+
         //load deal ID to submit to controller
         function chooseRealEstate(dealID) {
           // Retrieve the "chosen-deal" input element
@@ -634,7 +646,6 @@
               $("#popup-area").text(data.area + " m²");
               $("#popup-price").text(data.textPrice + " VND");
               $("#popup-manager").text(data.managerInfo.username);
-              console.log(data.realEstateType);
 
               //only show land/house fields according to type
               if (data.realEstateType == 'Land') {
@@ -655,6 +666,43 @@
                 $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
                 $("#popup-bath").text(data.propertyHouse.bath + " rooms");
               }
+
+              //load images to carousel
+              const carouselInner = document.querySelector(".carousel-inner");
+              const carouselIndicators = document.querySelector(".carousel-indicators");
+
+              //Reset images to be shown everytime popup is clicked
+              carouselInner.innerHTML = "",
+              carouselIndicators.innerHTML = "";
+
+            data.propertyImagesList.forEach((image, index) => {
+              //create slide
+              const slideElement = document.createElement("div");
+              slideElement.classList.add("carousel-item");
+              if(index == 0) {
+                slideElement.classList.add("active");
+              }
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              imgElement.classList.add("d-block", "w-100", "rounded");
+              slideElement.appendChild(imgElement);
+              carouselInner.appendChild(slideElement);
+
+              //create indexes
+              const indicatorElement = document.createElement("button");
+              indicatorElement.type = "button";
+              indicatorElement.dataset.bsTarget = "#image-section";
+              indicatorElement.dataset.bsSlideTo = index;
+              if(index == 0) {
+                indicatorElement.classList.add("acticve");
+                indicatorElement.setAttribute("aria-current", "true");
+              }
+              indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+              carouselIndicators.appendChild(indicatorElement);
+
+            });
+
+            const carousel = new bootstrap.Carousel("#image-section");;
 
               //only show list of Buyer Profiles if status is has Buyer waiting for approval
               if (data.status.toLowerCase() == "buyer_approving") {
