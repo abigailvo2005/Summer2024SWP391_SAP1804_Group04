@@ -3,6 +3,8 @@ package com.recs.models.entities.recsbusiness;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.utils.RealEstateUtils;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

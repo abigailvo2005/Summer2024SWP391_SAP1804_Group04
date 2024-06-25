@@ -89,7 +89,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
-                            OWNER
+                            Deal ID
                           </th>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
@@ -147,7 +147,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     id="deal-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.createTimestamp}
+                                    ${listing.realEstate.name}
                                   </p>
                                 </div>
                               </div>
@@ -163,7 +163,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                     id="deal-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.agency}
+                                    ${listing.realEstate.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -176,7 +176,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                   id="deal-createDate"
                                   class="mb-0 text-sm fw-bold text-dark"
                                 >
-                                  ${listing.createTimestamp}
+                                  ${listing.createDate}
                                 </p>
                               </div>
                             </td>

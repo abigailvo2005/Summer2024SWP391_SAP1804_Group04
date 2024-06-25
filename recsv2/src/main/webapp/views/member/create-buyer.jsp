@@ -46,96 +46,9 @@
           </div>
           <!-- END: INTRODUCTION HEADER -->
 
-          <!-- START: FORM REQUEST BUYER-->
-          <div class="container">
-            <div class="row mt-lg-n8 mt-md-n8 mt-n7 mt-sm-n9">
-              <div class="col-12 col-xl-11 mx-auto">
-                <div class="card z-index-0">
-                  <div class="card-header text-center pt-4">
-                    <h5><b>Buyer Profile</b></h5>
-                  </div>
-
-                  <div class="card-body">
-                    <form role="form text-left" name="submit-buyer-profile"
-                      action="${pageContext.request.contextPath}/member/create-buyer" method="post">
-                      <div class="mb-3 row">
-                        <div class="col-sm-2">
-                          <label for="firstname">Fullname:</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <input type="text" id="fullname" name="firstname"
-                            class="form-control form-create-control col-10" placeholder="Enter fullname" required />
-                          <!-- ERROR MESSAGE BEING HIDDEN -->
-                          <p class="text-danger text-error mb-0 text-center pt-1 error-name hidden">
-                            name should only contains maximum 32 characters.
-                          </p>
-                        </div>
-
-                        <div class="col-sm-2">
-                          <label for="phone"> Phone:</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <input type="number" id="phone" name="phone" class="form-control form-create-control col-10"
-                            placeholder="Enter phone number" min="1" required />
-                        </div>
-                      </div>
-
-                      <div class="mb-3 row">
-                        <div class="col-sm-2">
-                          <label for="birthday">Introduction Message:</label>
-                        </div>
-                        <div class="col-sm-4">
-                          <textarea id="buyer-description" name="description"
-                            class="form-control form-create-control col-10" required></textarea>
-                        </div>
-                      </div>
-
-                      <!-- drop down chosen real estate to submit buyer to -->
-                      <div class="row mb-3">
-                        <div class="col-sm-2">
-                          <label>Deal Submitted To:</label>
-                        </div>
-
-                        <div class="col-sm-6">
-                          <select class="form-control form-create-control" onchange="chooseRealEstate(this.value)">
-                            <option class="fs-6" value="">Choose Deal</option>
-                            <c:forEach items="${dealList}" var="deal">
-                              <option class="fs-6" value="${deal.dealId}">
-                                ${deal.realEstate.name}
-                              </option>
-                            </c:forEach>
-                          </select>
-                        </div>
-                        <div class="col-sm-4">
-                          <input id="form-chosen-deal" type="text" name="dealId"
-                            class="form-control form-create-control col-10" hidden />
-                        </div>
-                      </div>
-
-                      <!-- submit button -->
-                      <div class="text-center container">
-                        <div class="row">
-                          <div class="col-sm-4"></div>
-                          <div class="col-sm-4">
-                            <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2"
-                              onclick="submitRegister()">
-                              Submit Request
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- END: FORM CREATE NEW MEMBER REQUEST -->
-
-        <!-- START: LIST ASSIGNED DEAL -->
-        <div class="container-fluid">
-          <div class="row my-4">
+          <!-- START: LIST ASSIGNED DEAL -->
+        <div class="container">
+          <div class="row my-4 mt-lg-n8 mt-md-n8 mt-n7 mt-sm-n9">
             <div class="mb-md-0 mb-4">
               <div class="card">
                 <div class="card-header pb-0">
@@ -245,6 +158,94 @@
           </div>
         </div>
         <!-- END LIST ASSIGNED DEAL -->
+
+          <!-- START: FORM REQUEST BUYER-->
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-xl-11 mx-auto">
+                <div class="card z-index-0">
+                  <div class="card-header text-center pt-4">
+                    <h5><b>Buyer Profile</b></h5>
+                  </div>
+
+                  <div class="card-body">
+                    <form role="form text-left" name="submit-buyer-profile"
+                      action="${pageContext.request.contextPath}/member/create-buyer" method="post">
+                      <div class="mb-3 row">
+                        <div class="col-sm-2">
+                          <label for="firstname">Fullname:</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <input type="text" id="fullname" name="firstname"
+                            class="form-control form-create-control col-10" placeholder="Enter fullname" required />
+                          <!-- ERROR MESSAGE BEING HIDDEN -->
+                          <p class="text-danger text-error mb-0 text-center pt-1 error-name hidden">
+                            name should only contains maximum 32 characters.
+                          </p>
+                        </div>
+
+                        <div class="col-sm-2">
+                          <label for="phone"> Phone:</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <input type="number" id="phone" name="phone" class="form-control form-create-control col-10"
+                            placeholder="Enter phone number" min="1" required />
+                        </div>
+                      </div>
+
+                      <div class="mb-3 row">
+                        <div class="col-sm-2">
+                          <label for="birthday">Introduction Message:</label>
+                        </div>
+                        <div class="col-sm-4">
+                          <textarea id="buyer-description" name="description"
+                            class="form-control form-create-control col-10" required></textarea>
+                        </div>
+                      </div>
+
+                      <!-- drop down chosen real estate to submit buyer to -->
+                      <div class="row mb-3">
+                        <div class="col-sm-2">
+                          <label>Deal Submitted To:</label>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <select class="form-control form-create-control" onchange="chooseRealEstate(this.value)">
+                            <option class="fs-6" value="">Choose Deal</option>
+                            <c:forEach items="${dealList}" var="deal">
+                              <option class="fs-6" value="${deal.dealId}">
+                                ${deal.realEstate.name}
+                              </option>
+                            </c:forEach>
+                          </select>
+                        </div>
+                        <div class="col-sm-4">
+                          <input id="form-chosen-deal" type="text" name="dealId"
+                            class="form-control form-create-control col-10" hidden />
+                        </div>
+                      </div>
+
+                      <!-- submit button -->
+                      <div class="text-center container">
+                        <div class="row">
+                          <div class="col-sm-4"></div>
+                          <div class="col-sm-4">
+                            <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2"
+                              onclick="submitRegister()">
+                              Submit Request
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- END: FORM CREATE NEW MEMBER REQUEST -->
+
 
         <!-- START FOOTER-->
         <footer class="footer pt-3">
@@ -642,7 +643,7 @@
                 $("#popup-land-type").text(data.propertyLand.landType);
                 console.log(data.paperWorks);
                 $("#popup-land-pw").text("download this file to view paperwork");
-                document.querySelector("#popup-land-pw").setAttribute("href", data.paperWorks);
+                document.querySelector("#popup-land-pw").setAttribute('href', data.paperWorks);
 
               } else {
                 houseSection.classList.remove("hidden");
