@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.services.realestaesvc.RealEstateService;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.recs.models.dto.account.AgencyDTO;
 import com.recs.models.dto.realestate.RealEstateDTO;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
+import com.recs.utils.RealEstateUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,16 +17,19 @@ import lombok.NoArgsConstructor;
 public class AgencyRequestDTO {
     private String requestId;
     private long createTimestamp;
+    private String createDate;
     private String status;
     private String realEstateId;
     private String message;
     private AgencyDTO agency;
     private RealEstateDTO realEstate;
-
+    
+    
     public static AgencyRequestDTO from(AgencyRequest request) {
         return new AgencyRequestDTO(
                 request.getRequestId(),
                 request.getCreateTimestamp(),
+                RealEstateUtils.formatDate(request.getCreateTimestamp()),
                 request.getStatus(),
                 request.getRealEstate().getRealEstateId(),
                 request.getMessage(),

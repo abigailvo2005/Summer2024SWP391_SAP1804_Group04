@@ -1,5 +1,6 @@
 package com.recs.repositories.recsbusiness;
 
+import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 

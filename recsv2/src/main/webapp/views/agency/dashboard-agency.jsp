@@ -125,7 +125,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.requestId}
+                                    ${listing.realEstate.name}
                                   </p>
                                 </div>
                               </div>
@@ -141,7 +141,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.createTimestamp}
+                                    ${listing.realEstate.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -157,7 +157,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="listing-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${listing.agency}
+                                    ${listing.realEstate.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -287,7 +287,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${deal.dealId}
+                                    ${deal.realEstate.name}
                                   </p>
                                 </div>
                               </div>
@@ -303,7 +303,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${deal.createTimestamp}
+                                    ${deal.realEstate.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -319,7 +319,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${deal.priority}
+                                    ${deal.realEstate.realEstateType}
                                   </p>
                                 </div>
                               </div>
