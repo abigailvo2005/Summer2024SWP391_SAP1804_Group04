@@ -1,5 +1,6 @@
 package com.recs.controller;
 
+import com.recs.models.dto.account.MemberDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
@@ -107,10 +108,13 @@ public class AgencyController {
                 .filter(row -> AgencyRequestStatus.ACCEPTED.getValue().equals(row.getStatus()))
                 .toList();
 
+        List<MemberDTO> members = accountService.getMembersByAgency(userInfo.getAgencyId());
+
         String currentPage = "assign-deal";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("handledList", handledList);
+        model.addAttribute("memberList", members);
         return "agency/assign-deal";
     }
 

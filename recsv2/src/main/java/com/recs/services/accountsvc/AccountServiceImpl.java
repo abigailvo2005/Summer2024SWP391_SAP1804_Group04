@@ -1,5 +1,6 @@
 package com.recs.services.accountsvc;
 
+import com.recs.models.dto.account.MemberDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
@@ -230,5 +231,12 @@ public class AccountServiceImpl implements AccountService {
         List<UserInfo> staffList = list.stream().map(staff -> getStaffToUserInfo(staff.getStaffId())).toList();
         System.out.println("List staff info by manager " + managerId + " size " + staffList.size());
         return staffList;
+    }
+
+    @Override
+    public List<MemberDTO> getMembersByAgency(String agencyId) {
+        return memberRepository.findAllByAgencyAgencyId(agencyId)
+                .stream().map(MemberDTO::from)
+                .toList();
     }
 }
