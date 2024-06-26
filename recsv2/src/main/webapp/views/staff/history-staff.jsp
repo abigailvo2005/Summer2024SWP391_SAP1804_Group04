@@ -46,7 +46,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-    <!--Start List History Job assigned-->
+    <!--Start List History Job assigned validate success-->
     <div class="container-fluid">
         <div class="row my-4">
           <div class="mb-md-0 mb-4">
@@ -54,11 +54,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>History Properties Validated</h6>
+                    <h6>History Properties Validated Success</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-regular fa-comment-dots"></i>
                       <span class="font-weight-bold ms-1"
-                        >${reqList.size()} validated(s)</span
+                        >${listSuccess.size()} validated(s)</span
                       >
                       in total
                     </p>
@@ -86,11 +86,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <table class="table align-items-center mb-0">
                       <thead>
                         <tr>
-                          <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            ReqID
-                          </th>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
@@ -120,21 +115,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${reqList}" var="req">
+                        <c:forEach items="${listSuccess}" var="success">
                           <tr class="validate-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.id}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -144,7 +126,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                     id="req-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.name}
+                                    ${success.realEstateInfo.name}
                                   </p>
                                 </div>
                               </div>
@@ -157,7 +139,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.type}
+                                    ${success.realEstateInfo.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -170,7 +152,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${req.dateCreated}
+                                    ${success.realEstateInfo.createDate}
                                   </p>
                                 </div>
                               </div>
@@ -183,7 +165,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${req.status}
+                                    ${success.status.value}
                                   </p>
                                 </div>
                               </div>
@@ -197,7 +179,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${req.id}')"
+                                    onclick="viewDetail('${success.jobId}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -214,7 +196,159 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
-      <!--End History List Job Assigned-->
+      <!--End History List Job Assigned Validated Success-->
+
+      <!--Start List History Job assigned validate fail-->
+    <div class="container-fluid">
+      <div class="row my-4">
+        <div class="mb-md-0 mb-4">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-8 col-9">
+                  <h6>History Properties Validated fail</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa-regular fa-comment-dots"></i>
+                    <span class="font-weight-bold ms-1"
+                      >${listFail.size()} validated(s)</span
+                    >
+                    in total
+                  </p>
+                </div>
+                <div
+                  class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                >
+                  <div class="input-group">
+                    <span class="input-group-text text-body"
+                      ><i class="fas fa-search" aria-hidden="true"></i
+                    ></span>
+                    <input
+                      id="searchInput"
+                      type="text"
+                      class="form-control"
+                      placeholder="Type property name here..."
+                      onkeyup="searchTable()"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                        >
+                          PROPERTY NAME
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          TYPE
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        >
+                          DATE CREATED
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          STATUS
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          VIEW DETAILS
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <c:forEach items="${listFail}" var="fail">
+                        <tr class="validate-row">
+                          <td>
+                            <div class="d-flex justify-content-start">
+                              <div
+                                class="d-flex flex-column justify-content-start"
+                              >
+                                <p
+                                  id="req-name"
+                                  class="mb-0 text-sm fw-bold text-dark"
+                                >
+                                  ${fail.realEstateInfo.name}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  ${fail.realEstateInfo.realEstateType}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  ${fail.realEstateInfo.createDate}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-muted">
+                                  ${fail.status.value}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <a
+                                  class="show-detail"
+                                  onclick="viewDetail('${fail.jobId}')"
+                                  ><i class="fa-solid fa-eye"></i
+                                ></a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End History List Job Assigned Validated fail-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">

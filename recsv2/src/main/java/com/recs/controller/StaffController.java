@@ -69,10 +69,14 @@ public class StaffController {
     }
 
     @GetMapping({ "/history" })
-    public String historyView(Model model, Authentication authentication) {
-        String name = authentication.getName();
+    public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<ValidationJobInfo> listingListValidateSuccess = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
+        List<ValidationJobInfo> listingListValidateFail = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.FAIL.getValue());
+        String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
+        model.addAttribute("listSuccess", listingListValidateSuccess);
+        model.addAttribute("listFail", listingListValidateFail);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "staff/history-staff";
