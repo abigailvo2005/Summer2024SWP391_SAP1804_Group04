@@ -1,7 +1,9 @@
 package com.recs.controller;
 
+import java.util.Comparator;
 import java.util.List;
 
+import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import com.recs.services.businesssvc.RecsBusinessService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,11 +56,14 @@ public class MemberController {
 
         List<DealAssignMember> dealAssignMemberList = recsBusinessService.getAllDealByMemberId(userInfo.getMemberId());
 //        System.out.println(dealAssignMemberList);
+        List<BuyerRequestDTO> allBuyerRequests = recsBusinessService.getBuyerRequestByMember(userInfo.getMemberId())
+                .stream().sorted(Comparator.comparing(BuyerRequestDTO::getStatus))
+                .toList();
+        System.out.println("buyer request list: "+ allBuyerRequests);
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("dealList", dealAssignMemberList);
-        // return "seller/dashboard-seller";
         return "member/dashboard-member";
     }
 

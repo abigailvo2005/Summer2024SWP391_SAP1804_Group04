@@ -4,6 +4,8 @@ package com.recs.services.businesssvc;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestCreateDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
@@ -56,4 +58,8 @@ public interface RecsBusinessService {
     public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId);
 
     public void createDeal(String reId, String memberId, String agencyId);
+
+    public void createBuyerRequest(BuyerRequestCreateDTO request);
+
+    public List<BuyerRequestDTO> getBuyerRequestByMember(String memberId);
 }

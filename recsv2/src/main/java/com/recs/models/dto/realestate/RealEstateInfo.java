@@ -3,6 +3,7 @@ package com.recs.models.dto.realestate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.entities.realestate.PropertyHouse;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
@@ -44,6 +45,7 @@ public class RealEstateInfo {
     private String paperWorks;
     private String notes;
     private List<AgencyRequestDTO> agencyRequests;
+    private List<BuyerRequestDTO> buyerRequests;
 
     private RealEstateInfo(Builder builder) {
         this.realEstateId = builder.realEstateId;
@@ -68,6 +70,7 @@ public class RealEstateInfo {
         this.paperWorks = builder.paperWorks;
         this.notes = builder.notes;
         this.agencyRequests = builder.agencyRequests;
+        this.buyerRequests = builder.buyerRequests;
     }
 
     public static class Builder {
@@ -95,6 +98,7 @@ public class RealEstateInfo {
         private String paperWorks;
         private String notes;
         private List<AgencyRequestDTO> agencyRequests;
+        private List<BuyerRequestDTO> buyerRequests;
 
         public Builder setRealEstateId(String realEstateId) {
             this.realEstateId = realEstateId;
@@ -206,6 +210,11 @@ public class RealEstateInfo {
             return this;
         }
 
+        public Builder setBuyerRequest(List<BuyerRequestDTO> buyerRequests) {
+            this.buyerRequests = buyerRequests;
+            return this;
+        }
+
         public RealEstateInfo build() {
             return new RealEstateInfo(this);
         }
@@ -229,6 +238,7 @@ public class RealEstateInfo {
                 .setUpdatedDate(RealEstateUtils.formatDate(realestate.getUpdateTimestamp()))
                 .setNotes(realestate.getNoteMsg())
                 .setAgencyRequests(realestate.getAgencyRequests().stream().map(AgencyRequestDTO::from).toList())
+                .setBuyerRequest(realestate.getBuyerRequests().stream().map(BuyerRequestDTO::from).toList())
                 .build();
     }
 
@@ -266,7 +276,8 @@ public class RealEstateInfo {
                 .setPropertyLand(this.propertyLand)
                 .setPropertyImagesList(this.propertyImagesList)
                 .setPaperWorks(this.paperWorks)
-                .setNotes(this.notes);
+                .setNotes(this.notes)
+                .setBuyerRequest(this.buyerRequests);
     }
 
 }

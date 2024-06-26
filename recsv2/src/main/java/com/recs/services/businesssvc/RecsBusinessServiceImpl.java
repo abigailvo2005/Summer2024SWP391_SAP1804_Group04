@@ -6,18 +6,22 @@ import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestCreateDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Agency;
-import com.recs.models.entities.realestate.PaperWorks;
 import com.recs.models.entities.realestate.PropertyHouse;
 import com.recs.models.entities.realestate.PropertyLand;
 import com.recs.models.entities.realestate.RealEstate;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
+import com.recs.models.entities.recsbusiness.BuyerRequest;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import com.recs.models.enums.AgencyRequestStatus;
+import com.recs.models.enums.BuyerRequestStatus;
+import com.recs.models.enums.DealAssignMemberStatus;
 import com.recs.models.enums.JobStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.repositories.account.AgencyRepository;
@@ -26,11 +30,11 @@ import com.recs.repositories.realestate.PaperWorksRepository;
 import com.recs.repositories.realestate.PropertyHouseRepository;
 import com.recs.repositories.realestate.PropertyLandRepository;
 import com.recs.repositories.recsbusiness.AgencyRequestRepository;
+import com.recs.repositories.recsbusiness.BuyerRequestRepository;
 import com.recs.repositories.recsbusiness.DealAssignMemberRepository;
 import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +75,9 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private BuyerRequestRepository buyerRequestRepository;
 
     @Override
     public AssignJobStaff createAssignJobStaff(AssignJobStaff assignJobStaff) {
@@ -274,16 +281,46 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
     
     public void createDeal(String reId, String memberId, String agencyId) {
+
+        RealEstate realEstate = realEstateService.getById(reId);
+        realEstate.setStatus(RealEstateStatus.MARKETED.getValue());
+        realEstateService.update(realEstate);
+
         DealAssignMember dealAssignMember = new DealAssignMember(
                 UUID.randomUUID().toString(),
                 System.currentTimeMillis(),
                 1,
-                "Assigned",
+                DealAssignMemberStatus.ASSIGNED.getValue(),
                 agencyRepository.getReferenceById(agencyId),
                 memberRepository.getReferenceById(memberId),
-                realEstateService.getById(reId)
+                realEstate
         );
         dealAssignMemberRepository.save(dealAssignMember);
+    }
+
+    @Override
+    public void createBuyerRequest(BuyerRequestCreateDTO request) {
+        DealAssignMember deal = dealAssignMemberRepository.getReferenceById(request.getDealId());
+        RealEstate realEstate = deal.getRealEstate();
+        deal.setStatus(DealAssignMemberStatus.REVIEWING.getValue());
+        realEstate.setStatus(RealEstateStatus.BUYER_APPROVING.getValue());
+        BuyerRequest buyerRequest = new BuyerRequest(
+                UUID.randomUUID().toString(),
+                request.getFullName(),
+                request.getPhoneNumber(),
+                request.getMessage(),
+                System.currentTimeMillis(),
+                BuyerRequestStatus.REVIEWING.getValue(),
+                deal.getMember(),
+                realEstate,
+                deal
+        );
+    }
+
+    @Override
+    public List<BuyerRequestDTO> getBuyerRequestByMember(String memberId) {
+        List<BuyerRequest> buyerRequests = buyerRequestRepository.findAllByMemberMemberId(memberId);
+        return buyerRequests.stream().map(BuyerRequestDTO::from).toList();
     }
 
 }
