@@ -4,6 +4,7 @@ import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.entities.account.Manager;
 import com.recs.models.entities.realestate.PaperWorks;
 import com.recs.models.entities.realestate.PropertyHouse;
@@ -19,6 +20,7 @@ import com.recs.repositories.realestate.PropertyHouseRepository;
 import com.recs.repositories.realestate.PropertyImagesRepository;
 import com.recs.repositories.realestate.PropertyLandRepository;
 import com.recs.repositories.realestate.RealEstateRepository;
+import com.recs.repositories.recsbusiness.BuyerRequestRepository;
 import com.recs.services.accountsvc.AccountService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,7 @@ public class RealEstateServiceImpl implements RealEstateService{
     private PaperWorksRepository paperWorksRepository;
     private AccountService accountService;
     private ManagerRepository managerRepository;
+    private BuyerRequestRepository buyerRequestRepository;
 
     @Autowired
     public RealEstateServiceImpl(
@@ -50,7 +53,8 @@ public class RealEstateServiceImpl implements RealEstateService{
             PropertyImagesRepository propertyImagesRepository,
             PaperWorksRepository paperWorksRepository,
             AccountService accountService,
-            ManagerRepository managerRepository
+            ManagerRepository managerRepository,
+            BuyerRequestRepository buyerRequestRepository
     ) {
         this.realEstateRepository = realEstateRepository;
         this.propertyHouseRepository = propertyHouseRepository;
@@ -59,6 +63,7 @@ public class RealEstateServiceImpl implements RealEstateService{
         this.paperWorksRepository = paperWorksRepository;
         this.accountService = accountService;
         this.managerRepository = managerRepository;
+        this.buyerRequestRepository = buyerRequestRepository;
     }
 
     @Override
@@ -155,6 +160,9 @@ public class RealEstateServiceImpl implements RealEstateService{
             info.setSellerInfo(seller);
         }
 
+        List<BuyerRequestDTO> buyerRequests = buyerRequestRepository.findAllByRealEstateRealEstateId(realEstateId)
+                .stream().map(BuyerRequestDTO::from).toList();
+
         List<PropertyImages> propertyImages = propertyImagesRepository.findAllByRealEstateId(realEstateId);
 
         List<String> images = propertyImages != null ? propertyImages.stream()
@@ -173,6 +181,7 @@ public class RealEstateServiceImpl implements RealEstateService{
                                 .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
                                 .toList()
                 )
+                .setBuyerRequest(buyerRequests)
                 .build();
     }
 
@@ -293,6 +302,7 @@ public class RealEstateServiceImpl implements RealEstateService{
                 sellerId,
                 getSuitableManager(),
                 StringUtils.EMPTY,
+                List.of(),
                 List.of(),
                 List.of()
                 );

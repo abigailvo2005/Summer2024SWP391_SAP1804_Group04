@@ -1,6 +1,7 @@
 package com.recs.models.entities.realestate;
 
 import com.recs.models.entities.recsbusiness.AgencyRequest;
+import com.recs.models.entities.recsbusiness.BuyerRequest;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"buyerRequests"})
 public class RealEstate {
     @Id
     @Column(name = "realEstateId")
@@ -73,4 +76,7 @@ public class RealEstate {
     @OneToMany
     @JoinColumn(name = "realEstateId")
     private List<PropertyImages> images = List.of();
+
+    @OneToMany(mappedBy = "realEstate")
+    private List<BuyerRequest> buyerRequests = List.of();
 }
