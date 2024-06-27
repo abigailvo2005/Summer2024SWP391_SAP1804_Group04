@@ -57,7 +57,8 @@ public class MemberController {
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        List<DealAssignMember> dealAssignMemberList = recsBusinessService.getAllDealByMemberId(userInfo.getMemberId());
+        List<DealAssignMemberDTO> dealAssignMemberList = recsBusinessService.getAllDealByMemberId(userInfo.getMemberId())
+                .stream().map(DealAssignMemberDTO::from).toList();
 //        System.out.println(dealAssignMemberList);
         List<BuyerRequestDTO> allBuyerRequests = recsBusinessService.getBuyerRequestByMember(userInfo.getMemberId())
                 .stream().sorted(Comparator.comparing(BuyerRequestDTO::getStatus))
