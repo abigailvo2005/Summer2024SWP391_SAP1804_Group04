@@ -315,6 +315,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                 realEstate,
                 deal
         );
+        buyerRequestRepository.save(buyerRequest);
     }
 
     @Override
