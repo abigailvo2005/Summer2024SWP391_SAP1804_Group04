@@ -187,13 +187,13 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                <p
-                                id="prop-status"
-                                class="mb-0 text-sm fw-bold status-color"
-                                value="${req.status.value}"
-                              >
-                                ${req.status.value}
-                              </p>
+                                  <p
+                                    id="prop-status"
+                                    class="mb-0 text-sm fw-bold status-color"
+                                    value="${req.status.value}"
+                                  >
+                                    ${req.status.value}
+                                  </p>
                                 </div>
                               </div>
                             </td>
@@ -268,14 +268,14 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Description:</label></div>
                     <div class="col-sm-10">
-                      <input
+                      <textarea
                         id="form-description"
                         name="description"
                         type="text"
                         class="form-control form-create-control"
                         rows="5"
                         disabled
-                      />
+                      ></textarea>
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -698,7 +698,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           type: "GET",
           success: function (data) {
             // Update popup với information chosen Property
-            $("#owner").text(data.sellerInfo.username);
+            $("#owner").text(data.sellerInfo.fullName);
             $("#popup-name").text(data.name);
             $("#popup-status").text(data.status);
             $("#popup-desc").text(data.description);
@@ -797,9 +797,8 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         document
           .querySelector("#reID")
           .setAttribute("value", chosenData.realEstateId);
-        document
-          .querySelector("#form-description")
-          .setAttribute("value", chosenData.description);
+        document.querySelector("#form-description").value =
+          chosenData.description;
         document
           .querySelector("#form-propertyType")
           .setAttribute("value", chosenData.realEstateType);

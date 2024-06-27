@@ -292,68 +292,58 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
                     <div class="row">
-                      <form id="agency-profile-form" action="${pageContext.request.contextPath}/agency/agency-request" method="post" class="hidden">
+                      <form
+                        id="agency-profile-form"
+                        action="${pageContext.request.contextPath}/agency/agency-request"
+                        method="post"
+                        class="hidden"
+                      >
                         <div class="row d-flex justify-content-center mb-2">
                           <div class="col-12 text-center">
                             <strong>Agency Profile</strong>
                           </div>
                         </div>
                         <input
-                          type="hidden"
+                          type="hidden" 
                           id="realEstateId"
                           name="realEstateId"
                         />
                         <div class="row mb-3">
                           <div class="col-6">
                             <label for="agency-name" class="form-label"
-                              >Agency Name</label
+                              >Agency Name: ${name}</label
                             >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="agency-name"
-                              value="${name}"
-                              readonly
-                            />
                           </div>
                           <div class="col-6">
-                            <label for="agency-contact" class="form-label"
-                              >Company</label
+                            <label for="agency-company" class="form-label"
+                              >Company: ${agency.company}</label
                             >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="agency-company"
-                              value="${agency.company}"
-                              readonly
-                            />
+                          </div>
+                        </div>
+
+                        <div class="row mb-3">
+                          <div class="col-6">
+                            <label for="agency-phone" class="form-label"
+                              >Phone Number: ${agency.phone}</label
+                            >
+                          </div>
+                          <div class="col-6">
+                            <label for="agency-email" class="form-label"
+                              >Email: ${agency.email}</label
+                            >
                           </div>
                         </div>
 
                         <div class="row mb-3">
                           <div class="col-6">
                             <label for="agency-name" class="form-label"
-                              >Experienced Years</label
+                              >Experienced Years: ${agency.agencyYearsOfExperience} years</label
                             >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="agency-experience"
-                              value="${agency.yearsOfExperience}"
-                              readonly
-                            />
                           </div>
                           <div class="col-6">
                             <label for="agency-contact" class="form-label"
-                              >Completed Projects</label
+                              >Completed Projects: ${agency.completedProject} successfully connected properties.</label
                             >
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="agency-projects"
-                              value="${agency.completedProject}"
-                              readonly
-                            />
                           </div>
                         </div>
                         <div class="row mb-3">
@@ -455,7 +445,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
 
             //load real estate ID for submitting agency request
-            document.querySelector("#realEstateId").setAttribute("value", data.realEstateId);
+            document
+              .querySelector("#realEstateId")
+              .setAttribute("value", data.realEstateId);
 
             //load images to carousel
             const carouselInner = document.querySelector(".carousel-inner");
@@ -476,7 +468,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               }
               const imgElement = document.createElement("img");
               imgElement.src = image;
-              imgElement.classList.add("d-block", "w-100", "rounded", "marketplace");
+              imgElement.classList.add(
+                "d-block",
+                "w-100",
+                "rounded",
+                "marketplace"
+              );
               slideElement.appendChild(imgElement);
               carouselInner.appendChild(slideElement);
 
@@ -514,7 +511,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         hideAgencyForm();
 
         document.querySelector("#agency-profile-form").submit();
-
       }
 
       /* Show form to submit agency profile to seller */

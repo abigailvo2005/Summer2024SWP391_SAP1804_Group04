@@ -3769,14 +3769,35 @@ textarea.form-control.is-invalid {
 .table-responsive > .table {
   margin-bottom: 0;
 }
-#agency-list .table-responsive td.description{
-  white-space: normal;
-  word-wrap: break-word;
-  width: 60% !important;
+
+.confirm-button {
+  margin-right: 8px;
+  width: 100px; /* Giảm width lại chút */
+  border: none;
+  background-color: #4CAF50; /* Màu xanh lá cây */
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 12px 16px; /* Tăng padding chiều cao */
+}
+
+.cancel-button {
+  margin-left: 8px;
+  width: 100px;
+  border: none;
+  background-color: #d33;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 12px 16px; /* Tăng padding chiều cao */
 }
 
 #agency-list .table-responsive th,
-#agency-list .table-responsive td:not(.description) {
+#agency-list .table-responsive td:not(.description),
+#accepted-agency-list .table-responsive th,
+#accepted-agency-list .table-responsive td:not(.description) {
   width: 8% !important;
   text-align: center;
 }

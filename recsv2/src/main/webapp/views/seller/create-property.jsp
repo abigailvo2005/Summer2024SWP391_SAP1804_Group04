@@ -108,7 +108,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <p
                           class="error-name text-danger text-error mb-0 text-center pt-1 hidden"
                         >
-                          name should only contains maximum 32 characters.
+                          name should only contains maximum 64 characters.
                         </p>
                       </div>
                     </div>
@@ -512,64 +512,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             });
         }
       }
-
-      /* Process data & redirect back to dashboard after clicked submit */
-      function submitRequest(event) {
-        event.preventDefault(); //Stop form from default submitting
-
-        // Check if all fields have values
-        if (document.querySelector("form").checkValidity()) {
-          const propertyNameInput = document.querySelector("#prop-name");
-          const nameError = document.querySelector(".error-name");
-          const area = document.getElementById("area").value;
-          const price = document.getElementById("price").value;
-          const areaNumber = parseFloat(area);
-          const priceNumber = parseFloat(price);
-          const minPrice = areaNumber * 20000000;
-          const maxPrice = areaNumber * 50000000;
-          // No errors on start up
-          nameError.classList.add("hidden"); //clear all errors first
-
-          if (priceNumber < minPrice || priceNumber > maxPrice) {
-            Swal.fire({
-              title: "Are you sure about this price?",
-              text: "You can change a more suitable price to this price!",
-              icon: "question",
-              showCancelButton: true,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Yes"
-            }).then((result) => {
-              if (!result.isConfirmed) {
-                Swal.fire({
-                  title: "You can change other price",
-                  text: "Please, Input more suitable price!",
-                  icon: "info"
-                });
-              document.getElementById("price").value = "";
-              }
-              else {
-                if (propertyNameInput.value.length > 32) {
-                  //Check if property's name is longer than 32 characters
-                  nameError.classList.remove("hidden");
-                  return;
-                }
-
-                // No errors: Shows message "Successfully requested" & redirect back to dashboard
-                setTimeout(function () {
-                  alert("Successfully requested");
-                  document.querySelector("form").submit();
-                }, 500);
-              }
-            });
-            return;
-          }
-        } else {
-          // If some fields are empty, show default errors
-          document.querySelector("form").reportValidity();
-        }
-      }
-      
     </script>
   </body>
 </html>

@@ -691,6 +691,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <tr>
                             <th class="text-center">Name</th>
                             <th class="text-center">Phone</th>
+                            <th class="text-center">Email</th>
                             <th class="text-center">Company</th>
                             <th class="text-center">Years of Experience</th>
                             <th class="text-center">Completed Projects</th>
@@ -712,6 +713,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <th class="text-center">Select</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Phone</th>
+                            <th class="text-center">Email</th>
                             <th class="text-center">Company</th>
                             <th class="text-center">Years of Experience</th>
                             <th class="text-center">Completed Projects</th>
@@ -866,7 +868,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         <!-- Header -->
         <div class="popup-header row mx-1">
           <div class="col-11">
-            <h4 class="card-header font-weight-bolder mb-0">Message</h4>
+            <h4
+              id="small-popup-header"
+              class="card-header font-weight-bolder mb-0"
+            >
+            </h4>
           </div>
           <div class="col-1">
             <i
@@ -881,7 +887,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           <div class="col-12 mt-sm-1">
             <div class="card h-100">
               <div class="card-body p-3">
-                <p id="request-message"></p>
+                <p id="request-detail"></p>
               </div>
             </div>
           </div>
@@ -1135,7 +1141,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               unqualified.classList.add("hidden");
               pen.classList.add("hidden");
             }
-            
 
             //only show land/house fields according to type
             if (data.realEstateType == "Land") {
@@ -1194,10 +1199,26 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 row.append($("<td>").append(checkbox));
                 row.append($("<td>").text(request.agency.fullName));
                 row.append($("<td>").text(request.agency.phone));
+                row.append($("<td>").text(request.agency.email));
                 row.append($("<td>").text(request.agency.company));
                 row.append($("<td>").text(request.agency.yearsOfExperience));
                 row.append($("<td>").text(request.agency.completedProject));
-                row.append($("<td>").text(request.agency.description));
+                //row.append($("<td>").text(request.agency.description));
+
+                //part to view description from agency seperately
+                const viewDescriptionBtn = $("<td>")
+                  .append(
+                    $("<button>")
+                      .addClass("btn btn-sm view-message-btn")
+                      .text("View")
+                      .attr("data-description", request.agency.description)
+                  )
+                  .addClass("text-center");
+
+                viewDescriptionBtn.on("click", function () {
+                  showMessage(request, "desc");
+                });
+                row.append(viewDescriptionBtn);
 
                 //part to view introduction message from agency seperately
                 const viewMessageBtn = $("<td>")
@@ -1210,13 +1231,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   .addClass("text-center");
 
                 viewMessageBtn.on("click", function () {
-                  showMessage(request);
+                  showMessage(request, "message");
                 });
                 row.append(viewMessageBtn);
 
+                /* 
                 function closePopup(popupId) {
                   $(`#${popupId}`).addClass("hidden");
-                }
+                } */
 
                 agencyContainer.append(row);
               }
@@ -1235,14 +1257,29 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 //information of agencies to submit back to controller
                 row.append($("<td>").text(request.agency.fullName));
                 row.append($("<td>").text(request.agency.phone));
+                row.append($("<td>").text(request.agency.email));
                 row.append($("<td>").text(request.agency.company));
                 row.append($("<td>").text(request.agency.yearsOfExperience));
                 row.append($("<td>").text(request.agency.completedProject));
-                row.append($("<td>").text(request.agency.description));
 
-                function closePopup(popupId) {
+                  //part to view description from agency seperately
+                const viewDescriptionBtn = $("<td>")
+                  .append(
+                    $("<button>")
+                      .addClass("btn btn-sm view-message-btn")
+                      .text("View")
+                      .attr("data-description", request.agency.description)
+                  )
+                  .addClass("text-center");
+
+                viewDescriptionBtn.on("click", function () {
+                  showMessage(request, "desc");
+                });
+                row.append(viewDescriptionBtn);
+
+               /*  function closePopup(popupId) {
                   $(`#${popupId}`).addClass("hidden");
-                }
+                } */
 
                 chosenAgencyContainer.append(row);
               }
@@ -1323,16 +1360,25 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         });
       }
 
-      //Show agency request message everytime button is clicked
-      function showMessage(request) {
+      //Show agency request message or agency description everytime button is clicked
+      function showMessage(request, type) {
         //first clear popup
-        $("#request-message").text("");
+        $("#request-detail").text("");
+        var target = null;
+
+        if (type == "message") {
+          target = request.message;
+          $("#small-popup-header").text("Message");
+        } else {
+          target = request.agency.description;
+          $("#small-popup-header").text("Agency Description");
+        }
 
         //load message to popup
-        if (!request.message) {
-          $("#request-message").text("No messages being sent.");
+        if (!target) {
+          $("#request-detail").text("No messages being sent.");
         } else {
-          $("#request-message").text(request.message);
+          $("#request-detail").html(target.replace(/\r\n/g, "<br>"));
         }
         $("#popup-message").removeClass("hidden");
       }

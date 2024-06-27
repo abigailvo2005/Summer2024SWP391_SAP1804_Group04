@@ -46,7 +46,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <main
       class="no-dash main-content position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-      <!-- START: DEAL LITSING AVAILABLE -->
+      <!-- START: DEAL LISTING AVAILABLE -->
       <div class="container-fluid">
         <div class="row my-4">
           <div class="mb-md-0 mb-4">
@@ -54,11 +54,11 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>Deal Listing Available</h6>
+                    <h6>Handled Listing Available</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${handledList.size()} request(s)</span
+                        >${handledList.size()} listing(s)</span
                       >
                       in total
                     </p>
@@ -87,11 +87,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <thead>
                         <tr>
                           <th
-                            class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
-                            Deal ID
-                          </th>
-                          <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
                             PROPERTY NAME
@@ -104,7 +99,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                           >
-                            DATE CREATED
+                            DATE HANDLED
                           </th>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
@@ -122,22 +117,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       <tbody>
                         <c:forEach items="${handledList}" var="listing">
                           <tr class="deal-row">
-                            <td class="align-middle text-center text-sm">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    id="deal-id"
-                                    class="mb-0 text-sm fw-bold text-dark"
-                                  >
-                                    ${listing.requestId}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -453,7 +432,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   action="${pageContext.request.contextPath}/agency/assign-deal"
                   method="post"
                 >
-                  <input id="reID" type="text" name="realEstateId" hidden />
+                  <input id="reID" type="hidden" name="realEstateId"/>
 
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Property Name:</label></div>
@@ -480,14 +459,14 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Description:</label></div>
                     <div class="col-sm-10">
-                      <input
+                      <textarea
                         id="form-description"
                         name="description"
                         type="text"
                         class="form-control form-create-control"
                         rows="5"
                         disabled
-                      />
+                      ></textarea>
                     </div>
                   </div>
                   <div class="mb-3 row">
@@ -612,7 +591,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         <option class="fs-6" value="">Choose Member</option>
                         <c:forEach items="${memberList}" var="member">
                           <option class="fs-6" value="${member.memberId}">
-                            ${member.username}
+                            ${member.fullName}
                           </option>
                         </c:forEach>
                       </select>
@@ -692,12 +671,11 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       const urlAgencyRequest = "http://localhost:8085/api/agency-request/";
       var chosenData = null;
 
-       /* View Popup detail of each property */
-       function viewDetail(requestID) {
+      /* View Popup detail of each property */
+      function viewDetail(requestID) {
         var popup = document.querySelector("#popup-detail");
         var landSection = document.querySelector("#land-info-section");
         var houseSection = document.querySelector("#house-info-section");
-       
 
         // Send GET Request API to retrieve single property information
         $.ajax({
@@ -729,18 +707,24 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
-              $("#popup-house-type").text(data.realEstate.propertyHouse.houseType);
+              $("#popup-house-type").text(
+                data.realEstate.propertyHouse.houseType
+              );
               $("#popup-house-pw").text("download this file to view paperwork");
               document
                 .querySelector("#popup-house-pw")
                 .setAttribute("href", data.realEstate.paperWorks);
               $("#popup-builtIn").text(data.realEstate.propertyHouse.builtIn);
-              $("#popup-bed").text(data.realEstate.propertyHouse.bedroom + " rooms");
-              $("#popup-bath").text(data.realEstate.propertyHouse.bath + " rooms");
+              $("#popup-bed").text(
+                data.realEstate.propertyHouse.bedroom + " rooms"
+              );
+              $("#popup-bath").text(
+                data.realEstate.propertyHouse.bath + " rooms"
+              );
             }
 
-             //load images to carousel
-             const carouselInner = document.querySelector(".carousel-inner");
+            //load images to carousel
+            const carouselInner = document.querySelector(".carousel-inner");
             const carouselIndicators = document.querySelector(
               ".carousel-indicators"
             );
@@ -805,9 +789,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         document
           .querySelector("#reID")
           .setAttribute("value", chosenData.realEstateId);
-        document
-          .querySelector("#form-description")
-          .setAttribute("value", chosenData.realEstate.description);
+          console.log("realEstateID" + chosenData.realEstateId);
+        document.querySelector("#form-description").value =
+         chosenData.realEstate.description;
         document
           .querySelector("#form-propertyType")
           .setAttribute("value", chosenData.realEstate.realEstateType);
@@ -837,7 +821,10 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           landSection.classList.add("hidden");
           document
             .querySelector("#form-houseCategory")
-            .setAttribute("value", chosenData.realEstate.propertyHouse.houseType);
+            .setAttribute(
+              "value",
+              chosenData.realEstate.propertyHouse.houseType
+            );
 
           document
             .querySelector("#form-builtYear")
@@ -874,6 +861,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
       function chooseMember(selectedMember) {
         // Retrieve the "chosen-member" input element
+        console.log("memberID: " + selectedMember);
         const chosenMemberInput = document.getElementById("form-chosen-member");
 
         // Update the value of the "chosen-member" input
