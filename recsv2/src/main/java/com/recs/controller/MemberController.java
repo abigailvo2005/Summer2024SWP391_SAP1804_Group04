@@ -3,6 +3,7 @@ package com.recs.controller;
 import java.util.Comparator;
 import java.util.List;
 
+import com.recs.models.dto.recsbusiness.BuyerRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import com.recs.services.businesssvc.RecsBusinessService;
@@ -68,13 +69,21 @@ public class MemberController {
     }
 
     @GetMapping("/create-buyer")
-    public String createBuyer(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+    public String createBuyerView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-buyer";
         List<DealAssignMemberDTO> dealAssignMembers = recsBusinessService.getAssignDealPageByMemberId(userInfo.getMemberId());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("dealList", dealAssignMembers);
         model.addAttribute("name", userInfo.getFullName());
         return "member/create-buyer";
+    }
+
+    @PostMapping("/create-buyer")
+    public String createBuyer(
+            @ModelAttribute(name = "request")BuyerRequestCreateDTO request
+            ) {
+        recsBusinessService.createBuyerRequest(request);
+        return "redirect:/create-buyer";
     }
 
 }
