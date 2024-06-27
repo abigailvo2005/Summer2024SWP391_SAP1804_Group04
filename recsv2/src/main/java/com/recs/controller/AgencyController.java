@@ -138,23 +138,6 @@ public class AgencyController {
         return "redirect:/agency/marketplace";
     }
 
-    /*  */ /*
-            * @PostMapping("/assign-deal")
-            * public String createDeal(
-            * 
-            * @RequestBody String memberId,
-            * 
-            * @RequestBody String realEstateId,
-            * 
-            * @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-            * System.out.println("RealEstateID at controller: " + realEstateId);
-            * System.out.println("MemberID at controller: " + memberId);
-            * recsBusinessService.createDeal(realEstateId, memberId,
-            * userInfo.getAgencyId());
-            * return "redirect:/agency";
-            * }
-            */
-
     @PostMapping("/assign-deal")
     public String createDeal(
             @ModelAttribute(name = "request") AssignDealRequest request,
@@ -164,26 +147,4 @@ public class AgencyController {
         recsBusinessService.createDeal(request.getRealEstateId(), request.getMemberId(), userInfo.getAgencyId());
         return "redirect:/agency";
     }
-    /*
-     * @PostMapping("/assign-deal")
-     * public String assignDeal(
-     * 
-     * @ModelAttribute(name = "request") AssignDealRequest request,
-     * 
-     * @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-     * System.out.println(request);
-     * DealAssignMember entity = new DealAssignMember(
-     * UUID.randomUUID().toString(),
-     * Clock.systemUTC().millis(),
-     * 1,
-     * DealAssignMemberStatus.ASSIGNED.getValue(),
-     * userInfo.getAgencyId(),
-     * request.getMemberId(),
-     * request.getRealEstateId());
-     * 
-     * recsBusinessService.createAssignJobStaff(entity);
-     * 
-     * return "redirect:/manager";
-     * }
-     */
 }

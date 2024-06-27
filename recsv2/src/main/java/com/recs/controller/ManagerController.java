@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.Clock;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,12 +57,15 @@ public class ManagerController {
         List<ValidationJobInfo> validatingJobList = allJob.stream()
                 .filter(row -> JobStatus.ASSIGNED == row.getStatus())
                 .toList();
-//
-//        List<ValidationJobInfo> successJobList = allJob.stream()
-//                .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
-//                .toList();
+        //
+        // List<ValidationJobInfo> successJobList = allJob.stream()
+        // .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
+        // .toList();
 
-        /* List<RealEstate> validatingList = realEstateService.getValidatingListByManager(userInfo.getManagerId()); */
+        /*
+         * List<RealEstate> validatingList =
+         * realEstateService.getValidatingListByManager(userInfo.getManagerId());
+         */
         // Todo() tự nhét
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName()); // can get userInfo by using $sessionScope in jsp
@@ -97,10 +101,9 @@ public class ManagerController {
 
     @PostMapping("/assign-job")
     public String assignJob(
-            @ModelAttribute(name = "request")AssignJobRequest request,
-            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
-            ) {
-                System.out.println(request);
+            @ModelAttribute(name = "request") AssignJobRequest request,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        System.out.println(request);
         AssignJobStaff entity = new AssignJobStaff(
                 UUID.randomUUID().toString(),
                 request.getRealEstateId(),
@@ -108,8 +111,7 @@ public class ManagerController {
                 1,
                 JobStatus.ASSIGNED.getValue(),
                 request.getStaffId(),
-                userInfo.getManagerId()
-        );
+                userInfo.getManagerId());
 
         recsBusinessService.createAssignJobStaff(entity);
 
@@ -127,16 +129,26 @@ public class ManagerController {
     }
 
     @GetMapping({ "/history" })
-    public String historyView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
+    public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        /* Account account = accountService.getByUserName(userInfo.); */
         String currentPage = "history";
-        model.addAttribute("name", name);
+
+        List<ValidationJobInfo> listingListValidateSuccess = recsBusinessService
+                .getListByManagerAndStatus(userInfo.getManagerId(), JobStatus.SUCCESSFUL.getValue());
+        List<ValidationJobInfo> listingListValidateFail = recsBusinessService
+                .getListByManagerAndStatus(userInfo.getManagerId(), JobStatus.FAIL.getValue());
+
+        List<ValidationJobInfo> allValidatedJobs = new ArrayList<>();
+        allValidatedJobs.addAll(listingListValidateSuccess);
+        allValidatedJobs.addAll(listingListValidateFail);
+
+        model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("listJobAssigned", allValidatedJobs);
         return "manager/history-man";
     }
 
-    @GetMapping({ "/create-staff"})
+    @GetMapping({ "/create-staff" })
     public String registerStaff(Model model, Authentication authentication) {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);

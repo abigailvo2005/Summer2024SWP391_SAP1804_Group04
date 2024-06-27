@@ -63,11 +63,13 @@ public class MemberController {
         List<BuyerRequestDTO> allBuyerRequests = recsBusinessService.getBuyerRequestByMember(userInfo.getMemberId())
                 .stream().sorted(Comparator.comparing(BuyerRequestDTO::getStatus))
                 .toList();
-        System.out.println("buyer request list: "+ allBuyerRequests);
+        System.out.println("buyer request list: " + allBuyerRequests);
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
+
         model.addAttribute("dealList", dealAssignMemberList);
+        model.addAttribute("buyerRequestList", allBuyerRequests);
         return "member/dashboard-member";
     }
 
@@ -84,7 +86,8 @@ public class MemberController {
     @GetMapping("/create-buyer")
     public String createBuyerView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-buyer";
-        List<DealAssignMemberDTO> dealAssignMembers = recsBusinessService.getAssignDealPageByMemberId(userInfo.getMemberId());
+        List<DealAssignMemberDTO> dealAssignMembers = recsBusinessService
+                .getAssignDealPageByMemberId(userInfo.getMemberId());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("dealList", dealAssignMembers);
         model.addAttribute("name", userInfo.getFullName());
@@ -93,10 +96,9 @@ public class MemberController {
 
     @PostMapping("/create-buyer")
     public String createBuyer(
-            @ModelAttribute(name = "request")BuyerRequestCreateDTO request
-            ) {
+            @ModelAttribute(name = "request") BuyerRequestCreateDTO request) {
         recsBusinessService.createBuyerRequest(request);
-        return "redirect:/create-buyer";
+        return "redirect:/member/dashboard";
     }
 
 }

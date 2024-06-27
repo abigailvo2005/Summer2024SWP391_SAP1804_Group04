@@ -116,14 +116,14 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
                       <tbody>
                         <c:forEach items="${handledList}" var="listing">
-                          <tr class="deal-row">
+                          <tr class="listing-row">
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
                                   class="d-flex flex-column justify-content-start"
                                 >
                                   <p
-                                    id="deal-name"
+                                    id="listing-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
                                     ${listing.realEstate.name}
@@ -139,7 +139,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="deal-type"
+                                    id="listing-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
                                     ${listing.realEstate.realEstateType}
@@ -152,7 +152,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                 class="d-flex px-2 py-1 justify-content-center"
                               >
                                 <p
-                                  id="deal-createDate"
+                                  id="listing-createDate"
                                   class="mb-0 text-sm fw-bold text-dark"
                                 >
                                   ${listing.createDate}
@@ -167,7 +167,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p
-                                    id="deal-status"
+                                    id="listing-status"
                                     class="mb-0 text-sm fw-bold status-color"
                                     value="${listing.status}"
                                   >

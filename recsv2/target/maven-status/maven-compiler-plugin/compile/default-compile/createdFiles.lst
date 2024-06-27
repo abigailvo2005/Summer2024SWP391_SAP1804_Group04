@@ -52,6 +52,7 @@ com/recs/models/enums/DealAssignMemberStatus.class
 com/recs/controller/MemberController.class
 com/recs/models/entities/recsbusiness/BuyerRequest.class
 com/recs/ServletInitializer.class
+com/recs/services/businesssvc/RecsBusinessServiceImpl$1.class
 com/recs/models/dto/realestate/RealEstateDTO.class
 com/recs/models/enums/JobStatus.class
 com/recs/models/entities/account/Seller.class

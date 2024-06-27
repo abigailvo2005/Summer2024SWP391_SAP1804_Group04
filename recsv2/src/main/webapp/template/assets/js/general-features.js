@@ -17,10 +17,10 @@ statusElements.forEach((element) => {
   const statusValue = element.getAttribute("value");
   switch (statusValue.toLowerCase()) {
     case "assigned": //job status
-    case "reviewing":
       element.classList.add("status-reviewing");
       break;
     case "validating":
+    case "reviewing":
       element.classList.add("status-validating");
       break;
     case "unqualified":

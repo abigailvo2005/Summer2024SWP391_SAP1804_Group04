@@ -127,7 +127,7 @@ public class SellerController {
         return "redirect:/seller";
     }
 
-    @PostMapping("buyer-request/approve")
+    @PostMapping("/buyer-request/approve")
     public String approveBuyer(
             @RequestBody List<String> requestIds
     ) {

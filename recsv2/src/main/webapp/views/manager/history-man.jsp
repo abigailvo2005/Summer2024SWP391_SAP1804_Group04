@@ -59,7 +59,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     <p class="text-sm mb-0">
                       <i class="fa-regular fa-comment-dots"></i>
                       <span class="font-weight-bold ms-1"
-                        >${listJobAssigned.size()} assigned(s)</span
+                        >${listJobAssigned.size()} job(s) validated</span
                       >
                       in total
                     </p>
