@@ -8,6 +8,7 @@ import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.AssignJobRequest;
 import com.recs.models.dto.recsbusiness.AssignDealRequest;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
+import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
@@ -98,6 +99,15 @@ public class AgencyController {
         model.addAttribute("currentPage", currentPage);
 
         return "agency/create-acc-mem";
+    }
+
+    @GetMapping({ "/history" })
+    public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String name = userInfo.getFullName();
+        String currentPage = "history";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "agency/history-agency";
     }
 
     @GetMapping({ "/assign-deal" })

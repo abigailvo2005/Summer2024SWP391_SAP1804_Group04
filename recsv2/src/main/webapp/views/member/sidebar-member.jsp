@@ -112,7 +112,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 View your successfully connected properties here.
               </p>
               <a
-                href="${pageContext.request.contextPath}/seller/history"
+                href="${pageContext.request.contextPath}/member/history"
                 target="_self"
                 class="btn btn-white btn-sm w-100 mb-0"
                 >History</a

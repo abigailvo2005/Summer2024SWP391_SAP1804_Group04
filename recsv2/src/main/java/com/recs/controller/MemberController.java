@@ -6,6 +6,7 @@ import java.util.List;
 import com.recs.models.dto.recsbusiness.BuyerRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
+import com.recs.models.enums.JobStatus;
 import com.recs.services.businesssvc.RecsBusinessService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
+import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.services.realestaesvc.RealEstateService;
 import com.recs.models.dto.realestate.CreateRealEstateRequestDTO;
@@ -66,6 +68,16 @@ public class MemberController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("dealList", dealAssignMemberList);
         return "member/dashboard-member";
+    }
+
+    @GetMapping({ "/history" })
+    public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String name = userInfo.getFullName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "history";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "member/history-member";
     }
 
     @GetMapping("/create-buyer")
