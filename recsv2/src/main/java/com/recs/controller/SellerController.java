@@ -6,6 +6,7 @@ import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
+import com.recs.models.enums.BuyerRequestStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
@@ -123,6 +124,22 @@ public class SellerController {
     public String updateAgencyRequestStatus(
             @ModelAttribute(name = "request") ApproveAgencyRequestDTO request) {
         recsBusinessService.approveAgencyRequest(request);
+        return "redirect:/seller";
+    }
+
+    @PostMapping("buyer-request/approve")
+    public String approveBuyer(
+            @RequestBody List<String> requestIds
+    ) {
+        recsBusinessService.updateBuyer(requestIds, BuyerRequestStatus.ACCEPTED);
+        return "redirect:/seller";
+    }
+
+    @PostMapping("buyer-request/connect")
+    public String connectBuyer(
+            @RequestBody String requestId
+    ) {
+        recsBusinessService.updateBuyer(List.of(requestId), BuyerRequestStatus.CONNECTED);
         return "redirect:/seller";
     }
 }

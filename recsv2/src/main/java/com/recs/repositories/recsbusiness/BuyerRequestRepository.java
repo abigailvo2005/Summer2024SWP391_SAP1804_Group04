@@ -9,4 +9,5 @@ public interface BuyerRequestRepository extends JpaRepository<BuyerRequest, Stri
     List<BuyerRequest> findAllByMemberMemberId(String memberId);
     List<BuyerRequest> findAllByDealDealId(String dealId);
     List<BuyerRequest> findAllByRealEstateRealEstateId(String realEstateId);
+    List<BuyerRequest> findAllByRequestIdIn(List<String> requestIds);
 }

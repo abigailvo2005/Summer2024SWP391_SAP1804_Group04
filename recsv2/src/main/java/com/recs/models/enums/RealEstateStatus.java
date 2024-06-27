@@ -10,6 +10,7 @@ public enum RealEstateStatus {
     HANDLED("Handled"),
     MARKETED("Marketed"),
     BUYER_APPROVING("Buyer Approving"),
+    CONNECTED("Connected"),
     CLOSED("Closed");
 
     private final String value;

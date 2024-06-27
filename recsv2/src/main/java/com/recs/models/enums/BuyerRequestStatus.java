@@ -4,6 +4,7 @@ public enum BuyerRequestStatus {
     UNKNOWN(""),
     REVIEWING("Reviewing"),
     ACCEPTED("Accepted"),
+    CONNECTED("Connected"),
     DENIED("Denied");
 
     private final String value;

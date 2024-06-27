@@ -13,6 +13,7 @@ import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.AssignJobStaff;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import com.recs.models.enums.AgencyRequestStatus;
+import com.recs.models.enums.BuyerRequestStatus;
 
 import java.util.List;
 
@@ -62,4 +63,6 @@ public interface RecsBusinessService {
     public void createBuyerRequest(BuyerRequestCreateDTO request);
 
     public List<BuyerRequestDTO> getBuyerRequestByMember(String memberId);
+
+    public void updateBuyer(List<String> buyerRequests, BuyerRequestStatus status);
 }

@@ -4,7 +4,8 @@ public enum DealAssignMemberStatus {
     UNKNOWN(""),
     ASSIGNED("Assigned"),
     REVIEWING("Reviewing"),
-    CANCELLED("Cancelled");
+    CANCELLED("Cancelled"),
+    CLOSED("Closed");
 
     private final String value;
 
