@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       RECS - ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-      'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History' :
+      'profile' ? 'Profile' : (currentPage == 'history' ? 'View History' :
       (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
       'requests-man' ? 'Validating Requests' : (currentPage == 'register' ?
       'Register Staff' : '')))))}
@@ -131,8 +131,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             <div class="docs-info">
               <h6 class="text-white up mb-1">Want to keep track?</h6>
               <p class="text-xs">
-                View jobs, requests and properties you have successfully
-                handled.
+                View all account create successfully in the system.
               </p>
               <a
                 href="${pageContext.request.contextPath}/admin/history"
@@ -176,15 +175,15 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-admin' ?
+                'profile' ? 'View Profile' : (currentPage == 'history' ?
                 'View History' : (currentPage == 'tracking' ? 'System Property
                 Tracking' : (currentPage == 'create-account' ? 'Create Account' : ''))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-admin' ?
-              'History' : (currentPage == 'tracking' ? 'Property Tracking' :
+              'profile' ? 'Profile' : (currentPage == 'history' ?
+              'View History' : (currentPage == 'tracking' ? 'Property Tracking' :
               (currentPage == 'create-account' ? 'Create Account' : ''))))}
             </h6>
           </nav>
