@@ -183,7 +183,7 @@
                         <div class="col-sm-2">
                           <label for="birthday">Introduction Message:</label>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-10">
                           <textarea id="buyer-description" name="description"
                             class="form-control form-create-control col-10" required></textarea>
                         </div>

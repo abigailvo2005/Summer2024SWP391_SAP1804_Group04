@@ -167,13 +167,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                <p
-                                id="job-status"
-                                class="mb-0 text-sm fw-bold status-color"
-                                value="${job.status.value}"
-                              >
-                                ${job.status.value}
-                              </p>
+                                  <p
+                                    id="job-status"
+                                    class="mb-0 text-sm fw-bold status-color"
+                                    value="${job.status.value}"
+                                  >
+                                    ${job.status.value}
+                                  </p>
                                 </div>
                               </div>
                             </td>
@@ -548,7 +548,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#manager").text(data.managerInfo.username);
             $("#popup-name").text(data.realEstateInfo.name);
             $("#popup-status").text(data.status);
-            $("#popup-dateCreated").text(data.realEstateInfo.createTimestamp);
+            var createDate = new Date(data.realEstateInfo.createTimestamp);
+            $("#popup-dateCreated").text(
+              createDate.toLocaleDateString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            );
             $("#popup-desc").text(data.realEstateInfo.description);
             $("#popup-type").text(data.realEstateInfo.realEstateType);
             $("#popup-address").text(data.realEstateInfo.address);

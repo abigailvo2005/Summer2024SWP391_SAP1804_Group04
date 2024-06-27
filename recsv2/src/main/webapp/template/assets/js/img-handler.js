@@ -18,10 +18,10 @@ var paperwork = null;
 var fileType = null;
 
 /* Get images from user */
-if($("#prop-img")) {
-  $("#prop-img").on("change", function (event)  {
+if ($("#prop-img")) {
+  $("#prop-img").on("change", function (event) {
     getImageFile(event);
-  })
+  });
 }
 
 function getImageFile(e) {
@@ -101,15 +101,13 @@ async function uploadImage() {
 }
 
 /* Get images from user */
-if($("#submit-btn")) {
-  $("#submit-btn").on("click", async function (event)  {
+if ($("#submit-btn")) {
+  $("#submit-btn").on("click", async function (event) {
     submitRequest(event);
-  })
+  });
 }
 
-
-
-async function submitRequest(event) {
+/* async function submitRequest(event) {
   event.preventDefault(); //Stop form from default submitting
 
   console.log("inside submit request");
@@ -135,50 +133,148 @@ async function submitRequest(event) {
     // No errors on start up
     nameError.classList.add("hidden"); //clear all errors first
 
-    if (priceNumber < minPrice || priceNumber > maxPrice) {
-      Swal.fire({
-        title: "Are you sure about this price?",
-        text: "Current price might be too high or too low for this property.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes",
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          Swal.fire({
-            title: "Choose another price.",
-            icon: "success",
-          });
-          document.getElementById("price").value = "";
-          submitButton.disabled = false;
-        } else {
-          {
-            if (propertyNameInput.value.length > 32) {
-              //Check if property's name is longer than 32 characters
-              nameError.classList.remove("hidden");
-              return;
-            }
-
-            // Submit form
-            document.querySelector("form").submit();
-          }
-        }
-      });
+    if (propertyNameInput.value.length > 64) {
+      //Check if property's name is longer than 64 characters
+      nameError.classList.remove("hidden");
+      submitButton.disabled = false;
+      return;
     } else {
-      document.querySelector("form").reportValidity();
+      if (priceNumber < minPrice || priceNumber > maxPrice) {
+        Swal.fire({
+          title: "Are you sure about this price?",
+          text: "Current price might be too high or too low for this property.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          if (!result.isConfirmed) {
+            Swal.fire({
+              title: "Choose another price.",
+              icon: "success",
+            });
+            document.getElementById("price").value = "";
+            submitButton.disabled = false;
+          } else {
+            {
+              // Submit form
+              document.querySelector("form").submit();
+            }
+          }
+        });
+      } else {
+        document.querySelector("form").reportValidity();
+      }
     }
+  }
+} */
+
+async function submitRequest(event) {
+  event.preventDefault(); // Stop form from default submitting
+
+  console.log("inside submit request");
+
+  // Disable button while uploading file
+  const submitButton = document.querySelector("#submit-btn");
+  submitButton.disabled = true;
+
+  // Show loading SweetAlert
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger",
+    },
+    buttonsStyling: false,
+  });
+
+  try {
+    // Check if all fields have values
+    if (document.querySelector("form").checkValidity()) {
+      console.log("after get form");
+      const propertyNameInput = document.querySelector("#prop-name");
+      const nameError = document.querySelector(".error-name");
+      const area = document.getElementById("area").value;
+      const price = document.getElementById("price").value;
+      const areaNumber = parseFloat(area);
+      const priceNumber = parseFloat(price);
+      const minPrice = areaNumber * 20000000;
+      const maxPrice = areaNumber * 50000000;
+
+      // No errors on start up
+      nameError.classList.add("hidden"); // clear all errors first
+
+      if (propertyNameInput.value.length > 64) {
+        // Check if property's name is longer than 64 characters
+        nameError.classList.remove("hidden");
+        submitButton.disabled = false;
+        return;
+      } else {
+        if (priceNumber < minPrice || priceNumber > maxPrice) {
+          // Show confirmation alert
+          const result = await swalWithBootstrapButtons.fire({
+            title: "Are you sure about this price?",
+            text: "Current price might be too high or too low for this property.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            customClass: {
+              confirmButton: "confirm-button",
+              cancelButton: "cancel-button",
+            },
+          });
+
+          if (!result.isConfirmed) {
+            await swalWithBootstrapButtons.fire({
+              title: "Choose another price.",
+              icon: "success",
+            });
+            document.getElementById("price").value = "";
+            submitButton.disabled = false;
+          } else {
+            // Upload images and paperwork after passed all validation
+            const loadingAlert = await swalWithBootstrapButtons.fire({
+              title: "Uploading...",
+              text: "Please wait while we upload your property to system.",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              showCancelButton: false,
+              showConfirmButton: false,
+              willOpen: async () => {
+                Swal.showLoading();
+                await Promise.all([uploadImage(), uploadPaperwork()]);
+                // Submit form
+                document.querySelector("form").submit();
+              },
+            });
+          }
+        } else {
+          document.querySelector("form").reportValidity();
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error uploading files:", error);
+    await swalWithBootstrapButtons.fire({
+      title: "Error",
+      text: "An error occurred while uploading files. Please try again.",
+      icon: "error",
+    });
+  } finally {
+    // Close the loading alert
+    Swal.close();
+    submitButton.disabled = false;
   }
 }
 
 /* function to update paperwork */
-if($("#submit-land-btn") || $("#submit-house-btn")) {
-  $("#submit-land-btn").on("click", async function (event)  {
+if ($("#submit-land-btn") || $("#submit-house-btn")) {
+  $("#submit-land-btn").on("click", async function (event) {
     changePaperwork(event);
-  })
-  $("#submit-house-btn").on("click", async function (event)  {
+  });
+  $("#submit-house-btn").on("click", async function (event) {
     changePaperwork(event);
-  })
+  });
 }
 
 async function changePaperwork(event) {

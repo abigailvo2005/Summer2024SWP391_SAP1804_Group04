@@ -47,6 +47,7 @@ public class UserInfo {
     private String agencyId;
     private Integer completedProject;
     private String agencyDescription;
+    private Integer agencyYearsOfExperience;
 
     // Fields from Members
     private String memberId;
@@ -137,6 +138,7 @@ public class UserInfo {
             userInfo.setAgencyId(agency.getAgencyId());
             userInfo.setCompany(agency.getCompany());
             userInfo.setCompletedProject(agency.getCompletedProject());
+            userInfo.setAgencyYearsOfExperience(agency.getYearsOfExperience());
             userInfo.setAgencyDescription(agency.getDescription());
         }
         return userInfo;

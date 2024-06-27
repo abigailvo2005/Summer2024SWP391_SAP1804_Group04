@@ -169,13 +169,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                <p
-                                id="listing-status"
-                                class="mb-0 text-sm fw-bold status-color"
-                                value="${listing.status}"
-                              >
-                                ${listing.status}
-                              </p>
+                                  <p
+                                    id="listing-status"
+                                    class="mb-0 text-sm fw-bold status-color"
+                                    value="${listing.status}"
+                                  >
+                                    ${listing.status}
+                                  </p>
                                 </div>
                               </div>
                             </td>
@@ -188,7 +188,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${listing.requestId}', 'listing')"
+                                    onclick="viewDetail('${listing.requestId}', 'listing')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -219,7 +219,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${dealList.size()} request(s)</span
+                        >${dealList.size()} assignment(s)</span
                       >
                       in total
                     </p>
@@ -331,13 +331,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                <p
-                                id="req-status"
-                                class="mb-0 text-sm fw-bold status-color"
-                                value="${deal.status}"
-                              >
-                                ${deal.status}
-                              </p>
+                                  <p
+                                    id="req-status"
+                                    class="mb-0 text-sm fw-bold status-color"
+                                    value="${deal.status}"
+                                  >
+                                    ${deal.status}
+                                  </p>
                                 </div>
                               </div>
                             </td>
@@ -350,7 +350,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${deal.realEstate}', 'deal')"
+                                    onclick="viewDetail('${deal.realEstate}', 'deal')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -561,6 +561,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </li>
                       </div>
                     </div>
+
+                    <!-- Agency Request - Message to seller -->
+                    <div class="row">
+                      <li class="list-group-item border-0 ps-0 text-sm">
+                        <strong class="text-dark">Your Message:</strong>
+                        <p id="popup-agency-message"></p>
+                      </li>
+                    </div>
                   </div>
                 </ul>
               </div>
@@ -584,10 +592,18 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- Internal JS -->
     <script>
       //URL REAL ESTATE API
-      const urlRealEstate = "http://localhost:8085/api/real-estate/";
+      const urlAgencyRequest = "http://localhost:8085/api/agency-request/";
+      const urlDeal = "http://localhost:8085/api/deal/";
 
       /* View Popup detail of each property */
-      function viewDetailProperty(propID, type) {
+      function viewDetail(propID, type) {
+        var url = null;
+        if (type == "listing") {
+          url = urlAgencyRequest;
+        } else {
+          url = urlDeal;
+        }
+
         var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
@@ -595,30 +611,37 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
         // Send GET Request API to retrieve single property information
         $.ajax({
-          url: urlRealEstate + propID,
+          url: url + propID,
           type: "GET",
           success: function (data) {
             // Update popup with information chosen Property
-            $("#popup-name").text(data.name);
+            $("#popup-name").text(data.realEstate.name);
             $("#popup-status").text(data.status);
-            $("#popup-desc").text(data.description);
-            $("#popup-type").text(data.realEstateType);
-            $("#popup-address").text(data.address);
-            $("#popup-area").text(data.area + " m²");
-            $("#popup-price").text(data.textPrice + " VND");
+            $("#popup-desc").html(data.realEstate.description.replace(/\r\n/g, "<br>"));
+            $("#popup-type").text(data.realEstate.realEstateType);
+            $("#popup-address").text(data.realEstate.address);
+            $("#popup-area").text(data.realEstate.area + " m²");
+            $("#popup-price").text(data.realEstate.textPrice + " VND");
+            $("#popup-agency-message").html(data.message.replace(/\r\n/g, "<br>"));
 
             //only show land/house fields according to type
-            if (data.realEstateType == "Land") {
+            if (data.realEstate.realEstateType == "Land") {
               landSection.classList.remove("hidden");
               houseSection.classList.add("hidden");
-              $("#popup-land-type").text(data.propertyLand.landType);
+              $("#popup-land-type").text(data.realEstate.propertyLand.landType);
             } else {
               houseSection.classList.remove("hidden");
               landSection.classList.add("hidden");
-              $("#popup-house-type").text(data.propertyHouse.houseType);
-              $("#popup-builtIn").text(data.propertyHouse.builtIn);
-              $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
-              $("#popup-bath").text(data.propertyHouse.bath + " rooms");
+              $("#popup-house-type").text(
+                data.realEstate.propertyHouse.houseType
+              );
+              $("#popup-builtIn").text(data.realEstate.propertyHouse.builtIn);
+              $("#popup-bed").text(
+                data.realEstate.propertyHouse.bedroom + " rooms"
+              );
+              $("#popup-bath").text(
+                data.realEstate.propertyHouse.bath + " rooms"
+              );
             }
 
             //only show deal information if Deal is clicked
@@ -636,7 +659,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             carouselInner.innerHTML = "";
             carouselIndicators.innerHTML = "";
 
-            data.propertyImagesList.forEach((image, index) => {
+            data.realEstate.images.forEach((image, index) => {
               // create slide
               const slideElement = document.createElement("div");
               slideElement.classList.add("carousel-item");
