@@ -6,11 +6,13 @@ import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
+import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
 import com.recs.models.entities.recsbusiness.AgencyRequest;
 import com.recs.models.entities.recsbusiness.DealAssignMember;
 import com.recs.models.enums.AgencyRequestStatus;
+import com.recs.models.enums.JobStatus;
 import com.recs.models.enums.RealEstateStatus;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
@@ -97,6 +99,15 @@ public class AgencyController {
         model.addAttribute("currentPage", currentPage);
 
         return "agency/create-acc-mem";
+    }
+
+    @GetMapping({ "/history" })
+    public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String name = userInfo.getFullName();
+        String currentPage = "history";
+        model.addAttribute("name", name);
+        model.addAttribute("currentPage", currentPage);
+        return "agency/history-agency";
     }
 
     @GetMapping({ "/assign-deal" })

@@ -39,13 +39,166 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <header>
-      <jsp:include page="/views/seller/sidebar-seller.jsp"/>
+      <jsp:include page="/views/agency/sidebar-agency.jsp"/>
     </header>
     <!-- END SIDEBAR -->
 
     <main
       class="main-conten no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
+
+    <!--Start List History Job assigned validate success-->
+    <div class="container-fluid">
+      <div class="row my-4">
+        <div class="mb-md-0 mb-4">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-8 col-9">
+                  <h6>History Properties Assigned</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa-regular fa-comment-dots"></i>
+                    <span class="font-weight-bold ms-1"
+                      >${listAssigned.size()} validated(s)</span
+                    >
+                    in total
+                  </p>
+                </div>
+                <div
+                  class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3"
+                >
+                  <div class="input-group">
+                    <span class="input-group-text text-body"
+                      ><i class="fas fa-search" aria-hidden="true"></i
+                    ></span>
+                    <input
+                      id="searchInput"
+                      type="text"
+                      class="form-control"
+                      placeholder="Type property name here..."
+                      onkeyup="searchTable()"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
+                        >
+                          PROPERTY NAME
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          PRICE
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                        >
+                          TYPE
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          STATUS
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
+                        >
+                          VIEW DETAILS
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <c:forEach items="${listAssigned}" var="assigned">
+                        <tr class="validate-row">
+                          <td>
+                            <div class="d-flex justify-content-start">
+                              <div
+                                class="d-flex flex-column justify-content-start"
+                              >
+                                <p
+                                  id="req-name"
+                                  class="mb-0 text-sm fw-bold text-dark"
+                                >
+                                  ${assigned.name}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  ${assigned.price}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  ${assigned.type}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <p class="mb-0 text-sm fw-bold text-muted">
+                                  ${assigned.status}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div
+                              class="d-flex px-2 py-1 justify-content-center"
+                            >
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <a
+                                  class="show-detail"
+                                  onclick="viewDetail('${assigned.id}')"
+                                  ><i class="fa-solid fa-eye"></i
+                                ></a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End History List Job Assigned Validated Success-->
+
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">

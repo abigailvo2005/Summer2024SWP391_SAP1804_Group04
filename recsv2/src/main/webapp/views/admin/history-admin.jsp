@@ -43,7 +43,7 @@
                                             <p class="text-sm mb-0">
                                                 <i class="fa-regular fa-comment-dots"></i>
                                                 <span class="font-weight-bold ms-1">${listAccountActive.size()}
-                                                    available</span>
+                                                    available(s)</span>
                                                 in total
                                             </p>
                                         </div>
@@ -162,7 +162,7 @@
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
                                                                         <a class="show-detail"
-                                                                            onclick="viewDetail('${active.jobId}')"><i
+                                                                            onclick="viewDetail('${active.Id}')"><i
                                                                                 class="fa-solid fa-eye"></i></a>
                                                                     </div>
                                                                 </div>
@@ -310,7 +310,7 @@
                                                                     <div
                                                                         class="d-flex flex-column justify-content-center">
                                                                         <a class="show-detail"
-                                                                            onclick="viewDetail('${ban.jobId}')"><i
+                                                                            onclick="viewDetail('${ban.Id}')"><i
                                                                                 class="fa-solid fa-eye"></i></a>
                                                                     </div>
                                                                 </div>

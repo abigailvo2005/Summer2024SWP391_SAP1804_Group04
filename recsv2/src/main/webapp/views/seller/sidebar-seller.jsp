@@ -154,14 +154,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-seller' ?
+                'profile' ? 'View Profile' : (currentPage == 'history' ?
                 'View History' : (currentPage == 'create-property' ? 'Create
                 Property' : '')))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-seller' ?
+              'profile' ? 'Profile' : (currentPage == 'history' ?
               'History' : (currentPage == 'create-property' ? 'Create Property'
               : '')))}
             </h6>

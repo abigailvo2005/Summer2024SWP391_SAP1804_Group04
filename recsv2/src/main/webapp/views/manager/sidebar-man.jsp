@@ -130,8 +130,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <div class="docs-info">
               <h6 class="text-white up mb-1">Want to keep track?</h6>
               <p class="text-xs">
-                View jobs, requests and properties you have successfully
-                handled.
+                View all jobs you assigned.
               </p>
               <a
                 href="${pageContext.request.contextPath}/manager/history"
@@ -175,14 +174,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history-man' ?
+                'profile' ? 'View Profile' : (currentPage == 'history' ?
                 'View History' : (currentPage == 'assign-job' ? 'Assign Job' :
                 (currentPage == 'register' ? 'Register Account Staff' : (currentPage == 'create-staff' ? 'Create Staff' : '')))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-              'profile' ? 'Profile' : (currentPage == 'history-man' ? 'History'
+              'profile' ? 'Profile' : (currentPage == 'history' ? 'History'
               : (currentPage == 'assign-job' ? 'Assign Job' : (currentPage ==
               'register' ? 'Register Staff' : (currentPage == 'create-staff' ? 'Create Staff' : '')))))}
             </h6>
