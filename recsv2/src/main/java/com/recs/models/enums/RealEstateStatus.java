@@ -2,6 +2,7 @@ package com.recs.models.enums;
 
 public enum RealEstateStatus {
     UNKNOWN(""),
+    CREATED("Created"),
     REVIEWING("Reviewing"),
     VALIDATING("Validating"),
     UNQUALIFIED("Unqualified"),

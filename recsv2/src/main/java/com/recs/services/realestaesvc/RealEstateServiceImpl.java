@@ -301,7 +301,7 @@ public class RealEstateServiceImpl implements RealEstateService{
                 dto.getAddress(),
                 dto.getArea(),
                 dto.getPrice(),
-                RealEstateStatus.REVIEWING.getValue(),
+                RealEstateStatus.CREATED.getValue(),
                 0,
                 Clock.systemUTC().millis(),
                 Clock.systemUTC().millis(),

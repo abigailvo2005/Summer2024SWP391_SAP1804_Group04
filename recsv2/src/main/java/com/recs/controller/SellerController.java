@@ -51,7 +51,9 @@ public class SellerController {
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
-        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId());
+        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
+                .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED)
+                .toList();
 
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
@@ -67,7 +69,7 @@ public class SellerController {
 
             Model model) {
         System.out.println("ID" + realEstateID);
-        realEstateService.updateStatus(realEstateID, RealEstateStatus.REVIEWING, "");
+        realEstateService.updateStatus(realEstateID, RealEstateStatus.CREATED, "");
 
         realEstateService.updatePaperWork(realEstateID, url);
 
@@ -77,12 +79,14 @@ public class SellerController {
     }
 
     @GetMapping({ "/create-property" })
-    public String createPropView(Model model, Authentication authentication) {
-        String name = authentication.getName();
+    public String createPropView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<RealEstateInfo> createdList = realEstateService.getAllBySellerIdAndStatus(userInfo.getSellerId(),RealEstateStatus.CREATED.getValue());
+        String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-property";
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("createdList",createdList);
         return "seller/create-property";
     }
 
@@ -140,6 +144,14 @@ public class SellerController {
             @RequestParam String requestId
     ) {
         recsBusinessService.updateBuyer(List.of(requestId), BuyerRequestStatus.CONNECTED);
+        return "redirect:/seller";
+    }
+
+    @GetMapping("real-estate/request")
+    private String requestValidate(
+            @RequestParam String realEstateId
+    ) {
+        realEstateService.updateStatus(realEstateId, RealEstateStatus.REVIEWING, "");
         return "redirect:/seller";
     }
 }
