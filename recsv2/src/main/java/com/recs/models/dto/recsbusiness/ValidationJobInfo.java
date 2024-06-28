@@ -3,7 +3,10 @@ package com.recs.models.dto.recsbusiness;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
+import com.recs.models.entities.recsbusiness.AssignJobStaff;
 import com.recs.models.enums.JobStatus;
+import com.recs.utils.RealEstateUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +23,8 @@ public class ValidationJobInfo {
     private RealEstateInfo realEstateInfo;
     private UserInfo managerInfo;
     private UserInfo staffInfo;
+
+    public String createDate() {
+        return RealEstateUtils.formatDate(createTimeStamp);
+    }
 }
