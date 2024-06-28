@@ -164,7 +164,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 <div
                                   class="d-flex flex-column justify-content-center"
                                 >
-                                  <p class="mb-0 text-sm fw-bold text-muted">
+                                  <p class="mb-0 text-sm fw-bold status-color" value="${success.status.value}">
                                     ${success.status.value}
                                   </p>
                                 </div>
@@ -316,7 +316,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                               <div
                                 class="d-flex flex-column justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold text-muted">
+                                <p class="mb-0 text-sm fw-bold status-color" value="${fail.status.value}">
                                   ${fail.status.value}
                                 </p>
                               </div>
@@ -395,5 +395,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="../../template/assets/js/general-features.js"></script>
   </body>
 </html>

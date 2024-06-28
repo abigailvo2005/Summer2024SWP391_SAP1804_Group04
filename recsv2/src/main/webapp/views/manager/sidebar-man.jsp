@@ -123,14 +123,14 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <div
             class="full-background"
             style="
-              background-image: url('</template/assets/img/curved-images/white-curved.jpg/>');
+              background-image: url('./../../template/assets/img/curved-images/white-curved.jpg');
             "
           ></div>
           <div class="card-body text-start p-3 w-100">
             <div class="docs-info">
               <h6 class="text-white up mb-1">Want to keep track?</h6>
               <p class="text-xs">
-                View all jobs you assigned.
+                View all assigned jobs that have been validated and properties that has successfully been sold.
               </p>
               <a
                 href="${pageContext.request.contextPath}/manager/history"

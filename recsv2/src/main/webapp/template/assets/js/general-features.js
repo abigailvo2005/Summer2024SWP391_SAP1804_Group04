@@ -24,6 +24,7 @@ statusElements.forEach((element) => {
       element.classList.add("status-validating");
       break;
     case "unqualified":
+    case "fail":
       element.classList.add("status-unqualified");
       break;
     case "displayed":
@@ -31,6 +32,7 @@ statusElements.forEach((element) => {
     case "handled":
     case "accepted":
     case "active":
+    case "successful":
       element.classList.add("status-displayed");
       break;
     case "agency approving":

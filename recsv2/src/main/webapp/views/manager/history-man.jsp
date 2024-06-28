@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,23 +38,22 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
     <header>
-      <jsp:include page="/views/manager/sidebar-man.jsp"/>
+      <jsp:include page="/views/manager/sidebar-man.jsp" />
     </header>
     <!-- END SIDEBAR -->
 
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
-
-    <!--Start List History Job assigned validate success-->
-    <div class="container-fluid">
+      <!--Start List History Job assigned validate success-->
+      <div class="container-fluid">
         <div class="row my-4">
           <div class="mb-md-0 mb-4">
             <div class="card">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>History Job Assigned</h6>
+                    <h6>Jobs Validated</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-regular fa-comment-dots"></i>
                       <span class="font-weight-bold ms-1"
@@ -90,7 +88,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           <th
                             class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3"
                           >
-                            OWNER
+                            STAFF ASSIGNED
                           </th>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
@@ -132,7 +130,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                     id="req-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${assigned.sellerinfo}
+                                    ${assigned.staffInfo.fullName}
                                   </p>
                                 </div>
                               </div>
@@ -145,7 +143,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${assigned.name}
+                                    ${assigned.realEstateInfo.name}
                                   </p>
                                 </div>
                               </div>
@@ -158,7 +156,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${assigned.type}
+                                    ${assigned.realEstateInfo.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -171,24 +169,24 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${assigned.date}
+                                    ${assigned.createTimeStamp}
                                   </p>
                                 </div>
                               </div>
                             </td>
                             <td class="align-middle">
+                              <div
+                                class="d-flex px-2 py-1 justify-content-center"
+                              >
                                 <div
-                                  class="d-flex px-2 py-1 justify-content-center"
+                                  class="d-flex flex-column justify-content-center"
                                 >
-                                  <div
-                                    class="d-flex flex-column justify-content-center"
-                                  >
-                                    <p class="mb-0 text-sm fw-bold text-muted">
-                                      ${assigned.status}
-                                    </p>
-                                  </div>
+                                  <p class="mb-0 text-sm fw-bold status-color" value="${assigned.status.value}">
+                                    ${assigned.status.value}
+                                  </p>
                                 </div>
-                              </td>
+                              </div>
+                            </td>
                             <td class="align-middle">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -198,7 +196,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetail('${assigned.id}')"
+                                    onclick="viewDetail('${assigned.jobId}')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -217,8 +215,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       </div>
       <!--End History List Job Assigned Validated Success-->
 
-    <!-- START FOOTER-->
-    <footer class="footer pt-3">
+      <!-- START FOOTER-->
+      <footer class="footer pt-3">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
@@ -253,4 +251,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         </div>
       </footer>
       <!-- END: FOOTER -->
+
+      <script src="../../template/assets/js/general-features.js"></script>
     </main>
+  </body>
+</html>
