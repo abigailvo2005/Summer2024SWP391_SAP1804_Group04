@@ -41,4 +41,7 @@ public interface RealEstateService {
     public List<RealEstateInfo> getAllByStatus(String status);
 
     public List<RealEstateInfo> getListing(String agencyId);
+
+    public List<RealEstateInfo> getAllBySellerIdAndStatus(String sellerId, String status);
+
 }

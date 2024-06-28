@@ -130,7 +130,7 @@ public class SellerController {
 
     @PostMapping("/buyer-request/approve")
     public String approveBuyer(
-            @RequestBody List<String> requestIds
+            @RequestParam List<String> requestIds
     ) {
         recsBusinessService.updateBuyer(requestIds, BuyerRequestStatus.ACCEPTED);
         return "redirect:/seller";
@@ -138,7 +138,7 @@ public class SellerController {
 
     @PostMapping("buyer-request/connect")
     public String connectBuyer(
-            @RequestBody String requestId
+            @RequestParam String requestId
     ) {
         recsBusinessService.updateBuyer(List.of(requestId), BuyerRequestStatus.CONNECTED);
         return "redirect:/seller";

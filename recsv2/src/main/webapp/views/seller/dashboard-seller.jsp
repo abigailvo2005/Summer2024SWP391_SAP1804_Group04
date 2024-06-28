@@ -1007,7 +1007,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         e.preventDefault();
 
         //get container
-        var buyerContainer = $("#selected-agency-container");
+        var buyerContainer = $("#selected-buyer-container");
 
         //clear list of Agencies everytime reload
         buyerContainer.html("");

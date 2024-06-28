@@ -345,8 +345,8 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                     buyerRequestRepository.saveAll(othersRequest);
                 }
             }
-            buyerRequestRepository.saveAll(updateList);
         });
+        buyerRequestRepository.saveAll(updateList);
     }
 
 }
