@@ -169,7 +169,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-muted">
-                                    ${assigned.createTimeStamp}
+                                    ${assigned.createDate()}
                                   </p>
                                 </div>
                               </div>
