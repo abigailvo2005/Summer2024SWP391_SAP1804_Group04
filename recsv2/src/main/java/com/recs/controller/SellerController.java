@@ -102,6 +102,7 @@ public class SellerController {
 
     @GetMapping({ "/history" })
     public String historyView(Model model, Authentication authentication) {
+        
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";

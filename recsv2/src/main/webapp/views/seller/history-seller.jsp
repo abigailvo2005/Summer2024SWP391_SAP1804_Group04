@@ -54,7 +54,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-8 col-9">
-                  <h6>History Property Conncected Success</h6>
+                  <h6>History Property Close</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-regular fa-comment-dots"></i>
                     <span class="font-weight-bold ms-1"
