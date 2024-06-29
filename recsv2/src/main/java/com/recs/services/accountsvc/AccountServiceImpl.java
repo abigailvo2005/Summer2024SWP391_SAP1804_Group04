@@ -93,6 +93,28 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<Account> getActiveAccount() {
+        List<Account> list = accountRepository.findByStatus("ACTIVE")
+                .stream().sorted(
+                        Comparator.comparing(Account::getAccountId)
+                                .thenComparing(Account::getAccountId))
+                .toList();
+        System.out.println("ACTIVE LIST " + list.size());
+        return list;
+    }
+
+    @Override
+    public List<Account> getDeclinedAccount() {
+        List<Account> list = accountRepository.findByStatus("DENIED")
+                .stream().sorted(
+                        Comparator.comparing(Account::getAccountId)
+                                .thenComparing(Account::getAccountId))
+                .toList();
+        System.out.println("ACTIVE LIST " + list.size());
+        return list;
+    }
+
+    @Override
     public List<Account> getApprovingAccount() {
         List<Account> list = accountRepository.findByStatus("APPROVING")
                 .stream().sorted(

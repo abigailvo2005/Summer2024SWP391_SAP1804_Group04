@@ -201,7 +201,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <a
-                                    onclick="viewDetail(`${user.accountId}`)"
+                                    onclick="viewDetail('${user.accountId}')"
                                     class="show-detail"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>

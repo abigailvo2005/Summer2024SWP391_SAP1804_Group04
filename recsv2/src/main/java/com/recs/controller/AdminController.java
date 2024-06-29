@@ -57,10 +57,14 @@ public class AdminController {
 
     @GetMapping({"/history"})
     public String historyView(Model model, Authentication authentication){
+        List<Account> listAccountActive = accountService.getActiveAccount();
+        List<Account> listAccountDeclined = accountService.getDeclinedAccount();
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
         model.addAttribute("name", name);
+        model.addAttribute("listAccountDeclined", listAccountDeclined);
+        model.addAttribute("listAccountActive", listAccountActive);
         model.addAttribute("currentPage", currentPage);
         return "admin/history-admin";
     }

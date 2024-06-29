@@ -101,12 +101,14 @@ public class SellerController {
     }
 
     @GetMapping({ "/history" })
-    public String historyView(Model model, Authentication authentication) {
-        
-        String name = authentication.getName();
+    public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<RealEstateInfo> listClose = realEstateService.getAllBySellerIdAndStatus(userInfo.getSellerId(), RealEstateStatus.CLOSED.getValue());
+    
+        String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
         model.addAttribute("name", name);
+        model.addAttribute("listClose", listClose);
         model.addAttribute("currentPage", currentPage);
         return "seller/history-seller";
     }

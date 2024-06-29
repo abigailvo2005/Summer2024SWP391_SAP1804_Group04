@@ -58,7 +58,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <p class="text-sm mb-0">
                     <i class="fa-regular fa-comment-dots"></i>
                     <span class="font-weight-bold ms-1"
-                      >${listSuccess.size()} property(s)</span
+                      >${listClose.size()} property(s)</span
                     >
                     in total
                   </p>
@@ -115,7 +115,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     </thead>
 
                     <tbody>
-                      <c:forEach items="${listSuccess}" var="success">
+                      <c:forEach items="${listClose}" var="close">
                         <tr class="validate-row">
                           <td>
                             <div class="d-flex justify-content-start">
@@ -126,7 +126,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                   id="req-name"
                                   class="mb-0 text-sm fw-bold text-dark"
                                 >
-                                  ${success.realEstateInfo.name}
+                                  ${close.name}
                                 </p>
                               </div>
                             </div>
@@ -139,7 +139,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 class="d-flex flex-column justify-content-center"
                               >
                                 <p class="mb-0 text-sm fw-bold text-dark">
-                                  ${success.realEstateInfo.textprice}
+                                  ${close.textPrice}
                                 </p>
                               </div>
                             </div>
@@ -152,7 +152,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 class="d-flex flex-column justify-content-center"
                               >
                                 <p class="mb-0 text-sm fw-bold text-dark">
-                                  ${success.realEstateInfo.type}
+                                  ${close.realEstateType}
                                 </p>
                               </div>
                             </div>
@@ -165,7 +165,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                                 class="d-flex flex-column justify-content-center"
                               >
                                 <p class="mb-0 text-sm fw-bold text-muted">
-                                  ${success.status.value}
+                                  ${close.status.value}
                                 </p>
                               </div>
                             </div>
@@ -179,7 +179,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                               >
                                 <a
                                   class="show-detail"
-                                  onclick="viewDetail('${success.dealID}')"
+                                  onclick="viewDetail('${close.realEstateId}')"
                                   ><i class="fa-solid fa-eye"></i
                                 ></a>
                               </div>
