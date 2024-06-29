@@ -26,6 +26,10 @@ public interface AccountService {
 
     public List<Account> getApprovingAccount();
 
+    public List<Account> getActiveAccount();
+
+    public List<Account> getDeclinedAccount();
+
     public Account approveAccount(String id);
 
     public Account denyAccount(String id);

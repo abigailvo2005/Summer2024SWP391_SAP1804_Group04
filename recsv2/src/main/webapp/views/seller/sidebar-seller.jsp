@@ -110,7 +110,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <div class="docs-info">
               <h6 class="text-white up mb-0">Want to keep track?</h6>
               <p class="text-xs">
-                View your successfully connected properties here.
+                View your close properties here.
               </p>
               <a
                 href="${pageContext.request.contextPath}/seller/history"
