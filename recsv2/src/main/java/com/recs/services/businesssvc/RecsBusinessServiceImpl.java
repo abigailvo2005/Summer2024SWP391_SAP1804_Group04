@@ -181,6 +181,11 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public List<DealAssignMember> getDealByAgencyIdAndStatus(String agencyId, String status) {
+        return dealAssignMemberRepository.getByAgencyAgencyIdAndStatus(agencyId, status);
+    }
+
+    @Override
     public void createAgencyRequest(AgencyRequestCreateDTO request, int accountId) {
         Agency agency = agencyRepository.findByAccountAccountId(accountId);
         AgencyRequest agencyRequest = new AgencyRequest(
@@ -263,8 +268,30 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public List<AgencyRequestDTO> getPageHistoryAgencyRequest(String agencyId) {
+        List<String> dashboardStatus = Stream.of(AgencyRequestStatus.DENIED, AgencyRequestStatus.DROPPED, AgencyRequestStatus.ACCEPTED)
+                .map(AgencyRequestStatus::getValue)
+                .toList();
+        return agencyRequestRepository.getAllByAgencyAgencyIdAndStatusIn(agencyId, dashboardStatus)
+                .stream()
+                .map(AgencyRequestDTO::from)
+                .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
+                .toList();
+    }
+
+    @Override
     public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId) {
         return dealAssignMemberRepository.getByAgencyAgencyId(agencyId)
+                .stream()
+                .map(DealAssignMemberDTO::from)
+                .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
+                .toList();
+    }
+    
+
+    @Override
+    public List<DealAssignMemberDTO> getDealPageByAgencyIdAndStatus(String agencyId, String status) {
+        return dealAssignMemberRepository.getByAgencyAgencyIdAndStatus(agencyId, status)
                 .stream()
                 .map(DealAssignMemberDTO::from)
                 .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())

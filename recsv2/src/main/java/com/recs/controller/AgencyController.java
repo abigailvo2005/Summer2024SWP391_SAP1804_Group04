@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.Clock;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -103,8 +104,19 @@ public class AgencyController {
 
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<DealAssignMemberDTO> dealClose = recsBusinessService.getDealPageByAgencyIdAndStatus(userInfo.getAgencyId(), DealAssignMemberStatus.CLOSED.getValue());
+        List<DealAssignMemberDTO> dealAssigned = recsBusinessService.getDealPageByAgencyIdAndStatus(userInfo.getAgencyId(), DealAssignMemberStatus.ASSIGNED.getValue());
+        List<DealAssignMemberDTO> dealCancelled = recsBusinessService.getDealPageByAgencyIdAndStatus(userInfo.getAgencyId(), DealAssignMemberStatus.CANCELLED.getValue());
+
+        List<DealAssignMemberDTO> dealAssignedMember = new ArrayList<>();
+        dealAssignedMember.addAll(dealClose);
+        dealAssignedMember.addAll(dealAssigned);
+        dealAssignedMember.addAll(dealCancelled);
+        List<AgencyRequestDTO> historyRequestList = recsBusinessService.getPageHistoryAgencyRequest(userInfo.getAgencyId());
         String name = userInfo.getFullName();
         String currentPage = "history";
+        model.addAttribute("listAssigned", dealAssignedMember);
+        model.addAttribute("historyList", historyRequestList);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "agency/history-agency";
