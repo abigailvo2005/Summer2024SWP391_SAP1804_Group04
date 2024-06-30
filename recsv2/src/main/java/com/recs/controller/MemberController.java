@@ -75,9 +75,11 @@ public class MemberController {
 
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        List<BuyerRequestDTO> listRequestHistory = recsBusinessService.getPageBuyerRequestByMemberId(userInfo.getMemberId());
         String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
+        model.addAttribute("requestHistory", listRequestHistory);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "member/history-member";

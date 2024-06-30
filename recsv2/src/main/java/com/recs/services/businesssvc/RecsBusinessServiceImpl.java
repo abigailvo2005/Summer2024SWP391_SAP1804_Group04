@@ -352,6 +352,17 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public List<BuyerRequestDTO> getPageBuyerRequestByMemberId(String memberId) {
+        List<String> status = Stream.of(BuyerRequestStatus.CONNECTED, BuyerRequestStatus.DENIED)
+            .map(BuyerRequestStatus::getValue)
+            .toList();
+        List<BuyerRequest> buyerRequests = buyerRequestRepository.findAllByMemberMemberIdAndStatusIn(memberId, status);
+        return buyerRequests.stream().map(BuyerRequestDTO::from)
+                .sorted(Comparator.comparing(BuyerRequestDTO::getStatus))
+                .toList();
+    }
+
+    @Override
     public void updateBuyer(List<String> buyerRequests, BuyerRequestStatus status) {
         List<BuyerRequest> updateList = buyerRequestRepository.findAllByRequestIdIn(buyerRequests);
         updateList.forEach(row -> {

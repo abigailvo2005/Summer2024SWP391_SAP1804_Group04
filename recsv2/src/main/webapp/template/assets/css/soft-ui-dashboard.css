@@ -22061,6 +22061,7 @@ label,
   text-align: center;
 }
 
+.status-denied,
 .status-unqualified {
   color: #d03842 !important;
   border: 1px solid #e78088 !important;
@@ -22072,6 +22073,7 @@ label,
   text-align: center;
 }
 
+.status-connected,
 .status-displayed,
 .status-closed,
 .status-handled {
