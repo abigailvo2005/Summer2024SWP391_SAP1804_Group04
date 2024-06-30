@@ -269,7 +269,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Override
     public List<AgencyRequestDTO> getPageHistoryAgencyRequest(String agencyId) {
-        List<String> dashboardStatus = Stream.of(AgencyRequestStatus.DENIED, AgencyRequestStatus.DROPPED, AgencyRequestStatus.ACCEPTED)
+        List<String> dashboardStatus = Stream.of(AgencyRequestStatus.DENIED, AgencyRequestStatus.DROPPED, AgencyRequestStatus.ACCEPTED, AgencyRequestStatus.CLOSED)
                 .map(AgencyRequestStatus::getValue)
                 .toList();
         return agencyRequestRepository.getAllByAgencyAgencyIdAndStatusIn(agencyId, dashboardStatus)
@@ -312,6 +312,11 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         RealEstate realEstate = realEstateService.getById(reId);
         realEstate.setStatus(RealEstateStatus.MARKETED.getValue());
         realEstateService.update(realEstate);
+
+        AgencyRequest agencyRequest = agencyRequestRepository.getByAgencyAgencyIdAndRealEstateRealEstateId(agencyId, reId);
+
+        agencyRequest.setStatus(AgencyRequestStatus.PROCESSING.getValue());
+        agencyRequestRepository.save(agencyRequest);
 
         DealAssignMember dealAssignMember = new DealAssignMember(
                 UUID.randomUUID().toString(),
@@ -373,6 +378,8 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                 }
                 case CONNECTED -> {
                     row.getRealEstate().setStatus(RealEstateStatus.CLOSED.getValue());
+
+                    //deny all buyer request
                     List<BuyerRequest> othersRequest = buyerRequestRepository.findAllByRealEstateRealEstateId(row.getRealEstate().getRealEstateId())
                             .stream().filter(buyerRequest -> !buyerRequest.getRequestId().equals(row.getRequestId()))
                             .toList();
@@ -380,8 +387,22 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                         buyerRequest.setStatus(BuyerRequestStatus.DENIED.getValue());
                         buyerRequest.getDeal().setStatus(DealAssignMemberStatus.CLOSED.getValue());
                     });
+
+                    //close all deal
                     List<DealAssignMember> allDeal = dealAssignMemberRepository.getByRealEstateRealEstateId(row.getRealEstate().getRealEstateId());
                     allDeal.forEach(deal -> deal.setStatus(DealAssignMemberStatus.CLOSED.getValue()));
+
+                    //deny all agency request
+                    List<AgencyRequest> allAgencyRequests = agencyRequestRepository.getAllByRealEstateRealEstateId(row.getRealEstate().getRealEstateId());
+                    allAgencyRequests.forEach( agencyRequest -> {
+                        if(agencyRequest.getAgency().getAgencyId().equals(row.getDeal().getAgency().getAgencyId()))
+                            agencyRequest.setStatus(AgencyRequestStatus.CLOSED.getValue());
+                        else agencyRequest.setStatus(AgencyRequestStatus.DENIED.getValue());
+                            }
+                    );
+
+                    //save action
+                    agencyRequestRepository.saveAll(allAgencyRequests);
                     dealAssignMemberRepository.saveAll(allDeal);
                     buyerRequestRepository.saveAll(othersRequest);
                 }

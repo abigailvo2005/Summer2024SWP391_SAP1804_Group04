@@ -5,6 +5,8 @@ public enum AgencyRequestStatus {
     REVIEWING("Reviewing"),
     ACCEPTED("Accepted"),
     DENIED("Denied"),
+    PROCESSING("Processing"),
+    CLOSED("Closed"),
     DROPPED("Dropped");
 
     private final String value;
