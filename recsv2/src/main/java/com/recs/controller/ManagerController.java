@@ -1,5 +1,6 @@
 package com.recs.controller;
 
+import com.recs.models.dto.account.RegisterStaffDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AssignJobRequest;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -57,16 +59,6 @@ public class ManagerController {
         List<ValidationJobInfo> validatingJobList = allJob.stream()
                 .filter(row -> JobStatus.ASSIGNED == row.getStatus())
                 .toList();
-        //
-        // List<ValidationJobInfo> successJobList = allJob.stream()
-        // .filter(row -> JobStatus.SUCCESSFUL == row.getStatus())
-        // .toList();
-
-        /*
-         * List<RealEstate> validatingList =
-         * realEstateService.getValidatingListByManager(userInfo.getManagerId());
-         */
-        // Todo() tự nhét
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName()); // can get userInfo by using $sessionScope in jsp
         model.addAttribute("currentPage", currentPage);
@@ -130,7 +122,6 @@ public class ManagerController {
 
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        /* Account account = accountService.getByUserName(userInfo.); */
         String currentPage = "history";
 
         List<ValidationJobInfo> listingListValidateSuccess = recsBusinessService
@@ -157,6 +148,15 @@ public class ManagerController {
         model.addAttribute("currentPage", currentPage);
 
         return "manager/create-acc-staff";
+    }
+
+    @PostMapping("/staff/create")
+    public String createStaff(
+            @RequestBody RegisterStaffDTO request,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.registerStaff(request, userInfo.getManagerId());
+        return "redirect:/manager/create-staff";
     }
 
 }

@@ -1,6 +1,9 @@
 package com.recs.services.accountsvc;
 
+import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.dto.account.MemberDTO;
+import com.recs.models.dto.account.RegisterMemberDTO;
+import com.recs.models.dto.account.RegisterStaffDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
@@ -59,4 +62,10 @@ public interface AccountService {
     public List<UserInfo> getListStaffByManager(String managerId);
 
     public List<MemberDTO> getMembersByAgency(String agencyId);
+
+    public void registerAccount(CreateAccountRequestDTO request);
+
+    public void registerStaff(RegisterStaffDTO request, String managerId);
+
+    public void registerMember(RegisterMemberDTO request, String agencyId);
 }

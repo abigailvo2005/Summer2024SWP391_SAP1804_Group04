@@ -1,6 +1,9 @@
 package com.recs.services.accountsvc;
 
+import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.dto.account.MemberDTO;
+import com.recs.models.dto.account.RegisterMemberDTO;
+import com.recs.models.dto.account.RegisterStaffDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.account.Agency;
@@ -9,12 +12,14 @@ import com.recs.models.entities.account.Member;
 import com.recs.models.entities.account.Seller;
 import com.recs.models.entities.account.Staff;
 import com.recs.repositories.account.*;
+import com.recs.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -260,5 +265,80 @@ public class AccountServiceImpl implements AccountService {
         return memberRepository.findAllByAgencyAgencyId(agencyId)
                 .stream().map(MemberDTO::from)
                 .toList();
+    }
+
+    @Override
+    public void registerAccount(CreateAccountRequestDTO request) {
+        Account newAccount = new Account(
+                -1,
+                AccountUtils.generateUsername(request.getFullName()),
+                encoder.encode(request.getPassword()),
+                request.getRole(),
+                request.getFullName(),
+                request.getGender(),
+                request.getBirthDate(),
+                request.getEmail(),
+                request.getPhone(),
+                request.getAddress(),
+                request.getIdCard(),
+                "active"
+        );
+        Account savedAccount = accountRepository.save(newAccount);
+        switch (savedAccount.getRoleId()) {
+            case "ROLE_SELLER" -> {
+                Seller newSeller = new Seller(
+                        UUID.randomUUID().toString(),
+                        savedAccount.getAccountId(),
+                        request.getCompany()
+                );
+                sellerRepository.save(newSeller);
+            }
+            case "ROLE_MANAGER" -> {
+                Manager newManager = new Manager(
+                        UUID.randomUUID().toString(),
+                        savedAccount.getAccountId(),
+                        request.getYearsOfExperience()
+                );
+                managerRepository.save(newManager);
+            }
+            case "ROLE_AGENCY" -> {
+                Agency newAgency = new Agency(
+                        UUID.randomUUID().toString(),
+                        request.getCompany(),
+                        request.getYearsOfExperience(),
+                        request.getCompletedProject(),
+                        request.getDescription(),
+                        savedAccount,
+                        List.of()
+                );
+                agencyRepository.save(newAgency);
+            }
+        }
+    }
+
+    @Override
+    public void registerStaff(RegisterStaffDTO request, String managerId) {
+        Account newAccount = request.toAccount();
+        newAccount.setAccountPassword(encoder.encode(newAccount.getAccountPassword()));
+        Account savedAccount = accountRepository.save(newAccount);
+        Staff newStaff = new Staff(
+                UUID.randomUUID().toString(),
+                savedAccount.getAccountId(),
+                managerId
+        );
+        staffRepository.save(newStaff);
+    }
+
+    @Override
+    public void registerMember(RegisterMemberDTO request, String agencyId) {
+        Account newAccount = request.toAccount();
+        newAccount.setAccountPassword(encoder.encode(newAccount.getAccountPassword()));
+        Account savedAccount = accountRepository.save(newAccount);
+        Member newMember = new Member(
+                UUID.randomUUID().toString(),
+                agencyRepository.getReferenceById(agencyId),
+                savedAccount
+        );
+        memberRepository.save(newMember);
     }
 }

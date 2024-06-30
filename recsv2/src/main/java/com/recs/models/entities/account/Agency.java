@@ -43,7 +43,7 @@ public class Agency {
     private String description;
 
     @OneToOne
-    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "accountId", insertable = false)
     private Account account;
 
     @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

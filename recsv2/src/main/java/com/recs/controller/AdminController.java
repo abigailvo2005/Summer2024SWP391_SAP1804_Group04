@@ -1,5 +1,6 @@
 package com.recs.controller;
 
+import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.entities.account.Account;
 import com.recs.services.accountsvc.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -93,5 +96,13 @@ public class AdminController {
         System.out.println("Denied account:"+account);
         model.addAttribute("msg","Account denied!");
         return "redirect:/admin";
+    }
+
+    @PostMapping("/account/create")
+    private String createAccount(
+            @RequestBody CreateAccountRequestDTO request
+            ) {
+        accountService.registerAccount(request);
+        return "redirect:/admin/create-account";
     }
 }

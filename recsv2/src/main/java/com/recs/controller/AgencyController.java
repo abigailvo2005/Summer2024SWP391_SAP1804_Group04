@@ -1,6 +1,7 @@
 package com.recs.controller;
 
 import com.recs.models.dto.account.MemberDTO;
+import com.recs.models.dto.account.RegisterMemberDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
@@ -100,6 +101,15 @@ public class AgencyController {
         model.addAttribute("currentPage", currentPage);
 
         return "agency/create-acc-mem";
+    }
+
+    @PostMapping("/member/create")
+    public String createMember(
+            @RequestBody RegisterMemberDTO request,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+            ) {
+        accountService.registerMember(request, userInfo.getAgencyId());
+        return "redirect:/agency/create-mem";
     }
 
     @GetMapping({ "/history" })

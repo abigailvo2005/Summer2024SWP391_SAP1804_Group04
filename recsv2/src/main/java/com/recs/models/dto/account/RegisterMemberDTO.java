@@ -2,12 +2,10 @@ package com.recs.models.dto.account;
 
 import com.recs.models.entities.account.Account;
 import com.recs.utils.AccountUtils;
-import lombok.Data;
 
 import java.util.Date;
 
-@Data
-public class RegisterStaffDTO {
+public class RegisterMemberDTO {
     private String fullName;
     private String gender;
     private String email;
@@ -22,7 +20,7 @@ public class RegisterStaffDTO {
         return new Account(0,
                 AccountUtils.generateUsername(fullName),
                 this.password,
-                "ROLE_STAFF",
+                "ROLE_MEMBER",
                 fullName,
                 gender.equalsIgnoreCase("Male") ? 0 : 1,
                 birthDate,
@@ -31,7 +29,6 @@ public class RegisterStaffDTO {
                 address,
                 idCard,
                 "APPROVING"
-                );
+        );
     }
-
 }
