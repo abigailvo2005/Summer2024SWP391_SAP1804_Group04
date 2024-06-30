@@ -42,6 +42,10 @@ public interface RecsBusinessService {
 
     public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status);
 
+    public List<DealAssignMember> getDealByAgencyIdAndStatus(String agencyId, String status);
+
+    public List<DealAssignMemberDTO> getDealPageByAgencyIdAndStatus(String agencyId, String status);
+
     public void createAgencyRequest(AgencyRequestCreateDTO request, int accountId);
 
     public List<AgencyRequest> getAgencyRequestsByAgencyId(String agencyId);
@@ -55,6 +59,8 @@ public interface RecsBusinessService {
     public AgencyRequestDTO getAgencyRequest(String id);
 
     public List<AgencyRequestDTO> getDashBoardAgencyRequest(String agencyId);
+
+    public List<AgencyRequestDTO> getPageHistoryAgencyRequest(String agecyId);
 
     public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId);
 
