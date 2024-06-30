@@ -36,7 +36,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     />
   </head>
 
-  <body class="g-sidenav-show bg-gray-100">
+  <body class="g-sidenav-show bg-gray-100" onload = "makeTableScroll()">
     <!-- START: SIDEBAR -->
     <header>
       <jsp:include page="/views/member/sidebar-member.jsp"/>
