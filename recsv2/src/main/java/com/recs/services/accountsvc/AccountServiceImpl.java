@@ -38,6 +38,8 @@ public class AccountServiceImpl implements AccountService {
 
     private PasswordEncoder encoder;
 
+    private AccountUtils accountUtils;
+
     @Autowired
     public AccountServiceImpl(
             AccountRepository accountRepository,
@@ -46,7 +48,8 @@ public class AccountServiceImpl implements AccountService {
             StaffRepository staffRepository,
             AgencyRepository agencyRepository,
             MemberRepository memberRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            AccountUtils accountUtils) {
         this.accountRepository = accountRepository;
         this.sellerRepository = sellerRepository;
         this.managerRepository = managerRepository;
@@ -54,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
         this.agencyRepository = agencyRepository;
         this.memberRepository = memberRepository;
         this.encoder = passwordEncoder;
+        this.accountUtils = accountUtils;
     }
 
     @Override
@@ -271,7 +275,7 @@ public class AccountServiceImpl implements AccountService {
     public void registerAccount(CreateAccountRequestDTO request) {
         Account newAccount = new Account(
                 -1,
-                AccountUtils.generateUsername(request.getFullName()),
+                accountUtils.generateUsername(request.getFullName()),
                 encoder.encode(request.getPassword()),
                 request.getRole(),
                 request.getFullName(),
@@ -281,7 +285,7 @@ public class AccountServiceImpl implements AccountService {
                 request.getPhone(),
                 request.getAddress(),
                 request.getIdCard(),
-                "active"
+                "ACTIVE"
         );
         Account savedAccount = accountRepository.save(newAccount);
         switch (savedAccount.getRoleId()) {
@@ -320,6 +324,7 @@ public class AccountServiceImpl implements AccountService {
     public void registerStaff(RegisterStaffDTO request, String managerId) {
         Account newAccount = request.toAccount();
         newAccount.setAccountPassword(encoder.encode(newAccount.getAccountPassword()));
+        newAccount.setUsername(accountUtils.generateUsername(newAccount.getFullName()));
         Account savedAccount = accountRepository.save(newAccount);
         Staff newStaff = new Staff(
                 UUID.randomUUID().toString(),
@@ -333,6 +338,7 @@ public class AccountServiceImpl implements AccountService {
     public void registerMember(RegisterMemberDTO request, String agencyId) {
         Account newAccount = request.toAccount();
         newAccount.setAccountPassword(encoder.encode(newAccount.getAccountPassword()));
+        newAccount.setUsername(accountUtils.generateUsername(newAccount.getFullName()));
         Account savedAccount = accountRepository.save(newAccount);
         Member newMember = new Member(
                 UUID.randomUUID().toString(),

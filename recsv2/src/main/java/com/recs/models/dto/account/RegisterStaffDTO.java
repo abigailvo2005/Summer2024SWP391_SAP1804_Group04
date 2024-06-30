@@ -20,7 +20,7 @@ public class RegisterStaffDTO {
 
     public Account toAccount(){
         return new Account(0,
-                AccountUtils.generateUsername(fullName),
+                "",
                 this.password,
                 "ROLE_STAFF",
                 fullName,

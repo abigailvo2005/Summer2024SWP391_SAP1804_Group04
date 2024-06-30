@@ -1,5 +1,6 @@
 package com.recs.api;
 
+import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
@@ -69,5 +70,11 @@ public class ApiController {
     @GetMapping(path = "/agency-request/{id}", produces = "application/json")
     public ResponseEntity<AgencyRequestDTO> getAgencyRequest(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(recsBusinessService.getAgencyRequest(id));
+    }
+
+    @PostMapping("account/create")
+    public ResponseEntity<String> createAccount(@RequestBody CreateAccountRequestDTO request) {
+        accountService.registerAccount(request);
+        return ResponseEntity.ok("check db");
     }
 }
