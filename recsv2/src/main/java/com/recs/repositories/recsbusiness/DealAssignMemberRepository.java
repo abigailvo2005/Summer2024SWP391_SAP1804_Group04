@@ -16,4 +16,6 @@ public interface DealAssignMemberRepository extends JpaRepository<DealAssignMemb
 
     List<DealAssignMember> getByAgencyAgencyId(String agencyId);
 
+    List<DealAssignMember> getByRealEstateRealEstateId(String id);
+
 }

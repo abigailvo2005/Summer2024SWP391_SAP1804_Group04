@@ -369,6 +369,9 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                         buyerRequest.setStatus(BuyerRequestStatus.DENIED.getValue());
                         buyerRequest.getDeal().setStatus(DealAssignMemberStatus.CLOSED.getValue());
                     });
+                    List<DealAssignMember> allDeal = dealAssignMemberRepository.getByRealEstateRealEstateId(row.getRealEstate().getRealEstateId());
+                    allDeal.forEach(deal -> deal.setStatus(DealAssignMemberStatus.CLOSED.getValue()));
+                    dealAssignMemberRepository.saveAll(allDeal);
                     buyerRequestRepository.saveAll(othersRequest);
                 }
             }
