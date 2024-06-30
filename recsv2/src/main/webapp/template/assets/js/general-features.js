@@ -9,7 +9,9 @@ statusElements.forEach((element) => {
     "status-closed",
     "status-handled",
     "status-agency-approving",
-    "status-buyer-approving"
+    "status-buyer-approving",
+    "status-denied",
+    "status-connected"
   );
 });
 // Display colors according to status value
@@ -23,10 +25,12 @@ statusElements.forEach((element) => {
     case "reviewing":
       element.classList.add("status-validating");
       break;
+    case "denied":
     case "unqualified":
     case "fail":
       element.classList.add("status-unqualified");
       break;
+    case "connected":
     case "displayed":
     case "closed":
     case "handled":
