@@ -165,7 +165,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                               <div
                                 class="d-flex flex-column justify-content-center"
                               >
-                                <p class="mb-0 text-sm fw-bold status-color" value="${request.status.value}">
+                                <p class="mb-0 text-sm fw-bold text-muted status-color" value="${request.status.value}">
                                   ${request.status.value}
                                 </p>
                               </div>

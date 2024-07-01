@@ -155,7 +155,7 @@ public class SellerController {
     }
 
     @GetMapping("real-estate/request")
-    public String requestValidate(
+    private String requestValidate(
             @RequestParam String realEstateId
     ) {
         realEstateService.updateStatus(realEstateId, RealEstateStatus.REVIEWING, "");

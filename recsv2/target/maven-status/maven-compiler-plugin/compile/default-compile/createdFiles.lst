@@ -13,7 +13,6 @@ com/recs/models/entities/realestate/PropertyImages.class
 com/recs/controller/AdminController.class
 com/recs/api/ApiController.class
 com/recs/models/entities/realestate/PaperWorks.class
-com/recs/models/dto/account/RegisterMemberDTO.class
 com/recs/models/entities/account/Account.class
 com/recs/models/dto/recsbusiness/DealAssignMemberDTO.class
 com/recs/models/dto/account/StaffDTO.class
@@ -70,7 +69,6 @@ com/recs/models/entities/realestate/RealEstate.class
 com/recs/repositories/realestate/PaperWorksRepository.class
 com/recs/models/entities/realestate/PropertyHouse.class
 com/recs/services/businesssvc/RecsBusinessServiceImpl.class
-com/recs/models/dto/account/CreateAccountRequestDTO.class
 com/recs/models/dto/recsbusiness/ApproveAgencyRequestDTO.class
 com/recs/models/dto/account/UserInfo.class
 com/recs/models/dto/realestate/RealEstateInfo$Builder.class

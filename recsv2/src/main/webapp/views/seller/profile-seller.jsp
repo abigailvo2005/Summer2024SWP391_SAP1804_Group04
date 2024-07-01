@@ -50,7 +50,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         <div
           class="page-header min-height-300 border-radius-xl mt-2"
           style="
-            background-image: url(./../../template/assets/img/curved-images/curved19.jpg);
+            background-image: url(/template/assets/img/curved-images/profile-background.jpeg'/>);
             background-position-y: 50%;
           "
         >
