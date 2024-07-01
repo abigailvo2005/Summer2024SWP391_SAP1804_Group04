@@ -74,9 +74,11 @@ public class AdminController {
 
     @GetMapping({"/create-account"})
     public String createAccount(Model model, Authentication authentication){
+        List<Account> allAccountActive = accountService.getActiveAccount();
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-account";
+        model.addAttribute("activeAccunt", allAccountActive);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/create-account";
