@@ -92,24 +92,24 @@ public class AgencyController {
         return "agency/marketplace";
     }
 
-    @GetMapping({ "/create-mem" })
-    public String registerStaff(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "create-mem";
-        model.addAttribute("name", name);
+    @GetMapping({ "/create-acc-mem" })
+    public String registerStaff(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String currentPage = "create-acc-mem";
+        List<MemberDTO> memberListCreated = accountService.getMembersByAgency(userInfo.getAgencyId());
+        model.addAttribute("memberList", memberListCreated);
+        model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-
         return "agency/create-acc-mem";
     }
 
-    @PostMapping("/member/create")
+    @PostMapping("/create-acc-mem")
     public String createMember(
-            @RequestBody RegisterMemberDTO request,
+            @ModelAttribute(name = "request") RegisterMemberDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
             ) {
         accountService.registerMember(request, userInfo.getAgencyId());
-        return "redirect:/agency/create-mem";
+
+        return "redirect:/agency";
     }
 
     @GetMapping({ "/history" })

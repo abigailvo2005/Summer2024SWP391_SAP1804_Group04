@@ -88,8 +88,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'create-mem' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/agency/create-mem"
+              class="nav-link ${currentPage == 'create-acc-mem' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/agency/create-acc-mem"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -178,7 +178,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 'profile' ? 'View Profile' : (currentPage == 'history' ?
                 'View History' : (currentPage == 'assign-deal' ? 'Assign Deal' : 
                 (currentPage == 'register-mem' ? 'Register Member' : 
-                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-mem' ?
+                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-acc-mem' ?
                 'Create Member' : ''))))))}
               </li>
             </ol>
@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 'profile' ? 'Profile' : (currentPage == 'history' ?
                 'History' : (currentPage == 'assign-deal' ? 'Assign Deal' : 
                 (currentPage == 'register-mem' ? 'Register Member' : 
-                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-mem' ?
+                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-acc-mem' ?
                 'Create Member' : ''))))))}
             </h6>
           </nav>
