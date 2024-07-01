@@ -2,9 +2,11 @@ package com.recs.models.dto.account;
 
 import com.recs.models.entities.account.Account;
 import com.recs.utils.AccountUtils;
+import lombok.Data;
 
 import java.util.Date;
 
+@Data
 public class RegisterMemberDTO {
     private String fullName;
     private String gender;
@@ -17,7 +19,8 @@ public class RegisterMemberDTO {
     private String password;
 
     public Account toAccount(){
-        return new Account(0,
+        return new Account(
+                0,
                 "",
                 this.password,
                 "ROLE_MEMBER",

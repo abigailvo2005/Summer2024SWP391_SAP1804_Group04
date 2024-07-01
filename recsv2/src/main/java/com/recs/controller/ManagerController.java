@@ -157,7 +157,7 @@ public class ManagerController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
         accountService.registerStaff(request, userInfo.getManagerId());
-        return "redirect:/manager/create-staff";
+        return "redirect:/manager/create-acc-staff";
     }
 
 }
