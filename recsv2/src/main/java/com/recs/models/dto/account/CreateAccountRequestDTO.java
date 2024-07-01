@@ -16,7 +16,7 @@ public class CreateAccountRequestDTO {
 
     private String role;
 
-    private int gender;
+    private String gender;
 
     private Date birthDate;
 

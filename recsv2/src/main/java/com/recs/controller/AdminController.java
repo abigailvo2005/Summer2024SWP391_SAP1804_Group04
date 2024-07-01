@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,9 +101,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/account/create")
+    @PostMapping("/create-account")
     private String createAccount(
-            @RequestBody CreateAccountRequestDTO request
+            @ModelAttribute(name = "request") CreateAccountRequestDTO request
             ) {
         accountService.registerAccount(request);
         return "redirect:/admin/create-account";

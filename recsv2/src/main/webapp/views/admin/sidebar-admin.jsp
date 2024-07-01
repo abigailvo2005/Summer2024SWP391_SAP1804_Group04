@@ -99,8 +99,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           </li>
           <li class="nav-item">
             <a
-              class="nav-link ${currentPage == 'tracking' ? 'active' : ''}"
-              href="${pageContext.request.contextPath}/admin/property-tracking"
+              class="nav-link ${currentPage == 'create-account' ? 'active' : ''}"
+              href="${pageContext.request.contextPath}/admin/create-account"
             >
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
@@ -109,7 +109,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   class="fa-solid fa-pen-to-square"
                 ></i>
               </div>
-              <span class="nav-link-text ms-1">Property Tracking</span>
+              <span class="nav-link-text ms-1">Create Account</span>
             </a>
           </li>
         </ul>
@@ -127,26 +127,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               background-image: url('/template/assets/img/curved-images/white-curved.jpg');
             "
           ></div>
-          <div class="card-body text-start p-3 w-100">
-            <div class="docs-info">
-              <h6 class="text-white up mb-1">Want to keep track?</h6>
-              <p class="text-xs">
-                View all account create successfully in the system.
-              </p>
-              <a
-                href="${pageContext.request.contextPath}/admin/history"
-                target="_self"
-                class="btn btn-white btn-sm w-100 mb-0"
-                >History</a
-              >
-            </div>
-          </div>
         </div>
-        <a
-          class="btn bg-gradient-primary mt-3 w-100"
-          href="${pageContext.request.contextPath}/admin/create-account"
-          >Create Account</a
-        >
       </div>
     </aside>
     <!-- END SIDEBAR -->

@@ -58,7 +58,7 @@
 
                   <div class="card-body">
                     <form role="form text-left" name="create-account-form"
-                      action="${pageContext.request.contextPath}/admin/create-account" method="post">
+                      action="${pageContext.request.contextPath}/admin/create-account" method="POST" modelAttribute="request">
                       <div class="mb-3 row">
                         <div class="col-sm-2">
                           <label for="fullName">Full Name:</label>
@@ -117,7 +117,10 @@
                         <div class="col-sm-4">
                           <input type="number" id="phone" name="phone" class="form-control form-create-control col-10"
                             placeholder="Enter phone number" min="1" required />
-                        </div>
+                            <p class="text-danger text-error mb-0 text-center pt-1 error-phone hidden">
+                              Phone number must be between 10 and 11 digits long and contain only numbers.
+                            </p>
+                          </div>
                         <div class="col-sm-2">
                           <label for="address"> Address:</label>
                         </div>
@@ -768,6 +771,8 @@
             const userName = document.querySelector("#fullName");
             const emailInput = document.querySelector("#email");
             const passwordInput = document.querySelector("#password");
+            const phoneInput = document.querySelector("#phone");
+            const phoneError = document.querySelector(".error-phone");
             const nameError = document.querySelector(".error-name");
             const emailError = document.querySelector(".error-email");
             const pwError = document.querySelector(".error-pw");
@@ -778,6 +783,16 @@
               return;
             } else {
               nameError.classList.add("hidden");
+            }
+
+            const phoneInputText = phoneInput.value.toString();
+            if(phoneInputText.length > 11) {
+              phoneError.classList.remove("hidden");
+              console.log("valid phone");
+              return;
+            } else {
+              phoneError.classList.add("hidden");
+              console.log("invailid phone");
             }
 
             if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
