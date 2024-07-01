@@ -315,7 +315,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-lg-8 col-9">
-                  <h6>Your Staff Create Requests</h6>
+                  <h6>Subordinate Staff</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-house-user"></i>
                     <span class="font-weight-bold ms-1">1 request(s)</span>
@@ -366,17 +366,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                       >
-                        Status
+                        STATUS
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-3"
                       >
-                        Date Created
+                       DATE CREATED
                       </th>
                       <th
                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                       >
-                        View Details
+                        VIEW DETAILS
                       </th>
                     </tr>
                   </thead>

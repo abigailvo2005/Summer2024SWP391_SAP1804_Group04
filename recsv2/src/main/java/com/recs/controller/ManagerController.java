@@ -140,11 +140,13 @@ public class ManagerController {
     }
 
     @GetMapping({ "/create-staff" })
-    public String registerStaff(Model model, Authentication authentication) {
-        String name = authentication.getName();
+    public String registerStaff(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
+        String name = userInfo.getUsername();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-staff";
-        model.addAttribute("name", name);
+        List<UserInfo> staffList = accountService.getListStaffByManager(userInfo.getManagerId());
+        model.addAttribute("staffList", staffList);
+        model.addAttribute("name",name);
         model.addAttribute("currentPage", currentPage);
 
         return "manager/create-acc-staff";

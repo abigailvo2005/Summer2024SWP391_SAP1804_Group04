@@ -475,7 +475,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             //if user is manager
             if (data.roleId === "ROLE_MANAGER") {
               $("#manager-section").removeClass("hidden");
-              $("#popup-year-experience-man").text("4");
+              $("#popup-year-experience-man").text(data.yearsOfExperience);
             } else {
               $("#manager-section").addClass("hidden");
             }

@@ -676,12 +676,44 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       id="draft-section"
                       class="row d-flex justify-content-center hidden"
                     >
-                      <button id="request-validate-btn" class="btn btn-dark me-3 col-4" onclick="requestValidation(this.value)">
-                        Request Validation
-                      </button>
-                      <button id="delete-real-estate-btn" class="btn btn-danger col-4" onclick="deleteRealEstate(this.value)">
-                        Delete
-                      </button>
+                      <form
+                        class="col-4"
+                        action="${pageContext.request.contextPath}/seller/real-estate/request"
+                        id="request-validation"
+                        method="get"
+                      >
+                        <input
+                          type="hidden"
+                          id="request-reId"
+                          name="realEstateId"
+                        />
+                        <button
+                          id="request-validate-btn"
+                          class="btn btn-dark me-3 col-12"
+                          onclick="draftLoadId(event, this.value, '#request-reId', '#request-validation')"
+                        >
+                          Request Validation
+                        </button>
+                      </form>
+
+                      <form
+                        class="col-4"
+                        action="${pageContext.request.contextPath}/seller/"
+                        id="request-delete"
+                      >
+                        <input
+                          type="hidden"
+                          id="delete-reId"
+                          name="realEstateId"
+                        />
+                        <button
+                          id="delete-real-estate-btn"
+                          class="btn btn-danger col-12"
+                          onclick="draftLoadId(event, this.value, '#delete-reId', '#request-delete')"
+                        >
+                          Delete
+                        </button>
+                      </form>
                     </div>
 
                     <!-- Button allows user hide/show list of agencies -->
@@ -1070,6 +1102,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         chosenBuyerInput.setAttribute("value", selectedBuyer);
       }
 
+      //load Real estate ID for draft actions (request validation/delete property)
+      function draftLoadId(e, value, container, form) {
+        e.preventDefault();
+
+        //load ID
+        $(container).val(value);
+
+        console.log($(container).val());
+
+        //submit form
+        $(form).submit();
+      }
+
       //to let user update paperwork if validation fail
       function changePW(type) {
         //show update form
@@ -1108,9 +1153,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
         var agencyBtn = document.querySelector("#show-agency-permission");
-        agencyBtn.classList.add("hidden"); //default
         var buyerBtn = document.querySelector("#show-buyer-permission");
-        buyerBtn.classList.add("hidden"); //default
         var unqualified = document.querySelector(".unqualified");
         var pen = document.querySelector(".pen");
 
@@ -1173,11 +1216,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
 
             //only show options of submitting properties/delete property if it's a draft property
-            if(type == 'draft') {
+            if (type == "draft") {
               $("#draft-section").removeClass("hidden");
-
               $("#request-validate-btn").val(data.realEstateId);
               $("#delete-real-estate-btn").val(data.realEstateId);
+            } else {
+              $("#draft-section").addClass("hidden");
             }
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
@@ -1185,9 +1229,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               !requestingAgencyStatusHide.includes(data.status.toLowerCase())
             ) {
               agencyBtn.classList.remove("hidden");
-            }
-
-            if (!requestBuyerStatusHide.includes(data.status.toLowerCase())) {
+            } else if (!requestBuyerStatusHide.includes(data.status.toLowerCase())) {
               buyerBtn.classList.remove("hidden");
             } else {
               //hide all as default
