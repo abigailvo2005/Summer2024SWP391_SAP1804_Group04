@@ -1,6 +1,5 @@
-<%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,26 +7,25 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RECS - Profile</title>
 
-     <!-- Link CSS -->
-     <link
-     id="pagestyle"
-     href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
-     rel="stylesheet"
-   />
+    <!-- Link CSS -->
+    <link
+      id="pagestyle"
+      href="/template/assets/css/soft-ui-dashboard.css?v=1.0.7"
+      rel="stylesheet"
+    />
 
-   <!--Web's favicon-->
-   <link
-     rel="icon"
-     type="image/png"
-     href="/template/assets/img/logos/logo-no-name.png"
-   />
+    <!--Web's favicon-->
+    <link
+      rel="icon"
+      type="image/png"
+      href="/template/assets/img/logos/logo-no-name.png"
+    />
 
-   <!-- Fonts-->
-   <link
-     href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-     rel="stylesheet"
-   />
-
+    <!-- Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
 
     <!-- FontAwesome: icons used in website-->
     <link
@@ -63,7 +61,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <div class="col-auto">
               <div class="avatar avatar-xl position-relative">
                 <img
-                  src="/template/assets/img/male-pfp.png'/>"
+                  src="${account.gender == 0 ? './../../template/assets/img/male-pfp.png' : './../../template/assets/img/female-pfp.png'}"
                   alt="profile_image"
                   class="w-100 border-radius-lg shadow-sm"
                 />
@@ -71,9 +69,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             </div>
             <div class="col-auto my-auto">
               <div class="h-100">
-                <h5 class="mb-1">Nguyễn Đức Long</h5>
+                <h5 class="mb-1">${account.fullName}</h5>
                 <p class="mb-0 font-weight-bold text-sm">
-                  Seller / Property Owner
+                  ${account.roleId}
                 </p>
               </div>
             </div>
@@ -100,34 +98,29 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                     properties are legally accepted by the government to be sold
                     or not. You can also view and track your properties while
                     they are being validated, posted for agencies to follow,
-                    taken by an agency or having interested buyers or not.
+                    taken by an agency or had interested buyers or not.
                   </p>
                   <ul class="list-group">
                     <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                      <strong class="text-dark">Username:</strong> &nbsp; LongND
+                      <strong class="text-dark">Username:</strong> &nbsp; ${account.username}
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
-                      <strong class="text-dark">Gender:</strong> &nbsp; Male
+                      <strong class="text-dark">Gender:</strong> &nbsp; ${account.gender == 0 ? 'Male' : 'Female'}
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
-                      <strong class="text-dark">Address:</strong> &nbsp; đường
-                      số 1, phường Tân Phong, Quận 7, TP HCM, Việt Nam.
+                      <strong class="text-dark">Address:</strong> &nbsp; ${account.address}
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
                       <strong class="text-dark">Birthday:</strong> &nbsp;
-                      01/02/2003
+                      ${account.birthDate}
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
                       <strong class="text-dark">Email:</strong> &nbsp;
-                      longnd@gmail.com
-                    </li>
-                    <li class="list-group-item border-0 ps-0 text-sm">
-                      <strong class="text-dark">Company:</strong> &nbsp;
-                      Công Ty Tây Mỗ
+                      ${account.email}
                     </li>
                     <li class="list-group-item border-0 ps-0 text-sm">
                       <strong class="text-dark">ID Number:</strong> &nbsp;
-                      0013349227592
+                      ${account.idCard}
                     </li>
                   </ul>
                 </div>
@@ -155,7 +148,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
-                        <h6 class="mb-0 text-sm">0902283811</h6>
+                        <h6 class="mb-0 text-sm">${account.phone}</h6>
                         <p class="mb-0 text-xs">Phone Number</p>
                       </div>
 
@@ -180,32 +173,26 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
-                        <div class="d-flex">
-                          <h6 class="mb-0 text-sm">longnd2003@123</h6>
-                          <h6 class="mb-0 text-sm position-absolute">
-                            **************
-                          </h6>
-                        </div>
                         <p class="mb-0 text-xs">Password</p>
                       </div>
                       <!-- eye open - viewable / eye close - not viewable -->
                       <div class="pe-1 ps-0 mb-0 ms-auto">
                         <div class="d-flex">
-                          <a
+                          <!-- <a
                             class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
-                            href="javascript:;"
+                            href=""
                           >
                             <i class="fa-solid fa-eye"></i>
                           </a>
                           <a
                             class="btn btn-link pe-1 ps-1 mb-0 ms-auto position-absolute"
-                            href="javascript:;"
+                            href="""
                           >
                             <i class="fa-solid fa-eye-slash"></i>
-                          </a>
+                          </a> -->
                           <a
                             class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
-                            href="javascript:;"
+                            href=""
                             >Change</a
                           >
                         </div>
@@ -265,5 +252,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+
+    <script>
+      //URL REAL ESTATE API
+      const urlUser = "http://localhost:8085/api/user/";
+
+      //Load all information
+    </script>
   </body>
 </html>

@@ -175,7 +175,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   class="d-flex flex-column justify-content-center"
                                 >
                                   <p class="mb-0 text-sm fw-bold text-dark">
-                                    ${user.gender}
+                                    ${user.gender == 0 ? 'Male' : 'Female'}
                                   </p>
                                 </div>
                               </div>
@@ -261,7 +261,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- END DASHBOARD MAIN CONTENT -->
 
     <!--------------------START: POPUP SECTIONS-------------------- -->
-    <div id="popup-user-request" class="popup-container hidden z-index-3">
+    <div id="popup-user" class="popup-container hidden z-index-3">
       <div class="popup-content container-fluid">
         <!-- Header -->
         <div class="popup-header row mx-1">
@@ -287,128 +287,140 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 <ul class="list-group">
                   <div class="container-fluid">
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">User ID: </strong>
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">Account ID: </strong>
                         <p id="popup-id"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">Username:</strong>
+                        <p id="popup-username"></p>
+                      </li>
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
                         <strong class="text-dark">Status:</strong>
                         <p id="popup-status"></p>
                       </li>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Username:</strong>
-                        <p id="popup-username"></p>
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">Role:</strong>
+                        <p id="popup-role"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
                         <strong class="text-dark">Email:</strong>
                         <p id="popup-email"></p>
                       </li>
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">ID Number:</strong>
+                        <p id="popup-id-number"></p>
+                      </li>
                     </div>
 
                     <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
                         <strong class="text-dark">Gender:</strong>
                         <p id="popup-gender"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Created on:</strong>
-                        <p id="dateCreated">NaN</p>
-                      </li>
-                    </div>
-
-                    <div class="row">
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 company hidden"
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
-                        <strong class="text-dark">Company ID:</strong>
-                        <p id="popup-company-id"></p>
+                        <strong class="text-dark">Address:</strong>
+                        <p id="popup-address"></p>
                       </li>
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 superior hidden"
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
-                        <strong class="text-dark">Superior ID:</strong>
-                        <p id="popup-superior-id"></p>
-                      </li>
-                    </div>
-
-                    <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
                         <strong class="text-dark">Birth Date:</strong>
-                        <p id="popup-birth-date"></p>
-                      </li>
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Phone:</strong>
-                        <p id="popup-phone"></p>
+                        <p id="popup-birthdate"></p>
                       </li>
                     </div>
 
-                    <div class="row">
-                      <li class="list-group-item border-0 ps-0 text-sm col-6">
-                        <strong class="text-dark">Role ID:</strong>
-                        <p id="popup-role-id"></p>
-                      </li>
-                      <li class="list-group-item border-0 ps-0 text-sm">
-                        <strong class="text-dark">ID Card:</strong>
-                        <p id="popup-id-card"></p>
+                    <div id="seller-section" class="row hidden">
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">Company:</strong>
+                        <p id="popup-company-seller"></p>
                       </li>
                     </div>
 
-                    <div class="row">
-                      <li class="list-group-item border-0 ps-0 col-6 text-sm">
-                        <strong id="f-card" class="text-dark"
-                          >ID Card (Front):</strong
-                        >
-                        &nbsp;
-                        <img
-                          class="id-card card-img mt-2"
-                          src="/template/assets/img/id-front-demo.jpeg"
-                          alt="id-front"
-                        />
+                    <div id="manager-section" class="row hidden">
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">Years Of Experience:</strong>
+                        <p id="popup-year-experience-man"></p>
                       </li>
-                      <li class="list-group-item border-0 ps-0 col-6 text-sm">
-                        <strong id="b-card" class="text-dark"
-                          >ID Card (Back):</strong
-                        >
-                        &nbsp;
-                        <img
-                          class="id-card card-img mt-2"
-                          src="/template/assets/img/id-back-demo.jpeg"
-                          alt="id-back"
-                        />
+                    </div>
+
+                    <div id="staff-section" class="row hidden">
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark">Superior Manager: </strong>
+                        <p id="popup-superior-staff"></p>
                       </li>
+                      <li
+                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                      >
+                        <strong class="text-dark"
+                          >Currently Handling Validation:
+                        </strong>
+                        <p id="popup-num-of-projects"></p>
+                      </li>
+                    </div>
+
+                    <div id="agency-section" class="row hidden">
+                      <div class="row">
+                        <li
+                          class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                        >
+                          <strong class="text-dark">Company: </strong>
+                          <p id="popup-company-agency"></p>
+                        </li>
+                        <li
+                          class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                        >
+                          <strong class="text-dark"
+                            >Years Of Experience:</strong
+                          >
+                          <p id="popup-year-experience-agency"></p>
+                        </li>
+                        <li
+                          class="d-flex list-group-item border-0 ps-0 text-sm col-4"
+                        >
+                          <strong class="text-dark"
+                            >Completed Projects:
+                          </strong>
+                          <p id="popup-completed-projects"></p>
+                        </li>
+                      </div>
+
+                      <div class="row">
+                        <li
+                          class="d-flex list-group-item border-0 ps-0 text-sm col-12"
+                        >
+                          <strong class="text-dark">Description:</strong>
+                          <p id="popup-description"></p>
+                        </li>
+                      </div>
                     </div>
                   </div>
                 </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Buttons to decide if wanted to approve user or not -->
-          <div class="col-12 mt-1">
-            <div class="h-100 container-fluid mt-0">
-              <div class="row justify-content-center">
-                <div class="col-auto">
-                  <button
-                    type="button"
-                    onclick="adminResponse()"
-                    class="btn btn-success w-100 my-2 mb-2"
-                  >
-                    Approve
-                  </button>
-                </div>
-
-                <div class="col-auto">
-                  <button
-                    type="button"
-                    onclick="adminResponse()"
-                    class="btn btn-danger w-100 my-2 mb-2"
-                  >
-                    Decline
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -429,8 +441,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
     <script type="text/javascript">
       function viewDetail(userID) {
-        var popup = document.getElementById("popup-user-request");
-        var superior = document.querySelector(".superior");
+        var popup = document.getElementById("popup-user");
         var company = document.querySelector(".company");
 
         // Send GET Request API to retrieve single user information
@@ -441,34 +452,54 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             // Update popup với information chosen User
             $("#popup-id").text(data.accountId);
             $("#popup-username").text(data.username);
-            $("#popup-role-id").text(data.roleId);
+            $("#popup-role").text(data.roleId);
             $("#popup-full-name").text(data.fullName);
             $("#popup-gender").text(data.gender);
             $("#popup-email").text(data.email);
             $("#popup-phone").text(data.phone);
             $("#popup-address").text(data.address);
-            $("#popup-id-card").text(data.idCard);
+            $("#popup-id-number").text(data.idCard);
             $("#popup-status").text(data.status);
-            $("#popup-birth-date").text(
+            $("#popup-birthdate").text(
               new Date(data.birthDate).toLocaleDateString()
             );
 
-            //only shows company data if is agency/member
-            if (
-              data.roleId === "ROLE_AGENCY" ||
-              data.roleId === "ROLE_MEMBER"
-            ) {
-              $("#popup-company-id").text(data.companyId);
-              company.classList.remove("hidden");
+            //if user is seller
+            if (data.roleId === "ROLE_SELLER") {
+              $("#seller-section").removeClass("hidden");
+              $("#popup-company-seller").text(data.company);
+            } else {
+              $("#seller-section").addClass("hidden");
             }
 
-            //only shows superior data if is member/staff
-            if (data.roleId === "ROLE_STAFF") {
-              $("#popup-superior-id").text(data.managerId);
-              superior.classList.remove("hidden");
-            } else if (data.roleId === "ROLE_MEMBER") {
-              $("#popup-superior-id").text(data.agencyId);
-              superior.classList.remove("hidden");
+            //if user is manager
+            if (data.roleId === "ROLE_MANAGER") {
+              $("#manager-section").removeClass("hidden");
+              $("#popup-year-experience-man").text("4");
+            } else {
+              $("#manager-section").addClass("hidden");
+            }
+
+             //if user is staff
+             if (data.roleId === "ROLE_STAFF") {
+              $("#staff-section").removeClass("hidden");
+              console.log(data.superiorId);
+              $("#popup-superior-staff").text(data.superiorId);
+              $("#popup-num-of-projects").text(data.superiorId);
+            } else {
+              $("#staff-section").addClass("hidden");
+            }
+
+              //if user is agency
+              if (data.roleId === "ROLE_AGENCY") {
+                console.log("In agency");
+              $("#agency-section").removeClass("hidden");
+              $("#popup-company-agency").text(data.company);
+              $("#popup-year-experience-agency").text(data.agencyYearsOfExperience);
+              $("#popup-completed-projects").text(data.completedProject);
+              $("#popup-description").text(data.agencyDescription);
+            } else {
+              $("#agency-section").addClass("hidden");
             }
 
             popup.classList.remove("hidden");
@@ -481,7 +512,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       }
 
       function closeDetailRegisterRequest() {
-        var popup = document.getElementById("popup-user-request");
+        var popup = document.getElementById("popup-user");
         popup.classList.add("hidden");
       }
 
@@ -528,38 +559,40 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       function searchTable(type) {
         //search for request register accounts
 
-          //Get values from input search
-          var searchUser = document
-            .getElementById("userSearch")
-            .value.toLowerCase();
+        //Get values from input search
+        var searchUser = document
+          .getElementById("userSearch")
+          .value.toLowerCase();
 
-          // Get all rows in table
-          var user = document.querySelectorAll(".user-row");
+        // Get all rows in table
+        var user = document.querySelectorAll(".user-row");
 
+        user.forEach(function (row) {
+          var username = row
+            .querySelector("#user-uname")
+            .textContent.toLowerCase();
+          var name = row.querySelector("#user-fname").textContent.toLowerCase();
+          var role = row.querySelector("#user-role").textContent.toLowerCase();
 
-          user.forEach(function (row) {
-            var username = row
-              .querySelector("#user-uname")
-              .textContent.toLowerCase();
-            var name = row
-              .querySelector("#user-fname")
-              .textContent.toLowerCase();
-            var role = row
-              .querySelector("#user-role")
-              .textContent.toLowerCase();
-
-              console.log("Checking row:", row, "Username:", username, "Full Name:", name);
-            if (
-              username.includes(searchUser) ||
-              name.includes(searchUser) ||
-              role.includes(searchUser)
-            ) {
-              row.style.display = "";
-            } else {
-              row.style.display = "none";
-            }
-          });
-        }
+          console.log(
+            "Checking row:",
+            row,
+            "Username:",
+            username,
+            "Full Name:",
+            name
+          );
+          if (
+            username.includes(searchUser) ||
+            name.includes(searchUser) ||
+            role.includes(searchUser)
+          ) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
     </script>
   </body>
 </html>

@@ -3802,14 +3802,17 @@ textarea.form-control.is-invalid {
   text-align: center;
 }
 
-#buyer-list .table-responsive td.message{
+#buyer-list .table-responsive td.message, 
+#accepted-buyer-list .table-responsive td.message {
   white-space: normal;
   word-wrap: break-word;
   width: 70% !important;
 }
 
 #buyer-list .table-responsive th,
-#buyer-list .table-responsive td:not(.message) {
+#buyer-list .table-responsive td:not(.message),
+#accepted-buyer-list .table-responsive th,
+#accepted-buyer-list .table-responsive td:not(.message) {
   width: 10% !important;
   text-align: center;
 }

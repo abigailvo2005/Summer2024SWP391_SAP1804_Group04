@@ -23,6 +23,7 @@ statusElements.forEach((element) => {
       break;
     case "validating":
     case "reviewing":
+    case "created":
       element.classList.add("status-validating");
       break;
     case "denied":
@@ -37,6 +38,7 @@ statusElements.forEach((element) => {
     case "accepted":
     case "active":
     case "successful":
+    case "connected":
       element.classList.add("status-displayed");
       break;
     case "agency approving":

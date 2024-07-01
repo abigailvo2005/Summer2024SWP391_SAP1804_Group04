@@ -57,13 +57,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>Your Properties</h6>
+                    <h6>Submitted Properties</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${propList.size()} properties</span
+                        >${propList.size()} propertie(s)</span
                       >
-                      in total
+                      submitted to system in total
                     </p>
                   </div>
                   <div
@@ -211,7 +211,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       </div>
       <!-- END LIST OWNED PROPERTIES (1)-->
 
-      <!-- START: LIST VALIDATING REQUEST (2)-->
+      <!-- START: LIST CREATED PROPERTIES (2)-->
       <div class="container-fluid">
         <div class="row my-4">
           <div class="mb-md-0 mb-4">
@@ -219,13 +219,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>All Validating Requests</h6>
+                    <h6>Draft Properties</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1"
-                        >${reqList.size()} request(s)</span
+                        >${draftList.size()} propertie(s)</span
                       >
-                      in total
+                      have not been submitted in total
                     </p>
                   </div>
                   <div
@@ -280,8 +280,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </thead>
 
                       <tbody>
-                        <c:forEach items="${reqList}" var="req">
-                          <tr class="req-row">
+                        <c:forEach items="${draftList}" var="draft">
+                          <tr class="draft-row">
                             <td>
                               <div class="d-flex justify-content-start">
                                 <div
@@ -291,7 +291,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-name"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.name}
+                                    ${draft.name}
                                   </p>
                                 </div>
                               </div>
@@ -307,7 +307,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-price"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.textPrice}
+                                    ${draft.textPrice}
                                   </p>
                                 </div>
                               </div>
@@ -323,7 +323,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     id="req-type"
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
-                                    ${req.realEstateType}
+                                    ${draft.realEstateType}
                                   </p>
                                 </div>
                               </div>
@@ -338,9 +338,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                   <p
                                     id="req-status"
                                     class="mb-0 text-sm fw-bold status-color"
-                                    value="${req.status.value}"
+                                    value="${draft.status.value}"
                                   >
-                                    ${req.status.value}
+                                    ${draft.status.value}
                                   </p>
                                 </div>
                               </div>
@@ -354,7 +354,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 >
                                   <a
                                     class="show-detail"
-                                    onclick="viewDetailProperty('${req.realEstateId}', 'req')"
+                                    onclick="viewDetailProperty('${draft.realEstateId}', 'draft')"
                                     ><i class="fa-solid fa-eye"></i
                                   ></a>
                                 </div>
@@ -671,6 +671,19 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       </div>
                     </div>
 
+                    <!-- Buttons allows user submit/delete draft properties -->
+                    <div
+                      id="draft-section"
+                      class="row d-flex justify-content-center hidden"
+                    >
+                      <button id="request-validate-btn" class="btn btn-dark me-3 col-4" onclick="requestValidation(this.value)">
+                        Request Validation
+                      </button>
+                      <button id="delete-real-estate-btn" class="btn btn-danger col-4" onclick="deleteRealEstate(this.value)">
+                        Delete
+                      </button>
+                    </div>
+
                     <!-- Button allows user hide/show list of agencies -->
                     <div
                       id="show-agency-permission"
@@ -811,9 +824,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <tr>
                             <th class="text-center">Name</th>
                             <th class="text-center">Phone</th>
-                            <th class="text-center">Message</th>
                             <th class="text-center">From Agency</th>
                             <th class="text-center">Agency Company</th>
+                            <th class="text-center">Message</th>
                           </tr>
                         </thead>
                         <tbody id="accepted-buyer-container"></tbody>
@@ -822,7 +835,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
                     <div id="confirm-sold-buyer" class="row hidden">
                       <!-- section for confirm connected successfully buyer ${pageContext.request.contextPath}-->
-                      <form id="form-confirm-sold" action="" method="post">
+                      <form
+                        id="form-confirm-sold"
+                        action="${pageContext.request.contextPath}/seller/buyer-request/connect"
+                        method="post"
+                      >
                         <li
                           class="row list-group-item border-0 ps-0 text-sm d-flex"
                         >
@@ -832,27 +849,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <div class="col-5">
                             <select
                               class="form-control form-create-control"
+                              id="chosen-buyer-container"
                               onchange="chooseSoldBuyer(this.value)"
                             >
                               <option class="fs-6" value="">
                                 Choose Buyer
                               </option>
-                              <c:forEach
-                                items="${buyerRequestList}"
-                                var="buyer"
-                              >
-                                <option class="fs-6" value="${buyer.requestId}">
-                                  ${buyer.fullName}
-                                </option>
-                              </c:forEach>
                             </select>
                           </div>
 
                           <input
-                            id="form-chosen-buyer"
+                            id="chosen-buyer"
                             type="hidden"
-                            name="buyerId"
+                            name="requestId"
                           />
+
                           <div class="col-2">
                             <button
                               type="button"
@@ -929,17 +940,22 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       var chosenRequest = null;
       var propStatus = null;
       const chosenAgencyStatusHide = [
+        "created",
         "reviewing",
         "validating",
         "unqualified",
         "agency_approving",
+        "closed",
       ];
       const requestingAgencyStatusHide = [
+        "created",
         "reviewing",
         "validating",
         "unqualified",
+        "closed",
       ];
       const chosenBuyerStatusHide = [
+        "created",
         "reviewing",
         "validating",
         "unqualified",
@@ -947,16 +963,20 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         "handled",
         "marketed",
         "buyer_approving",
+        "closed",
       ];
       const requestBuyerStatusHide = [
+        "created",
         "reviewing",
         "validating",
         "unqualified",
         "agency_approving",
         "handled",
         "marketed",
+        "closed",
       ];
       const confirmedBuyerStatusHide = [
+        "created",
         "reviewing",
         "validating",
         "unqualified",
@@ -965,6 +985,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         "marketed",
         "buyer_approving",
         "connected",
+        "closed",
       ];
 
       // Submit chosen Agency Profile to system
@@ -1002,7 +1023,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-      // Submit chosen Agency Profile to system
+      // Submit chosen Buyer Profile to system
       function confirmBuyer(e) {
         e.preventDefault();
 
@@ -1018,12 +1039,12 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         if (checkboxes) {
           checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
-              // Only get agencyId that is checked
-              const agencyId = checkbox.getAttribute("data-agency-id");
+              // Only get requestId that is checked
+              const requestId = checkbox.getAttribute("data-request-id");
               //create input type hidden to submit to controller
               const item = document.createElement("input");
               item.type = "text";
-              item.value = agencyId;
+              item.value = requestId;
               item.name = "requestIds";
 
               //append to container
@@ -1033,14 +1054,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
           document.querySelector("#buyer-form").submit();
         } else {
-          alert("You must choose at least 1 buyer profile to submit to system.");
+          alert(
+            "You must choose at least 1 buyer profile to submit to system."
+          );
         }
       }
 
       //confirm last step - successfully sold property - close property
       function chooseSoldBuyer(selectedBuyer) {
         // Retrieve the "chosen-buyer" input element
-        const chosenBuyerInput = document.getElementById("form-chosen-buyer");
+        const chosenBuyerInput = document.getElementById("chosen-buyer");
+        console.log("selected buyer id: " + selectedBuyer);
 
         // Update the value of the "chosen-buyer" input
         chosenBuyerInput.setAttribute("value", selectedBuyer);
@@ -1115,9 +1139,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             document
               .querySelector("#realEstateId")
               .setAttribute("value", data.realEstateId);
-           /*  document
-              .querySelector("#realEstateIdBuyer")
-              .setAttribute("value", data.realEstateId); */
 
             //show notes when property unqualified
             if (data.status.toLowerCase() == "unqualified") {
@@ -1149,6 +1170,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-builtIn").text(data.propertyHouse.builtIn);
               $("#popup-bed").text(data.propertyHouse.bedroom + " rooms");
               $("#popup-bath").text(data.propertyHouse.bath + " rooms");
+            }
+
+            //only show options of submitting properties/delete property if it's a draft property
+            if(type == 'draft') {
+              $("#draft-section").removeClass("hidden");
+
+              $("#request-validate-btn").val(data.realEstateId);
+              $("#delete-real-estate-btn").val(data.realEstateId);
             }
 
             //only show list of Agency/Buyer Profiles if it's list of owned Properties
@@ -1190,7 +1219,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 row.append($("<td>").text(request.agency.company));
                 row.append($("<td>").text(request.agency.yearsOfExperience));
                 row.append($("<td>").text(request.agency.completedProject));
-                //row.append($("<td>").text(request.agency.description));
 
                 //part to view description from agency seperately
                 const viewDescriptionBtn = $("<td>")
@@ -1336,6 +1364,31 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 row.append(viewMessageBtn);
 
                 buyerContainer.append(row);
+              }
+            });
+
+            //load list of accepted buyer for confirm close
+            $("#chosen-buyer-container").empty(); //clear data of previous property
+
+            const chosenBuyerContainer = $("#chosen-buyer-container");
+            //default option
+            const option = document.createElement("option");
+            option.value = "";
+            option.textContent = "--choose a buyer--";
+            option.classList.add("fs-6");
+            chosenBuyerContainer.append(option);
+
+            data.buyerRequests.forEach((request) => {
+              if (request.status.toLowerCase() == "accepted") {
+                console.log(
+                  "There are 1 accepted to dropdown buyer!" + request.fullName
+                );
+                //create rows with checkboxes - for controller submission - and information to view
+                const option = document.createElement("option");
+                option.value = request.requestId;
+                option.textContent = request.fullName;
+                option.classList.add("fs-6");
+                chosenBuyerContainer.append(option);
               }
             });
 
@@ -1518,7 +1571,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         // Prevent the default button click behavior
         event.preventDefault();
 
-        var form = document.getElementById("form-chosen-buyer");
+        var form = document.getElementById("form-confirm-sold");
 
         //check if no staff is chosen
         if (form.value == "") {

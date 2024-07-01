@@ -50,15 +50,18 @@ public class SellerController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId());
-        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
-                .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED)
+      /*   List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId()); */
+      List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
+      .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED)
+      .toList();
+        List<RealEstateInfo> draftRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
+                .stream().filter(realEstateInfo -> realEstateInfo.getStatus() == RealEstateStatus.CREATED)
                 .toList();
 
         String currentPage = "dashboard";
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("reqList", validatingList);
+        model.addAttribute("draftList", draftRealEstate);
         model.addAttribute("propList", allRealEstate);
         return "seller/dashboard-seller";
     }
@@ -123,6 +126,7 @@ public class SellerController {
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
         model.addAttribute("name", name);
+        model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "seller/profile-seller";
     }
@@ -142,7 +146,7 @@ public class SellerController {
         return "redirect:/seller";
     }
 
-    @PostMapping("buyer-request/connect")
+    @PostMapping("/buyer-request/connect")
     public String connectBuyer(
             @RequestParam String requestId
     ) {
