@@ -57,7 +57,7 @@
 
                   <div class="card-body">
                     <form role="form text-left" name="register-staff-form"
-                      action="${pageContext.request.contextPath}/manager/register-staff" method="post">
+                      action="${pageContext.request.contextPath}/manager/create-staff" method="post" modelAttribute="request">
                       <div class="mb-3 row">
                         <div class="col-sm-2">
                           <label for="fullName">Full Name:</label>
@@ -116,13 +116,16 @@
                         <div class="col-sm-4">
                           <input type="number" id="phone" name="phone" class="form-control form-create-control col-10"
                             placeholder="Enter phone number" min="1" required />
+                            <p class="text-danger text-error mb-0 text-center pt-1 error-phone hidden">
+                              Phone number must be between 10 and 11 digits long and contain only numbers.
+                            </p>
                         </div>
                         <div class="col-sm-2">
                           <label for="address"> Address:</label>
                         </div>
                         <div class="col-sm-4">
                           <input type="text" id="address" name="address" class="form-control form-create-control col-10"
-                            placeholder="your property's adress" required />
+                            placeholder="Enter address" required />
                         </div>
                       </div>
 
@@ -144,7 +147,7 @@
                           </p>
                         </div>
                         <div class="col-sm-2">
-                          <label for="idCardNo"> ID Card No. :</label>
+                          <label for="idCardNo"> ID Card No:</label>
                         </div>
                         <div class="col-sm-4">
                           <input type="number" id="idCardNo" name="idCardNo"
@@ -555,13 +558,11 @@
           // Check if all fields have values
           if (document.querySelector("form").checkValidity()) {
             const staffName = document.querySelector("#fullName");
-            const frontID = document.querySelector("#frontID");
-            const backID = document.querySelector("#backID");
             const emailInput = document.querySelector("#email");
             const passwordInput = document.querySelector("#password");
+            const phoneInput = document.querySelector("#phone");
+            const phoneError = document.querySelector(".error-phone");
             const nameError = document.querySelector(".error-name");
-            const idFrontError = document.querySelector(".error-id-front");
-            const idBackError = document.querySelector(".error-id-back");
             const emailError = document.querySelector(".error-email");
             const pwError = document.querySelector(".error-pw");
 
@@ -579,6 +580,14 @@
               return;
             } else {
               nameError.classList.add("hidden");
+            }
+            
+            const phoneInputText = phoneInput.value.toString();
+            if(phoneInputText.length > 11) {
+              phoneError.classList.remove("hidden");
+              return;
+            } else {
+              phoneError.classList.add("hidden");
             }
 
             if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
@@ -601,33 +610,10 @@
               pwError.classList.add("hidden");
             }
 
-            idFrontError.classList.add("hidden");
-            idBackError.classList.add("hidden");
-            // Check if front ID and back ID are valid image types
-            for (let i = 0; i < 2; i++) {
-              const fileInput = i == 0 ? frontID : backID;
-              var err = 0;
-              const file = fileInput.files[0];
-              const fileType = file ? file.type : "";
-              if (!validImageTypes.includes(fileType)) {
-                if (i == 0) {
-                  err++;
-                  idFrontError.classList.remove("hidden");
-                }
-                if (i == 1) {
-                  err++;
-                  idBackError.classList.remove("hidden");
-                }
-              }
-              if (err > 0) {
-                return;
-              }
-            }
 
             // Ẩn tất cả các thông báo lỗi
+            phoneError.classList.add("hidden");
             nameError.classList.add("hidden");
-            idFrontError.classList.add("hidden");
-            idBackError.classList.add("hidden");
             emailError.classList.add("hidden");
             pwError.classList.add("hidden");
 

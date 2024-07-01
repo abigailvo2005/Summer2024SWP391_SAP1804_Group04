@@ -151,13 +151,13 @@ public class ManagerController {
         return "manager/create-acc-staff";
     }
 
-    @PostMapping("/staff/create")
+    @PostMapping("/create-staff")
     public String createStaff(
-            @RequestBody RegisterStaffDTO request,
+            @ModelAttribute(name = "request") RegisterStaffDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
         accountService.registerStaff(request, userInfo.getManagerId());
-        return "redirect:/manager/create-acc-staff";
+        return "redirect:/manager/create-staff";
     }
 
 }
