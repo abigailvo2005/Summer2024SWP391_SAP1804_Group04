@@ -13,6 +13,7 @@ import com.recs.services.accountsvc.AccountService;
 import com.recs.services.businesssvc.RecsBusinessService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -140,11 +141,11 @@ public class ManagerController {
     }
 
     @GetMapping({ "/create-staff" })
-    public String registerStaff(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
+    public String registerStaff(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-staff";
-        model.addAttribute("name", name);
+        List<UserInfo> listStaffCreated = accountService.getListStaffByManager(userInfo.getManagerId());
+        model.addAttribute("listStaff", listStaffCreated);
+        model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
 
         return "manager/create-acc-staff";
