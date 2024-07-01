@@ -411,4 +411,10 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         buyerRequestRepository.saveAll(updateList);
     }
 
+    @Override
+    public BuyerRequestDTO getBuyerRequest(String id) {
+        BuyerRequest buyerRequest = buyerRequestRepository.getReferenceById(id);
+        return BuyerRequestDTO.from(buyerRequest);
+    }
+
 }

@@ -73,4 +73,6 @@ public interface RecsBusinessService {
     public List<BuyerRequestDTO> getPageBuyerRequestByMemberId(String memberId);
 
     public void updateBuyer(List<String> buyerRequests, BuyerRequestStatus status);
+
+    public BuyerRequestDTO getBuyerRequest(String id);
 }

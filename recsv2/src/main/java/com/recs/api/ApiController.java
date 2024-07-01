@@ -4,6 +4,7 @@ import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
 import com.recs.models.dto.recsbusiness.ValidationJobInfo;
 import com.recs.models.entities.account.Account;
@@ -72,9 +73,14 @@ public class ApiController {
         return ResponseEntity.ok(recsBusinessService.getAgencyRequest(id));
     }
 
-    @PostMapping("account/create")
+    @PostMapping("/account/create")
     public ResponseEntity<String> createAccount(@RequestBody CreateAccountRequestDTO request) {
         accountService.registerAccount(request);
         return ResponseEntity.ok("check db");
+    }
+
+    @GetMapping(value = "/buyer-request/{id}", produces = "application/json")
+    public ResponseEntity<BuyerRequestDTO> getBuyerRequest(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(recsBusinessService.getBuyerRequest(id));
     }
 }
