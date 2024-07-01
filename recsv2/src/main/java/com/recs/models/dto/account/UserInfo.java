@@ -42,6 +42,7 @@ public class UserInfo {
     // Fields from Staff
     private String staffId;
     private String superiorId; // with staff is managerId, with member is agencyId
+    private Integer numOfProjects;
 
     // Fields from Agency
     private String agencyId;
@@ -115,6 +116,7 @@ public class UserInfo {
         if (staff != null) {
             userInfo.setStaffId(staff.getStaffId());
             userInfo.setSuperiorId(staff.getManagerId());
+            userInfo.setNumOfProjects(staff.getNumOfProjects());
         }
         return userInfo;
     }

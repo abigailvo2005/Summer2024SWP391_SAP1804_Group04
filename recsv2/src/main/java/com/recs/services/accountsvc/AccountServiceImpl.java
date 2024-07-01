@@ -197,7 +197,11 @@ public class AccountServiceImpl implements AccountService {
             }
             case "ROLE_STAFF" -> {
                 Staff staff = staffRepository.findByAccountId(id);
-                yield UserInfo.fromStaff(account, staff);
+                Manager manager = managerRepository.getReferenceById(staff.getManagerId());
+                Account managerAccount = accountRepository.getReferenceById(String.valueOf(manager.getAccountId()));
+                UserInfo userInfo = UserInfo.fromStaff(account, staff);
+                userInfo.setSuperiorId(managerAccount.getUsername());
+                yield userInfo;
             }
             case "ROLE_AGENCY" -> {
                 Agency agency = agencyRepository.findByAccountAccountId(id);
@@ -205,7 +209,10 @@ public class AccountServiceImpl implements AccountService {
             }
             case "ROLE_MEMBER" -> {
                 Member member = memberRepository.findByAccountAccountId(id);
-                yield UserInfo.fromMember(account, member);
+                Agency agency = agencyRepository.getReferenceById(member.getAgency().getAgencyId());
+                UserInfo userInfo = UserInfo.fromMember(account, member);
+                userInfo.setSuperiorId(agency.getAccount().getUsername());
+                yield userInfo;
             }
             default -> UserInfo.fromAccount(account);
         };
@@ -329,7 +336,8 @@ public class AccountServiceImpl implements AccountService {
         Staff newStaff = new Staff(
                 UUID.randomUUID().toString(),
                 savedAccount.getAccountId(),
-                managerId
+                managerId,
+                0
         );
         staffRepository.save(newStaff);
     }

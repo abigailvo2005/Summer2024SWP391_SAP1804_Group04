@@ -25,4 +25,7 @@ public class Staff {
 
     @Column(name = "managerId")
     private String managerId;
+
+    @Column(name = "numOfProjects")
+    private int numOfProjects;
 }
