@@ -281,12 +281,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void registerAccount(CreateAccountRequestDTO request) {
         Account newAccount = new Account(
-                -1,
+                0,
                 accountUtils.generateUsername(request.getFullName()),
                 encoder.encode(request.getPassword()),
                 request.getRole(),
                 request.getFullName(),
-                request.getGender(),
+                request.getGender().equalsIgnoreCase("Male") ? 0 : 1,
                 request.getBirthDate(),
                 request.getEmail(),
                 request.getPhone(),

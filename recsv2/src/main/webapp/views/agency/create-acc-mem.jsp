@@ -585,11 +585,9 @@
             const phoneInputText = phoneInput.value.toString();
             if(phoneInputText.length > 11) {
               phoneError.classList.remove("hidden");
-              console.log("valid phone")
               return;
             } else {
               phoneError.classList.add("hidden");
-              console.log("invailid phone");
             }
 
             if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
