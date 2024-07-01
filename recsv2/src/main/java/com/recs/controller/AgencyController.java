@@ -109,7 +109,7 @@ public class AgencyController {
             ) {
         accountService.registerMember(request, userInfo.getAgencyId());
 
-        return "redirect:/agency";
+        return "redirect:/agency/create-acc-mem";
     }
 
     @GetMapping({ "/history" })
