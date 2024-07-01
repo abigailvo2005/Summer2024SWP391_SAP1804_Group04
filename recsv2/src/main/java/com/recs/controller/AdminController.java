@@ -78,7 +78,7 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-account";
-        model.addAttribute("activeAccunt", allAccountActive);
+        model.addAttribute("activeAccount", allAccountActive);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/create-account";

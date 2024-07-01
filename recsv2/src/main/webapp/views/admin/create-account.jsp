@@ -80,8 +80,8 @@
                             <option value="" disabled selected>
                               Select biological gender
                             </option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
                           </select>
                         </div>
                       </div>
@@ -91,7 +91,7 @@
                           <label for="birthday">Date of Birth:</label>
                         </div>
                         <div class="col-sm-4">
-                          <input type="date" id="birthday" name="birthday"
+                          <input type="date" id="birthday" name="birthDate"
                             class="form-control form-create-control col-10" required onchange="validateDateOfBirth()" />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-bday hidden">
                             birthday has to be before current day.
@@ -147,7 +147,7 @@
                           <label for="idCardNo"> ID Card No. :</label>
                         </div>
                         <div class="col-sm-4">
-                          <input type="number" id="idCardNo" name="idCardNo"
+                          <input type="number" id="idCardNo" name="idCard"
                             class="form-control form-create-control col-10" placeholder="Enter ID card number" min="1"
                             required />
                         </div>
@@ -158,8 +158,8 @@
                           <label for="role"> Role:</label>
                         </div>
                         <div class="col-sm-2">
-                          <select id="role-name" name="roleName" class="form-control form-create-control col-10"
-                            onchange="showRoleName(this)" required>
+                          <select id="role-name" name="role" class="form-control form-create-control col-10"
+                            onchange="showRgoleName(this)" required>
                             <option value="" selected>
                               Select role
                             </option>
@@ -233,7 +233,7 @@
                           <div class="col-lg-10 col-sm-10">
                             <input id="desc" type="text" name="description"
                               class="form-control form-create-control col-10"
-                              placeholder="Your discription about yourself." required />
+                              placeholder="Your description about yourself." required />
                           </div>
                         </div>
                       </div>
@@ -267,11 +267,11 @@
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>List Account Create</h6>
+                    <h6>Created Accounts</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
-                      <span class="font-weight-bold ms-1">${activeAccunt.size()} created</span>
-                      create
+                      <span class="font-weight-bold ms-1">${activeAccount.size()} account(s)</span>
+                      created
                     </p>
                   </div>
 
