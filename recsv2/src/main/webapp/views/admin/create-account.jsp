@@ -32,7 +32,7 @@
       <main class="no-dash main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 
         <!-- START: INTRODUCTION HEADER -->
-        <section class="min-vh-100 mb-4">
+        <section class="min-vh-80 mb-4">
           <div class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg" style="
           background-image: url(/template/assets/img/create-account-bg.png);
         ">
@@ -123,7 +123,7 @@
                         </div>
                         <div class="col-sm-4">
                           <input type="text" id="address" name="address" class="form-control form-create-control col-10"
-                            placeholder="user 's address" required />
+                            placeholder="User 's address" required />
                         </div>
                       </div>
 
@@ -133,8 +133,7 @@
                         </div>
                         <div class="col-sm-4">
                           <input type="text" id="password" name="password"
-                            class="form-control form-create-control col-10" placeholder="Enter password"
-                            required />
+                            class="form-control form-create-control col-10" placeholder="Enter password" required />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-pw hidden">
                             password must be: <br />
                             Minimum length of 8 characters.<br />
@@ -159,31 +158,101 @@
                           <label for="role"> Role:</label>
                         </div>
                         <div class="col-sm-2">
-                          <select class="form-control form-create-control col-10" id="gender" name="gender" required>
-                            <option value="" disabled selected>
+                          <select id="role-name" name="roleName" class="form-control form-create-control col-10"
+                            onchange="showRoleName(this)" required>
+                            <option value="" selected>
                               Select role
                             </option>
-                            <option value="Seller">Seller</option>
-                            <option value="Agency">Agency</option>
-                            <option value="Manager">Manager</option>
+                            <option value="seller">Seller</option>
+                            <option value="agency">Agency</option>
+                            <option value="manager">Manager</option>
                           </select>
                         </div>
+                      </div>
 
-                        <!-- create button -->
-                        <div class="text-center container">
-                          <div class="row">
-                            <div class="col-sm-4"></div>
-                            <div class="col-sm-4">
-                              <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2"
-                                onclick="createAccount()">
-                                Create
-                              </button>
-                            </div>
+                      <div id="input-seller-info" class="hidden">
+                        <div class="mb-3 row">
+                          <div class="col-lg-2 col-sm-2">
+                            <label> Company:</label>
+                          </div>
+                          <div class="col-lg-10 col-sm-10">
+                            <input id="companys" type="text" name="companys"
+                              class="seller form-control form-create-control col-10" placeholder="Your company name"
+                              required />
                           </div>
                         </div>
                       </div>
-                    </form>
+
+                      <div id="input-manager-info" class="hidden">
+                        <div class="mb-3 row">
+                          <div class="col-sm-2">
+                            <label for="yoeManager"> Year of Experience:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input type="number" id="yoeManager" name="yoeManager"
+                              class="manager form-control form-create-control col-10"
+                              placeholder="Enter your year experience" min="1" required />
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div id="input-agency-info" class="hidden">
+                        <div class="mb-3 row">
+                          <div class="col-sm-2">
+                            <label for="yoeAgency"> Year of Experience:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input type="number" id="yoeAgency" name="yoeAgency"
+                              class="agency form-control form-create-control col-10"
+                              placeholder="Enter your year experience" min="1" required />
+                          </div>
+                          <div class="col-sm-2">
+                            <label for="project"> Number project complete:</label>
+                          </div>
+                          <div class="col-sm-4">
+                            <input type="number" id="project" name="project"
+                              class="agency form-control form-create-control col-10"
+                              placeholder="Enter your project completed" min="1" required />
+                          </div>
+                        </div>
+                        <div class="mb-3 row">
+                          <div class="col-lg-2 col-sm-2">
+                            <label> Company:</label>
+                          </div>
+                          <div class="col-lg-10 col-sm-10">
+                            <input id="companyAgency" type="text" name="companyAgency"
+                              class="agency form-control form-create-control col-10" placeholder="Your company name"
+                              required />
+                          </div>
+                        </div>
+                        <div class="mb-3 row">
+                          <div class="col-lg-2 col-sm-2">
+                            <label> Description:</label>
+                          </div>
+                          <div class="col-lg-10 col-sm-10">
+                            <input id="desc" type="text" name="description"
+                              class="form-control form-create-control col-10"
+                              placeholder="Your discription about yourself." required />
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!-- create button -->
+                      <div class="text-center container">
+                        <div class="row">
+                          <div class="col-sm-4"></div>
+                          <div class="col-sm-4">
+                            <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2"
+                              onclick="createAccount()">
+                              Create
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -201,7 +270,7 @@
                     <h6>List Account Create</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
-                      <span class="font-weight-bold ms-1">1 account</span>
+                      <span class="font-weight-bold ms-1">${activeAccunt.size()} created</span>
                       create
                     </p>
                   </div>
@@ -226,18 +295,18 @@
                           ID
                         </th>
                         <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3">
-                          FULL NAME
+                          Name
                         </th>
                         <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-2">
-                          USERNAME
+                          Role
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2">
-                          Status
+                          Gender
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-3">
-                          Date Created
+                          Status
                         </th>
                         <th
                           class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1">
@@ -249,60 +318,62 @@
                     <!--chưa có list nên không forEach được-->
                     <!--forEach-->
                     <tbody>
-                      <!--forEach-->
-                      <tr class="tbl-row">
-                        <td class="align-middle text-center text-sm">
-                          <div class="d-flex px-2 py-1 justify-content-center">
-                            <div class="d-flex flex-column justify-content-center">
-                              <p class="mb-0 text-sm fw-bold text-dark">01</p>
+                      <c:forEach items="${activeAccunt}" var="active">
+                        <tr class="active-row">
+                          <td class="align-middle text-center text-sm">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p id="active-id" class="mb-0 text-sm fw-bold text-dark">
+                                  ${active.accountId}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex justify-content-start">
-                            <div class="d-flex flex-column justify-content-start">
-                              <p id="fname" class="mb-0 text-sm fw-bold text-dark">
-                                Hoàng Việt Hùng
-                              </p>
+                          </td>
+                          <td>
+                            <div class="d-flex justify-content-start">
+                              <div class="d-flex flex-column justify-content-start">
+                                <p id="active-name" class="mb-0 text-sm fw-bold text-dark">
+                                  ${active.fullName}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex justify-content-start">
-                            <div class="d-flex flex-column justify-content-start">
-                              <p id="uname" class="mb-0 text-sm fw-bold text-dark">
-                                HungVH
-                              </p>
+                          </td>
+                          <td>
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p id="active-role" class="mb-0 text-sm fw-bold text-dark">
+                                  ${active.roleId}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="d-flex px-2 py-1 justify-content-center">
-                            <div class="d-flex flex-column justify-content-center">
-                              <p class="mb-0 text-sm fw-bold text-muted">
-                                Created
-                              </p>
+                          </td>
+                          <td class="align-middle">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  ${active.gender == 0 ? 'Male' : 'Female'}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
-                            <div class="d-flex flex-column justify-content-center">
-                              <p class="mb-0 text-sm fw-bold text-dark">
-                                20/05/2024
-                              </p>
+                          </td>
+                          <td class="align-middle">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p class="mb-0 text-sm fw-bold text-muted">
+                                  ${active.status}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td class="align-middle">
-                          <div class="d-flex px-2 py-1 justify-content-center">
-                            <div class="d-flex flex-column justify-content-center">
-                              <a href="#"><i class="fa-solid fa-eye"></i></a>
+                          </td>
+                          <td class="align-middle">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <a onclick="viewDetail('${active.accountId}')"><i class="fa-solid fa-eye"></i></a>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <!--forEach-->
+                          </td>
+                        </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -342,6 +413,131 @@
         <!-- END: FOOTER -->
       </main>
 
+      <!--------------------START: POPUP SECTIONS-------------------- -->
+      <div id="popup-user" class="popup-container hidden z-index-3">
+        <div class="popup-content container-fluid">
+          <!-- Header -->
+          <div class="popup-header row mx-1">
+            <div class="col-11">
+              <h4 id="popup-full-name" class="card-header font-weight-bolder mb-0"></h4>
+            </div>
+            <div class="col-1">
+              <i class="fa-solid fa-xmark close-button" onclick="closeDetailRegisterRequest()"></i>
+            </div>
+          </div>
+
+          <!-- Request content -->
+          <div class="row">
+            <div class="col-12 mt-sm-1">
+              <div class="card h-100">
+                <div class="card-body p-3">
+                  <ul class="list-group">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Account ID: </strong>
+                          <p id="popup-id"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Username:</strong>
+                          <p id="popup-username"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Status:</strong>
+                          <p id="popup-status"></p>
+                        </li>
+                      </div>
+
+                      <div class="row">
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Role:</strong>
+                          <p id="popup-role"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Email:</strong>
+                          <p id="popup-email"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">ID Number:</strong>
+                          <p id="popup-id-number"></p>
+                        </li>
+                      </div>
+
+                      <div class="row">
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Gender:</strong>
+                          <p id="popup-gender"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Address:</strong>
+                          <p id="popup-address"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Birth Date:</strong>
+                          <p id="popup-birthdate"></p>
+                        </li>
+                      </div>
+
+                      <div id="seller-section" class="row hidden">
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Company:</strong>
+                          <p id="popup-company-seller"></p>
+                        </li>
+                      </div>
+
+                      <div id="manager-section" class="row hidden">
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Years Of Experience:</strong>
+                          <p id="popup-year-experience-man"></p>
+                        </li>
+                      </div>
+
+                      <div id="staff-section" class="row hidden">
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Superior Manager: </strong>
+                          <p id="popup-superior-staff"></p>
+                        </li>
+                        <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                          <strong class="text-dark">Currently Handling Validation:
+                          </strong>
+                          <p id="popup-num-of-projects"></p>
+                        </li>
+                      </div>
+
+                      <div id="agency-section" class="row hidden">
+                        <div class="row">
+                          <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                            <strong class="text-dark">Company: </strong>
+                            <p id="popup-company-agency"></p>
+                          </li>
+                          <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                            <strong class="text-dark">Years Of Experience:</strong>
+                            <p id="popup-year-experience-agency"></p>
+                          </li>
+                          <li class="d-flex list-group-item border-0 ps-0 text-sm col-4">
+                            <strong class="text-dark">Completed Projects:
+                            </strong>
+                            <p id="popup-completed-projects"></p>
+                          </li>
+                        </div>
+
+                        <div class="row">
+                          <li class="d-flex list-group-item border-0 ps-0 text-sm col-12">
+                            <strong class="text-dark">Description:</strong>
+                            <p id="popup-description"></p>
+                          </li>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ---------------- END POPUP SECTION --------------------- -->
+
       <!--   Core JS Files   -->
       <script src="/template/assets/js/core/popper.min.js"></script>
       <script src="/template/assets/js/core/bootstrap.min.js"></script>
@@ -349,7 +545,152 @@
       <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
       <script src="/template/assets/js/plugins/chartjs.min.js"></script>
       <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script type="text/javascript">
+
+        function showRoleName(select) {
+          const inputAgencyInfo = document.getElementById("input-agency-info");
+          const inputManagerInfo = document.getElementById("input-manager-info");
+          const inputSellerInfo = document.getElementById("input-seller-info");
+
+          switch (select.value) {
+            case "seller":
+              inputSellerInfo.classList.remove("hidden");
+              inputAgencyInfo.classList.add("hidden");
+              inputManagerInfo.classList.add("hidden");
+
+              inputSellerInfo.querySelectorAll("input, .seller").forEach((input) => { input.required = true; });
+              inputAgencyInfo.querySelectorAll("input, .agency").forEach((input) => {
+                input.required = false;
+              });
+              inputManagerInfo.querySelectorAll("input, .manager").forEach((input) => {
+                input.required = false;
+              });
+              break;
+            case "agency":
+              inputSellerInfo.classList.add("hidden");
+              inputAgencyInfo.classList.remove("hidden");
+              inputManagerInfo.classList.add("hidden");
+
+              inputSellerInfo.querySelectorAll("input, .seller").forEach((input) => { input.required = false; });
+              inputAgencyInfo.querySelectorAll("input, .agency").forEach((input) => {
+                input.required = true;
+              });
+              inputManagerInfo.querySelectorAll("input, .manager").forEach((input) => {
+                input.required = false;
+              });
+              break;
+            case "manager":
+              inputSellerInfo.classList.add("hidden");
+              inputAgencyInfo.classList.add("hidden");
+              inputManagerInfo.classList.remove("hidden");
+
+              inputSellerInfo.querySelectorAll("input, .seller").forEach((input) => { input.required = false; });
+              inputAgencyInfo.querySelectorAll("input, .agency").forEach((input) => {
+                input.required = false;
+              });
+              inputManagerInfo.querySelectorAll("input, .manager").forEach((input) => {
+                input.required = true;
+              });
+              break;
+            default:
+              inputSellerInfo.classList.add("hidden");
+              inputAgencyInfo.classList.add("hidden");
+              inputManagerInfo.classList.add("hidden");
+
+              inputSellerInfo.querySelectorAll("input, .seller").forEach((input) => { input.required = false; });
+              inputAgencyInfo.querySelectorAll("input, .agency").forEach((input) => {
+                input.required = false;
+              });
+              inputManagerInfo.querySelectorAll("input, .manager").forEach((input) => {
+                input.required = false;
+              });
+          }
+        }
+
+        function closeDetailRegisterRequest() {
+          var popup = document.getElementById("popup-user");
+          popup.classList.add("hidden");
+        }
+
+        //still forcely close every popup if clicked on somewhere else than close button
+        window.onclick = function (event) {
+          var popup = document.querySelector(".popup-container");
+          if (event.target == popup) {
+            popup.classList.add("hidden");
+          }
+        };
+
+        function viewDetail(userID) {
+          var popup = document.getElementById("popup-user");
+          var company = document.querySelector(".company");
+
+          // Send GET Request API to retrieve single user information
+          $.ajax({
+            url: "http://localhost:8085/api/user/" + userID,
+            type: "GET",
+            success: function (data) {
+              // Update popup với information chosen User
+              $("#popup-id").text(data.accountId);
+              $("#popup-username").text(data.username);
+              $("#popup-role").text(data.roleId);
+              $("#popup-full-name").text(data.fullName);
+              $("#popup-gender").text(data.gender);
+              $("#popup-email").text(data.email);
+              $("#popup-phone").text(data.phone);
+              $("#popup-address").text(data.address);
+              $("#popup-id-number").text(data.idCard);
+              $("#popup-status").text(data.status);
+              $("#popup-birthdate").text(
+                new Date(data.birthDate).toLocaleDateString()
+              );
+
+              //if user is seller
+              if (data.roleId === "ROLE_SELLER") {
+                $("#seller-section").removeClass("hidden");
+                $("#popup-company-seller").text(data.company);
+              } else {
+                $("#seller-section").addClass("hidden");
+              }
+
+              //if user is manager
+              if (data.roleId === "ROLE_MANAGER") {
+                $("#manager-section").removeClass("hidden");
+                $("#popup-year-experience-man").text("4");
+              } else {
+                $("#manager-section").addClass("hidden");
+              }
+
+              //if user is staff
+              if (data.roleId === "ROLE_STAFF") {
+                $("#staff-section").removeClass("hidden");
+                console.log(data.superiorId);
+                $("#popup-superior-staff").text(data.superiorId);
+                $("#popup-num-of-projects").text(data.superiorId);
+              } else {
+                $("#staff-section").addClass("hidden");
+              }
+
+              //if user is agency
+              if (data.roleId === "ROLE_AGENCY") {
+                console.log("In agency");
+                $("#agency-section").removeClass("hidden");
+                $("#popup-company-agency").text(data.company);
+                $("#popup-year-experience-agency").text(data.agencyYearsOfExperience);
+                $("#popup-completed-projects").text(data.completedProject);
+                $("#popup-description").text(data.agencyDescription);
+              } else {
+                $("#agency-section").addClass("hidden");
+              }
+
+              popup.classList.remove("hidden");
+            },
+            error: function () {
+              //Error when sending request
+              console.error("Error fetching register request details");
+            },
+          });
+        }
 
         //make table scrollable & fixed header
         function makeTableScroll() {
@@ -387,15 +728,15 @@
             .value.toLowerCase();
 
           // Retrieve all rows in a table
-          var tableRows = document.querySelectorAll(".tbl-row");
+          var tableRows = document.querySelectorAll(".active-row");
 
           // Loop through each row and hide/unhide them based on search value
           tableRows.forEach(function (row) {
-            var username = row.querySelector("#uname").textContent.toLowerCase();
-            var fullname = row.querySelector("#fname").textContent.toLowerCase();
+            var username = row.querySelector("#active-name").textContent.toLowerCase();
+            var role = row.querySelector("#active-role").textContent.toLowerCase();
             if (
               username.includes(searchInput) ||
-              fullname.includes(searchInput)
+              role.includes(searchInput)
             ) {
               row.style.display = "";
             } else {
