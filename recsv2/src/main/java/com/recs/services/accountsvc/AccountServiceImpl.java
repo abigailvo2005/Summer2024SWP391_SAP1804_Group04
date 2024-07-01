@@ -12,6 +12,7 @@ import com.recs.models.entities.account.Member;
 import com.recs.models.entities.account.Seller;
 import com.recs.models.entities.account.Staff;
 import com.recs.repositories.account.*;
+import com.recs.services.emailservice.EmailService;
 import com.recs.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
@@ -43,6 +44,8 @@ public class AccountServiceImpl implements AccountService {
 
     private AccountUtils accountUtils;
 
+    private EmailService emailService;
+
     @Autowired
     public AccountServiceImpl(
             AccountRepository accountRepository,
@@ -52,7 +55,9 @@ public class AccountServiceImpl implements AccountService {
             AgencyRepository agencyRepository,
             MemberRepository memberRepository,
             PasswordEncoder passwordEncoder,
-            AccountUtils accountUtils) {
+            AccountUtils accountUtils,
+            EmailService emailService
+    ) {
         this.accountRepository = accountRepository;
         this.sellerRepository = sellerRepository;
         this.managerRepository = managerRepository;
@@ -61,6 +66,7 @@ public class AccountServiceImpl implements AccountService {
         this.memberRepository = memberRepository;
         this.encoder = passwordEncoder;
         this.accountUtils = accountUtils;
+        this.emailService = emailService;
     }
 
     @Override
@@ -366,6 +372,7 @@ public class AccountServiceImpl implements AccountService {
                 "ACTIVE"
         );
         Account savedAccount = accountRepository.save(newAccount);
+        mailRegisterAccount(newAccount, request.getPassword());
         switch (savedAccount.getRoleId()) {
             case "ROLE_SELLER" -> {
                 Seller newSeller = new Seller(
@@ -410,6 +417,7 @@ public class AccountServiceImpl implements AccountService {
                 managerId,
                 0
         );
+        mailRegisterAccount(newAccount, request.getPassword());
         staffRepository.save(newStaff);
     }
 
@@ -424,7 +432,17 @@ public class AccountServiceImpl implements AccountService {
                 agencyRepository.getReferenceById(agencyId),
                 savedAccount
         );
+        mailRegisterAccount(newAccount, request.getPassword());
         memberRepository.save(newMember);
+    }
+
+    private void mailRegisterAccount(Account newAccount, String password) {
+        Account mailAccount = new Account();
+        mailAccount.setUsername(newAccount.getUsername());
+        mailAccount.setAccountPassword(password);
+        mailAccount.setEmail(newAccount.getEmail());
+        mailAccount.setRoleId(newAccount.getRoleId());
+        emailService.sendNewAccountEmail(mailAccount);
     }
 
     @Override
