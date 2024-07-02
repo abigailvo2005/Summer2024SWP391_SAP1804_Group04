@@ -102,7 +102,7 @@ public class AdminController {
     }
 
     @PostMapping("/create-account")
-    private String createAccount(
+    public String createAccount(
             @ModelAttribute(name = "request") CreateAccountRequestDTO request
             ) {
         accountService.registerAccount(request);
