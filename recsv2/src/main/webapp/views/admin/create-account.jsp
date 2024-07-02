@@ -417,7 +417,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 </div>
               </div>
             </div>
-
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
                 <table class="register-req-table table align-items-center mb-0">

@@ -90,7 +90,7 @@
                           <label for="birthday">Date of Birth:</label>
                         </div>
                         <div class="col-sm-4">
-                          <input type="date" id="birthday" name="birthday"
+                          <input type="date" id="birthday" name="birthDate"
                             class="form-control form-create-control col-10" required onchange="validateDateOfBirth()" />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-bday hidden">
                             birthday has to be before current day.
@@ -150,7 +150,7 @@
                           <label for="idCardNo"> ID Card No:</label>
                         </div>
                         <div class="col-sm-4">
-                          <input type="number" id="idCardNo" name="idCardNo"
+                          <input type="number" id="idCardNo" name="idCard"
                             class="form-control form-create-control col-10" placeholder="Enter ID card number" min="1"
                             required />
                         </div>
@@ -537,10 +537,23 @@
           });
         }
 
+        //Function to format date 
+        function formatDate(date){
+          const d = new Date(date);
+          const year = d.getFullYear();
+          const month = String(d.getMonth + 1).padStart(2, '0');
+          const day = String(d.getDate().padStart(2, '0'));
+          return `${year}-${month}-${day}`;
+        }
+
         //validate birthday of staff
         function validateDateOfBirth() {
           const birthdayInput = document.getElementById("birthday");
-          const birthDate = new Date(birthdayInput.value);
+          const formattedDate = formatDate(birthdayInput);
+
+          birthdayInput.value = formatDate;
+
+          const birthDate = new Date(formatDate);
           const currentDate = new Date();
 
           if (birthDate.getTime() >= currentDate.getTime()) {

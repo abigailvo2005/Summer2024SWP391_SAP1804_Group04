@@ -44,7 +44,7 @@ public class Account {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birthDate")
-    private Date birthDate;
+    private String birthDate;
 
     @Column(name = "email")
     private String email;

@@ -29,7 +29,7 @@ public class UserInfo {
     private String address;
     private String idCard;
     private String status;
-    private Date birthDate;
+    private String birthDate;
 
     // Fields from Seller
     private String sellerId;

@@ -18,7 +18,7 @@ public class CreateAccountRequestDTO {
 
     private String gender;
 
-    private Date birthDate;
+    private String birthDate;
 
     private String email;
 

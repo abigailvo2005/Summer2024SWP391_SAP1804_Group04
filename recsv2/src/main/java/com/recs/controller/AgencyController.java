@@ -95,20 +95,25 @@ public class AgencyController {
     @GetMapping({ "/create-acc-mem" })
     public String registerStaff(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-acc-mem";
-        List<MemberDTO> memberListCreated = accountService.getMembersByAgency(userInfo.getAgencyId());
-        model.addAttribute("memberList", memberListCreated);
         model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
+        List<MemberDTO> memberListCreated = accountService.getMembersByAgency(userInfo.getAgencyId());
+        model.addAttribute("memberList", memberListCreated);
         return "agency/create-acc-mem";
     }
 
     @PostMapping("/create-acc-mem")
     public String createMember(
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             @ModelAttribute(name = "request") RegisterMemberDTO request,
-            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+            Model model
             ) {
+        
         accountService.registerMember(request, userInfo.getAgencyId());
 
+        UserInfo updateUserInfo = accountService.getAgencyToUserInfo(userInfo.getAgencyId());
+        model.addAttribute("LOGIN_USER", updateUserInfo);
+        model.addAttribute("name", updateUserInfo.getFullName());
         return "redirect:/agency/create-acc-mem";
     }
 

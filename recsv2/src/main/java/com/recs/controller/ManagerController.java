@@ -154,9 +154,15 @@ public class ManagerController {
     @PostMapping("/create-staff")
     public String createStaff(
             @ModelAttribute(name = "request") RegisterStaffDTO request,
-            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
+            Model model
     ) {
         accountService.registerStaff(request, userInfo.getManagerId());
+
+
+        UserInfo updateUserInfo = accountService.getManagerToUserInfo(userInfo.getManagerId());
+        model.addAttribute("LOGIN_USER", updateUserInfo);
+        model.addAttribute("name", userInfo.getManagerId());
         return "redirect:/manager/create-staff";
     }
 
