@@ -145,7 +145,7 @@ public class ManagerController {
         String currentPage = "create-staff";
         List<UserInfo> listStaffCreated = accountService.getListStaffByManager(userInfo.getManagerId());
         model.addAttribute("listStaff", listStaffCreated);
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("name", userInfo.getManagerId());
         model.addAttribute("currentPage", currentPage);
 
         return "manager/create-acc-staff";
@@ -154,8 +154,10 @@ public class ManagerController {
     @PostMapping("/create-staff")
     public String createStaff(
             @ModelAttribute(name = "request") RegisterStaffDTO request,
-            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
+            Model model
     ) {
+        model.addAttribute("name", userInfo.getManagerId());
         accountService.registerStaff(request, userInfo.getManagerId());
         return "redirect:/manager/create-staff";
     }

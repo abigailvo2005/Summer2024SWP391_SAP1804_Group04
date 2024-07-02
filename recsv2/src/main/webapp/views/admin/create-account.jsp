@@ -318,7 +318,7 @@
                     </thead>
                     <!--input list of validating requests here - only 1 row for reference-->
                     <tbody>
-                      <c:forEach items="${activeAccunt}" var="active">
+                      <c:forEach items="${activeAccount}" var="active">
                         <tr class="active-row">
                           <td class="align-middle text-center text-sm">
                             <div class="d-flex px-2 py-1 justify-content-center">

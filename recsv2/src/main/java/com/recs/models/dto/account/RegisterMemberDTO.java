@@ -15,7 +15,7 @@ public class RegisterMemberDTO {
     private String address;
     private String idCard;
     private String status;
-    private Date birthDate;
+    private String birthDate;
     private String password;
 
     public Account toAccount(){

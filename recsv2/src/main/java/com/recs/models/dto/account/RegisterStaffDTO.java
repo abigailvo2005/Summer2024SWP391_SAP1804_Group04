@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Data
 public class RegisterStaffDTO {
     private String fullName;
@@ -15,7 +17,7 @@ public class RegisterStaffDTO {
     private String address;
     private String idCard;
     private String status;
-    private Date birthDate;
+    private String birthDate;
     private String password;
 
     public Account toAccount(){
