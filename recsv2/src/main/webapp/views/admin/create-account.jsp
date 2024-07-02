@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-sm-4">
                           <input type="date" id="birthday" name="birthDate"
-                            class="form-control form-create-control col-10" required onchange="validateDateOfBirth()" />
+                            class="form-control form-create-control col-10" required onchange="validateDateOfBirth(this.value)" />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-bday hidden">
                             birthday has to be before current day.
                           </p>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="col-sm-4">
                           <input type="text" id="address" name="address" class="form-control form-create-control col-10"
-                            placeholder="User 's address" required />
+                            placeholder="Enter address" required />
                         </div>
                       </div>
 
@@ -150,7 +150,7 @@
                           <label for="idCardNo"> ID Card No. :</label>
                         </div>
                         <div class="col-sm-4">
-                          <input type="number" id="idCardNo" name="idCard"
+                          <input type="number" id="idCard" name="idCard"
                             class="form-control form-create-control col-10" placeholder="Enter ID card number" min="1"
                             required />
                         </div>
@@ -162,13 +162,13 @@
                         </div>
                         <div class="col-sm-2">
                           <select id="role-name" name="role" class="form-control form-create-control col-10"
-                            onchange="showRgoleName(this)" required>
+                            onchange="showRoleName(this.value)" required>
                             <option value="" selected>
                               Select role
                             </option>
-                            <option value="seller">Seller</option>
-                            <option value="agency">Agency</option>
-                            <option value="manager">Manager</option>
+                            <option value="ROLE_SELLER">Seller</option>
+                            <option value="ROLE_AGENCY">Agency</option>
+                            <option value="ROLE_MANAGER">Manager</option>
                           </select>
                         </div>
                       </div>
@@ -179,8 +179,8 @@
                             <label> Company:</label>
                           </div>
                           <div class="col-lg-10 col-sm-10">
-                            <input id="companys" type="text" name="companys"
-                              class="seller form-control form-create-control col-10" placeholder="Your company name"
+                            <input id="seller-company" type="text" name="company"
+                              class="seller form-control form-create-control col-10" placeholder="Enter company name"
                               required />
                           </div>
                         </div>
@@ -189,34 +189,33 @@
                       <div id="input-manager-info" class="hidden">
                         <div class="mb-3 row">
                           <div class="col-sm-2">
-                            <label for="yoeManager"> Year of Experience:</label>
+                            <label for="yoeManager">Year of Experience:</label>
                           </div>
                           <div class="col-sm-4">
-                            <input type="number" id="yoeManager" name="yoeManager"
+                            <input type="number" id="yoeManager" name="yearsOfExperience"
                               class="manager form-control form-create-control col-10"
-                              placeholder="Enter your year experience" min="1" required />
+                              placeholder="Enter year experience" min="1" required />
                           </div>
                         </div>
                       </div>
 
-
                       <div id="input-agency-info" class="hidden">
                         <div class="mb-3 row">
                           <div class="col-sm-2">
-                            <label for="yoeAgency"> Year of Experience:</label>
+                            <label for="yoeAgency">Year of Experience:</label>
                           </div>
                           <div class="col-sm-4">
-                            <input type="number" id="yoeAgency" name="yoeAgency"
+                            <input type="number" id="yoeAgency" name="yearsOfExperience"
                               class="agency form-control form-create-control col-10"
-                              placeholder="Enter your year experience" min="1" required />
+                              placeholder="Enter year experience" min="1" required />
                           </div>
                           <div class="col-sm-2">
                             <label for="project"> Number project complete:</label>
                           </div>
                           <div class="col-sm-4">
-                            <input type="number" id="project" name="project"
+                            <input type="number" id="project" name="completedProject"
                               class="agency form-control form-create-control col-10"
-                              placeholder="Enter your project completed" min="1" required />
+                              placeholder="Enter project completed" min="1" required />
                           </div>
                         </div>
                         <div class="mb-3 row">
@@ -224,7 +223,7 @@
                             <label> Company:</label>
                           </div>
                           <div class="col-lg-10 col-sm-10">
-                            <input id="companyAgency" type="text" name="companyAgency"
+                            <input id="companyAgency" type="text" name="company"
                               class="agency form-control form-create-control col-10" placeholder="Your company name"
                               required />
                           </div>
@@ -236,7 +235,7 @@
                           <div class="col-lg-10 col-sm-10">
                             <input id="desc" type="text" name="description"
                               class="form-control form-create-control col-10"
-                              placeholder="Your description about yourself." required />
+                              placeholder="Enter description." required />
                           </div>
                         </div>
                       </div>
@@ -318,8 +317,6 @@
                       </tr>
                     </thead>
                     <!--input list of validating requests here - only 1 row for reference-->
-                    <!--chưa có list nên không forEach được-->
-                    <!--forEach-->
                     <tbody>
                       <c:forEach items="${activeAccunt}" var="active">
                         <tr class="active-row">
@@ -556,8 +553,8 @@
           const inputManagerInfo = document.getElementById("input-manager-info");
           const inputSellerInfo = document.getElementById("input-seller-info");
 
-          switch (select.value) {
-            case "seller":
+          switch (select) {
+            case "ROLE_SELLER":
               inputSellerInfo.classList.remove("hidden");
               inputAgencyInfo.classList.add("hidden");
               inputManagerInfo.classList.add("hidden");
@@ -570,7 +567,7 @@
                 input.required = false;
               });
               break;
-            case "agency":
+            case "ROLE_AGENCY":
               inputSellerInfo.classList.add("hidden");
               inputAgencyInfo.classList.remove("hidden");
               inputManagerInfo.classList.add("hidden");
@@ -583,7 +580,7 @@
                 input.required = false;
               });
               break;
-            case "manager":
+            case "ROLE_MANAGER":
               inputSellerInfo.classList.add("hidden");
               inputAgencyInfo.classList.add("hidden");
               inputManagerInfo.classList.remove("hidden");
@@ -749,10 +746,10 @@
         }
 
         //validate birthday of user
-        function validateDateOfBirth() {
-          const birthdayInput = document.getElementById("birthday");
-          const birthDate = new Date(birthdayInput.value);
+        function validateDateOfBirth(value) {
+          const birthDate = new Date(value);
           const currentDate = new Date();
+          
 
           if (birthDate.getTime() >= currentDate.getTime()) {
             document.querySelector(".error-bday").classList.remove("hidden"); //show errors
@@ -829,7 +826,7 @@
             // Waiting Promise to hide all errors then alert to user
             hideErrorsPromise.then(() => {
               alert("Successfully create an account!");
-              document.querySelector("form").submit();
+              //document.querySelector("form").submit();
             });
 
           } else {

@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-sm-4">
                           <input type="text" id="password" name="password"
-                            class="form-control form-create-control col-10" placeholder="Enter expected password"
+                            class="form-control form-create-control col-10" placeholder="Enter password"
                             required />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-pw hidden">
                             password must be: <br />
@@ -194,11 +194,11 @@
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-8 col-9">
-                    <h6>Your Staff Create Requests</h6>
+                    <h6>All Staffs Created</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
                       <span class="font-weight-bold ms-1">${listStaff.size()} request(s)</span>
-                      being handled
+                      have created
                     </p>
                   </div>
 
