@@ -1073,7 +1073,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           // Waiting Promise to hide all errors then alert to user
           hideErrorsPromise.then(() => {
             alert("Successfully create an account!");
-            //document.querySelector("form").submit();
+            document.querySelector("form").submit();
           });
         } else {
           // If some fields are empty, show default errors
