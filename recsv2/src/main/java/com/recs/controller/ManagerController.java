@@ -145,7 +145,7 @@ public class ManagerController {
         String currentPage = "create-staff";
         List<UserInfo> listStaffCreated = accountService.getListStaffByManager(userInfo.getManagerId());
         model.addAttribute("listStaff", listStaffCreated);
-        model.addAttribute("name", userInfo.getManagerId());
+        model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
 
         return "manager/create-acc-staff";
@@ -157,8 +157,12 @@ public class ManagerController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             Model model
     ) {
-        model.addAttribute("name", userInfo.getManagerId());
         accountService.registerStaff(request, userInfo.getManagerId());
+
+
+        UserInfo updateUserInfo = accountService.getManagerToUserInfo(userInfo.getManagerId());
+        model.addAttribute("LOGIN_USER", updateUserInfo);
+        model.addAttribute("name", userInfo.getManagerId());
         return "redirect:/manager/create-staff";
     }
 

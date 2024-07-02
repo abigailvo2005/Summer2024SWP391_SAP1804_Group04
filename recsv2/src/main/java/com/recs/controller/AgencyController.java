@@ -95,7 +95,7 @@ public class AgencyController {
     @GetMapping({ "/create-acc-mem" })
     public String registerStaff(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-acc-mem";
-        model.addAttribute("name", userInfo.getAgencyId());
+        model.addAttribute("name", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         List<MemberDTO> memberListCreated = accountService.getMembersByAgency(userInfo.getAgencyId());
         model.addAttribute("memberList", memberListCreated);
@@ -110,7 +110,10 @@ public class AgencyController {
             ) {
         
         accountService.registerMember(request, userInfo.getAgencyId());
-        model.addAttribute("name", userInfo.getAgencyId());
+
+        UserInfo updateUserInfo = accountService.getAgencyToUserInfo(userInfo.getAgencyId());
+        model.addAttribute("LOGIN_USER", updateUserInfo);
+        model.addAttribute("name", updateUserInfo.getFullName());
         return "redirect:/agency/create-acc-mem";
     }
 
