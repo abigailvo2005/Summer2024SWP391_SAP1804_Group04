@@ -175,12 +175,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           min="1"
                           required
                         />
-                       <!--  <p
+                       <p
                           class="text-danger text-error mb-0 text-center pt-1 error-phone hidden"
                         >
-                          Phone number must be between 10 and 11 digits long and
-                          contain only numbers.
-                        </p> -->
+                          Phone number must be 10 digits long and contain only numbers.
+                        </p>
                       </div>
                       <div class="col-sm-2">
                         <label for="address"> Address:</label>
@@ -222,12 +221,12 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         </p>
                       </div>
                       <div class="col-sm-2">
-                        <label for="idCardNo"> ID Card No. :</label>
+                        <label for="idCardNo"> ID Card No:</label>
                       </div>
                       <div class="col-sm-4">
                         <input
                           type="number"
-                          id="idCard"
+                          id="idCardNo"
                           name="idCard"
                           class="form-control form-create-control col-10"
                           placeholder="Enter ID card number"
@@ -287,7 +286,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             name="yearsOfExperience"
                             class="manager form-control form-create-control col-10"
                             placeholder="Enter year experience"
-                            min="1"
+                            min="0"
+                            value="0"
                             required
                           />
                         </div>
@@ -306,7 +306,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             name="yearsOfExperience"
                             class="agency form-control form-create-control col-10"
                             placeholder="Enter year experience"
-                            min="1"
+                            min="0"
+                            value="0"
                             required
                           />
                         </div>
@@ -320,7 +321,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             name="completedProject"
                             class="agency form-control form-create-control col-10"
                             placeholder="Enter project completed"
-                            min="1"
+                            min="0"
+                            value="0"
                             required
                           />
                         </div>
@@ -349,7 +351,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             id="desc"
                             type="text"
                             name="description"
-                            class="form-control form-create-control col-10"
+                            class="agency form-control form-create-control col-10"
                             placeholder="Enter description."
                             required
                           />
@@ -456,8 +458,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <c:forEach items="${activeAccunt}" var="active">
-                      <tr class="active-row">
+                    <c:forEach items="${activeAccount}" var="active">
+                      <tr class="active-ro  w">
                         <td class="align-middle text-center text-sm">
                           <div class="d-flex px-2 py-1 justify-content-center">
                             <div
@@ -1014,7 +1016,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           const userName = document.querySelector("#fullName");
           const emailInput = document.querySelector("#email");
           const passwordInput = document.querySelector("#password");
-          /* const phoneInput = document.querySelector("#phone"); */
+          const phoneInput = document.querySelector("#phone");
           const phoneError = document.querySelector(".error-phone");
           const nameError = document.querySelector(".error-name");
           const emailError = document.querySelector(".error-email");
@@ -1028,7 +1030,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             nameError.classList.add("hidden");
           }
 
-         /*  const phoneInputText = phoneInput.value.toString();
+         const phoneInputText = phoneInput.value.toString();
           if (phoneInputText.length > 11) {
             phoneError.classList.remove("hidden");
             console.log("valid phone");
@@ -1036,7 +1038,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           } else {
             phoneError.classList.add("hidden");
             console.log("invailid phone");
-          } */
+          }
 
           if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
             // Check if email is valid

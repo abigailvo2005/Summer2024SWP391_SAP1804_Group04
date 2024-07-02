@@ -31,8 +31,8 @@ public class CreateAccountRequestDTO {
     private String company;
 
     private String description;
+    
+    private int yearsOfExperience = 0;
 
-    private int yearsOfExperience;
-
-    private int completedProject;
+    private int completedProject = 0;
 }

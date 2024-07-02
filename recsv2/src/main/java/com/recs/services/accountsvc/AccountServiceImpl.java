@@ -308,7 +308,7 @@ public class AccountServiceImpl implements AccountService {
                 Manager newManager = new Manager(
                         UUID.randomUUID().toString(),
                         savedAccount.getAccountId(),
-                        request.getYearsOfExperience()
+                        request.getYearsOfExperience() != 0 ? request.getYearsOfExperience() : 0
                 );
                 managerRepository.save(newManager);
             }
@@ -316,8 +316,8 @@ public class AccountServiceImpl implements AccountService {
                 Agency newAgency = new Agency(
                         UUID.randomUUID().toString(),
                         request.getCompany(),
-                        request.getYearsOfExperience(),
-                        request.getCompletedProject(),
+                        request.getYearsOfExperience() != 0 ? request.getYearsOfExperience() : 0,
+                        request.getCompletedProject() != 0 ? request.getCompletedProject() : 0,
                         request.getDescription(),
                         savedAccount,
                         List.of()
