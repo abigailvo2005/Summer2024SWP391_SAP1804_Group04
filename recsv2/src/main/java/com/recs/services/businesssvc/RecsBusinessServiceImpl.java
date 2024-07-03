@@ -269,7 +269,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Override
     public List<AgencyRequestDTO> getPageHistoryAgencyRequest(String agencyId) {
-        List<String> dashboardStatus = Stream.of(AgencyRequestStatus.DENIED, AgencyRequestStatus.DROPPED, AgencyRequestStatus.ACCEPTED, AgencyRequestStatus.CLOSED)
+        List<String> dashboardStatus = Stream.of(AgencyRequestStatus.DENIED, AgencyRequestStatus.DROPPED, AgencyRequestStatus.DENIED, AgencyRequestStatus.CLOSED)
                 .map(AgencyRequestStatus::getValue)
                 .toList();
         return agencyRequestRepository.getAllByAgencyAgencyIdAndStatusIn(agencyId, dashboardStatus)

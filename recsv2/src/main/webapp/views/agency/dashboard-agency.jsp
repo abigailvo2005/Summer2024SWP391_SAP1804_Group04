@@ -391,7 +391,7 @@
                       </div>
 
                       <!-- Agency Request - Message to seller -->
-                      <div class="row">
+                      <div class="row deal-message">
                         <li class="list-group-item border-0 ps-0 text-sm">
                           <strong class="text-dark">Your Message:</strong>
                           <p id="popup-agency-message"></p>
@@ -429,9 +429,11 @@
           var landSection = document.querySelector(".land-info-section");
           var houseSection = document.querySelector(".house-info-section");
           var dealSection = document.querySelector(".deal-only");
+          var dealMessage = document.querySelector(".deal-message");
           var url = null;
           if (type == "listing") {
             url = urlAgencyRequest;
+            dealMessage.classList.remove("hidden");
             // Send GET Request API to retrieve single property information
             $.ajax({
               url: url + propID,
@@ -446,7 +448,7 @@
                 $("#popup-area").text(data.realEstate.area + " m²");
                 $("#popup-price").text(data.realEstate.textPrice + " VND");
                 $("#popup-agency-message").html(data.message.replace(/\r\n/g, "<br>"));
-
+                
                 //only show land/house fields according to type
                 if (data.realEstate.realEstateType == "Land") {
                   landSection.classList.remove("hidden");
@@ -520,6 +522,7 @@
             });
           } else {
             url = urlDeal;
+            dealMessage.classList.add("hidden");
             // Send GET Request API to retrieve single property information
             $.ajax({
               url: url + propID,
@@ -533,7 +536,9 @@
                 $("#popup-address").text(data.realEstate.address);
                 $("#popup-area").text(data.realEstate.area + " m²");
                 $("#popup-price").text(data.realEstate.textPrice + " VND");
-                $("#popup-agency-message").html(data.realEstate.agencyRequests.message);
+                $("#popup-handle").text(data.member.fullName)
+                
+
 
                 //only show land/house fields according to type
                 if (data.realEstate.realEstateType == "Land") {
