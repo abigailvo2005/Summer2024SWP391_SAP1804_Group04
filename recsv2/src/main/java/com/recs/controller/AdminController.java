@@ -1,8 +1,12 @@
 package com.recs.controller;
 
 import com.recs.models.dto.account.CreateAccountRequestDTO;
+import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
+import com.recs.models.entities.realestate.RealEstate;
 import com.recs.services.accountsvc.AccountService;
+import com.recs.services.realestaesvc.RealEstateService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -25,13 +29,18 @@ public class AdminController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private RealEstateService realEstateService;
+
     @GetMapping({"", "/dashboard"})
     public String dashboardView(Model model, Authentication authentication){
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         List<Account> registerList = accountService.getApprovingAccount();
         List<Account> allAccounts = accountService.getAllAccount();
+        List<RealEstateInfo> allRealEstateInfo = realEstateService.getAllRealEstate();
         String currentPage = "dashboard";
+        model.addAttribute("listRealEstate", allRealEstateInfo);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", registerList);
