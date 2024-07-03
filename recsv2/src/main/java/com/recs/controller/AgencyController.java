@@ -1,4 +1,4 @@
-package com.recs.controller;
+    package com.recs.controller;
 
 import com.recs.models.dto.account.MemberDTO;
 import com.recs.models.dto.account.RegisterMemberDTO;
