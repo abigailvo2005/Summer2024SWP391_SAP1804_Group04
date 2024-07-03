@@ -39,7 +39,7 @@
                 <div class="card-header pb-0">
                   <div class="row">
                     <div class="col-lg-8 col-9">
-                      <h6>History Properties Close</h6>
+                      <h6>History Properties Closed</h6>
                       <p class="text-sm mb-0">
                         <i class="fa-regular fa-comment-dots"></i>
                         <span class="font-weight-bold ms-1">${listAssigned.size()} Closed(s)</span>
@@ -392,8 +392,18 @@
                         </div>
                       </div>
 
-                      <!-- Agency Request - Message to seller -->
                       <div class="row">
+                        <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                          <strong class="text-dark">Experienced Years: </strong>
+                          <p id="popup-agency-experience"></p>
+                        </li>
+                          <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
+                            <strong class="text-dark">Completed Projects: </strong>
+                            <p id="popup-agency-completed"></p>
+                        </div>
+
+                      <!-- Agency Request - Message to seller -->
+                      <div class="row deal-message">
                         <li class="list-group-item border-0 ps-0 text-sm">
                           <strong class="text-dark">Your Message:</strong>
                           <p id="popup-agency-message"></p>
@@ -428,6 +438,7 @@
           var landSection = document.querySelector(".land-info-section");
           var houseSection = document.querySelector(".house-info-section");
           var dealSection = document.querySelector(".deal-only");
+          var dealMessage = document.querySelector(".deal-message");
           var url = null;
           if (type == "close") {
             url = urlDeal;
@@ -439,6 +450,7 @@
                 // Update popup with information chosen Property
                 $("#popup-name").text(data.realEstate.name);
                 $("#popup-status").text(data.status);
+                $("#popup-handle").text(data.member.fullName);
                 $("#popup-desc").html(data.realEstate.description.replace(/\r\n/g, "<br>"));
                 $("#popup-type").text(data.realEstate.realEstateType);
                 $("#popup-address").text(data.realEstate.address);
@@ -467,8 +479,9 @@
                 }
 
                 //only show deal information if Deal is clicked
-                if (type == "deal") {
+                if (type == "close") {
                   dealSection.classList.remove("hidden");
+                  dealMessage.classList.add("hidden");
                 }
 
                 //load images to carousel
@@ -532,6 +545,8 @@
                 $("#popup-address").text(data.realEstate.address);
                 $("#popup-area").text(data.realEstate.area + " m²");
                 $("#popup-price").text(data.realEstate.textPrice + " VND");
+                $("#popup-agency-experience").text(data.agency.yearsOfExperience + " years");
+                $("#popup-agency-completed").text(data.agency.completedProject + " successfully connected properties.");
                 $("#popup-agency-message").html(data.message.replace(/\r\n/g, "<br>"));
 
                 //only show land/house fields according to type
