@@ -75,4 +75,6 @@ public interface RecsBusinessService {
     public void updateBuyer(List<String> buyerRequests, BuyerRequestStatus status);
 
     public BuyerRequestDTO getBuyerRequest(String id);
+
+    public void cancelDeal(String dealId);
 }

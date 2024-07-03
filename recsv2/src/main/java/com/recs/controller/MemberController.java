@@ -11,7 +11,7 @@ import com.recs.services.businesssvc.RecsBusinessService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
@@ -28,10 +28,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -103,4 +99,11 @@ public class MemberController {
         return "redirect:/member/dashboard";
     }
 
+    @GetMapping("/deal/cancel")
+    public String cancelDeal(
+            @RequestParam String dealId
+    ) {
+        recsBusinessService.cancelDeal(dealId);
+        return "redirect:/agency";
+    }
 }

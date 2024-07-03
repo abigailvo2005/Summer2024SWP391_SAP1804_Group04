@@ -174,4 +174,12 @@ public class AgencyController {
         recsBusinessService.createDeal(request.getRealEstateId(), request.getMemberId(), userInfo.getAgencyId());
         return "redirect:/agency";
     }
+
+    @GetMapping("/deal/cancel")
+    public String cancelDeal(
+            @RequestParam String dealId
+    ) {
+        recsBusinessService.cancelDeal(dealId);
+        return "redirect:/agency";
+    }
 }

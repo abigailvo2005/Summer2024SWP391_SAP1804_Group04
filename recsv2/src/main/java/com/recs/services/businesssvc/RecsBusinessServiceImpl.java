@@ -417,4 +417,17 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         return BuyerRequestDTO.from(buyerRequest);
     }
 
+    @Override
+    public void cancelDeal(String dealId) {
+        DealAssignMember deal = dealAssignMemberRepository.getReferenceById(dealId);
+        deal.setStatus(DealAssignMemberStatus.CANCELLED.getValue());
+        AgencyRequest agencyRequest = agencyRequestRepository.getByAgencyAgencyIdAndRealEstateRealEstateId(
+                deal.getAgency().getAgencyId(),
+                deal.getRealEstate().getRealEstateId()
+        );
+        agencyRequest.setStatus(AgencyRequestStatus.ACCEPTED.getValue());
+        dealAssignMemberRepository.save(deal);
+        agencyRequestRepository.save(agencyRequest);
+    }
+
 }
