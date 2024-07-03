@@ -155,10 +155,18 @@ public class SellerController {
     }
 
     @GetMapping("real-estate/request")
-    private String requestValidate(
+    public String requestValidate(
             @RequestParam String realEstateId
     ) {
         realEstateService.updateStatus(realEstateId, RealEstateStatus.REVIEWING, "");
+        return "redirect:/seller";
+    }
+
+    @GetMapping("/real-estate/delete")
+    public String deleteRealEstate(
+            @RequestParam String realEstateId
+    ) {
+        realEstateService.deleteRealEstate(realEstateId);
         return "redirect:/seller";
     }
 }

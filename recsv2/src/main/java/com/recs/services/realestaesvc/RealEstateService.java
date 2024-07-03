@@ -44,4 +44,5 @@ public interface RealEstateService {
 
     public List<RealEstateInfo> getAllBySellerIdAndStatus(String sellerId, String status);
 
+    public void deleteRealEstate(String realEstateId);
 }

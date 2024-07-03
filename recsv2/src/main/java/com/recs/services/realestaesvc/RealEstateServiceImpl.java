@@ -285,6 +285,11 @@ public class RealEstateServiceImpl implements RealEstateService{
         return mapListToInfo(list);
     }
 
+    @Override
+    public void deleteRealEstate(String realEstateId) {
+        realEstateRepository.deleteById(realEstateId);
+    }
+
     public boolean checkAgency(RealEstate realEstate, String agencyId) {
         List<String> agencyIds = realEstate.getAgencyRequests().stream()
                 .map(request -> request.getAgency().getAgencyId())
