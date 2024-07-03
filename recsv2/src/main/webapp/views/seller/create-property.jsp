@@ -467,7 +467,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         const landInfoSection = document.getElementById("land-info-section");
         const houseInfoSection = document.getElementById("house-info-section");
 
-        if (select.value === "Land") {
+        console.log(select.value);
+
+        if (select.value === "land") {
           landInfoSection.classList.remove("hidden");
           houseInfoSection.classList.add("hidden");
 

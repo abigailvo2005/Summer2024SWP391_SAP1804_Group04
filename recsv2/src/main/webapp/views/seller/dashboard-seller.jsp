@@ -676,12 +676,44 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       id="draft-section"
                       class="row d-flex justify-content-center hidden"
                     >
-                      <button id="request-validate-btn" class="btn btn-dark me-3 col-4" onclick="requestValidation(this.value)">
-                        Request Validation
-                      </button>
-                      <button id="delete-real-estate-btn" class="btn btn-danger col-4" onclick="deleteRealEstate(this.value)">
-                        Delete
-                      </button>
+                      <form
+                        class="col-4"
+                        action="${pageContext.request.contextPath}/seller/real-estate/request"
+                        id="request-validation"
+                        method="get"
+                      >
+                        <input
+                          type="hidden"
+                          id="request-reId"
+                          name="realEstateId"
+                        />
+                        <button
+                          id="request-validate-btn"
+                          class="btn btn-dark me-3 col-12"
+                          onclick="draftLoadId(event, this.value, '#request-reId', '#request-validation')"
+                        >
+                          Request Validation
+                        </button>
+                      </form>
+
+                      <form
+                        class="col-4"
+                        action="${pageContext.request.contextPath}/seller/real-estate/delete"
+                        id="request-delete"
+                      >
+                        <input
+                          type="hidden"
+                          id="delete-reId"
+                          name="realEstateId"
+                        />
+                        <button
+                          id="delete-real-estate-btn"
+                          class="btn btn-danger col-12"
+                          onclick="draftLoadId(event, this.value, '#delete-reId', '#request-delete')"
+                        >
+                          Delete
+                        </button>
+                      </form>
                     </div>
 
                     <!-- Button allows user hide/show list of agencies -->
@@ -988,6 +1020,17 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         "closed",
       ];
 
+      //Load Real Estate ID
+      function draftLoadId(e, id, input, form) {
+        e.preventDefault();
+
+        //load id
+        $(input).val(id);
+
+        //submit form
+        $(form).submit();
+      }
+
       // Submit chosen Agency Profile to system
       function confirmAgency(e) {
         e.preventDefault();
@@ -1129,6 +1172,8 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.area + " m²");
             $("#popup-price").text(data.textPrice + " VND");
 
+            console.log(data.status.toLowerCase());
+
             //assign property status for future reference
             propStatus = data.status.toLowerCase();
 
@@ -1173,7 +1218,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             }
 
             //only show options of submitting properties/delete property if it's a draft property
-            if(type == 'draft') {
+            if (type == "draft") {
               $("#draft-section").removeClass("hidden");
 
               $("#request-validate-btn").val(data.realEstateId);
@@ -1184,13 +1229,21 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             if (
               !requestingAgencyStatusHide.includes(data.status.toLowerCase())
             ) {
+              console.log("in request agency");
               agencyBtn.classList.remove("hidden");
             }
 
             if (!requestBuyerStatusHide.includes(data.status.toLowerCase())) {
+              console.log("in request buyer");
               buyerBtn.classList.remove("hidden");
-            } else {
+            }
+
+            if (
+              requestingAgencyStatusHide.includes(data.status.toLowerCase()) &&
+              requestBuyerStatusHide.includes(data.status.toLowerCase())
+            ) {
               //hide all as default
+              console.log("hide all");
               agencyBtn.classList.add("hidden");
               buyerBtn.classList.add("hidden");
             }
@@ -1259,7 +1312,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             const chosenAgencyContainer = $("#chosen-agency-container");
             data.agencyRequests.forEach((request) => {
-              if (request.status == "Accepted") {
+              if (request.status == "Accepted" || request.status == "Processing") {
                 //only show chosen agencies
                 //create rows with checkboxes - for controller submission - and information to view
                 const row = $("<tr>");

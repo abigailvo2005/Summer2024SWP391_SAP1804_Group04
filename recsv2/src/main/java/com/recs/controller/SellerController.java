@@ -166,6 +166,7 @@ public class SellerController {
     public String deleteRealEstate(
             @RequestParam String realEstateId
     ) {
+        System.out.println("REAL ESTATE ID RECEIVED: " + realEstateId);
         realEstateService.deleteRealEstate(realEstateId);
         return "redirect:/seller";
     }
