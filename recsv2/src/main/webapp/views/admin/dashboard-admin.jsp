@@ -447,7 +447,7 @@
                       <div class="row">
                         <li class="list-group-item border-0 ps-0 text-sm d-flex">
                           <strong class="text-dark">Status:</strong>
-                          <p id="popup-status"></p>
+                          <p id="popup-status-property"></p>
                         </li>
                       </div>
 
@@ -575,7 +575,7 @@
             success: function (data) {
               // Update popup với information chosen Property
               $("#popup-name").text(data.name);
-              $("#popup-status").text(data.status.toLowerCase());
+              $("#popup-status-property").text(data.status.toLowerCase());
 
               $("#popup-desc").text(data.description);
               $("#popup-type").text(data.realEstateType);
@@ -619,7 +619,7 @@
               const slideElement = document.createElement("div");
               slideElement.classList.add("carousel-item");
               if (index === 0) {
-                slideElement.classLcuist.add("active");
+                slideElement.classList.add("active");
               }
               const imgElement = document.createElement("img");
               imgElement.src = image;

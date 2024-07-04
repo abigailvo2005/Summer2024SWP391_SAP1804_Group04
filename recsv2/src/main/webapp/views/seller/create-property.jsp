@@ -61,14 +61,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         <div
           class="page-header align-items-start min-vh-35 pt-1 pb-1 m-3 border-radius-lg"
           style="
-            background-image: url('/template/assets/img/curved-images/create-property-background.jpeg/>');
+            background-image: url('./../../template/assets/img/curved-images/curved9.jpg');
           "
         >
           <span class="mask bg-gradient-dark opacity-6"></span>
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-sm-12 col-md-8 col-lg-6 text-center mx-auto">
-                <h2 class="text-white mb-1 mt-sm-4">Posting Validation</h2>
+                <h2 class="text-white mb-1 mt-sm-4">Upload Property</h2>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             <div class="col-12 col-xl-11 mx-auto">
               <div class="card z-index-0">
                 <div class="card-header text-center pt-4">
-                  <h5>Property Validation Request Form</h5>
+                  <h5>Property Submission Form</h5>
                 </div>
 
                 <div class="card-body">
