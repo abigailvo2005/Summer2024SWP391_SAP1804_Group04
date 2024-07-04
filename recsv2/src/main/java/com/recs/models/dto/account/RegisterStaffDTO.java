@@ -32,7 +32,7 @@ public class RegisterStaffDTO {
                 phone,
                 address,
                 idCard,
-                "APPROVING"
+                "ACTIVE"
                 );
     }
 

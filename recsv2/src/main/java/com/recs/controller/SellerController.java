@@ -52,7 +52,8 @@ public class SellerController {
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
       /*   List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId()); */
       List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
-      .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED)
+      .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED &&
+                                        realEstateInfo.getStatus() != RealEstateStatus.CLOSED)
       .toList();
         List<RealEstateInfo> draftRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
                 .stream().filter(realEstateInfo -> realEstateInfo.getStatus() == RealEstateStatus.CREATED)

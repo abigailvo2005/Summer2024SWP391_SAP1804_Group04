@@ -180,7 +180,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                               >
                                 <a
                                   class="show-detail"
-                                  onclick="viewDetail('${request.requestId}')"
+                                  onclick="viewDetail('${request.requestId}', 'req')"
                                   ><i class="fa-solid fa-eye"></i
                                 ></a>
                               </div>
@@ -198,6 +198,117 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       </div>
     </div>
     <!--End List History Property connected successfully-->
+
+    <!--Start List History Deal-->
+    <div class="container-fluid">
+      <div class="row my-4">
+        <div class="mb-md-0 mb-4">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-8 col-9">
+                  <h6>Closed Deals Assignment</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa-regular fa-comment-dots"></i>
+                    <span class="font-weight-bold ms-1">${listDeal.size()} Closed(s)</span>
+                    in total
+                  </p>
+                </div>
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center col-lg-4 col-3">
+                  <div class="input-group">
+                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input id="searchInputDeal" type="text" class="form-control"
+                      placeholder="Type property name here..." onkeyup="searchTable('close')" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3">
+                          PROPERTY NAME
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1">
+                          PRICE
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2">
+                          TYPE
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1">
+                          STATUS
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1">
+                          VIEW DETAILS
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <c:forEach items="${listDeal}" var="assigned">
+                        <tr class="close-row">
+                          <td>
+                            <div class="d-flex justify-content-start">
+                              <div class="d-flex flex-column justify-content-start">
+                                <p id="close-name" class="mb-0 text-sm fw-bold text-dark">
+                                  ${assigned.realEstate.name}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p class="mb-0 text-sm fw-bold text-dark">
+                                  ${assigned.realEstate.textPrice}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p id="close-type" class="mb-0 text-sm fw-bold text-dark">
+                                  ${assigned.realEstate.realEstateType}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <p class="mb-0 text-sm fw-bold status-color" value="${assigned.status}">
+                                  ${assigned.status}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <div class="d-flex px-2 py-1 justify-content-center">
+                              <div class="d-flex flex-column justify-content-center">
+                                <a class="show-detail" onclick="viewDetail('${assigned.dealId}', 'close')"><i
+                                    class="fa-solid fa-eye"></i></a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End History Deal-->
 
       <!-- START FOOTER-->
       <footer class="footer pt-3">
@@ -271,7 +382,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                         <p id="popup-status"></p>
                       </li>
                       <li
-                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex"
+                        class="list-group-item border-0 ps-0 text-sm col-6 d-flex deal-only hidden"
                       >
                         <strong class="text-dark">Assigned by: </strong>
                         <p id="popup-agency"></p>
@@ -406,6 +517,13 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                           <strong class="text-dark">Bathrooms: </strong>
                           <p id="popup-bath"></p>
                         </li>
+
+                        <div class="row deal-message">
+                          <li class="list-group-item border-0 ps-0 text-sm">
+                            <strong class="text-dark">Member 's Message:</strong>
+                            <p id="popup-agency-message"></p>
+                          </li>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -456,22 +574,49 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               row.style.display = "none";
             }
           });
+        } else {
+          var searchInput = document
+              .getElementById("searchInputDeal")
+              .value.toLowerCase();
+
+            // Get all rows in table
+            var requests = document.querySelectorAll(".close-row");
+
+            requests.forEach(function (row) {
+              var name = row.querySelector("#close-name").textContent.toLowerCase();
+              var type = row.querySelector("#close-type").textContent.toLowerCase();
+              if (
+                name.includes(searchInput) ||
+                type.includes(searchInput)
+              ) {
+                row.style.display = "";
+              } else {
+                row.style.display = "none";
+              }
+            });
         }
       }
 
       //URL DEAL API
-      const urlDeal = "";
+      const urlDeal = "http://localhost:8085/api/deal/";
+
+      const urlBuyerRequest = "http://localhost:8085/api/buyer-request/";
+
 
       /* View Popup detail of each property */
-      function viewDetail(requestId) {
+      function viewDetail(popupid, type) {
         var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");
         var houseSection = document.querySelector(".house-info-section");
-        var buyerList = document.querySelector("#buyer-list");
-
+        var dealMessage = document.querySelector(".deal-message");
+        var dealSection = document.querySelector(".deal-only");
+        var url = null;
         // Send GET Request API to retrieve single property information
-        $.ajax({
-          url: urlDeal + requestId,
+        if(type == "close") {
+          url = urlDeal;
+
+          $.ajax({
+          url: urlDeal + popupid,
           type: "GET",
           success: function (data) {
             // Update popup with information chosen Property
@@ -513,6 +658,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 data.realEstate.propertyHouse.bath + " rooms"
               );
             }
+
+            //only show deal information if Deal is clicked
+            if (type == "close") {
+                  dealSection.classList.remove("hidden");
+                }
 
             //load images to carousel
             const carouselInner = document.querySelector(".carousel-inner");
@@ -558,7 +708,99 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             console.error("Error fetching property details");
           },
         });
-      }
+ 
+        } else {
+          url = urlBuyerRequest
+          $.ajax({
+              url: url + popupid,
+              type: "GET",
+              success: function (data) {
+                // Update popup with information chosen Property
+                $("#popup-name").text(data.realEstateDTO.name);
+                $("#popup-status").text(data.status);
+                $("#popup-desc").html(data.realEstateDTO.description.replace(/\r\n/g, "<br>"));
+                $("#popup-type").text(data.realEstateDTO.realEstateType);
+                $("#popup-address").text(data.realEstateDTO.address);
+                $("#popup-area").text(data.realEstateDTO.area + " m²");
+                $("#popup-price").text(data.realEstateDTO.textPrice + " VND");
+                $("#popup-agency-message").html(data.message.replace(/\r\n/g, "<br>"));
+                // //only show land/house fields according to type
+                // if (data.realEstateDTO.realEstateType == "Land") {
+                //   landSection.classList.remove("hidden");
+                //   houseSection.classList.add("hidden");
+                //   $("#popup-land-type").text(data.realEstateDTO.propertyLand.landType);
+                // } else {
+                //   houseSection.classList.remove("hidden");
+                //   landSection.classList.add("hidden");
+                //   $("#popup-house-type").text(
+                //     data.realEstateDTO.propertyHouse.houseType
+                //   );
+                //   $("#popup-builtIn").text(data.realEstateDTO.propertyHouse.builtIn);
+                //   $("#popup-bed").text(
+                //     data.realEstateDTO.propertyHouse.bedroom + " rooms"
+                //   );
+                //   $("#popup-bath").text(
+                //     data.realEstateDTO.propertyHouse.bath + " rooms"
+                //   );
+                // }
+
+                if(type == "req") {
+                  dealMessage.classList.remove("hidden");
+                }
+
+                //only show deal information if Deal is clicked
+                if (type == "close") {
+                  dealSection.classList.remove("hidden");
+                }
+
+                //load images to carousel
+                const carouselInner = document.querySelector(".carousel-inner");
+                const carouselIndicators = document.querySelector(
+                  ".carousel-indicators"
+                );
+
+                // Reset images to be shown everytime popup is clicked
+                carouselInner.innerHTML = "";
+                carouselIndicators.innerHTML = "";
+
+                data.realEstateDTO.images.forEach((image, index) => {
+                  // create slide
+                  const slideElement = document.createElement("div");
+                  slideElement.classList.add("carousel-item");
+                  if (index === 0) {
+                    slideElement.classList.add("active");
+                  }
+                  const imgElement = document.createElement("img");
+                  imgElement.src = image;
+                  imgElement.classList.add("d-block", "w-100", "rounded");
+                  slideElement.appendChild(imgElement);
+                  carouselInner.appendChild(slideElement);
+
+                  // create indexes
+                  const indicatorElement = document.createElement("button");
+                  indicatorElement.type = "button";
+                  indicatorElement.dataset.bsTarget = "#image-section";
+                  indicatorElement.dataset.bsSlideTo = index;
+                  if (index === 0) {
+                    indicatorElement.classList.add("active");
+                    indicatorElement.setAttribute("aria-current", "true");
+                  }
+                  indicatorElement.setAttribute("aria-label", `Slide ${index + 1}`);
+                  carouselIndicators.appendChild(indicatorElement);
+                });
+
+                // init Bootstrap Carousel
+                const carousel = new bootstrap.Carousel("#image-section");
+
+                popup.classList.remove("hidden");
+              },
+              error: function () {
+                //Error when sending request
+                console.error("Error fetching property details");
+              },
+            });
+        }
+    }
 
       function closeDetail() {
         document

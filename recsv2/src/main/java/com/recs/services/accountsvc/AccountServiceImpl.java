@@ -344,7 +344,7 @@ public class AccountServiceImpl implements AccountService {
                 Manager newManager = new Manager(
                         UUID.randomUUID().toString(),
                         savedAccount.getAccountId(),
-                        request.getYearsOfExperience() != 0 ? request.getYearsOfExperience() : 0
+                        request.getYearsOfExperienceMan() != 0 ? request.getYearsOfExperienceMan() : 0
                 );
                 managerRepository.save(newManager);
             }

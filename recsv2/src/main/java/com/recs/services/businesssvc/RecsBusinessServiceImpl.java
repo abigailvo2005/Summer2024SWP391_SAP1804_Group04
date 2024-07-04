@@ -36,6 +36,7 @@ import com.recs.repositories.recsbusiness.JobAssignStaffRepository;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -176,6 +177,14 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public List<DealAssignMember> getDashboarDealByMemberId(String memberId) {
+        List<String> dashboardStatus = Stream.of(DealAssignMemberStatus.ASSIGNED, DealAssignMemberStatus.REVIEWING)
+            .map(DealAssignMemberStatus::getValue)
+            .toList();
+        return dealAssignMemberRepository.getByMemberMemberIdAndStatusIn(memberId, dashboardStatus);
+    }
+
+    @Override
     public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status) {
         return dealAssignMemberRepository.getByMemberMemberIdAndStatus(memberId, status);
     }
@@ -281,7 +290,10 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Override
     public List<DealAssignMemberDTO> getAgencyDashboardDeal(String agencyId) {
-        return dealAssignMemberRepository.getByAgencyAgencyId(agencyId)
+        List<String> dashboardStatus = Stream.of(DealAssignMemberStatus.ASSIGNED, DealAssignMemberStatus.REVIEWING)
+            .map(DealAssignMemberStatus::getValue)
+            .toList();
+        return dealAssignMemberRepository.getByAgencyAgencyIdAndStatusIn(agencyId, dashboardStatus)
                 .stream()
                 .map(DealAssignMemberDTO::from)
                 .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
@@ -299,8 +311,22 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public List<DealAssignMemberDTO> getPageHistoryAssignDealPageByMemberId(String memberId) {
+        List<String> dashboardStatus = Stream.of(DealAssignMemberStatus.CANCELLED, DealAssignMemberStatus.CLOSED)
+                    .map(DealAssignMemberStatus::getValue)
+                    .toList();
+        return dealAssignMemberRepository.getByMemberMemberIdAndStatusIn(memberId, dashboardStatus)
+                .stream().map(DealAssignMemberDTO::from)
+                .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
+                .toList();
+    }
+
+    @Override
     public List<DealAssignMemberDTO> getAssignDealPageByMemberId(String memberId) {
-        return dealAssignMemberRepository.getByMemberMemberId(memberId)
+        List<String> createStatus = Stream.of(DealAssignMemberStatus.ASSIGNED, DealAssignMemberStatus.REVIEWING)
+                .map(DealAssignMemberStatus::getValue)
+                .toList();
+        return dealAssignMemberRepository.getByMemberMemberIdAndStatusIn(memberId, createStatus)
                 .stream()
                 .map(DealAssignMemberDTO::from)
                 .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
@@ -354,6 +380,16 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     public List<BuyerRequestDTO> getBuyerRequestByMember(String memberId) {
         List<BuyerRequest> buyerRequests = buyerRequestRepository.findAllByMemberMemberId(memberId);
         return buyerRequests.stream().map(BuyerRequestDTO::from).toList();
+    }
+
+    @Override
+    public List<BuyerRequestDTO> getDaboardBuyerRequestByMember(String memberId) {
+        List<String> status = Stream.of(BuyerRequestStatus.CONNECTED)
+            .map(BuyerRequestStatus::getValue)
+            .toList();
+
+        return buyerRequestRepository.findAllByMemberMemberIdAndStatusIn(memberId, status)
+                .stream().map(BuyerRequestDTO::from).toList();
     }
 
     @Override

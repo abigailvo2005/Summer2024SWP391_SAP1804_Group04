@@ -35,4 +35,6 @@ public class CreateAccountRequestDTO {
     private int yearsOfExperience = 0;
 
     private int completedProject = 0;
+
+    private int yearsOfExperienceMan = 0;
 }

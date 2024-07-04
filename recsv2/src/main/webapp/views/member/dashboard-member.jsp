@@ -92,7 +92,7 @@
                               <td>
                                 <div class="d-flex justify-content-start">
                                   <div class="d-flex flex-column justify-content-start">
-                                    <p id="req-name" class="mb-0 text-sm fw-bold text-dark">
+                                    <p id="deal-name" class="mb-0 text-sm fw-bold text-dark">
                                       ${deal.realEstate.name}
                                     </p>
                                   </div>
@@ -240,7 +240,7 @@
                                 <div class="d-flex px-2 py-1 justify-content-center">
                                   <div class="d-flex flex-column justify-content-center">
                                     <p id="req-type" class="mb-0 text-sm fw-bold text-dark">
-                                      ${req.fullName}
+                                      ${req.realEstateDTO.realEstateType}
                                     </p>
                                   </div>
                                 </div>
@@ -697,19 +697,21 @@
         };
 
         //display elements according to search value
-        function searchTable() {
-          // Lấy giá trị từ ô input
+        function searchTable(type) {
+
+          if(type.includes("deal")) {
+            // Lấy giá trị từ ô input
           var searchInput = document
-            .getElementById("reqSearch")
+            .getElementById("dealSearch")
             .value.toLowerCase();
 
           // Retrieve all rows in a table
-          var tableRows = document.querySelectorAll(".tbl-row");
+          var tableRows = document.querySelectorAll(".deal-row");
 
           // Loop through each row and hide/unhide them based on search value
           tableRows.forEach(function (row) {
-            var username = row.querySelector("#uname").textContent.toLowerCase();
-            var fullname = row.querySelector("#fname").textContent.toLowerCase();
+            var username = row.querySelector("#deal-name").textContent.toLowerCase();
+            var fullname = row.querySelector("#deal-type").textContent.toLowerCase();
             if (
               username.includes(searchInput) ||
               fullname.includes(searchInput)
@@ -719,6 +721,32 @@
               row.style.display = "none";
             }
           });
+          } else {
+
+              // Lấy giá trị từ ô input
+          var searchInput = document
+            .getElementById("reqSearch")
+            .value.toLowerCase();
+
+          // Retrieve all rows in a table
+          var tableRows = document.querySelectorAll(".req-row");
+
+          // Loop through each row and hide/unhide them based on search value
+          tableRows.forEach(function (row) {
+            var username = row.querySelector("#req-name").textContent.toLowerCase();
+            var fullname = row.querySelector("#req-type").textContent.toLowerCase();
+            if (
+              username.includes(searchInput) ||
+              fullname.includes(searchInput)
+            ) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+
+          }
+          
         }
       </script>
     </body>

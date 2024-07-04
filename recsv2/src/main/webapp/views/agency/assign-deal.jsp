@@ -923,15 +923,15 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
           .value.toLowerCase();
 
         //Get all rows in table
-        var requests = document.querySelectorAll(".deal-row");
+        var requests = document.querySelectorAll(".listing-row");
 
         //Iterate through all rows and hide/show based on value
         requests.forEach(function (row) {
           var dealName = row
-            .querySelector("#deal-name")
+            .querySelector("#listing-name")
             .textContent.toLowerCase();
           var dealType = row
-            .querySelector("#deal-type")
+            .querySelector("#listing-type")
             .textContent.toLowerCase();
           if (dealName.includes(searchDeal) || dealType.includes(searchDeal)) {
             row.style.display = "";

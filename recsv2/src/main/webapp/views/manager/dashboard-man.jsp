@@ -180,7 +180,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p
-                                id="val-status"
+                                id="job-status"
                                 class="mb-0 text-sm fw-bold status-color"
                                 value="${val.status.value}"
                               >

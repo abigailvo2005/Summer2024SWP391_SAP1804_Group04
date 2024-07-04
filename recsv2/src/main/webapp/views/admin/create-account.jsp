@@ -175,12 +175,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           min="1"
                           required
                         />
-                        <!--  <p
+                       <p
                           class="text-danger text-error mb-0 text-center pt-1 error-phone hidden"
                         >
-                          Phone number must be between 10 and 11 digits long and
-                          contain only numbers.
-                        </p> -->
+                          Phone number must be 10 digits long and contain only numbers.
+                        </p>
                       </div>
                       <div class="col-sm-2">
                         <label for="address"> Address:</label>
@@ -252,7 +251,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <option value="" selected>Select role</option>
                           <option value="ROLE_SELLER">Seller</option>
                           <option value="ROLE_AGENCY">Agency</option>
-                          <!--  <option value="ROLE_MANAGER">Manager</option> -->
+                        <!--  <option value="ROLE_MANAGER">Manager</option> -->
                         </select>
                       </div>
                     </div>
@@ -284,7 +283,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             type="number"
                             id="yoeManager"
-                            name="yearsOfExperience"
+                            name="yearsOfExperienceMan"
                             class="manager form-control form-create-control col-10"
                             placeholder="Enter year experience"
                             min="0"
@@ -348,13 +347,14 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <label> Description:</label>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                          <textarea
+                          <input
                             id="desc"
+                            type="text"
                             name="description"
                             class="agency form-control form-create-control col-10"
                             placeholder="Enter description."
                             required
-                          ></textarea>
+                          />
                         </div>
                       </div>
                     </div>
@@ -459,7 +459,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
                     <c:forEach items="${listAccount}" var="list">
-                      <tr class="active-ro  w">
+                      <tr class="active-row">
                         <td class="align-middle text-center text-sm">
                           <div class="d-flex px-2 py-1 justify-content-center">
                             <div
@@ -1030,14 +1030,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             nameError.classList.add("hidden");
           }
 
-          /*  const phoneInputText = phoneInput.value.toString();
+         const phoneInputText = phoneInput.value.toString();
           if (phoneInputText.length > 11) {
             phoneError.classList.remove("hidden");
             return;
           } else {
             phoneError.classList.add("hidden");
-            console.log("invailid phone");
-          } */
+          }
 
           if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
             // Check if email is valid
