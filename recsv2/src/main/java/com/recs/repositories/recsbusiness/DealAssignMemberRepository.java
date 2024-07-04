@@ -10,7 +10,11 @@ public interface DealAssignMemberRepository extends JpaRepository<DealAssignMemb
 
     List<DealAssignMember> getByMemberMemberIdAndStatus(String memberId, String status);
 
+    List<DealAssignMember> getByMemberMemberIdAndStatusIn(String memberId, List<String> status);
+
     List<DealAssignMember> getByAgencyAgencyIdAndStatus(String agencyId, String status);
+
+    List<DealAssignMember> getByAgencyAgencyIdAndStatusIn(String agencyId, List<String> status);
 
     List<DealAssignMember> getByMemberMemberId(String memberId);
 

@@ -27,7 +27,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -53,10 +52,10 @@ public class MemberController {
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        List<DealAssignMemberDTO> dealAssignMemberList = recsBusinessService.getAllDealByMemberId(userInfo.getMemberId())
+        List<DealAssignMemberDTO> dealAssignMemberList = recsBusinessService.getDashboarDealByMemberId(userInfo.getMemberId())
                 .stream().map(DealAssignMemberDTO::from).toList();
 //        System.out.println(dealAssignMemberList);
-        List<BuyerRequestDTO> allBuyerRequests = recsBusinessService.getBuyerRequestByMember(userInfo.getMemberId())
+        List<BuyerRequestDTO> allBuyerRequests = recsBusinessService.getDaboardBuyerRequestByMember(userInfo.getMemberId())
                 .stream().sorted(Comparator.comparing(BuyerRequestDTO::getStatus))
                 .toList();
         System.out.println("buyer request list: " + allBuyerRequests);
@@ -72,10 +71,12 @@ public class MemberController {
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         List<BuyerRequestDTO> listRequestHistory = recsBusinessService.getPageBuyerRequestByMemberId(userInfo.getMemberId());
+        List<DealAssignMemberDTO> allListDeal = recsBusinessService.getPageHistoryAssignDealPageByMemberId(userInfo.getMemberId());
         String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
         model.addAttribute("requestHistory", listRequestHistory);
+        model.addAttribute("listDeal", allListDeal);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "member/history-member";

@@ -31,7 +31,7 @@ public class RegisterMemberDTO {
                 phone,
                 address,
                 idCard,
-                "APPROVING"
+                "ACTIVE"
         );
     }
 }

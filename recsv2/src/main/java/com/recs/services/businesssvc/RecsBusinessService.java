@@ -38,7 +38,11 @@ public interface RecsBusinessService {
 
     public List<DealAssignMember> getAllDealByMemberId(String memberId);
 
+    public List<DealAssignMember> getDashboarDealByMemberId(String memId);
+
     public List<DealAssignMemberDTO> getAssignDealPageByMemberId(String memberId);
+
+    public List<DealAssignMemberDTO> getPageHistoryAssignDealPageByMemberId(String memberId);
 
     public List<DealAssignMember> getDealByMemberIdAndStatus(String memberId, String status);
 
@@ -69,6 +73,8 @@ public interface RecsBusinessService {
     public void createBuyerRequest(BuyerRequestCreateDTO request);
 
     public List<BuyerRequestDTO> getBuyerRequestByMember(String memberId);
+
+    public List<BuyerRequestDTO> getDaboardBuyerRequestByMember(String memberId);
 
     public List<BuyerRequestDTO> getPageBuyerRequestByMemberId(String memberId);
 

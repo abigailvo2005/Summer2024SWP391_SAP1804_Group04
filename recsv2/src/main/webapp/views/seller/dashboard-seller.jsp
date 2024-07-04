@@ -1677,7 +1677,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             .value.toLowerCase();
 
           // Get all rows in table
-          var requests = document.querySelectorAll(".req-row");
+          var requests = document.querySelectorAll(".draft-row");
 
           requests.forEach(function (row) {
             var name = row.querySelector("#req-name").textContent.toLowerCase();

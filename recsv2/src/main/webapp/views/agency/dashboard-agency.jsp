@@ -73,7 +73,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         id="ownSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type id/name/type here..."
+                        placeholder="Type name/type here..."
                         onkeyup="searchTable('prop')"
                       />
                     </div>
@@ -235,7 +235,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         id="propSearch"
                         type="text"
                         class="form-control"
-                        placeholder="Type id/name/type here..."
+                        placeholder="Type name/type here..."
                         onkeyup="searchTable('req')"
                       />
                     </div>
@@ -928,7 +928,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       //display elements according to search value
       function searchTable(type) {
         //search for request register accounts
-        if (type.includes("prop")) {
+        if (type.includes("req")) {
           //Get values from input search
           var searchInput = document
             .getElementById("propSearch")
@@ -938,11 +938,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var requests = document.querySelectorAll(".req-row");
 
           requests.forEach(function (row) {
-            var id = row.querySelector("#req-id").textContent.toLowerCase();
             var name = row.querySelector("#req-name").textContent.toLowerCase();
             var type = row.querySelector("#req-type").textContent.toLowerCase();
             if (
-              id.includes(searchInput) ||
               name.includes(searchInput) ||
               type.includes(searchInput)
             ) {
@@ -961,7 +959,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var requests = document.querySelectorAll(".listing-row");
 
           requests.forEach(function (row) {
-            var id = row.querySelector("#listing-id").textContent.toLowerCase();
             var name = row
               .querySelector("#listing-name")
               .textContent.toLowerCase();
@@ -969,7 +966,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               .querySelector("#listing-type")
               .textContent.toLowerCase();
             if (
-              id.includes(searchInput) ||
               name.includes(searchInput) ||
               type.includes(searchInput)
             ) {
