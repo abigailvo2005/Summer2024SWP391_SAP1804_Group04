@@ -197,7 +197,7 @@
                     <h6>All Staffs Created</h6>
                     <p class="text-sm mb-0">
                       <i class="fa-solid fa-house-user"></i>
-                      <span class="font-weight-bold ms-1">${listStaff.size()} request(s)</span>
+                      <span class="font-weight-bold ms-1">${listStaff.size()} account(s)</span>
                       have created
                     </p>
                   </div>
@@ -638,7 +638,7 @@
 
             // Waiting Promise to hide all errors then alert to user
             hideErrorsPromise.then(() => {
-              alert("Successfully requested to register a new Staff!");
+              alert("Successfully created a new Staff!");
               document.querySelector("form").submit();
             });
 

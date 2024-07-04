@@ -619,7 +619,7 @@
               const slideElement = document.createElement("div");
               slideElement.classList.add("carousel-item");
               if (index === 0) {
-                slideElement.classList.add("active");
+                slideElement.classLcuist.add("active");
               }
               const imgElement = document.createElement("img");
               imgElement.src = image;
@@ -640,6 +640,7 @@
               carouselIndicators.appendChild(indicatorElement);
             });
               popup.classList.remove("hidden");
+              
             },
             error: function (xhr, status, error) {
               const errorMessage = `Error: ${xhr.status} - ${xhr.statusText}`;
@@ -699,7 +700,7 @@
                 $("#staff-section").removeClass("hidden");
                 console.log(data.superiorId);
                 $("#popup-superior-staff").text(data.superiorId);
-                $("#popup-num-of-projects").text(data.superiorId);
+                $("#popup-num-of-projects").text(data.numOfProjects);
               } else {
                 $("#staff-section").addClass("hidden");
               }

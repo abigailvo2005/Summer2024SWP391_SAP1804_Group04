@@ -24,11 +24,13 @@ statusElements.forEach((element) => {
     case "validating":
     case "reviewing":
     case "created":
+    case "marketed":
       element.classList.add("status-validating");
       break;
     case "denied":
     case "unqualified":
     case "fail":
+    case "cancelled":
       element.classList.add("status-unqualified");
       break;
     case "connected":
