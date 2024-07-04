@@ -39,7 +39,7 @@
                 <div class="card-header pb-0">
                   <div class="row">
                     <div class="col-lg-8 col-9">
-                      <h6>History Properties Closed</h6>
+                      <h6>Closed Deals Assignment</h6>
                       <p class="text-sm mb-0">
                         <i class="fa-regular fa-comment-dots"></i>
                         <span class="font-weight-bold ms-1">${listAssigned.size()} Closed(s)</span>
@@ -115,7 +115,7 @@
                               <td class="align-middle">
                                 <div class="d-flex px-2 py-1 justify-content-center">
                                   <div class="d-flex flex-column justify-content-center">
-                                    <p class="mb-0 text-sm fw-bold text-muted status-color" value="${assigned.status}">
+                                    <p class="mb-0 text-sm fw-bold status-color" value="${assigned.status}">
                                       ${assigned.status}
                                     </p>
                                   </div>
@@ -150,7 +150,7 @@
                 <div class="card-header pb-0">
                   <div class="row">
                     <div class="col-lg-8 col-9">
-                      <h6>History Agency Request</h6>
+                      <h6>Closed Listing Handlings</h6>
                       <p class="text-sm mb-0">
                         <i class="fa-regular fa-comment-dots"></i>
                         <span class="font-weight-bold ms-1">${historyList.size()} request(s)</span>
@@ -226,7 +226,7 @@
                               <td class="align-middle">
                                 <div class="d-flex px-2 py-1 justify-content-center">
                                   <div class="d-flex flex-column justify-content-center">
-                                    <p class="mb-0 text-sm fw-bold text-muted status-color" value="${history.status}">
+                                    <p class="mb-0 text-sm fw-bold status-color" value="${history.status}">
                                       ${history.status}
                                     </p>
                                   </div>

@@ -175,7 +175,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           min="1"
                           required
                         />
-                       <!--  <p
+                        <!--  <p
                           class="text-danger text-error mb-0 text-center pt-1 error-phone hidden"
                         >
                           Phone number must be between 10 and 11 digits long and
@@ -252,7 +252,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <option value="" selected>Select role</option>
                           <option value="ROLE_SELLER">Seller</option>
                           <option value="ROLE_AGENCY">Agency</option>
-                          <option value="ROLE_MANAGER">Manager</option>
+                          <!--  <option value="ROLE_MANAGER">Manager</option> -->
                         </select>
                       </div>
                     </div>
@@ -348,14 +348,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <label> Description:</label>
                         </div>
                         <div class="col-lg-10 col-sm-10">
-                          <input
+                          <textarea
                             id="desc"
-                            type="text"
                             name="description"
                             class="agency form-control form-create-control col-10"
                             placeholder="Enter description."
                             required
-                          />
+                          ></textarea>
                         </div>
                       </div>
                     </div>
@@ -460,7 +459,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
                     <c:forEach items="${activeAccount}" var="active">
-                      <tr class="active-ro  w">
+                      <tr class="active-ro w">
                         <td class="align-middle text-center text-sm">
                           <div class="d-flex px-2 py-1 justify-content-center">
                             <div
@@ -1031,7 +1030,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             nameError.classList.add("hidden");
           }
 
-         /*  const phoneInputText = phoneInput.value.toString();
+          /*  const phoneInputText = phoneInput.value.toString();
           if (phoneInputText.length > 11) {
             phoneError.classList.remove("hidden");
             return;
