@@ -14,12 +14,15 @@ import com.recs.models.entities.account.Staff;
 import com.recs.repositories.account.*;
 import com.recs.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -122,7 +125,7 @@ public class AccountServiceImpl implements AccountService {
         System.out.println("ACTIVE LIST " + list.size());
         return list;
     }
-
+    
     @Override
     public List<Account> getApprovingAccount() {
         List<Account> list = accountRepository.findByStatus("APPROVING")
@@ -225,6 +228,39 @@ public class AccountServiceImpl implements AccountService {
         UserInfo info = UserInfo.fromSeller(account, seller);
         System.out.println("get seller info: " + info);
         return info;
+    }
+
+    @Override
+    public List<UserInfo> getListAgencyToUserInfo() {
+        List<Agency> agencies = agencyRepository.findAll();
+
+        return agencies.stream().map(agency -> {
+            Account account = accountRepository.findById(String.valueOf(agency.getAccount().getAccountId())).orElse(null);
+            return UserInfo.fromAgency(account, agency);
+        })
+        .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserInfo> getListSellerToUserInfo() {
+        List<Seller> sellers = sellerRepository.findAll();
+
+        return sellers.stream().map(seller -> {
+            Account account = accountRepository.findById(String.valueOf(seller.getAccountId())).orElse(null);
+            return UserInfo.fromSeller(account, seller);
+            })
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserInfo> getListManagerToUserInfo() {
+        List<Manager> managers = managerRepository.findAll();
+
+        return managers.stream().map(manager -> {
+                Account account = accountRepository.findById(String.valueOf(manager.getAccountId())).orElse(null);
+                return UserInfo.fromManager(account, manager);
+                })
+                .collect(Collectors.toList());
     }
 
     @Override

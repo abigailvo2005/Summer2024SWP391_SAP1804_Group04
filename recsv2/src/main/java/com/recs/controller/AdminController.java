@@ -1,6 +1,7 @@
 package com.recs.controller;
 
 import com.recs.models.dto.account.CreateAccountRequestDTO;
+import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
 import com.recs.models.entities.realestate.RealEstate;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -84,11 +86,18 @@ public class AdminController {
 
     @GetMapping({"/create-account"})
     public String createAccount(Model model, Authentication authentication){
-        List<Account> allAccountActive = accountService.getActiveAccount();
+        List<UserInfo> agencyList = accountService.getListAgencyToUserInfo();
+        List<UserInfo> managerList = accountService.getListManagerToUserInfo();
+        List<UserInfo> sellerList = accountService.getListSellerToUserInfo();
+        List<UserInfo> listAll = new ArrayList<>();
+        listAll.addAll(agencyList);
+        listAll.addAll(managerList);
+        listAll.addAll(sellerList);
+        
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-account";
-        model.addAttribute("activeAccount", allAccountActive);
+        model.addAttribute("listAccount", listAll);
         model.addAttribute("name", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/create-account";
