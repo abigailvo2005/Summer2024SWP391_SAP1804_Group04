@@ -394,7 +394,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   <p class="text-sm mb-0">
                     <i class="fa-solid fa-house-user"></i>
                     <span class="font-weight-bold ms-1"
-                      >${activeAccount.size()} account(s)</span
+                      >${listAccount.size()} account(s)</span
                     >
                     created
                   </p>
@@ -458,7 +458,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   </thead>
                   <!--input list of validating requests here - only 1 row for reference-->
                   <tbody>
-                    <c:forEach items="${activeAccount}" var="active">
+                    <c:forEach items="${listAccount}" var="list">
                       <tr class="active-ro  w">
                         <td class="align-middle text-center text-sm">
                           <div class="d-flex px-2 py-1 justify-content-center">
@@ -469,7 +469,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 id="active-id"
                                 class="mb-0 text-sm fw-bold text-dark"
                               >
-                                ${active.accountId}
+                                ${list.accountId}
                               </p>
                             </div>
                           </div>
@@ -483,7 +483,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 id="active-name"
                                 class="mb-0 text-sm fw-bold text-dark"
                               >
-                                ${active.fullName}
+                                ${list.fullName}
                               </p>
                             </div>
                           </div>
@@ -497,7 +497,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 id="active-role"
                                 class="mb-0 text-sm fw-bold text-dark"
                               >
-                                ${active.roleId}
+                                ${list.roleId}
                               </p>
                             </div>
                           </div>
@@ -508,7 +508,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-dark">
-                                ${active.gender == 0 ? 'Male' : 'Female'}
+                                ${list.gender}
                               </p>
                             </div>
                           </div>
@@ -519,7 +519,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               class="d-flex flex-column justify-content-center"
                             >
                               <p class="mb-0 text-sm fw-bold text-muted">
-                                ${active.status}
+                                ${list.status}
                               </p>
                             </div>
                           </div>
@@ -529,7 +529,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <a onclick="viewDetail('${active.accountId}')"
+                              <a onclick="viewDetail('${list.accountId}')"
                                 ><i class="fa-solid fa-eye"></i
                               ></a>
                             </div>
