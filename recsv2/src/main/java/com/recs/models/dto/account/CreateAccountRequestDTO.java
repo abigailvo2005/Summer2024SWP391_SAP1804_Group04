@@ -31,10 +31,13 @@ public class CreateAccountRequestDTO {
     private String company;
 
     private String description;
+
+    private String companySeller;
     
     private int yearsOfExperience = 0;
 
     private int completedProject = 0;
 
     private int yearsOfExperienceMan = 0;
+    
 }

@@ -266,7 +266,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="seller-company"
                             type="text"
-                            name="company"
+                            name="companySeller"
                             class="seller form-control form-create-control col-10"
                             placeholder="Enter company name"
                             required
@@ -338,7 +338,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             type="text"
                             name="company"
                             class="agency form-control form-create-control col-10"
-                            placeholder="Your company name"
+                            placeholder="Enter user company."
                             required
                           />
                         </div>
@@ -518,7 +518,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-muted">
+                              <p class="mb-0 text-sm fw-bold text-muted status-color" value="${list.status}">
                                 ${list.status}
                               </p>
                             </div>
@@ -761,6 +761,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../template/assets/js/general-features.js"></script>
     <script type="text/javascript">
       function showRoleName(select) {
         const inputAgencyInfo = document.getElementById("input-agency-info");

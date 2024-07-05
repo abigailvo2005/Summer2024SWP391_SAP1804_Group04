@@ -100,11 +100,7 @@ public class SellerController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             Model model) {
 
-        RealEstate realEstate = realEstateService.createRealEstate(userInfo.getSellerId(), request);
-        String currentPage = "create-property";
-        model.addAttribute("name", userInfo.getFullName());
-        model.addAttribute("currentPage", currentPage);
-
+        realEstateService.createRealEstate(userInfo.getSellerId(), request);
         return "redirect:/seller";
     }
 
