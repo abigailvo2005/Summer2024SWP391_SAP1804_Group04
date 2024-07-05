@@ -271,7 +271,7 @@
                           <td>
                             <div class="d-flex px-2 py-1 justify-content-center">
                               <div class="d-flex flex-column justify-content-center">
-                                <p class="mb-0 text-sm fw-bold text-muted">
+                                <p class="mb-0 text-sm fw-bold text-muted status-color" value="${staff.status}">
                                   ${staff.status}
                                 </p>
                               </div>
@@ -710,6 +710,7 @@
       <script src="/template/assets/js/plugins/chartjs.min.js"></script>
       <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="../../template/assets/js/general-features.js"></script>
     </body>
 
     </html>
