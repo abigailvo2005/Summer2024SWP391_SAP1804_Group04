@@ -22033,7 +22033,7 @@ label,
   box-shadow: 0 0 0 2px rgba(102, 212, 50, 0.65);
 }
 
-#agency-profile-form {
+#agency-profile-form, #seller-profile-form {
   border: 1px solid #ccc !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
   padding: 20px !important;
