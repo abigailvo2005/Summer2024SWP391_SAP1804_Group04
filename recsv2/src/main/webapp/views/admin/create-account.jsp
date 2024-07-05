@@ -265,7 +265,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <input
                             id="seller-company"
                             type="text"
-                            name="company"
+                            name="companySeller"
                             class="seller form-control form-create-control col-10"
                             placeholder="Enter company name"
                             required
@@ -337,7 +337,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             type="text"
                             name="company"
                             class="agency form-control form-create-control col-10"
-                            placeholder="Your company name"
+                            placeholder="Enter user company."
                             required
                           />
                         </div>

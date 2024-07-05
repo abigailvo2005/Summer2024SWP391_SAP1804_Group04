@@ -619,7 +619,7 @@
               const slideElement = document.createElement("div");
               slideElement.classList.add("carousel-item");
               if (index === 0) {
-                slideElement.classLcuist.add("active");
+                slideElement.classList.add("active");
               }
               const imgElement = document.createElement("img");
               imgElement.src = image;

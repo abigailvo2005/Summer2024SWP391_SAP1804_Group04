@@ -336,7 +336,7 @@ public class AccountServiceImpl implements AccountService {
                 Seller newSeller = new Seller(
                         UUID.randomUUID().toString(),
                         savedAccount.getAccountId(),
-                        request.getCompany()
+                        request.getCompanySeller()
                 );
                 sellerRepository.save(newSeller);
             }
