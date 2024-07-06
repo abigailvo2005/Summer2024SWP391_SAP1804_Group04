@@ -287,7 +287,16 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     @Override
     public void deleteRealEstate(String realEstateId) {
-        realEstateRepository.deleteById(realEstateId);
+        paperWorksRepository.deleteById(realEstateId);
+        RealEstate realEstate = realEstateRepository.getReferenceById(realEstateId);
+        if(realEstate.getRealEstateType() == 1) {
+            PropertyLand land = propertyLandRepository.getByRealEstateId(realEstateId);
+            propertyLandRepository.delete(land);
+        } else {
+            PropertyHouse house = propertyHouseRepository.getByRealEstateId(realEstateId);
+            propertyHouseRepository.delete(house);
+        }
+        realEstateRepository.delete(realEstate);
     }
 
     public boolean checkAgency(RealEstate realEstate, String agencyId) {
