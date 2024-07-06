@@ -91,7 +91,7 @@ public class StaffController {
         model.addAttribute("currentPage", currentPage);
         return "staff/create-property";
     }
-
+*/
    
 
     @GetMapping({ "/profile" })
@@ -99,10 +99,11 @@ public class StaffController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", account);
+        model.addAttribute("name", name);
+        model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "staff/profile-staff";
-    } */
+    }
 }
 
 

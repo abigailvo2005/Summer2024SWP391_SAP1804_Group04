@@ -25,7 +25,7 @@
             <!-- START: SIDEBAR -->
 
             <header>
-                <jsp:include page="/views/agency/sidebar-agency.jsp" />
+                <jsp:include page="/views/staff/sidebar-staff.jsp" />
             </header>
 
             <main class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg">
