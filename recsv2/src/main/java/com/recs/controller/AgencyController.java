@@ -102,6 +102,17 @@ public class AgencyController {
         return "agency/create-acc-mem";
     }
 
+    @GetMapping({"/profile"})
+    public String profileView(Model model, Authentication authentication){
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "profile";
+        model.addAttribute("name", name);
+        model.addAttribute("account", account);
+        model.addAttribute("currentPage", currentPage);
+        return "agency/profile-agency";
+    }
+
     @PostMapping("/create-acc-mem")
     public String createMember(
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,

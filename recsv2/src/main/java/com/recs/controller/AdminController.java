@@ -56,6 +56,7 @@ public class AdminController {
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
         model.addAttribute("name", name);
+        model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "admin/profile-admin";
     }

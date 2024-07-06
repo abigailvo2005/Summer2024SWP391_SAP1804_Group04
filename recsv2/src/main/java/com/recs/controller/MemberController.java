@@ -82,6 +82,17 @@ public class MemberController {
         return "member/history-member";
     }
 
+    @GetMapping({"/profile"})
+    public String profileView(Model model, Authentication authentication){
+        String name = authentication.getName();
+        Account account = accountService.getByUserName(name);
+        String currentPage = "profile";
+        model.addAttribute("name", name);
+        model.addAttribute("account", account);
+        model.addAttribute("currentPage", currentPage);
+        return "member/profile-member";
+    }
+
     @GetMapping("/create-buyer")
     public String createBuyerView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-buyer";
