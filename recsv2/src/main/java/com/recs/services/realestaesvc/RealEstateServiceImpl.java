@@ -301,6 +301,7 @@ public class RealEstateServiceImpl implements RealEstateService{
 
     public boolean checkAgency(RealEstate realEstate, String agencyId) {
         List<String> agencyIds = realEstate.getAgencyRequests().stream()
+                .filter(request -> !request.getStatus().equals(AgencyRequestStatus.DROPPED.getValue()))
                 .map(request -> request.getAgency().getAgencyId())
                 .toList();
         return !agencyIds.contains(agencyId);
