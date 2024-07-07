@@ -199,4 +199,23 @@ public class AgencyController {
         recsBusinessService.dropAgencyRequest(requestId);
         return "redirect:/agency";
     }
+
+    @PostMapping("/password/update")
+    public String updatePassword(
+            @RequestParam String password,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
+        return "redirect:/agency/profile";
+    }
+
+
+    @PostMapping("/password/update")
+    public String updatePhone(
+            @RequestParam String phone,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
+        return "redirect:/agency/profile";
+    }
 }

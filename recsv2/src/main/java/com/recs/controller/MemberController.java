@@ -117,4 +117,24 @@ public class MemberController {
         recsBusinessService.cancelDeal(dealId);
         return "redirect:/agency";
     }
+
+    @PostMapping("/password/update")
+    public String updatePassword(
+            @RequestParam String password,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
+        return "redirect:/member/profile";
+    }
+
+
+    @PostMapping("/password/update")
+    public String updatePhone(
+            @RequestParam String phone,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
+        return "redirect:/member/profile";
+    }
+
 }

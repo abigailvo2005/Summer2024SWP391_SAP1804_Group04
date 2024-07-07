@@ -391,4 +391,18 @@ public class AccountServiceImpl implements AccountService {
         );
         memberRepository.save(newMember);
     }
+
+    @Override
+    public void updatePassword(String accountId, String newPassword) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setAccountPassword(encoder.encode(newPassword));
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void updatePhone(String accountId, String phoneNum) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setPhone(phoneNum);
+        accountRepository.save(account);
+    }
 }

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.Clock;
@@ -165,6 +166,25 @@ public class ManagerController {
         model.addAttribute("LOGIN_USER", updateUserInfo);
         model.addAttribute("fullName", userInfo.getManagerId());
         return "redirect:/manager/create-staff";
+    }
+
+    @PostMapping("/password/update")
+    public String updatePassword(
+            @RequestParam String password,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
+        return "redirect:/manager/profile";
+    }
+
+
+    @PostMapping("/password/update")
+    public String updatePhone(
+            @RequestParam String phone,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
+        return "redirect:/manager/profile";
     }
 
 }

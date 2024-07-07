@@ -74,4 +74,8 @@ public interface AccountService {
     public void registerStaff(RegisterStaffDTO request, String managerId);
 
     public void registerMember(RegisterMemberDTO request, String agencyId);
+
+    public void updatePassword(String accountId, String newPassword);
+
+    public void updatePhone(String accountId, String phoneNum);
 }
