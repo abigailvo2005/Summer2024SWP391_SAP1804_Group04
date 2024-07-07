@@ -518,7 +518,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             <div
                               class="d-flex flex-column justify-content-center"
                             >
-                              <p class="mb-0 text-sm fw-bold text-muted status-color" value="${list.status}">
+                              <p class="mb-0 text-sm fw-bold status-color" value="${list.status}">
                                 ${list.status}
                               </p>
                             </div>
@@ -1032,7 +1032,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           }
 
           const phoneInputText = phoneInput.value.toString();
-          if (phoneInputText.length > 11) {
+          if (phoneInputText.length > 10) {
             phoneError.classList.remove("hidden");
             return;
           } else {

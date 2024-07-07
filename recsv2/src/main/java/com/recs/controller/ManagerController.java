@@ -61,7 +61,7 @@ public class ManagerController {
                 .filter(row -> JobStatus.ASSIGNED == row.getStatus())
                 .toList();
         String currentPage = "dashboard";
-        model.addAttribute("name", userInfo.getFullName()); // can get userInfo by using $sessionScope in jsp
+        model.addAttribute("fullName", userInfo.getFullName()); // can get userInfo by using $sessionScope in jsp
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("valList", validatingJobList);
         return "manager/dashboard-man";
@@ -72,7 +72,7 @@ public class ManagerController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "manager/profile-man";
@@ -86,7 +86,7 @@ public class ManagerController {
         List<UserInfo> staffList = accountService.getListStaffByManager(userInfo.getManagerId());
 
         String currentPage = "assign-job";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", reviewingList);
         model.addAttribute("staffList", staffList);
@@ -117,7 +117,7 @@ public class ManagerController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "register";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "manager/register-acc-man";
     }
@@ -135,7 +135,7 @@ public class ManagerController {
         allValidatedJobs.addAll(listingListValidateSuccess);
         allValidatedJobs.addAll(listingListValidateFail);
 
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("listJobAssigned", allValidatedJobs);
         return "manager/history-man";
@@ -146,7 +146,7 @@ public class ManagerController {
         String currentPage = "create-staff";
         List<UserInfo> listStaffCreated = accountService.getListStaffByManager(userInfo.getManagerId());
         model.addAttribute("listStaff", listStaffCreated);
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
 
         return "manager/create-acc-staff";
@@ -163,7 +163,7 @@ public class ManagerController {
 
         UserInfo updateUserInfo = accountService.getManagerToUserInfo(userInfo.getManagerId());
         model.addAttribute("LOGIN_USER", updateUserInfo);
-        model.addAttribute("name", userInfo.getManagerId());
+        model.addAttribute("fullName", userInfo.getManagerId());
         return "redirect:/manager/create-staff";
     }
 

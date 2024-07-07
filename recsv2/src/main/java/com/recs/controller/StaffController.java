@@ -54,7 +54,7 @@ public class StaffController {
         List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
 
         String currentPage = "dashboard";
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("jobList", validatingList);
         model.addAttribute("listingList", listingList);
@@ -77,7 +77,7 @@ public class StaffController {
         String currentPage = "history";
         model.addAttribute("listSuccess", listingListValidateSuccess);
         model.addAttribute("listFail", listingListValidateFail);
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "staff/history-staff";
     }
@@ -87,7 +87,7 @@ public class StaffController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-property";
-        model.addAttribute("name", account);
+        model.addAttribute("fullName", account);
         model.addAttribute("currentPage", currentPage);
         return "staff/create-property";
     }
@@ -99,7 +99,7 @@ public class StaffController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "staff/profile-staff";

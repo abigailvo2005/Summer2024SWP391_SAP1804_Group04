@@ -50,17 +50,17 @@ public class SellerController {
 
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-      /*   List<RealEstateInfo> validatingList = realEstateService.getValidatingBySeller(userInfo.getSellerId()); */
-      List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
-      .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED &&
-                                        realEstateInfo.getStatus() != RealEstateStatus.CLOSED)
-      .toList();
+
+        List<RealEstateInfo> allRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
+                .stream().filter(realEstateInfo -> realEstateInfo.getStatus() != RealEstateStatus.CREATED &&
+                        realEstateInfo.getStatus() != RealEstateStatus.CLOSED)
+                .toList();
         List<RealEstateInfo> draftRealEstate = realEstateService.getAllBySeller(userInfo.getSellerId())
                 .stream().filter(realEstateInfo -> realEstateInfo.getStatus() == RealEstateStatus.CREATED)
                 .toList();
 
         String currentPage = "dashboard";
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("draftList", draftRealEstate);
         model.addAttribute("propList", allRealEstate);
@@ -84,13 +84,14 @@ public class SellerController {
 
     @GetMapping({ "/create-property" })
     public String createPropView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> createdList = realEstateService.getAllBySellerIdAndStatus(userInfo.getSellerId(),RealEstateStatus.CREATED.getValue());
+        List<RealEstateInfo> createdList = realEstateService.getAllBySellerIdAndStatus(userInfo.getSellerId(),
+                RealEstateStatus.CREATED.getValue());
         String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "create-property";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("createdList",createdList);
+        model.addAttribute("createdList", createdList);
         return "seller/create-property";
     }
 
@@ -106,12 +107,13 @@ public class SellerController {
 
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<RealEstateInfo> listClose = realEstateService.getAllBySellerIdAndStatus(userInfo.getSellerId(), RealEstateStatus.CLOSED.getValue());
-    
+        List<RealEstateInfo> listClose = realEstateService.getAllBySellerIdAndStatus(userInfo.getSellerId(),
+                RealEstateStatus.CLOSED.getValue());
+
         String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("listClose", listClose);
         model.addAttribute("currentPage", currentPage);
         return "seller/history-seller";
@@ -122,7 +124,7 @@ public class SellerController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "seller/profile-seller";
@@ -137,32 +139,28 @@ public class SellerController {
 
     @PostMapping("/buyer-request/approve")
     public String approveBuyer(
-            @RequestParam List<String> requestIds
-    ) {
+            @RequestParam List<String> requestIds) {
         recsBusinessService.updateBuyer(requestIds, BuyerRequestStatus.ACCEPTED);
         return "redirect:/seller";
     }
 
     @PostMapping("/buyer-request/connect")
     public String connectBuyer(
-            @RequestParam String requestId
-    ) {
+            @RequestParam String requestId) {
         recsBusinessService.updateBuyer(List.of(requestId), BuyerRequestStatus.CONNECTED);
         return "redirect:/seller";
     }
 
     @GetMapping("real-estate/request")
     public String requestValidate(
-            @RequestParam String realEstateId
-    ) {
+            @RequestParam String realEstateId) {
         realEstateService.updateStatus(realEstateId, RealEstateStatus.REVIEWING, "");
         return "redirect:/seller";
     }
 
     @GetMapping("/real-estate/delete")
     public String deleteRealEstate(
-            @RequestParam String realEstateId
-    ) {
+            @RequestParam String realEstateId) {
         System.out.println("REAL ESTATE ID RECEIVED: " + realEstateId);
         realEstateService.deleteRealEstate(realEstateId);
         return "redirect:/seller";

@@ -399,9 +399,11 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                       >
                         <option class="fs-6" value="">Choose Staff</option>
                         <c:forEach items="${staffList}" var="staff">
-                          <option class="fs-6" value="${staff.staffId}">
-                            ${staff.username}
-                          </option>
+                          <c:if test="${staff.numOfProjects < 2}">
+                            <option class="fs-6" value="${staff.staffId}">
+                              ${staff.username}
+                            </option>
+                          </c:if>
                         </c:forEach>
                       </select>
                     </div>

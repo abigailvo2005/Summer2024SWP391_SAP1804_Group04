@@ -31,6 +31,7 @@ statusElements.forEach((element) => {
     case "unqualified":
     case "fail":
     case "cancelled":
+    case "inactive":
       element.classList.add("status-unqualified");
       break;
     case "connected":

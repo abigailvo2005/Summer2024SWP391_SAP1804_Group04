@@ -81,7 +81,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               <div
                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center"
               >
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-store"></i>
               </div>
               <span class="nav-link-text ms-1">Marketplace</span>
             </a>
@@ -168,27 +168,27 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
             >
               <li class="breadcrumb-item text-sm">
-                <a class="opacity-5 text-dark" >Pages</a>
+                <a class="opacity-5 text-dark">Pages</a>
               </li>
               <li
                 class="breadcrumb-item text-sm text-dark active"
                 aria-current="page"
               >
                 ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'View Profile' : (currentPage == 'history' ?
-                'View History' : (currentPage == 'assign-deal' ? 'Assign Deal' : 
-                (currentPage == 'register-mem' ? 'Register Member' : 
-                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-acc-mem' ?
-                'Create Member' : ''))))))}
+                'profile' ? 'View Profile' : (currentPage == 'history' ? 'View
+                History' : (currentPage == 'assign-deal' ? 'Assign Deal' :
+                (currentPage == 'register-mem' ? 'Register Member' :
+                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage ==
+                'create-acc-mem' ? 'Create Member' : ''))))))}
               </li>
             </ol>
             <h6 class="font-weight-bolder mb-0">
               ${currentPage == 'dashboard' ? 'Dashboard' : (currentPage ==
-                'profile' ? 'Profile' : (currentPage == 'history' ?
-                'History' : (currentPage == 'assign-deal' ? 'Assign Deal' : 
-                (currentPage == 'register-mem' ? 'Register Member' : 
-                (currentPage == 'marketplace' ? 'Marketplace' : (currentPage == 'create-acc-mem' ?
-                'Create Member' : ''))))))}
+              'profile' ? 'Profile' : (currentPage == 'history' ? 'History' :
+              (currentPage == 'assign-deal' ? 'Assign Deal' : (currentPage ==
+              'register-mem' ? 'Register Member' : (currentPage == 'marketplace'
+              ? 'Marketplace' : (currentPage == 'create-acc-mem' ? 'Create
+              Member' : ''))))))}
             </h6>
           </nav>
 
@@ -202,14 +202,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">
                   <i class="fa fa-user me-sm-1"></i>
-                  <span class="d-sm-inline d-none">Welcome, ${name}</span>
+                  <span class="d-sm-inline d-none">Welcome, ${fullName}</span>
                 </a>
               </li>
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                <a
-                  class="nav-link text-body p-0"
-                  id="iconNavbarSidenav"
-                >
+                <a class="nav-link text-body p-0" id="iconNavbarSidenav">
                   <div class="sidenav-toggler-inner">
                     <i class="sidenav-toggler-line"></i>
                     <i class="sidenav-toggler-line"></i>

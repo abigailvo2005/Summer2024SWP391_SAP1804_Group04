@@ -60,7 +60,7 @@ public class MemberController {
                 .toList();
         System.out.println("buyer request list: " + allBuyerRequests);
         String currentPage = "dashboard";
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
 
         model.addAttribute("dealList", dealAssignMemberList);
@@ -77,7 +77,7 @@ public class MemberController {
         String currentPage = "history";
         model.addAttribute("requestHistory", listRequestHistory);
         model.addAttribute("listDeal", allListDeal);
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "member/history-member";
     }
@@ -87,7 +87,7 @@ public class MemberController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "member/profile-member";
@@ -100,7 +100,7 @@ public class MemberController {
                 .getAssignDealPageByMemberId(userInfo.getMemberId());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("dealList", dealAssignMembers);
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         return "member/create-buyer";
     }
 

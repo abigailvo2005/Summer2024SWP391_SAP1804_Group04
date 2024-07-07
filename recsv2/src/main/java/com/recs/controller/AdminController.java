@@ -43,7 +43,7 @@ public class AdminController {
         List<RealEstateInfo> allRealEstateInfo = realEstateService.getAllRealEstate();
         String currentPage = "dashboard";
         model.addAttribute("listRealEstate", allRealEstateInfo);
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", registerList);
         model.addAttribute("allAccounts", allAccounts);
@@ -55,7 +55,7 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "admin/profile-admin";
@@ -66,7 +66,7 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "tracking";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/property-tracking";
     }
@@ -78,7 +78,7 @@ public class AdminController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("listAccountDeclined", listAccountDeclined);
         model.addAttribute("listAccountActive", listAccountActive);
         model.addAttribute("currentPage", currentPage);
@@ -99,7 +99,7 @@ public class AdminController {
         Account account = accountService.getByUserName(name);
         String currentPage = "create-account";
         model.addAttribute("listAccount", listAll);
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/create-account";
     }

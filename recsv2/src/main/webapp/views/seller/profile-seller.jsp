@@ -73,12 +73,7 @@
                   </div>
                   <div class="card-body p-3">
                     <p class="text-sm">
-                      As a seller - you can upload your properties and relating
-                      paperwork in order for RECS to validate whether your
-                      properties are legally accepted by the government to be sold
-                      or not. You can also view and track your properties while
-                      they are being validated, posted for agencies to follow,
-                      taken by an agency or had interested buyers or not.
+                      As a seller, you can upload your properties and related paperwork in order for RECS to validate whether your properties are legally accepted by the government to be sold or not. You can also view and track your properties while they are being validated, posted for agencies to follow, taken by an agency or had interested buyers or not. Eventually, you will be able to connect with and confirm the transaction of selling your properties to an appropriate buyer through RECS. 
                     </p>
                     <ul class="list-group">
                       <li class="list-group-item border-0 ps-0 pt-0 text-sm">

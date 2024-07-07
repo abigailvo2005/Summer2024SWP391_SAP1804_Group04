@@ -128,7 +128,7 @@
                               <td class="align-middle">
                                 <div class="d-flex px-2 py-1 justify-content-center">
                                   <div class="d-flex flex-column justify-content-center">
-                                    <p class="mb-0 text-sm fw-bold text-muted status-color" value="${user.status}">
+                                    <p class="mb-0 text-sm fw-bold status-color" value="${user.status}">
                                       ${user.status}
                                     </p>
                                   </div>

@@ -71,7 +71,7 @@ public class AgencyController {
 
         // TODO() tự nhét vào
         String currentPage = "dashboard";
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("handleList", requestList);
         model.addAttribute("dealList", dealList);
@@ -85,7 +85,7 @@ public class AgencyController {
         List<RealEstateInfo> listings = realEstateService.getListing(userInfo.getAgencyId());
 
         String currentPage = "marketplace";
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("propList", listings);
         model.addAttribute("agency", userInfo);
@@ -95,7 +95,7 @@ public class AgencyController {
     @GetMapping({ "/create-acc-mem" })
     public String registerStaff(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "create-acc-mem";
-        model.addAttribute("name", userInfo.getFullName());
+        model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         List<MemberDTO> memberListCreated = accountService.getMembersByAgency(userInfo.getAgencyId());
         model.addAttribute("memberList", memberListCreated);
@@ -107,7 +107,7 @@ public class AgencyController {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
         String currentPage = "profile";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("account", account);
         model.addAttribute("currentPage", currentPage);
         return "agency/profile-agency";
@@ -124,7 +124,7 @@ public class AgencyController {
 
         UserInfo updateUserInfo = accountService.getAgencyToUserInfo(userInfo.getAgencyId());
         model.addAttribute("LOGIN_USER", updateUserInfo);
-        model.addAttribute("name", updateUserInfo.getFullName());
+        model.addAttribute("fullName", updateUserInfo.getFullName());
         return "redirect:/agency/create-acc-mem";
     }
 
@@ -141,7 +141,7 @@ public class AgencyController {
         String currentPage = "history";
         model.addAttribute("listAssigned", dealAssignedMember);
         model.addAttribute("historyList", historyRequestList);
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "agency/history-agency";
     }
@@ -159,7 +159,7 @@ public class AgencyController {
         List<MemberDTO> members = accountService.getMembersByAgency(userInfo.getAgencyId());
 
         String currentPage = "assign-deal";
-        model.addAttribute("name", name);
+        model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("handledList", handledList);
         model.addAttribute("memberList", members);
