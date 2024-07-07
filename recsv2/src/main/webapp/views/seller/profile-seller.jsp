@@ -127,7 +127,9 @@
                         </div>
 
                         <div class="pe-1 ps-0 mb-0 ms-auto">
-                          <a class="btn btn-link pe-1 ps-1 mb-0 ms-auto" href="javascript:;">Change</a>
+                          <a class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
+                           id="changePhone"
+                           href="javascript:;">Change</a>
                         </div>
                       </li>
 
@@ -173,7 +175,9 @@
                           >
                             <i class="fa-solid fa-eye-slash"></i>
                           </a> -->
-                            <a class="btn btn-link pe-1 ps-1 mb-0 ms-auto" href="">Change</a>
+                            <a class="btn btn-link pe-1 ps-1 mb-0 ms-auto" 
+                               id="changePassword"
+                               href="javascript:;">Change</a>
                           </div>
                         </div>
                       </li>
