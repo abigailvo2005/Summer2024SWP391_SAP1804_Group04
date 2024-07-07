@@ -397,7 +397,7 @@
 
             // Waiting Promise to hide all errors then alert to user
             hideErrorsPromise.then(() => {
-              alert("Successfully create an account!");
+              alert("Successfully update phone!");
               phoneForm.submit();
             });
           } else {
@@ -437,7 +437,7 @@
 
             // Waiting Promise to hide all errors then alert to user
             hideErrorsPromise.then(() => {
-              alert("Successfully create an account!");
+              alert("Successfully update password!!");
               passwordForm.submit();
             });
           } else {
