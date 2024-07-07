@@ -78,4 +78,6 @@ public interface AccountService {
     public void updatePassword(String accountId, String newPassword);
 
     public void updatePhone(String accountId, String phoneNum);
+
+    public boolean checkPassword(String accountId, String password);
 }

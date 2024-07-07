@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController()
 @RequestMapping("/api")
@@ -82,5 +85,13 @@ public class ApiController {
     @GetMapping(value = "/buyer-request/{id}", produces = "application/json")
     public ResponseEntity<BuyerRequestDTO> getBuyerRequest(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(recsBusinessService.getBuyerRequest(id));
+    }
+
+    @PostMapping(value = "password/check", produces = "application/json")
+    public ResponseEntity<Map<String, Boolean>> checkPassword(
+            @RequestParam String accountId,
+            @RequestParam String password
+    ) {
+        return ResponseEntity.ok(Map.of("result", accountService.checkPassword(accountId,password)));
     }
 }

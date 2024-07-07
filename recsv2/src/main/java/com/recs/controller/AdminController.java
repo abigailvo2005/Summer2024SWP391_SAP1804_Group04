@@ -4,7 +4,6 @@ import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
-import com.recs.models.entities.realestate.RealEstate;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
 
@@ -16,9 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
+@SessionAttributes(names = "LOGIN_USER")
 public class AdminController {
 
     @Autowired
@@ -34,16 +34,28 @@ public class AdminController {
     @Autowired
     private RealEstateService realEstateService;
 
-    @GetMapping({"", "/dashboard"})
-    public String dashboardView(Model model, Authentication authentication){
+    @ModelAttribute(name = "LOGIN_USER")
+    public UserInfo getLoginUser(Authentication authentication) {
         String name = authentication.getName();
         Account account = accountService.getByUserName(name);
-        List<Account> registerList = accountService.getApprovingAccount();
-        List<Account> allAccounts = accountService.getAllAccount();
+        return accountService.getUserInfo(account.getAccountId());
+    }
+
+    @GetMapping({"", "/dashboard"})
+    public String dashboardView(
+            Model model,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+            ){
+        Account account = accountService.getByUserName(userInfo.getUsername());
+        List<Account> registerList = accountService.getApprovingAccount()
+                .stream()
+                .filter(row -> row.getAccountId() != userInfo.getAccountId()).toList();;
+        List<Account> allAccounts = accountService.getAllAccount().stream()
+                .filter(row -> row.getAccountId() != userInfo.getAccountId()).toList();
         List<RealEstateInfo> allRealEstateInfo = realEstateService.getAllRealEstate();
         String currentPage = "dashboard";
         model.addAttribute("listRealEstate", allRealEstateInfo);
-        model.addAttribute("fullName", name);
+        model.addAttribute("fullName", userInfo.getUsername());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("reqList", registerList);
         model.addAttribute("allAccounts", allAccounts);
@@ -126,5 +138,24 @@ public class AdminController {
             ) {
         accountService.registerAccount(request);
         return "redirect:/admin/create-account";
+    }
+
+    @PostMapping("/password/update")
+    public String updatePassword(
+            @RequestParam String password,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
+        return "redirect:/agency/profile";
+    }
+
+
+    @PostMapping("/phone/update")
+    public String updatePhone(
+            @RequestParam String phone,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
+        return "redirect:/agency/profile";
     }
 }

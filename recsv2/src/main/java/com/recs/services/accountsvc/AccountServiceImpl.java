@@ -405,4 +405,10 @@ public class AccountServiceImpl implements AccountService {
         account.setPhone(phoneNum);
         accountRepository.save(account);
     }
+
+    @Override
+    public boolean checkPassword(String accountId, String password) {
+        Account account = accountRepository.getReferenceById(accountId);
+        return encoder.matches(password, account.getAccountPassword());
+    }
 }
