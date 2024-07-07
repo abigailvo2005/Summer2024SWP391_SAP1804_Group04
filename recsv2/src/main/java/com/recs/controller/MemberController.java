@@ -54,7 +54,6 @@ public class MemberController {
 
         List<DealAssignMemberDTO> dealAssignMemberList = recsBusinessService.getDashboarDealByMemberId(userInfo.getMemberId())
                 .stream().map(DealAssignMemberDTO::from).toList();
-//        System.out.println(dealAssignMemberList);
         List<BuyerRequestDTO> allBuyerRequests = recsBusinessService.getDaboardBuyerRequestByMember(userInfo.getMemberId())
                 .stream().sorted(Comparator.comparing(BuyerRequestDTO::getStatus))
                 .toList();

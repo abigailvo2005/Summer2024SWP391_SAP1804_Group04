@@ -134,14 +134,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <label> Description:</label>
                       </div>
                       <div class="col-lg-10 col-sm-10">
-                        <input
+                        <textarea
                           id="desc"
-                          type="text"
                           name="description"
                           class="form-control form-create-control col-10"
                           placeholder="your property's description (i.e interior/exterior features)"
                           required
-                        />
+                        ></textarea>
                       </div>
                     </div>
 

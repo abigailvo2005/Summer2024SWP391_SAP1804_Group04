@@ -577,20 +577,20 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     >
                       <form
                         class="col-4"
-                        action="${pageContext.request.contextPath}/agency/"
+                        action="${pageContext.request.contextPath}/agency/agency-request/drop"
                         id="drop-listing-form"
                         method="get"
                       >
                         <input
                           type="hidden"
-                          id="drop-listing-reId"
-                          name="realEstateId"
+                          id="drop-listing-reqId"
+                          name="requestId"
                         />
                         <button
                           id="drop-listing-btn"
                           title="Cancel request property handling."
                           class="btn btn-danger me-3 col-12"
-                          onclick="deleteLoadId(event, this.value, '#drop-listing-reId', '#drop-listing-form')"
+                          onclick="deleteLoadId(event, this.value, '#drop-listing-reqId', '#drop-listing-form')"
                         >
                           Drop Listing
                         </button>
@@ -702,7 +702,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               }
 
               //load real estate ID for cancel deal/drop listing
-              $("#drop-listing-btn").val(data.realEstate.realEstateId);
+              $("#drop-listing-btn").val(data.requestId);
               //only show option to cancel listing if has not been accepted by seller
               if (data.status.toLowerCase() == "reviewing") {
                 dealOnly.classList.add("hidden");
