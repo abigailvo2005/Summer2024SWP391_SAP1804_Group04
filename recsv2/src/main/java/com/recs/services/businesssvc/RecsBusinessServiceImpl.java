@@ -466,4 +466,17 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
         agencyRequestRepository.save(agencyRequest);
     }
 
+    @Override
+    public void dropAgencyRequest(String requestId) {
+        AgencyRequest agencyRequest = agencyRequestRepository.getReferenceById(requestId);
+        RealEstate realEstate = agencyRequest.getRealEstate();
+        List<AgencyRequest> handledList = realEstate.getAgencyRequests().stream()
+                .filter(request -> request.getStatus().equals(AgencyRequestStatus.ACCEPTED.getValue()))
+                .toList();
+        if(handledList.size() == 1 && agencyRequest.getRequestId().equals(handledList.get(0).getRequestId()))
+            realEstate.setStatus(RealEstateStatus.DISPLAYED.getValue());
+        agencyRequest.setStatus(AgencyRequestStatus.DROPPED.getValue());
+        agencyRequestRepository.save(agencyRequest);
+    }
+
 }

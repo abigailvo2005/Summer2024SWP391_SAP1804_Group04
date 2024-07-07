@@ -191,4 +191,12 @@ public class AgencyController {
         recsBusinessService.cancelDeal(dealId);
         return "redirect:/agency";
     }
+
+    @GetMapping("/agency-request/drop")
+    public String dropAgencyRequest(
+            @RequestParam String requestId
+    ) {
+        recsBusinessService.dropAgencyRequest(requestId);
+        return "redirect:/agency";
+    }
 }

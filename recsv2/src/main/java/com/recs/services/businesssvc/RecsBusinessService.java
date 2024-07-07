@@ -83,4 +83,6 @@ public interface RecsBusinessService {
     public BuyerRequestDTO getBuyerRequest(String id);
 
     public void cancelDeal(String dealId);
+
+    public void dropAgencyRequest(String requestId);
 }
