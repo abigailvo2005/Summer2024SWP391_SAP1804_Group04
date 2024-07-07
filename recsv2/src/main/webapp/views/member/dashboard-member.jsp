@@ -661,7 +661,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <label class="form-label text-center"
                           ><i
                             >All details are now explicit - your Customer can
-                            contact with the property owner through information above.</i
+                            contact with the property owner through information
+                            above.</i
                           ></label
                         >
                       </div>
@@ -705,6 +706,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
       const urlDeal = "http://localhost:8085/api/deal/";
       const urlBuyerRequest = "http://localhost:8085/api/buyer-request/";
+      const urlRealEstate = "http://localhost:8085/api/real-estate/";
       function viewDetailProperty(popupid, type) {
         var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");
@@ -821,49 +823,59 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                 data.message.replace(/\r\n/g, "<br>")
               );
 
-              //Only show seller contact info if Buyer request is accepted/connected
-              $("#seller-contact-info").addClass("hidden");
-              if (
-                data.status.toLowerCase() == "connected" ||
-                data.status.toLowerCase() == "accepted"
-              ) {
-                console.log("in here");
-                $("#seller-contact-info").removeClass("hidden");
-                console.log("in here after");
+              $.ajax({
+                url: urlRealEstate + data.realEstateDTO.realEstateId,
+                type: "GET",
+                success: function (prop) {
+                  //Only show seller contact info if Buyer request is accepted/connected
+                  $("#seller-contact-info").addClass("hidden");
+                  if (
+                    data.status.toLowerCase() == "connected" ||
+                    data.status.toLowerCase() == "accepted"
+                  ) {
+                    console.log("in here");
+                    $("#seller-contact-info").removeClass("hidden");
+                    console.log("in here after");
 
-                //Load Information
-                $("#seller-name").text("Full Name: ");
-                $("#seller-company").text("Company: ");
-                $("#seller-phone").text("Phone Number: ");
-                $("#seller-email").text("Email: ");
-                $("#seller-gender").text("Gender: ");
-                $("#seller-birthday").text("Date of Birth: ");
-              }
+                    //Load Information
+                    $("#seller-name").text(
+                      "Full Name: " + prop.sellerInfo.fullName
+                    );
+                    $("#seller-company").text(
+                      "Company: " + prop.sellerInfo.company
+                    );
+                    $("#seller-phone").text(
+                      "Phone Number: " + prop.sellerInfo.phone
+                    );
+                    $("#seller-email").text("Email: " + prop.sellerInfo.email);
+                    $("#seller-gender").text(
+                      "Gender: " + prop.sellerInfo.gender
+                    );
+                    $("#seller-birthday").text(
+                      "Date of Birth: " + prop.sellerInfo.birthDate
+                    );
+                  }
 
-              //only show land/house fields according to type REQUIRES API INFORMATION TO VIEW THIS PART
-              /*  if (data.realEstateDTO.realEstateType == "Land") {
-                landSection.classList.remove("hidden");
-                houseSection.classList.add("hidden");
-                $("#popup-land-type").text(
-                  data.realEstateDTO.propertyLand.landType
-                );
-              } else {
-                houseSection.classList.remove("hidden");
-                landSection.classList.add("hidden");
-                $("#popup-house-type").text(
-                  data.realEstateDTO.propertyHouse.houseType
-                );
-                $("#popup-builtIn").text(
-                  data.realEstateDTO.propertyHouse.builtIn
-                );
-                $("#popup-bed").text(
-                  data.realEstateDTO.propertyHouse.bedroom + " rooms"
-                );
-                $("#popup-bath").text(
-                  data.realEstateDTO.propertyHouse.bath + " rooms"
-                );
-              }
- */
+                  //only show land/house fields according to type
+                  if (data.realEstateDTO.realEstateType == "Land") {
+                    landSection.classList.remove("hidden");
+                    houseSection.classList.add("hidden");
+                    $("#popup-land-type").text(prop.propertyLand.landType);
+                  } else {
+                    houseSection.classList.remove("hidden");
+                    landSection.classList.add("hidden");
+                    $("#popup-house-type").text(prop.propertyHouse.houseType);
+                    $("#popup-builtIn").text(prop.propertyHouse.builtIn);
+                    $("#popup-bed").text(prop.propertyHouse.bedroom + " rooms");
+                    $("#popup-bath").text(prop.propertyHouse.bath + " rooms");
+                  }
+                },
+                error: function (error) {
+                  //Error when sending request
+                  console.error("Error fetching real estate details");
+                },
+              });
+
               //only show deal information if Deal is clicked
               if (type == "deal") {
                 dealSection.classList.remove("hidden");
@@ -915,7 +927,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             },
             error: function () {
               //Error when sending request
-              console.error("Error fetching property details");
+              console.error("Error fetching buyer request details");
             },
           });
         }
