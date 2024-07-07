@@ -176,7 +176,7 @@ public class SellerController {
     }
 
 
-    @PostMapping("/password/update")
+    @PostMapping("/phone/update")
     public String updatePhone(
             @RequestParam String phone,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
