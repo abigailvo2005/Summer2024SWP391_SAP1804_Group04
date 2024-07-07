@@ -33,6 +33,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!--Alert Custom-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/template/assets/css/sweetalert2.css"
+    />
   </head>
 
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll()">
@@ -642,6 +649,10 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>
+    <script
+      type="text/javascript"
+      src="../../template/assets/js/sweetalert2.js"
+    ></script>
 
     <!-- Internal JS -->
     <script>
@@ -871,8 +882,38 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         //load id
         $(input).val(id);
 
-        //submit form
-        $(form).submit();
+        //if drop listing is clicked
+        if (input == "#drop-listing-reqId") {
+          Swal.fire({
+            title: "Drop this listing?",
+            text: "You won't be able to revert this action and will no longer being reviewed to handle this listing!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, drop it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // User confirmed, submit the form
+              $(form).submit();
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Cancel this deal?",
+            text: "You won't be able to revert this action and the member you have assigned this property to will no longer see this task!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, cancel it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // User confirmed, submit the form
+              $(form).submit();
+            }
+          });
+        }
       }
 
       /* Close Popup */
@@ -940,10 +981,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           requests.forEach(function (row) {
             var name = row.querySelector("#req-name").textContent.toLowerCase();
             var type = row.querySelector("#req-type").textContent.toLowerCase();
-            if (
-              name.includes(searchInput) ||
-              type.includes(searchInput)
-            ) {
+            if (name.includes(searchInput) || type.includes(searchInput)) {
               row.style.display = "";
             } else {
               row.style.display = "none";
@@ -965,10 +1003,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             var type = row
               .querySelector("#listing-type")
               .textContent.toLowerCase();
-            if (
-              name.includes(searchInput) ||
-              type.includes(searchInput)
-            ) {
+            if (name.includes(searchInput) || type.includes(searchInput)) {
               row.style.display = "";
             } else {
               row.style.display = "none";

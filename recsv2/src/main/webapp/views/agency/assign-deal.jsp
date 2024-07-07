@@ -882,7 +882,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         }
 
         //show success message
-        alert("Job assigned successfully!");
+        alert("Deal assigned successfully!");
 
         //execute default submit
         document.querySelector("form").submit();

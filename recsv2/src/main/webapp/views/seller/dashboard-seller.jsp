@@ -34,6 +34,13 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
+    <!--Alert Custom-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/template/assets/css/sweetalert2.css"
+    />
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
@@ -964,6 +971,11 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       type="module"
       src="../../template/assets/js/img-handler.js"
     ></script>
+    <!-- Sweet Alert 2 -->
+    <script
+      type="text/javascript"
+      src="../../template/assets/js/sweetalert2.js"
+    ></script>
 
     <!-- Internal JS -->
     <script>
@@ -1027,8 +1039,38 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         //load id
         $(input).val(id);
 
-        //submit form
-        $(form).submit();
+        //deleting prop
+        if (input == "#delete-reId") {
+          Swal.fire({
+            title: "Delete this property?",
+            text: "You won't be able to revert this action!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // User confirmed, submit the form
+              $(form).submit();
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Submit this property?",
+            text: "You won't be able to revert this action!",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, submit it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // User confirmed, submit the form
+              $(form).submit();
+            }
+          });
+        }
       }
 
       // Submit chosen Agency Profile to system
@@ -1312,7 +1354,10 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             const chosenAgencyContainer = $("#chosen-agency-container");
             data.agencyRequests.forEach((request) => {
-              if (request.status == "Accepted" || request.status == "Processing") {
+              if (
+                request.status == "Accepted" ||
+                request.status == "Processing"
+              ) {
                 //only show chosen agencies
                 //create rows with checkboxes - for controller submission - and information to view
                 const row = $("<tr>");
