@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
@@ -104,6 +105,26 @@ public class StaffController {
         model.addAttribute("currentPage", currentPage);
         return "staff/profile-staff";
     }
+
+    @PostMapping("/password/update")
+    public String updatePassword(
+            @RequestParam String password,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
+        return "redirect:/staff/profile";
+    }
+
+
+    @PostMapping("/password/update")
+    public String updatePhone(
+            @RequestParam String phone,
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
+    ) {
+        accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
+        return "redirect:/staff/profile";
+    }
+
 }
 
 
