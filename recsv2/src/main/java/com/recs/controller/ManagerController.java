@@ -177,8 +177,7 @@ public class ManagerController {
         return "redirect:/manager/profile";
     }
 
-
-    @PostMapping("/password/update")
+    @PostMapping("/phone/update")
     public String updatePhone(
             @RequestParam String phone,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
