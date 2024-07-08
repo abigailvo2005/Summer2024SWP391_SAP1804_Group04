@@ -163,6 +163,7 @@ public class AdminController {
     public String deleteAccount(
             @RequestParam String accountId
     ) {
+        System.out.println("Account Id: " + accountId);
         accountService.deleteAccount(accountId);
         return  "redirect:/admin";
     }

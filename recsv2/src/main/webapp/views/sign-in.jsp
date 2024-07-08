@@ -56,11 +56,6 @@
                         <c:if test="${not empty param.error}">
                           <p style="color: red;">Invalid username or password.</p>
                         </c:if>
-                        <!-- remember me toggle btn -->
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="rememberMe" checked="" />
-                          <label class="form-check-label" for="rememberMe">Remember me</label>
-                        </div>
 
                         <!-- sign in button -->
                         <div class="text-center">

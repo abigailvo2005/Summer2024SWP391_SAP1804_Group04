@@ -503,19 +503,19 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-     // Add event listeners to toggle password buttons
-     document.querySelectorAll(".toggle-password").forEach(function (button) {
-          var isShowing = false;
-          button.addEventListener("click", function () {
-            var toggleTarget = button.getAttribute("data-toggle");
-            togglePassword(toggleTarget);
-            if(isShowing) {
-              button.textContent = "Show";
-            } else {
-              button.textContent = "Hide";
-            }
-            isShowing = !isShowing
-          });
+      // Add event listeners to toggle password buttons
+      document.querySelectorAll(".toggle-password").forEach(function (button) {
+        var isShowing = false;
+        button.addEventListener("click", function () {
+          var toggleTarget = button.getAttribute("data-toggle");
+          togglePassword(toggleTarget);
+          if (isShowing) {
+            button.textContent = "Show";
+          } else {
+            button.textContent = "Hide";
+          }
+          isShowing = !isShowing;
+        });
       });
 
       // Add event listener to validate phone number on update
