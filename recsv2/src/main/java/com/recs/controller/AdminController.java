@@ -158,4 +158,12 @@ public class AdminController {
         accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
         return "redirect:/admin/profile";
     }
+
+    @PostMapping("/account/delete")
+    public String deleteAccount(
+            @RequestParam String accountId
+    ) {
+        accountService.deleteAccount(accountId);
+        return  "redirect:/admin";
+    }
 }

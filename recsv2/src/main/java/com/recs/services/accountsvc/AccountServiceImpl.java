@@ -95,6 +95,41 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public boolean deleteAccount(String accountId) {
+        Account deleteAccount = accountRepository.getReferenceById(accountId);
+        if(deleteAccount != null & deleteAccount.getRoleId() != null) {
+            switch (deleteAccount.getRoleId()) {
+                case "ROLE_SELLER":
+                    Seller seller = sellerRepository.findByAccountId(Integer.parseInt(accountId));
+                    if (seller != null) {
+                        sellerRepository.delete(seller);
+                    }
+                    break;
+                case "ROLE_MANAGER":
+                    Manager manager = managerRepository.findByAccountId(Integer.parseInt(accountId));
+                    if (manager != null) {
+                        managerRepository.delete(manager);
+                    }
+                    break;
+                case "ROLE_AGENCY":
+                    Agency agency = agencyRepository.findByAccountAccountId(Integer.parseInt(accountId));
+                    if (agency != null) {
+                        agencyRepository.delete(agency);
+                    }
+                    break;
+                case "ROLE_MEMBER":
+                    Member member = memberRepository.findByAccountAccountId(Integer.parseInt(accountId));
+                    if (member != null) {
+                        memberRepository.delete(member);
+                    }
+                    break;
+                case "ROLE_STAFF":
+                    Staff staff = staffRepository.findByAccountId(Integer.parseInt(accountId));
+                    if (staff != null) {
+                        staffRepository.delete(staff);
+                    }
+                    break;
+            }
+        }
         accountRepository.deleteById(accountId);
         return true;
     }
