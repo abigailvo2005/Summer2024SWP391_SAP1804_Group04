@@ -146,7 +146,7 @@ public class AdminController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
         accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
-        return "redirect:/agency/profile";
+        return "redirect:/admin/profile";
     }
 
 
@@ -156,6 +156,6 @@ public class AdminController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
         accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
-        return "redirect:/agency/profile";
+        return "redirect:/admin/profile";
     }
 }

@@ -32,6 +32,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!--Alert Custom-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/template/assets/css/sweetalert2.css"
+    />
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -77,6 +84,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           </div>
         </div>
 
+        <!-- temporarily save user info for updating password validation -->
+        <c:set var="accountId" value="${account.accountId}" scope="request" />
+
         <!--Information-->
         <div>
           <!--all detail profile information-->
@@ -95,10 +105,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     As an admin, you have full control and oversight of the
                     entire system. Your key responsibilities include managing
                     all properties and user accounts in the system. You can
-                    create user accounts for sellers,
-                    and agencies. You also have the
-                    authority to monitor the overall platform activity and
-                    generate detailed reports to support strategic
+                    create user accounts for sellers, and agencies. You also
+                    have the authority to monitor the overall platform activity
+                    and generate detailed reports to support strategic
                     decision-making.
                   </p>
                   <ul class="list-group">
@@ -176,7 +185,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           >&times;</span
                         >
                         <h5>Update Phone Number</h5>
-                        <form id="phoneForm">
+                        <form
+                          action="${pageContext.request.contextPath}/admin/phone/update"
+                          method="post"
+                          id="phoneForm"
+                        >
                           <h6 for="phone">New Phone Number:</h6>
                           <input
                             type="number"
@@ -224,18 +237,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <!-- eye open - viewable / eye close - not viewable -->
                       <div class="pe-1 ps-0 mb-0 ms-auto">
                         <div class="d-flex">
-                          <!-- <a
-                              class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
-                              href=""
-                            >
-                              <i class="fa-solid fa-eye"></i>
-                            </a>
-                            <a
-                              class="btn btn-link pe-1 ps-1 mb-0 ms-auto position-absolute"
-                              href="""
-                            >
-                              <i class="fa-solid fa-eye-slash"></i>
-                            </a> -->
                           <a
                             id="changePassword"
                             class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
@@ -253,7 +254,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           >&times;</span
                         >
                         <h5>Update Password</h5>
-                        <form id="passwordForm">
+                        <form
+                          action="${pageContext.request.contextPath}/admin/password/update"
+                          method="post"
+                          id="passwordForm"
+                        >
                           <div>
                             <h6 for="oldPassword">Old Password:</h6>
                             <div class="password-container">
@@ -284,7 +289,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               <input
                                 type="password"
                                 id="newPassword"
-                                name="newPassword"
+                                name="password"
                                 class="form-control"
                                 placeholder="Enter new password"
                                 required
@@ -398,10 +403,18 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Sweet Alert 2 -->
+    <script
+      type="text/javascript"
+      src="../../template/assets/js/sweetalert2.js"
+    ></script>
 
     <script>
       //URL REAL ESTATE API
       const urlUser = "http://localhost:8085/api/user/";
+      const urlCheckPassword =
+        "http://localhost:8085/api/password/check?accountId=";
 
       var overlay = document.getElementById("overlay");
       var phoneModal = document.getElementById("phoneModal");
@@ -524,7 +537,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
           // Waiting Promise to hide all errors then alert to user
           hideErrorsPromise.then(() => {
-            alert("Successfully create an account!");
+            alert("Successfully update phone!");
             phoneForm.submit();
           });
         } else {
@@ -539,7 +552,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var oldPassword = document.getElementById("oldPassword");
           var newPassword = document.getElementById("newPassword");
           var confirmPassword = document.getElementById("confirmPassword");
-
           var oldPasswordError = document.getElementById("oldPasswordError");
           var newPasswordError = document.getElementById("newPasswordError");
           var confirmPasswordError = document.getElementById(
@@ -560,16 +572,54 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           } else {
             confirmPasswordError.textContent = "";
           }
-          // Create a Promise to wair for all errors to be hidden
-          const hideErrorsPromise = new Promise((resolve) => {
-            // Wait 500ms to make sure all errors are hidden
-            setTimeout(resolve, 500);
-          });
 
-          // Waiting Promise to hide all errors then alert to user
-          hideErrorsPromise.then(() => {
-            alert("Successfully create an account!");
-            passwordForm.submit();
+          //Password validation before submitting changing password
+          const accountId = "${accountId}";
+          //console.log(typeof(accountId));
+          const oldPass = $("#oldPassword").val();
+
+          $.ajax({
+            url:
+              urlCheckPassword +
+              encodeURIComponent(accountId) +
+              "&password=" +
+              oldPass,
+            type: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            success: function (data) {
+              // The password match, submit form
+              if (data.result) {
+                console.log("correct pass");
+                // Create a Promise to wair for all errors to be hidden
+                const hideErrorsPromise = new Promise((resolve) => {
+                  // Wait 500ms to make sure all errors are hidden
+                  setTimeout(resolve, 500);
+                });
+
+                // Waiting Promise to hide all errors then alert to user
+                hideErrorsPromise.then(() => {
+                  alert("Successfully update password!!");
+                  passwordForm.submit();
+                });
+              } else {
+                // The password does not match, alert and return
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Old password does not match",
+                });
+                $("#oldPassword").val("");
+                $("#newPassword").val("");
+                $("#confirmPassword").val("");
+              }
+              console.log("true password? : " + data.result);
+            },
+            error: function (xhr, status, error) {
+              // The request failed, handle the error
+              console.error("Error checkin password:", error);
+            },
           });
         } else {
           // If some fields are empty, show default errors
