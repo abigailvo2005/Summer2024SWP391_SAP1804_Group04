@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -60,7 +61,9 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
-                        .successHandler(customAuthenticationSuccessHandler()))
+                        .loginProcessingUrl("/login")
+                        .successHandler(customAuthenticationSuccessHandler())
+                        .failureHandler(customAuthenticationFailureHandler()))
                 .logout(LogoutConfigurer::permitAll)
                 .getOrBuild();
     }
@@ -105,6 +108,11 @@ public class SecurityConfiguration {
                 }
             }
         };
+    }
+
+    @Bean
+    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return (request, response, exception) -> response.sendRedirect("/login?error=true");
     }
 
     @Bean
