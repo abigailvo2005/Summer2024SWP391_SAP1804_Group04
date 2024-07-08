@@ -34,7 +34,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     />
 
     <!--Alert Custom-->
-    <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/template/assets/css/sweetalert2.css"
+    />
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -178,9 +182,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           >&times;</span
                         >
                         <h5>Update Phone Number</h5>
-                        <form action="${pageContext.request.contextPath}/agency/phone/update"
-                              method="post"
-                              id="phoneForm">
+                        <form
+                          action="${pageContext.request.contextPath}/agency/phone/update"
+                          method="post"
+                          id="phoneForm"
+                        >
                           <h6 for="phone">New Phone Number:</h6>
                           <input
                             type="number"
@@ -246,9 +252,10 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         >
                         <h5>Update Password</h5>
                         <form
-                            action="${pageContext.request.contextPath}/agency/password/update"
-                            method="post" 
-                            id="passwordForm">
+                          action="${pageContext.request.contextPath}/agency/password/update"
+                          method="post"
+                          id="passwordForm"
+                        >
                           <div>
                             <h6 for="oldPassword">Old Password:</h6>
                             <div class="password-container">
@@ -394,12 +401,17 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
+    <!-- Sweet Alert 2 -->
+    <script
+      type="text/javascript"
+      src="../../template/assets/js/sweetalert2.js"
+    ></script>
 
     <script>
       //URL REAL ESTATE API
       const urlUser = "http://localhost:8085/api/user/";
-      const urlCheckPassword = "http://localhost:8085/api/password/check?accountId=";
+      const urlCheckPassword =
+        "http://localhost:8085/api/password/check?accountId=";
 
       var overlay = document.getElementById("overlay");
       var phoneModal = document.getElementById("phoneModal");
@@ -543,7 +555,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           var oldPassword = document.getElementById("oldPassword");
           var newPassword = document.getElementById("newPassword");
           var confirmPassword = document.getElementById("confirmPassword");
-
           var oldPasswordError = document.getElementById("oldPasswordError");
           var newPasswordError = document.getElementById("newPasswordError");
           var confirmPasswordError = document.getElementById(
@@ -564,47 +575,60 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           } else {
             confirmPasswordError.textContent = "";
           }
-            const accountId = "${accountId}";
-            const oldPass = $("#oldPassword").val();
 
-            $.ajax({
-              url: urlCheckPassword + encodeURIComponent(accountId) + "&password=" + oldPass,
-              type: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              success: function (data) {
-                if (data.result) {
-                  const hideErrorsPromise = new Promise((resolve) => {
-                    setTimeout(resolve, 500);
-                  });
+          //Password validation before submitting changing password
+          const accountId = "${accountId}";
+          //console.log(typeof(accountId));
+          const oldPass = $("#oldPassword").val();
 
-                  hideErrorsPromise.then(() => {
-                    alert("Successfully update password!!");
-                    passwordForm.submit();
-                  });
-                } else {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Old password does not match",
-                  });
-                  $("#oldPassword").val("");
-                  $("#newPassword").val("");
-                  $("#confirmPassword").val("");
-                }
-              },
-              error: function (xhr, status, error) {
-                console.error("Error checking password:", error);
-              },
-            });
+          $.ajax({
+            url:
+              urlCheckPassword +
+              encodeURIComponent(accountId) +
+              "&password=" +
+              oldPass,
+            type: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            success: function (data) {
+              // The password match, submit form
+              if (data.result) {
+                console.log("correct pass");
+                // Create a Promise to wair for all errors to be hidden
+                const hideErrorsPromise = new Promise((resolve) => {
+                  // Wait 500ms to make sure all errors are hidden
+                  setTimeout(resolve, 500);
+                });
+
+                // Waiting Promise to hide all errors then alert to user
+                hideErrorsPromise.then(() => {
+                  alert("Successfully update password!!");
+                  passwordForm.submit();
+                });
+              } else {
+                // The password does not match, alert and return
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Old password does not match",
+                });
+                $("#oldPassword").val("");
+                $("#newPassword").val("");
+                $("#confirmPassword").val("");
+              }
+              console.log("true password? : " + data.result);
+            },
+            error: function (xhr, status, error) {
+              // The request failed, handle the error
+              console.error("Error checkin password:", error);
+            },
+          });
         } else {
           // If some fields are empty, show default errors
           passwordForm.reportValidity();
         }
       };
-
-      //Load all information
     </script>
   </body>
 </html>

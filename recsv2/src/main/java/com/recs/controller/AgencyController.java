@@ -215,6 +215,7 @@ public class AgencyController {
             @RequestParam String phone,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
     ) {
+        System.out.println("phone: " + phone);
         accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
         return "redirect:/agency/profile";
     }
