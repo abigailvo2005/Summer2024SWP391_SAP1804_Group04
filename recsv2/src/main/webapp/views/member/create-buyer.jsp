@@ -320,6 +320,18 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         class="form-control form-create-control col-10"
                       />
                       <input
+                        id="form-chosen-deal"
+                        type="hidden"
+                        name="dealId"
+                        class="form-control form-create-control col-10"
+                      />
+                      <input
+                        id="member-id"
+                        type="hidden"
+                        name="memberId"
+                        class="form-control form-create-control col-10"
+                      />
+                      <input
                         id="form-realEstate-name"
                         type="text"
                         name="realEstateName"
@@ -739,9 +751,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.realEstate.area + " m²");
             $("#popup-price").text(data.realEstate.textPrice + " VND");
             $("#popup-agency").text(data.agency.fullName);
-            //load ReID for controller submission
+            //load Ids for controller submission
             $("#form-chosen-realEstate-Id").val(data.realEstate.realEstateId);
             $("#form-realEstate-name").val(data.realEstate.name);
+            $("#form-chosen-deal").val(data.dealId);
+            $("#memberId").val(data.member.memberId);
+           
+            console.log($("#form-chosen-realEstate-Id").val());
 
             //only show land/house fields according to type
             if (data.realEstate.realEstateType == "Land") {
