@@ -1228,6 +1228,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
             //show notes when property unqualified
             if (data.status.toLowerCase() == "unqualified") {
+              console.log("in");
               unqualified.classList.remove("hidden");
               console.log(data.status.toLowerCase());
               pen.classList.remove("hidden");

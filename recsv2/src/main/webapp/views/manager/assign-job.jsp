@@ -401,7 +401,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         <c:forEach items="${staffList}" var="staff">
                           <c:if test="${staff.numOfProjects < 2}">
                             <option class="fs-6" value="${staff.staffId}">
-                              ${staff.username}
+                              ${staff.fullName}
                             </option>
                           </c:if>
                         </c:forEach>
