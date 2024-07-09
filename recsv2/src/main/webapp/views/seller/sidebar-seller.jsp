@@ -183,7 +183,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               </li>
               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                 <a
-                  href="javascript:;"
                   class="nav-link text-body p-0"
                   id="iconNavbarSidenav"
                 >
@@ -206,11 +205,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </main>
 
     <!--   Core JS Files   -->
-    <script src="/template/assets/js/core/popper.min.js"></script>
-    <script src="/template/assets/js/core/bootstrap.min.js"></script>
-    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script>
       document

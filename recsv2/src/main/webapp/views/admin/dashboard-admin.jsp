@@ -116,11 +116,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
                           >
-                            Status
-                          </th>
-                          <th
-                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-1"
-                          >
                             View Details
                           </th>
                         </tr>
@@ -187,22 +182,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 </div>
                               </div>
                             </td>
-                            <td class="align-middle">
-                              <div
-                                class="d-flex px-2 py-1 justify-content-center"
-                              >
-                                <div
-                                  class="d-flex flex-column justify-content-center"
-                                >
-                                  <p
-                                    class="mb-0 text-sm fw-bold status-color"
-                                    value="${user.status}"
-                                  >
-                                    ${user.status}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
+                           
                             <td class="align-middle">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -470,12 +450,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <strong class="text-dark">Username:</strong>
                         <p id="popup-username"></p>
                       </li>
-                      <li
-                        class="d-flex list-group-item border-0 ps-0 text-sm col-4"
-                      >
-                        <strong class="text-dark">Status:</strong>
-                        <p id="popup-status"></p>
-                      </li>
+                      
                     </div>
 
                     <div class="row">
@@ -968,7 +943,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-phone").text(data.phone);
             $("#popup-address").text(data.address);
             $("#popup-id-number").text(data.idCard);
-            $("#popup-status").text(data.status);
             $("#popup-birthdate").text(
               new Date(data.birthDate).toLocaleDateString()
             );

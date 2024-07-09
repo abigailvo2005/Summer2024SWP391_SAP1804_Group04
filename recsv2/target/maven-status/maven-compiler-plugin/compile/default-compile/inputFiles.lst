@@ -41,6 +41,7 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/account/AgencyDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/controller/AdminController.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/businesssvc/RecsBusinessService.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/emailservice/EmailServiceImpl.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/UpdateJobStatusDTO.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/ValidationJobInfo.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/enums/RealEstateStatus.java
@@ -54,6 +55,7 @@
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/recsbusiness/DealAssignMember.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/enums/BuyerRequestStatus.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/realestate/PropertyImages.java
+/Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/services/emailservice/EmailService.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/entities/recsbusiness/AssignJobStaff.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/repositories/recsbusiness/AgencyRequestRepository.java
 /Users/anvo/Desktop/FPTU/SUMMER24/SWP391/Summer2024SWP391_SAP1804_Group04/recsv2/src/main/java/com/recs/models/dto/recsbusiness/ApproveAgencyRequestDTO.java

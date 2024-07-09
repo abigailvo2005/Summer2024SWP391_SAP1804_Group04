@@ -96,7 +96,7 @@ public class SellerController {
     }
 
     @PostMapping({ "/create-property" })
-    public String createPropView(
+    public String createProp(
             @ModelAttribute(name = "request") CreateRealEstateRequestDTO request,
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo,
             Model model) {
