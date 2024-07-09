@@ -1,6 +1,5 @@
 package com.recs.controller;
 
-
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.UpdateJobStatusDTO;
@@ -46,33 +45,36 @@ public class StaffController {
         return accountService.getUserInfo(account.getAccountId());
     }
 
-
     @GetMapping({ "", "/dashboard" })
     public String dashboardView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
 
-        List<ValidationJobInfo> validatingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.ASSIGNED.getValue());
+        List<ValidationJobInfo> validatingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(),
+                JobStatus.ASSIGNED.getValue());
 
-        List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
+        List<ValidationJobInfo> listingList = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(),
+                JobStatus.SUCCESSFUL.getValue());
 
         String currentPage = "dashboard";
         model.addAttribute("fullName", userInfo.getFullName());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("jobList", validatingList);
         model.addAttribute("listingList", listingList);
-        
+
         return "staff/dashboard-staff";
     }
 
     @PostMapping("/validate-property")
-    public String validate(@ModelAttribute(name = "request") UpdateJobStatusDTO request){
+    public String validate(@ModelAttribute(name = "request") UpdateJobStatusDTO request) {
         recsBusinessService.updateStatus(request);
         return "redirect:/staff";
     }
 
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
-        List<ValidationJobInfo> listingListValidateSuccess = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
-        List<ValidationJobInfo> listingListValidateFail = recsBusinessService.getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.FAIL.getValue());
+        List<ValidationJobInfo> listingListValidateSuccess = recsBusinessService
+                .getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.SUCCESSFUL.getValue());
+        List<ValidationJobInfo> listingListValidateFail = recsBusinessService
+                .getListByStaffAndStatus(userInfo.getStaffId(), JobStatus.FAIL.getValue());
         String name = userInfo.getFullName();
         Account account = accountService.getByUserName(name);
         String currentPage = "history";
@@ -82,18 +84,6 @@ public class StaffController {
         model.addAttribute("currentPage", currentPage);
         return "staff/history-staff";
     }
-
-    /* @GetMapping({ "/create-property" })
-    public String dashboardView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "create-property";
-        model.addAttribute("fullName", account);
-        model.addAttribute("currentPage", currentPage);
-        return "staff/create-property";
-    }
-*/
-   
 
     @GetMapping({ "/profile" })
     public String profileView(Model model, Authentication authentication) {
@@ -109,22 +99,17 @@ public class StaffController {
     @PostMapping("/password/update")
     public String updatePassword(
             @RequestParam String password,
-            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
-    ) {
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
         return "redirect:/staff/profile";
     }
 
-
     @PostMapping("/phone/update")
     public String updatePhone(
             @RequestParam String phone,
-            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo
-    ) {
+            @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         accountService.updatePhone(String.valueOf(userInfo.getAccountId()), phone);
         return "redirect:/staff/profile";
     }
 
 }
-
-
