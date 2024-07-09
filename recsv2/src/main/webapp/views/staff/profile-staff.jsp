@@ -152,7 +152,7 @@
                             <button type="submit" id="updatePhone" class="btn btn-dark my-2 mb-2">
                               Update
                             </button>
-                            <button type="button" class="btn btn-dark my-2 mb-2" id="cancelPhone">
+                            <button type="button" class="btn btn-danger my-2 mb-2" id="cancelPhone">
                               Cancel
                             </button>
                           </form>
@@ -221,7 +221,7 @@
                               <button type="submit" id="updatePassword" class="btn btn-dark my-2 mb-2">
                                 Update
                               </button>
-                              <button type="button" class="btn btn-dark my-2 mb-2" id="cancelPassword">
+                              <button type="button" class="btn btn-danger my-2 mb-2" id="cancelPassword">
                                 Cancel
                               </button>
                             </div>

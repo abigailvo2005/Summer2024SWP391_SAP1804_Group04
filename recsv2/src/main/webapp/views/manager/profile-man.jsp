@@ -21,6 +21,12 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       href="/template/assets/img/logos/logo-no-name.png"
     />
 
+    <!-- Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+
     <!-- FontAwesome: icons used in website-->
     <link
       rel="stylesheet"
@@ -34,12 +40,14 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       href="/template/assets/css/sweetalert2.css"
     />
   </head>
+
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
-
     <header>
       <jsp:include page="/views/manager/sidebar-man.jsp" />
     </header>
+    <!-- END SIDEBAR -->
+
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
     >
@@ -55,7 +63,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         >
           <span class="mask bg-gradient-primary opacity-6"></span>
         </div>
-
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
           <div class="row gx-4">
             <div class="col-auto">
@@ -158,8 +165,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div class="pe-1 ps-0 mb-0 ms-auto">
                         <a
                           class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
-                          href="javascript:;"
                           id="changePhone"
+                          href="javascript:;"
                           >Change</a
                         >
                       </div>
@@ -200,7 +207,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           </button>
                           <button
                             type="button"
-                            class="btn btn-dark my-2 mb-2"
+                            class="btn btn-danger my-2 mb-2"
                             id="cancelPhone"
                           >
                             Cancel
@@ -221,22 +228,20 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       <div
                         class="d-flex align-items-start flex-column justify-content-center"
                       >
-                        <h6 class="mb-0 text-sm"></h6>
                         <p class="mb-0 text-xs">Password</p>
                       </div>
                       <!-- eye open - viewable / eye close - not viewable -->
                       <div class="pe-1 ps-0 mb-0 ms-auto">
                         <div class="d-flex">
                           <a
-                            id="changePassword"
                             class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
+                            id="changePassword"
                             href="javascript:;"
                             >Change</a
                           >
                         </div>
                       </div>
                     </li>
-
                     <!-- Modal for Updating Password -->
                     <div id="passwordModal" class="profileUpdate">
                       <div class="update-content">
@@ -331,7 +336,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             </button>
                             <button
                               type="button"
-                              class="btn btn-dark my-2 mb-2"
+                              class="btn btn-danger my-2 mb-2"
                               id="cancelPassword"
                             >
                               Cancel
@@ -406,6 +411,12 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       const urlUser = "http://localhost:8085/api/user/";
       const urlCheckPassword =
         "http://localhost:8085/api/password/check?accountId=";
+
+      var overlay = document.getElementById("overlay");
+      var phoneModal = document.getElementById("phoneModal");
+      var changePhoneBtn = document.getElementById("changePhone");
+      var closePhoneBtn = document.getElementById("closePhone");
+      var cancelPhoneBtn = document.getElementById("cancelPhone");
 
       var passwordModal = document.getElementById("passwordModal");
       var changePasswordBtn = document.getElementById("changePassword");
@@ -491,20 +502,20 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-      // Add event listeners to toggle password buttons
-      document.querySelectorAll(".toggle-password").forEach(function (button) {
-        var isShowing = false;
-        button.addEventListener("click", function () {
-          var toggleTarget = button.getAttribute("data-toggle");
-          togglePassword(toggleTarget);
-          if (isShowing) {
-            button.textContent = "Show";
-          } else {
-            button.textContent = "Hide";
-          }
-          isShowing = !isShowing;
+       // Add event listeners to toggle password buttons
+       document.querySelectorAll(".toggle-password").forEach(function (button) {
+          var isShowing = false;
+          button.addEventListener("click", function () {
+            var toggleTarget = button.getAttribute("data-toggle");
+            togglePassword(toggleTarget);
+            if(isShowing) {
+              button.textContent = "Show";
+            } else {
+              button.textContent = "Hide";
+            }
+            isShowing = !isShowing
+          });
         });
-      });
 
       // Add event listener to validate phone number on update
       updatePhoneBtn.onclick = function (event) {
