@@ -959,6 +959,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- END POPUP - MESSAGE -->
 
     <!--   Core JS Files   -->
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>

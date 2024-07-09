@@ -205,6 +205,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     </main>
 
     <!--   Core JS Files   -->
+    <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script>
       document

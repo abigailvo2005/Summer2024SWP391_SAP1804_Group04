@@ -182,7 +182,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                 </div>
                               </div>
                             </td>
-                           
+
                             <td class="align-middle">
                               <div
                                 class="d-flex px-2 py-1 justify-content-center"
@@ -450,7 +450,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         <strong class="text-dark">Username:</strong>
                         <p id="popup-username"></p>
                       </li>
-                      
                     </div>
 
                     <div class="row">
@@ -786,11 +785,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!--END POPUP PROPERTY-->
 
     <!--   Core JS Files   -->
-    <script src="/template/assets/js/core/popper.min.js"></script>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
-    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>
