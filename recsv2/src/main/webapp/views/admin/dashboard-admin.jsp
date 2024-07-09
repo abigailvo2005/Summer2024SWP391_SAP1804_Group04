@@ -490,12 +490,14 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       >
                         <strong class="text-dark">Email:</strong>
                         <p id="popup-email"></p>
+                        <a href="#">Change</a>
                       </li>
                       <li
                         class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
                         <strong class="text-dark">ID Number:</strong>
                         <p id="popup-id-number"></p>
+                        <a href="#">Change</a>
                       </li>
                     </div>
 
@@ -511,6 +513,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       >
                         <strong class="text-dark">Address:</strong>
                         <p id="popup-address"></p>
+                        <a href="#">Change</a>
                       </li>
                       <li
                         class="d-flex list-group-item border-0 ps-0 text-sm col-4"

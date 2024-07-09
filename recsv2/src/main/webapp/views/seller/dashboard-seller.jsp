@@ -650,7 +650,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               type="text"
                             />
                           </form>
-                          <a class="hidden pen" onclick="changePW('house')">
+                          <a class="hidden penHouse" onclick="changePW('house')">
                             <i class="fa-solid fa-pencil"></i>
                           </a>
                         </li>
@@ -1169,6 +1169,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
         //hide pen
         $(".pen").addClass("hidden");
+        $(".penHouse").addClass("hidden");
       }
 
       //to let user cancel updating paperwork
@@ -1185,6 +1186,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
         //show pen
         $(".pen").removeClass("hidden");
+        $(".penHouse").removeClass("hidden");
       }
 
       /* View Popup detail of each property */
@@ -1198,6 +1200,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         buyerBtn.classList.add("hidden"); //default
         var unqualified = document.querySelector(".unqualified");
         var pen = document.querySelector(".pen");
+        var penHouse = document.querySelector(".penHouse");
 
         // Send GET Request API to retrieve single property information
         $.ajax({
@@ -1230,11 +1233,14 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             //show notes when property unqualified
             if (data.status.toLowerCase() == "unqualified") {
               unqualified.classList.remove("hidden");
+              console.log(data.status.toLowerCase());
               pen.classList.remove("hidden");
+              penHouse.classList.remove("hidden");
               $("#popup-note").text(data.notes);
             } else {
               unqualified.classList.add("hidden");
               pen.classList.add("hidden");
+              penHouse.classList.add("hidden");
             }
 
             //only show land/house fields according to type

@@ -21945,6 +21945,12 @@ fieldset:disabled .btn {
   padding-right: 10px;
 }
 
+.password-container-login {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .password-container {
   display: flex;
   align-items: center;
@@ -21954,6 +21960,14 @@ fieldset:disabled .btn {
 .error-message {
   color: red;
   font-size: 0.9em;
+}
+
+.password-container-login input {
+  flex-grow: 1;
+  margin-right: -62px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .password-container input {
