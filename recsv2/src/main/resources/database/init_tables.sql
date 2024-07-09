@@ -184,4 +184,16 @@ CREATE TABLE BuyerRequest(
     FOREIGN KEY (memberId) REFERENCES Members(memberId)
 );
 
+ALTER TABLES
+ALTER TABLE RealEstate
+MODIFY COLUMN description TEXT NOT NULL;
+
+ALTER TABLE Agency
+MODIFY COLUMN description TEXT;
+
+ALTER TABLE AgencyRequest
+MODIFY COLUMN message TEXT;
+
+ALTER TABLE BuyerRequest
+MODIFY COLUMN message TEXT;
 

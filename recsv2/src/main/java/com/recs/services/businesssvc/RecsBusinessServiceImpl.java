@@ -6,6 +6,7 @@ import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.dto.recsbusiness.AgencyRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.AgencyRequestDTO;
 import com.recs.models.dto.recsbusiness.ApproveAgencyRequestDTO;
+import com.recs.models.dto.recsbusiness.AssignDealRequest;
 import com.recs.models.dto.recsbusiness.BuyerRequestCreateDTO;
 import com.recs.models.dto.recsbusiness.BuyerRequestDTO;
 import com.recs.models.dto.recsbusiness.DealAssignMemberDTO;
@@ -332,14 +333,15 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                 .sorted(Comparator.comparing(DealAssignMemberDTO::getCreateTimestamp).reversed())
                 .toList();
     }
-    
-    public void createDeal(String reId, String memberId, String agencyId) {
 
-        RealEstate realEstate = realEstateService.getById(reId);
+    @Override
+    public void createDeal(AssignDealRequest request, String agencyId) {
+
+        RealEstate realEstate = realEstateService.getById(request.getRealEstateId());
         realEstate.setStatus(RealEstateStatus.MARKETED.getValue());
         realEstateService.update(realEstate);
 
-        AgencyRequest agencyRequest = agencyRequestRepository.getByAgencyAgencyIdAndRealEstateRealEstateId(agencyId, reId);
+        AgencyRequest agencyRequest = agencyRequestRepository.getReferenceById(request.getRequestId());
 
         agencyRequest.setStatus(AgencyRequestStatus.PROCESSING.getValue());
         agencyRequestRepository.save(agencyRequest);
@@ -350,7 +352,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
                 1,
                 DealAssignMemberStatus.ASSIGNED.getValue(),
                 agencyRepository.getReferenceById(agencyId),
-                memberRepository.getReferenceById(memberId),
+                memberRepository.getReferenceById(request.getMemberId()),
                 realEstate
         );
         dealAssignMemberRepository.save(dealAssignMember);
