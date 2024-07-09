@@ -21,6 +21,12 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       href="/template/assets/img/logos/logo-no-name.png"
     />
 
+    <!-- Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+
     <!-- FontAwesome: icons used in website-->
     <link
       rel="stylesheet"
@@ -37,10 +43,10 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
   <body class="g-sidenav-show bg-gray-100">
     <!-- START: SIDEBAR -->
-
     <header>
       <jsp:include page="/views/member/sidebar-member.jsp" />
     </header>
+    <!-- END SIDEBAR -->
 
     <main
       class="main-content no-dash position-relative max-height-vh-100 h-100 border-radius-lg"
@@ -57,7 +63,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         >
           <span class="mask bg-gradient-primary opacity-6"></span>
         </div>
-
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
           <div class="row gx-4">
             <div class="col-auto">
@@ -130,400 +135,263 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   </ul>
                 </div>
               </div>
+            </div>
 
-              <!-- Update some information (password + phone number) -->
-              <div class="col-12 col-xl-6 mt-sm-4">
-                <div class="card h-100">
-                  <div class="card-header pb-0 p-3">
-                    <h6 class="mb-0">Update Profile</h6>
-                  </div>
-                  <div class="card-body p-3">
-                    <ul class="list-group">
-                      <!--change phone number-->
-                      <li
-                        class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
+            <!-- Update some information (password + phone number) -->
+            <div class="col-12 col-xl-6 mt-sm-4">
+              <div class="card h-100">
+                <div class="card-header pb-0 p-3">
+                  <h6 class="mb-0">Update Profile</h6>
+                </div>
+                <div class="card-body p-3">
+                  <ul class="list-group">
+                    <!--change phone number-->
+                    <li
+                      class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
+                    >
+                      <div
+                        class="navbar-toggler-icon d-flex justify-content-center my-1 mx-2"
                       >
-                        <div
-                          class="navbar-toggler-icon d-flex justify-content-center my-1 mx-2"
-                        >
-                          <i class="fa-solid fa-phone"></i>
-                        </div>
+                        <i class="fa-solid fa-phone"></i>
+                      </div>
 
-                        <div
-                          class="d-flex align-items-start flex-column justify-content-center"
-                        >
-                          <h6 class="mb-0 text-sm">${account.phone}</h6>
-                          <p class="mb-0 text-xs">Phone Number</p>
-                        </div>
+                      <div
+                        class="d-flex align-items-start flex-column justify-content-center"
+                      >
+                        <h6 class="mb-0 text-sm">${account.phone}</h6>
+                        <p class="mb-0 text-xs">Phone Number</p>
+                      </div>
 
-                        <div class="pe-1 ps-0 mb-0 ms-auto">
+                      <div class="pe-1 ps-0 mb-0 ms-auto">
+                        <a
+                          class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
+                          id="changePhone"
+                          href="javascript:;"
+                          >Change</a
+                        >
+                      </div>
+                    </li>
+
+                    <!-- Background Overlay -->
+                    <div id="overlay" class="overlay"></div>
+
+                    <!-- Modal for Updating Phone -->
+                    <div id="phoneModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closePhone"
+                          >&times;</span
+                        >
+                        <h5>Update Phone Number</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/member/phone/update"
+                          method="post"
+                          id="phoneForm"
+                        >
+                          <h6 for="phone">New Phone Number:</h6>
+                          <input
+                            type="number"
+                            id="phone"
+                            name="phone"
+                            class="form-control"
+                            placeholder="Enter new phone number"
+                            min="1"
+                            required
+                          />
+                          <div id="phoneError" class="error-message"></div>
+                          <button
+                            type="submit"
+                            id="updatePhone"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelPhone"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
+                    <!--change password-->
+                    <li
+                      class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
+                    >
+                      <div
+                        class="navbar-toggler-icon d-flex justify-content-center my-1 mx-2"
+                      >
+                        <i class="fa-solid fa-lock"></i>
+                      </div>
+                      <div
+                        class="d-flex align-items-start flex-column justify-content-center"
+                      >
+                        <p class="mb-0 text-xs">Password</p>
+                      </div>
+                      <!-- eye open - viewable / eye close - not viewable -->
+                      <div class="pe-1 ps-0 mb-0 ms-auto">
+                        <div class="d-flex">
                           <a
                             class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
+                            id="changePassword"
                             href="javascript:;"
-                            id="changePhone"
                             >Change</a
                           >
                         </div>
-                      </li>
-
-                      <!-- Background Overlay -->
-                      <div id="overlay" class="overlay"></div>
-
-                      <!-- Modal for Updating Phone -->
-                      <div id="phoneModal" class="profileUpdate">
-                        <div class="update-content">
-                          <span class="close-update" id="closePhone"
-                            >&times;</span
-                          >
-                          <h5>Update Phone Number</h5>
-                          <form
-                            action="${pageContext.request.contextPath}/member/phone/update"
-                            method="post"
-                            id="phoneForm"
-                          >
-                            <h6 for="phone">New Phone Number:</h6>
-                            <input
-                              type="number"
-                              id="phone"
-                              name="phone"
-                              class="form-control"
-                              placeholder="Enter new phone number"
-                              min="1"
-                              required
-                            />
-                            <div id="phoneError" class="error-message"></div>
+                      </div>
+                    </li>
+                    <!-- Modal for Updating Password -->
+                    <div id="passwordModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closePassword"
+                          >&times;</span
+                        >
+                        <h5>Update Password</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/member/password/update"
+                          method="post"
+                          id="passwordForm"
+                        >
+                          <div>
+                            <h6 for="oldPassword">Old Password:</h6>
+                            <div class="password-container">
+                              <input
+                                type="password"
+                                id="oldPassword"
+                                name="oldPassword"
+                                class="form-control"
+                                placeholder="Enter old password"
+                                required
+                              />
+                              <button
+                                type="button"
+                                class="toggle-password"
+                                data-toggle="#oldPassword"
+                              >
+                                Show
+                              </button>
+                            </div>
+                            <div
+                              id="oldPasswordError"
+                              class="error-message"
+                            ></div>
+                          </div>
+                          <div>
+                            <h6 for="newPassword">New Password:</h6>
+                            <div class="password-container">
+                              <input
+                                type="password"
+                                id="newPassword"
+                                name="password"
+                                class="form-control"
+                                placeholder="Enter new password"
+                                required
+                              />
+                              <button
+                                type="button"
+                                class="toggle-password"
+                                data-toggle="#newPassword"
+                              >
+                                Show
+                              </button>
+                              <div
+                                id="newPasswordError"
+                                class="error-message"
+                              ></div>
+                            </div>
+                          </div>
+                          <div>
+                            <h6 for="confirmPassword">Confirm New Password:</h6>
+                            <div class="password-container">
+                              <input
+                                type="password"
+                                id="confirmPassword"
+                                class="form-control"
+                                name="confirmPassword"
+                                placeholder="Confirm new password"
+                                required
+                              />
+                              <button
+                                type="button"
+                                class="toggle-password"
+                                data-toggle="#confirmPassword"
+                              >
+                                Show
+                              </button>
+                              <div
+                                id="confirmPasswordError"
+                                class="error-message"
+                              ></div>
+                            </div>
+                          </div>
+                          <div class="modal-buttons">
                             <button
                               type="submit"
-                              id="updatePhone"
+                              id="updatePassword"
                               class="btn btn-dark my-2 mb-2"
                             >
                               Update
                             </button>
                             <button
                               type="button"
-                              class="btn btn-dark my-2 mb-2"
-                              id="cancelPhone"
+                              class="btn btn-danger my-2 mb-2"
+                              id="cancelPassword"
                             >
                               Cancel
                             </button>
-                          </form>
-                        </div>
+                          </div>
+                        </form>
                       </div>
-
-                      <!--change password-->
-                      <li
-                        class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
-                      >
-                        <div
-                          class="navbar-toggler-icon d-flex justify-content-center my-1 mx-2"
-                        >
-                          <i class="fa-solid fa-lock"></i>
-                        </div>
-                        <div
-                          class="d-flex align-items-start flex-column justify-content-center"
-                        >
-                          <h6 class="mb-0 text-sm"></h6>
-                          <p class="mb-0 text-xs">Password</p>
-                        </div>
-                        <!-- eye open - viewable / eye close - not viewable -->
-                        <div class="pe-1 ps-0 mb-0 ms-auto">
-                          <div class="d-flex">
-                            <a
-                              id="changePassword"
-                              class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
-                              href="javascript:;"
-                              >Change</a
-                            >
-                          </div>
-
-                          <!-- Modal for Updating Password -->
-                          <div id="passwordModal" class="profileUpdate">
-                            <div class="update-content">
-                              <span class="close-update" id="closePassword"
-                                >&times;</span
-                              >
-                              <h5>Update Password</h5>
-                              <form
-                                action="${pageContext.request.contextPath}/member/password/update"
-                                method="post"
-                                id="passwordForm"
-                              >
-                                <div>
-                                  <h6 for="oldPassword">Old Password:</h6>
-                                  <div class="password-container">
-                                    <input
-                                      type="password"
-                                      id="oldPassword"
-                                      name="oldPassword"
-                                      class="form-control"
-                                      placeholder="Enter old password"
-                                      required
-                                    />
-                                    <button
-                                      type="button"
-                                      class="toggle-password"
-                                      data-toggle="#oldPassword"
-                                    >
-                                      Show
-                                    </button>
-                                  </div>
-                                  <div
-                                    id="oldPasswordError"
-                                    class="error-message"
-                                  ></div>
-                                </div>
-                                <div>
-                                  <h6 for="newPassword">New Password:</h6>
-                                  <div class="password-container">
-                                    <input
-                                      type="password"
-                                      id="newPassword"
-                                      name="password"
-                                      class="form-control"
-                                      placeholder="Enter new password"
-                                      required
-                                    />
-                                    <button
-                                      type="button"
-                                      class="toggle-password"
-                                      data-toggle="#newPassword"
-                                    >
-                                      Show
-                                    </button>
-                                    <div
-                                      id="newPasswordError"
-                                      class="error-message"
-                                    ></div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <h6 for="confirmPassword">
-                                    Confirm New Password:
-                                  </h6>
-                                  <div class="password-container">
-                                    <input
-                                      type="password"
-                                      id="confirmPassword"
-                                      class="form-control"
-                                      name="confirmPassword"
-                                      placeholder="Confirm new password"
-                                      required
-                                    />
-                                    <button
-                                      type="button"
-                                      class="toggle-password"
-                                      data-toggle="#confirmPassword"
-                                    >
-                                      Show
-                                    </button>
-                                    <div
-                                      id="confirmPasswordError"
-                                      class="error-message"
-                                    ></div>
-                                  </div>
-                                </div>
-                                <div class="modal-buttons">
-                                  <button
-                                    type="submit"
-                                    id="updatePassword"
-                                    class="btn btn-dark my-2 mb-2"
-                                  >
-                                    Update
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-dark my-2 mb-2"
-                                    id="cancelPhone"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-
-                          <!--change password-->
-                          <li
-                            class="list-group-item border-0 d-flex align-items-center px-0 mb-2"
-                          >
-                            <div
-                              class="navbar-toggler-icon d-flex justify-content-center my-1 mx-2"
-                            >
-                              <i class="fa-solid fa-lock"></i>
-                            </div>
-                            <div
-                              class="d-flex align-items-start flex-column justify-content-center"
-                            >
-                              <h6 class="mb-0 text-sm"></h6>
-                              <p class="mb-0 text-xs">Password</p>
-                            </div>
-                            <!-- eye open - viewable / eye close - not viewable -->
-                            <div class="pe-1 ps-0 mb-0 ms-auto">
-                              <div class="d-flex">
-                                <a
-                                  id="changePassword"
-                                  class="btn btn-link pe-1 ps-1 mb-0 ms-auto"
-                                  href="javascript:;"
-                                  >Change</a
-                                >
-                              </div>
-                            </div>
-                          </li>
-
-                          <!-- Modal for Updating Password -->
-                          <div id="passwordModal" class="profileUpdate">
-                            <div class="update-content">
-                              <span class="close-update" id="closePassword"
-                                >&times;</span
-                              >
-                              <h5>Update Password</h5>
-                              <form
-                                action="${pageContext.request.contextPath}/member/password/update"
-                                method="post"
-                                id="passwordForm"
-                              >
-                                <div>
-                                  <h6 for="oldPassword">Old Password:</h6>
-                                  <div class="password-container">
-                                    <input
-                                      type="password"
-                                      id="oldPassword"
-                                      name="oldPassword"
-                                      class="form-control"
-                                      placeholder="Enter old password"
-                                      required
-                                    />
-                                    <button
-                                      type="button"
-                                      class="toggle-password"
-                                      data-toggle="#oldPassword"
-                                    >
-                                      Show
-                                    </button>
-                                  </div>
-                                  <div
-                                    id="oldPasswordError"
-                                    class="error-message"
-                                  ></div>
-                                </div>
-                                <div>
-                                  <h6 for="newPassword">New Password:</h6>
-                                  <div class="password-container">
-                                    <input
-                                      type="password"
-                                      id="newPassword"
-                                      name="password"
-                                      class="form-control"
-                                      placeholder="Enter new password"
-                                      required
-                                    />
-                                    <button
-                                      type="button"
-                                      class="toggle-password"
-                                      data-toggle="#newPassword"
-                                    >
-                                      Show
-                                    </button>
-                                    <div
-                                      id="newPasswordError"
-                                      class="error-message"
-                                    ></div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <h6 for="confirmPassword">
-                                    Confirm New Password:
-                                  </h6>
-                                  <div class="password-container">
-                                    <input
-                                      type="password"
-                                      id="confirmPassword"
-                                      class="form-control"
-                                      name="confirmPassword"
-                                      placeholder="Confirm new password"
-                                      required
-                                    />
-                                    <button
-                                      type="button"
-                                      class="toggle-password"
-                                      data-toggle="#confirmPassword"
-                                    >
-                                      Show
-                                    </button>
-                                    <div
-                                      id="confirmPasswordError"
-                                      class="error-message"
-                                    ></div>
-                                  </div>
-                                </div>
-                                <div class="modal-buttons">
-                                  <button
-                                    type="submit"
-                                    id="updatePassword"
-                                    class="btn btn-dark my-2 mb-2"
-                                  >
-                                    Update
-                                  </button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-dark my-2 mb-2"
-                                    id="cancelPassword"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                    </div>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--END: Profile-->
+      </div>
+      <!--END: Profile-->
 
-        <!-- START FOOTER-->
-        <footer class="footer pt-3">
-          <div class="container-fluid">
-            <div class="row align-items-center justify-content-lg-between">
-              <div class="col-lg-6 mb-lg-0 mb-4">
-                <div
-                  class="copyright text-center text-sm text-muted text-lg-start"
-                >
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with <i class="fa fa-heart"></i> by
-                  <b>Team 4 - SAP1801</b>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <ul
-                  class="nav nav-footer justify-content-center justify-content-lg-end"
-                >
-                  <li class="nav-item">
-                    <a href="#" class="nav-link text-muted" target="_blank"
-                      >About Us</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link text-muted" target="_blank"
-                      >Team</a
-                    >
-                  </li>
-                </ul>
+      <!-- START FOOTER-->
+      <footer class="footer pt-3">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div
+                class="copyright text-center text-sm text-muted text-lg-start"
+              >
+                ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , made with <i class="fa fa-heart"></i> by
+                <b>Team 4 - SAP1801</b>
               </div>
             </div>
+            <div class="col-lg-6">
+              <ul
+                class="nav nav-footer justify-content-center justify-content-lg-end"
+              >
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-muted" target="_blank"
+                    >About Us</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link text-muted" target="_blank"
+                    >Team</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
-        </footer>
-        <!-- END: FOOTER -->
-      </div>
+        </div>
+      </footer>
+      <!-- END: FOOTER -->
     </main>
+
     <!--   Core JS Files   -->
     <script src="/template/assets/js/core/popper.min.js"></script>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
@@ -543,6 +411,12 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       const urlUser = "http://localhost:8085/api/user/";
       const urlCheckPassword =
         "http://localhost:8085/api/password/check?accountId=";
+
+      var overlay = document.getElementById("overlay");
+      var phoneModal = document.getElementById("phoneModal");
+      var changePhoneBtn = document.getElementById("changePhone");
+      var closePhoneBtn = document.getElementById("closePhone");
+      var cancelPhoneBtn = document.getElementById("cancelPhone");
 
       var passwordModal = document.getElementById("passwordModal");
       var changePasswordBtn = document.getElementById("changePassword");
@@ -628,20 +502,20 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       }
 
-      // Add event listeners to toggle password buttons
-      document.querySelectorAll(".toggle-password").forEach(function (button) {
-        var isShowing = false;
-        button.addEventListener("click", function () {
-          var toggleTarget = button.getAttribute("data-toggle");
-          togglePassword(toggleTarget);
-          if (isShowing) {
-            button.textContent = "Show";
-          } else {
-            button.textContent = "Hide";
-          }
-          isShowing = !isShowing;
+       // Add event listeners to toggle password buttons
+       document.querySelectorAll(".toggle-password").forEach(function (button) {
+          var isShowing = false;
+          button.addEventListener("click", function () {
+            var toggleTarget = button.getAttribute("data-toggle");
+            togglePassword(toggleTarget);
+            if(isShowing) {
+              button.textContent = "Show";
+            } else {
+              button.textContent = "Hide";
+            }
+            isShowing = !isShowing
+          });
         });
-      });
 
       // Add event listener to validate phone number on update
       updatePhoneBtn.onclick = function (event) {
@@ -702,6 +576,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           }
 
           //Password validation before submitting changing password
+
           const accountId = "${accountId}";
           //console.log(typeof(accountId));
           const oldPass = $("#oldPassword").val();

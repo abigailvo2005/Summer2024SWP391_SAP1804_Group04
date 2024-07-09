@@ -211,7 +211,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           </button>
                           <button
                             type="button"
-                            class="btn btn-dark my-2 mb-2"
+                            class="btn btn-danger my-2 mb-2"
                             id="cancelPhone"
                           >
                             Cancel
@@ -340,7 +340,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             </button>
                             <button
                               type="button"
-                              class="btn btn-dark my-2 mb-2"
+                              class="btn btn-danger my-2 mb-2"
                               id="cancelPassword"
                             >
                               Cancel
