@@ -49,9 +49,12 @@
                             aria-label="Username" />
                         </div>
                         <label>Password</label>
-                        <div class="mb-3">
+                        <div class="mb-3 password-container-login">
                           <input id="password" name="password" type="password" class="form-control"
                             placeholder="Password" aria-label="Password" />
+                          <button type="button" class="toggle-password" data-toggle="#password">
+                              Show
+                          </button>
                         </div>
                         <c:if test="${not empty param.error}">
                           <p style="color: red;">Invalid username or password.</p>
@@ -126,6 +129,35 @@
 
       <script src="/template/assets/js/core/bootstrap.min.js"></script>
 
+      <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+
+      <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+      <script>
+        function togglePassword(inputId) {
+          var input = document.querySelector(inputId);
+          if (input.type === "password") {
+            input.type = "text";
+          } else {
+            input.type = "password";
+          }
+        }
+
+        // Add event listeners to toggle password buttons
+        document.querySelectorAll(".toggle-password").forEach(function (button) {
+          var isShowing = false;
+          button.addEventListener("click", function () {
+            var toggleTarget = button.getAttribute("data-toggle");
+            togglePassword(toggleTarget);
+            if (isShowing) {
+              button.textContent = "Show";
+            } else {
+              button.textContent = "Hide";
+            }
+            isShowing = !isShowing
+          });
+        });
+      </script>
     </body>
 
     </html>
