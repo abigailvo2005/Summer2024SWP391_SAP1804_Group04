@@ -427,8 +427,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       var closePasswordBtn = document.getElementById("closePassword");
       var cancelPasswordBtn = document.getElementById("cancelPassword");
 
-      var updatePhoneBtn = document.getElementById("updatePhone");
-
       // Get the update button for phone
       var updatePhoneBtn = document.getElementById("updatePhone");
       var updatePasswordBtn = document.getElementById("updatePassword");

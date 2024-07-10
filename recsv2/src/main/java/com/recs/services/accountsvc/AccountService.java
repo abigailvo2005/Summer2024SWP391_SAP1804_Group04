@@ -79,5 +79,29 @@ public interface AccountService {
 
     public void updatePhone(String accountId, String phoneNum);
 
+    public void updateGender(String accountId, int gender);
+
+    public void updateEmail(String accountId, String email);
+
+    public void updateIDCard(String accountId, String idCard);
+
+    public void updateAddress(String accountId, String address);
+
+    public void updateBirthday(String accountId, String birthDate);
+
+    public void updateCompany(String accountId, String company);
+
+    public void updateYOE(String accountId, String yearsOfExperienceMan);
+
+    public void updateNOP(String accountId, String numOfProjects);
+
+    public void updateCompanyAgency(String accountId, String company);
+
+    public void updateYOEAgency(String accountId, String yearsOfExperience);
+
+    public void updateCompleteProjectAgency(String accountId, String completedProject);
+
+    public void updateDescription(String accountId, String description);
+
     public boolean checkPassword(String accountId, String password);
 }

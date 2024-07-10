@@ -490,15 +490,101 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       >
                         <strong class="text-dark">Email:</strong>
                         <p id="popup-email"></p>
-                        <a href="#">Change</a>
+                        <a class="text-warning" href="javascript:;" id="changeEmail">Change</a>
                       </li>
+
+                      <!-- Background Overlay -->
+                      <div id="overlay" class="overlay"></div>
+
+                      <!-- Modal for Updating Email -->
+                    <div id="emailModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeEmail"
+                          >&times;</span
+                        >
+                        <h5>Update Email</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/email/update"
+                          method="post"
+                          id="emailForm"
+                        >
+                          <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="email">New Email:</h6>
+                          <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter new email"
+                            required
+                          />
+                          <div id="emailError" class="error-message"></div>
+                          <button
+                            type="submit"
+                            id="updateEmail"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelEmail"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
                       <li
                         class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
                         <strong class="text-dark">ID Number:</strong>
                         <p id="popup-id-number"></p>
-                        <a href="#">Change</a>
+                        <a class="text-warning" href="javascript:;" id="changeidNumber">Change</a>
                       </li>
+
+                      <!-- Modal for Updating ID Card Number -->
+                    <div id="idNumberModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeidNumber"
+                          >&times;</span
+                        >
+                        <h5>Update ID Card Number</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/idcard/update"
+                          method="post"
+                          id="idNumberForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="idNumber">New ID card number:</h6>
+                          <input
+                            type="number"
+                            id="idCardNo"
+                            name="idCard"
+                            class="form-control"
+                            placeholder="Enter new ID card number"
+                            min="1"
+                            required
+                          />
+                          <button
+                            type="submit"
+                            id="updateidNumber"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelidNumber"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>      
                     </div>
 
                     <div class="row">
@@ -507,20 +593,150 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       >
                         <strong class="text-dark">Gender:</strong>
                         <p id="popup-gender"></p>
+                        <a class="text-warning" href="javascript:;" id="changeGender">Change</a>
                       </li>
+
+                      <!-- Modal for Updating Gender -->
+                    <div id="genderModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeGender"
+                          >&times;</span
+                        >
+                        <h5>Update Gender</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/gender/update"
+                          method="post"
+                          id="genderForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="gender">New Gender:</h6>
+                          <select
+                          class="form-control"
+                          id="gender"
+                          name="gender"
+                          required
+                        >
+                          <option value="" selected>
+                            Select biological gender
+                          </option>
+                          <option value="0">Male</option>
+                          <option value="1">Female</option>
+                        </select>
+                          <button
+                            type="submit"
+                            id="updateGender"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelGender"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
                       <li
                         class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
                         <strong class="text-dark">Address:</strong>
                         <p id="popup-address"></p>
-                        <a href="#">Change</a>
+                        <a class="text-warning" href="javascript:;" id="changeAddress">Change</a>
                       </li>
+
+                      <!-- Modal for Updating Address -->
+                    <div id="addressModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeAddress"
+                          >&times;</span
+                        >
+                        <h5>Update Address</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/address/update"
+                          method="post"
+                          id="addressForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="address">New Address:</h6>
+                          <input
+                            type="text"
+                            id="address"
+                            name="address"
+                            class="form-control"
+                            placeholder="Enter new address"
+                            required
+                          />
+                          <button
+                            type="submit"
+                            id="updateAddress"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelAddress"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+       
+
                       <li
                         class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
                         <strong class="text-dark">Birth Date:</strong>
                         <p id="popup-birthdate"></p>
+                        <a class="text-warning" href="javascript:;" id="changeBirthday">Change</a>
                       </li>
+
+                      <div id="birthdayModal" class="profileUpdate">
+                        <div class="update-content">
+                          <span class="close-update" id="closeBirthday"
+                            >&times;</span
+                          >
+                          <h5>Update Birthday</h5>
+                          <form
+                            action="${pageContext.request.contextPath}/admin/birthday/update"
+                            method="post"
+                            id="birthdayForm"
+                          >
+                          <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                            <h6 for="birthday">New Birthday:</h6>
+                            <input
+                              type="date"
+                              id="birthday"
+                              name="birthDate"
+                              class="form-control form-create-control col-10"
+                              required
+                              onchange="validateDateOfBirth(this.value)"
+                            />
+                            <div id="birthdayError" class="error-message"></div>
+                            <button
+                              type="submit"
+                              id="updateBirthday"
+                              class="btn btn-dark my-2 mb-2"
+                            >
+                              Update
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger my-2 mb-2"
+                              id="cancelBirthday"
+                            >
+                              Cancel
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+
                     </div>
 
                     <div id="seller-section" class="row hidden">
@@ -529,7 +745,47 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       >
                         <strong class="text-dark">Company:</strong>
                         <p id="popup-company-seller"></p>
+                        <a class="text-warning" href="javascript:;" id="changeCompany">Change</a>
                       </li>
+
+                      <div id="companyModal" class="profileUpdate">
+                        <div class="update-content">
+                          <span class="close-update" id="closeCompany"
+                            >&times;</span
+                          >
+                          <h5>Update Company</h5>
+                          <form
+                            action="${pageContext.request.contextPath}/admin/company/update"
+                            method="post"
+                            id="companyForm"
+                          >
+                          <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                            <h6 for="company">New Name Company:</h6>
+                            <input
+                              type="text"
+                              id="company"
+                              name="companySeller"
+                              class="form-control"
+                              placeholder="Enter new name company"
+                              required
+                            />
+                            <button
+                              type="submit"
+                              id="updateCompany"
+                              class="btn btn-dark my-2 mb-2"
+                            >
+                              Update
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger my-2 mb-2"
+                              id="cancelCompany"
+                            >
+                              Cancel
+                            </button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
 
                     <div id="manager-section" class="row hidden">
@@ -538,13 +794,57 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       >
                         <strong class="text-dark">Years Of Experience:</strong>
                         <p id="popup-year-experience-man"></p>
+                        <a class="text-warning" href="javascript:;" id="changeYOE">Change</a>
                       </li>
+
+                      <!-- Modal for Updating Phone -->
+                    <div id="YOEModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeYOE"
+                          >&times;</span
+                        >
+                        <h5>Update Year Of Experience</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/yearofexperience/update"
+                          method="post"
+                          id="YOEForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="YOE">New Year Of Experience</h6>
+                          <input
+                            type="number"
+                            id="YOE"
+                            name="yearsOfExperienceMan"
+                            class="form-control"
+                            placeholder="Enter new year of experience"
+                            min="1"
+                            required
+                          />
+                          <button
+                            type="submit"
+                            id="updateYOE"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelYOE"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
                     </div>
 
                     <div id="staff-section" class="row hidden">
                       <li
                         class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                       >
+
                         <strong class="text-dark">Superior Manager: </strong>
                         <p id="popup-superior-staff"></p>
                       </li>
@@ -555,7 +855,52 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           >Currently Handling Validation:
                         </strong>
                         <p id="popup-num-of-projects"></p>
+                        <a class="text-warning" href="javascript:;" id="changeNOP">Change</a>
                       </li>
+
+                      <!-- Modal for Updating Phone -->
+                    <div id="NOPModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeNOP"
+                          >&times;</span
+                        >
+                        
+                        <h5>Update Current Project Number</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/numberofproject/update"
+                          method="post"
+                          id="NOPForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="NOP">New Current Project Number</h6>
+                          <input
+                            type="number"
+                            id="NOP"
+                            name="numOfProjects"
+                            class="form-control"
+                            placeholder="Enter new number of project"
+                            min="1"
+                            required
+                          />
+                          <div id="NOPError" class="error-message"></div>
+                          <button
+                            type="submit"
+                            id="updateNOP"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelNOP"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
                     </div>
 
                     <div id="agency-section" class="row hidden">
@@ -565,7 +910,50 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         >
                           <strong class="text-dark">Company: </strong>
                           <p id="popup-company-agency"></p>
+                          <a class="text-warning" href="javascript:;" id="changeCompanyAgency">Change</a>
                         </li>
+                        
+                        <div id="companyAgencyModal" class="profileUpdate">
+                          <div class="update-content">
+                            <span class="close-update" id="closeCompanyAgency"
+                              >&times;</span
+                            >
+                            <h5>Update Company</h5>
+                            <form
+                              action="${pageContext.request.contextPath}/admin/companyAgency/update"
+                              method="post"
+                              id="companyAgencyForm"
+                            >
+                            <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                              <h6 for="companyAgency">New Name Company:</h6>
+                              <input
+                                type="text"
+                                id="companyAgency"
+                                name="company"
+                                class="form-control"
+                                placeholder="Enter new name company"
+                                required
+                              />
+                              <button
+                                type="submit"
+                                id="updateCompanyAgency"
+                                class="btn btn-dark my-2 mb-2"
+                              >
+                                Update
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-danger my-2 mb-2"
+                                id="cancelCompanyAgency"
+                              >
+                                Cancel
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+  
+
                         <li
                           class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                         >
@@ -573,7 +961,51 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             >Years Of Experience:</strong
                           >
                           <p id="popup-year-experience-agency"></p>
+                          <a class="text-warning" href="javascript:;" id="changeYOEAgency">Change</a>
                         </li>
+
+                         <!-- Modal for Updating YOEAgency -->
+                    <div id="YOEAgencyModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeYOEAgency"
+                          >&times;</span
+                        >
+                        <h5>Update Year Of Experience</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/yoeagency/update"
+                          method="post"
+                          id="YOEAgencyForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="YOEAgency">New Year Of Experience</h6>
+                          <input
+                            type="number"
+                            id="YOEAgency"
+                            name="yearsOfExperience"
+                            class="form-control"
+                            placeholder="Enter new year of experience"
+                            min="1"
+                            required
+                          />
+                          <button
+                            type="submit"
+                            id="updateYOEAgency"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelYOEAgency"
+                          >
+                            Cancel
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
+
                         <li
                           class="d-flex list-group-item border-0 ps-0 text-sm col-4"
                         >
@@ -581,8 +1013,48 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             >Completed Projects:
                           </strong>
                           <p id="popup-completed-projects"></p>
+                          <a class="text-warning" href="javascript:;" id="changeCompleteProject">Change</a>
                         </li>
+                         <!-- Modal for Updating YOEAgency -->
+                    <div id="completeProjectModal" class="profileUpdate">
+                      <div class="update-content">
+                        <span class="close-update" id="closeCompleteProject"
+                          >&times;</span
+                        >
+                        <h5>Update Number Of Project Completed</h5>
+                        <form
+                          action="${pageContext.request.contextPath}/admin/completeprojectagency/update"
+                          method="post"
+                          id="completeProjectForm"
+                        >
+                        <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                          <h6 for="completeProject">New Number Of Project Completed</h6>
+                          <input
+                            type="number"
+                            id="completeProject"
+                            name="completedProject"
+                            class="form-control"
+                            placeholder="Enter new number of project completed"
+                            min="1"
+                            required
+                          />
+                          <button
+                            type="submit"
+                            id="updateCompleteProject"
+                            class="btn btn-dark my-2 mb-2"
+                          >
+                            Update
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger my-2 mb-2"
+                            id="cancelCompleteProject"
+                          >
+                            Cancel
+                          </button>
+                        </form>
                       </div>
+                    </div>
 
                       <div class="row">
                         <li
@@ -590,7 +1062,48 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         >
                           <strong class="text-dark">Description:</strong>
                           <p id="popup-description"></p>
+                          <a class="text-warning" href="javascript:;" id="changeDesc">Change</a>
                         </li>
+
+                        <div id="descModal" class="profileUpdate">
+                          <div class="update-content">
+                            <span class="close-update" id="closeDesc"
+                              >&times;</span
+                            >
+                            <h5>Update Description</h5>
+                            <form
+                              action="${pageContext.request.contextPath}/admin/description/update"
+                              method="post"
+                              id="descForm"
+                            >
+                            <input type="hidden" class="accountIDUpdate" name="accountId"/>
+                              <h6 for="desc">New Description:</h6>
+                              <input
+                                type="text"
+                                id="desc"
+                                name="description"
+                                class="form-control"
+                                placeholder="Enter new description"
+                                required
+                              />
+                              <button
+                                type="submit"
+                                id="updateDesc"
+                                class="btn btn-dark my-2 mb-2"
+                              >
+                                Update
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-danger my-2 mb-2"
+                                id="cancelDesc"
+                              >
+                                Cancel
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
 
@@ -955,6 +1468,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       function viewDetail(userID) {
         var popup = document.getElementById("popup-user");
         var company = document.querySelector(".company");
+        var accountIDInput = document.querySelectorAll(".accountIDUpdate");
 
         // Send GET Request API to retrieve single user information
         $.ajax({
@@ -990,7 +1504,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             //if user is manager
             if (data.roleId === "ROLE_MANAGER") {
               $("#manager-section").removeClass("hidden");
-              $("#popup-year-experience-man").text("4");
+              $("#popup-year-experience-man").text(data.yearsOfExperience);
             } else {
               $("#manager-section").addClass("hidden");
             }
@@ -1018,6 +1532,12 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             } else {
               $("#agency-section").addClass("hidden");
             }
+
+            accountIDInput.forEach(function() {
+              $(".accountIDUpdate").val(data.accountId);
+            })
+
+           
 
             popup.classList.remove("hidden");
           },
@@ -1131,6 +1651,600 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
           });
         }
       }
+
+      var overlay = document.getElementById("overlay");
+
+      function openModal(modal) {
+        modal.style.display = "block";
+        overlay.style.display = "block";
+      }
+
+      function closeModal(modal) {
+        modal.style.display = "none";
+        overlay.style.display = "none";
+        clearInputs(modal);
+      }
+
+      // Function to clear input fields within a modal
+      function clearInputs(modal) {
+        var gender = document.getElementById("gender");
+        var errorMessage = document.getElementById("emailError");
+        var errorMessageBirthday = document.getElementById("birthdayError");
+        errorMessage.textContent = "";
+        errorMessageBirthday.textContent = "";
+        gender.value = gender.options[0].value;
+
+        var emailInput = document.getElementById("email");
+        emailInput.value = "";
+        var idNumberInput = document.getElementById("idCardNo");
+        idNumberInput.value = "";
+        var genderInput = document.getElementById("gender");
+        genderInput.value = "";
+        var addressInput = document.getElementById("address");
+        addressInput.value = "";
+        var birthDayInput = document.getElementById("birthday");
+        birthDayInput.value = "";
+        var companyInput = document.getElementById("company");
+        companyInput.value = "";
+        var YOEInput = document.getElementById("YOE");
+        YOEInput.value = "";
+        var NOPInput = document.getElementById("NOP");
+        NOPInput.value = "";
+        var companyAgencyInput = document.getElementById("companyAgency");
+        companyAgencyInput.value = "";
+        var YOEAgencyInput = document.getElementById("YOEAgency");
+        YOEAgencyInput.value = "";
+        var completedProjectInput = document.getElementById("completeProject");
+        companyAgencyInput.value = "";
+        var descInput = document.getElementById("desc");
+        descInput.value = "";
+        
+      }
+
+      window.onclick = function (event) {
+        if (event.target == overlay) {
+          closeModal(emailModal);
+          closeModal(idNumberModal);
+          closeModal(genderModal);
+          closeModal(addressModal);
+          closeModal(birthdayModal);
+          closeModal(companyModal);
+          closeModal(YOEModal);
+          closeModal(NOPModal);
+          closeModal(companyAgencyModal);
+          closeModal(YOEAgencyModal);
+          closeModal(completeProjectModal);
+          closeModal(descModal);
+        }
+      };
+
+      //Update NOP completed
+      var completeProjectModal = document.getElementById("completeProjectModal");
+      var changeCompleteProjectBtn = document.getElementById("changeCompleteProject");
+      var closeCompleteProjectBtn = document.getElementById("closeCompleteProject");
+      var cancelCompleteProjectBtn = document.getElementById("cancelCompleteProject");
+      var updateCompleteProjectBtn = document.getElementById("updateCompleteProject");
+      var completeProjectForm = document.getElementById("completeProjectForm");
+
+      changeCompleteProjectBtn.onclick = function () {
+        openModal(completeProjectModal);
+      };
+
+      closeCompleteProjectBtn.onclick = function () {
+        closeModal(completeProjectModal);
+      };
+
+      cancelCompleteProjectBtn.onclick = function () {
+        closeModal(completeProjectModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateCompleteProjectBtn.onclick = function (event) {
+        event.preventDefault();
+        if (completeProjectForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update year of experience!");
+            completeProjectForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          completeProjectForm.reportValidity();
+        }
+      };
+
+
+      //Update YOE Agency
+      var YOEAgencyModal = document.getElementById("YOEAgencyModal");
+      var changeYOEAgencyBtn = document.getElementById("changeYOEAgency");
+      var closeYOEAgencyBtn = document.getElementById("closeYOEAgency");
+      var cancelYOEAgencyBtn = document.getElementById("cancelYOEAgency");
+      var updateYOEAgencyBtn = document.getElementById("updateYOEAgency");
+      var YOEAgencyForm = document.getElementById("YOEAgencyForm");
+
+      changeYOEAgencyBtn.onclick = function () {
+        openModal(YOEAgencyModal);
+      };
+
+      closeYOEAgencyBtn.onclick = function () {
+        closeModal(YOEAgencyModal);
+      };
+
+      cancelYOEAgencyBtn.onclick = function () {
+        closeModal(YOEAgencyModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateYOEAgencyBtn.onclick = function (event) {
+        event.preventDefault();
+        if (YOEAgencyForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update year of experience!");
+            YOEAgencyForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          YOEAgencyForm.reportValidity();
+        }
+      };
+
+      //Updaet Description
+      var descModal = document.getElementById("descModal");
+      var changeDescBtn = document.getElementById("changeDesc");
+      var closeDescBtn = document.getElementById("closeDesc");
+      var cancelDescBtn = document.getElementById("cancelDesc");
+      var updateDescBtn = document.getElementById("updateDesc");
+      var descForm = document.getElementById("descForm");
+
+      changeDescBtn.onclick = function () {
+        openModal(descModal);
+      };
+
+      closeDescBtn.onclick = function () {
+        closeModal(descModal);
+      };
+
+      cancelDescBtn.onclick = function () {
+        closeModal(descModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateDescBtn.onclick = function (event) {
+        event.preventDefault();
+        if (descForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update description!");
+            descForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          descForm.reportValidity();
+        }
+      };
+
+      //Update Company Agency
+      var companyAgencyModal = document.getElementById("companyAgencyModal");
+      var changeCompanyAgencyBtn = document.getElementById("changeCompanyAgency");
+      var closeCompanyAgencyBtn = document.getElementById("closeCompanyAgency");
+      var cancelCompanyAgencyBtn = document.getElementById("cancelCompanyAgency");
+      var updateCompanyAgencyBtn = document.getElementById("updateCompanyAgency");
+      var companyAgencyForm = document.getElementById("companyAgencyForm");
+
+      changeCompanyAgencyBtn.onclick = function () {
+        openModal(companyAgencyModal);
+      };
+
+      closeCompanyAgencyBtn.onclick = function () {
+        closeModal(companyAgencyModal);
+      };
+
+      cancelCompanyAgencyBtn.onclick = function () {
+        closeModal(companyAgencyModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateCompanyAgencyBtn.onclick = function (event) {
+        event.preventDefault();
+        if (companyAgencyForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update name company!");
+            companyAgencyForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          companyAgencyForm.reportValidity();
+        }
+      };
+
+      //Update NOP
+      var NOPModal = document.getElementById("NOPModal");
+      var changeNOPBtn = document.getElementById("changeNOP");
+      var closeNOPBtn = document.getElementById("closeNOP");
+      var cancelNOPBtn = document.getElementById("cancelNOP");
+      var updateNOPBtn = document.getElementById("updateNOP");
+      var NOPForm = document.getElementById("NOPForm");
+
+      changeNOPBtn.onclick = function () {
+        openModal(NOPModal);
+      };
+
+      closeNOPBtn.onclick = function () {
+        closeModal(NOPModal);
+      };
+
+      cancelNOPBtn.onclick = function () {
+        closeModal(NOPModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateNOPBtn.onclick = function (event) {
+        event.preventDefault();
+        if (NOPForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update number of project!");
+            NOPForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          NOPForm.reportValidity();
+        }
+      };
+
+      //Update YOE
+      var YOEModal = document.getElementById("YOEModal");
+      var changeYOEBtn = document.getElementById("changeYOE");
+      var closeYOEBtn = document.getElementById("closeYOE");
+      var cancelYOEBtn = document.getElementById("cancelYOE");
+      var updateYOEBtn = document.getElementById("updateYOE");
+      var YOEForm = document.getElementById("YOEForm");
+
+      changeYOEBtn.onclick = function () {
+        openModal(YOEModal);
+      };
+
+      closeYOEBtn.onclick = function () {
+        closeModal(YOEModal);
+      };
+
+      cancelYOEBtn.onclick = function () {
+        closeModal(YOEModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateYOEBtn.onclick = function (event) {
+        event.preventDefault();
+        if (YOEForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update year of experience!");
+            YOEForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          YOEForm.reportValidity();
+        }
+      };
+
+      //Update company
+      var companyModal = document.getElementById("companyModal");
+      var changeCompanyBtn = document.getElementById("changeCompany");
+      var closeCompanyBtn = document.getElementById("closeCompany");
+      var cancelCompanyBtn = document.getElementById("cancelCompany");
+      var updateCompanyBtn = document.getElementById("updateCompany");
+      var companyForm = document.getElementById("companyForm");
+
+      changeCompanyBtn.onclick = function () {
+        openModal(companyModal);
+      };
+
+      closeCompanyBtn.onclick = function () {
+        closeModal(companyModal);
+      };
+
+      cancelCompanyBtn.onclick = function () {
+        closeModal(companyModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateCompanyBtn.onclick = function (event) {
+        event.preventDefault();
+        if (companyForm.checkValidity()) {
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update name company!");
+            companyForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          companyForm.reportValidity();
+        }
+      };
+
+      //Update Birthday
+      var birthdayModal = document.getElementById("birthdayModal");
+      var changeBirthdayBtn = document.getElementById("changeBirthday");
+      var closeBirthdayBtn = document.getElementById("closeBirthday");
+      var cancelBirthdayBtn = document.getElementById("cancelBirthday");
+      var updateBirthdayBtn = document.getElementById("updateBirthday");
+      var birthdayForm = document.getElementById("birthdayForm");
+
+      changeBirthdayBtn.onclick = function () {
+        openModal(birthdayModal);
+      };
+
+      closeBirthdayBtn.onclick = function () {
+        closeModal(birthdayModal);
+      };
+
+      cancelBirthdayBtn.onclick = function () {
+        closeModal(birthdayModal);
+      };
+
+      //validate birthday of user
+      function validateDateOfBirth(value) {
+        const birthDate = new Date(value);
+        const currentDate = new Date();
+
+        if (birthDate.getTime() >= currentDate.getTime()) {
+          var errorMessageBirthday = document.getElementById("birthdayError");
+          var birthdayInput = document.getElementById("birthday");
+          errorMessageBirthday.textContent = "birthday has to be before current day.";
+          birthdayInput.value = ""; // Delete bday value if invalid
+        } else {
+          errorMessageBirthday.textContent = "";
+        }
+      }
+
+      // Add event listener to validate phone number on update
+      updateBirthdayBtn.onclick = function (event) {
+        event.preventDefault();
+        if (birthdayForm.checkValidity()) {
+
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update birthdate!");
+            birthdayForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          birthdayForm.reportValidity();
+        }
+      };
+
+
+      //Update Address
+      var addressModal = document.getElementById("addressModal");
+      var changeAddressBtn = document.getElementById("changeAddress");
+      var closeAddressBtn = document.getElementById("closeAddress");
+      var cancelAddressBtn = document.getElementById("cancelAddress");
+      var updateAddressBtn = document.getElementById("updateAddress");
+      var addressForm = document.getElementById("addressForm");
+
+      changeAddressBtn.onclick = function () {
+        openModal(addressModal);
+      };
+
+      closeAddressBtn.onclick = function () {
+        closeModal(addressModal);
+      };
+
+      cancelAddressBtn.onclick = function () {
+        closeModal(addressModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateAddressBtn.onclick = function (event) {
+        event.preventDefault();
+        if (addressForm.checkValidity()) {
+
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update gender!");
+            addressForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          addressForm.reportValidity();
+        }
+      };
+
+      //Update Gender
+      var genderModal = document.getElementById("genderModal");
+      var changeGenderBtn = document.getElementById("changeGender");
+      var closeGenderBtn = document.getElementById("closeGender");
+      var cancelGenderBtn = document.getElementById("cancelGender");
+      var updateGenderBtn = document.getElementById("updateGender");
+      var genderForm = document.getElementById("genderForm");
+
+      changeGenderBtn.onclick = function () {
+        openModal(genderModal);
+      };
+
+      closeGenderBtn.onclick = function () {
+        closeModal(genderModal);
+      };
+
+      cancelGenderBtn.onclick = function () {
+        closeModal(genderModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateGenderBtn.onclick = function (event) {
+        event.preventDefault();
+        if (genderForm.checkValidity()) {
+
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update gender!");
+            genderForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          genderForm.reportValidity();
+        }
+      };
+
+      //Update Email
+      var emailModal = document.getElementById("emailModal");
+      var changeEmailBtn = document.getElementById("changeEmail");
+      var closeEmailBtn = document.getElementById("closeEmail");
+      var cancelEmailBtn = document.getElementById("cancelEmail");
+      var updateEmailBtn = document.getElementById("updateEmail");
+      var emailForm = document.getElementById("emailForm");
+
+      changeEmailBtn.onclick = function () {
+        openModal(emailModal);
+      };
+
+      closeEmailBtn.onclick = function () {
+        closeModal(emailModal);
+      };
+
+      cancelEmailBtn.onclick = function () {
+        closeModal(emailModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateEmailBtn.onclick = function (event) {
+        event.preventDefault();
+        if (emailForm.checkValidity()) {
+          var emailInput = document.getElementById("email");
+          var errorMessage = document.getElementById("emailError");
+          
+
+          if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(emailInput.value)) {
+            // Check if email is valid
+            errorMessage.textContent = "email is not in the correct format. (ie:example@domain.com)";
+            return;
+          } else {
+            errorMessage.textContent = "";
+          }
+          
+
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully update email!");
+            emailForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          emailForm.reportValidity();
+        }
+      };
+
+      //Update ID card number
+      var idNumberModal = document.getElementById("idNumberModal");
+      var changeidNumberBtn = document.getElementById("changeidNumber");
+      var closeidNumberBtn = document.getElementById("closeidNumber");
+      var cancelidNumberBtn = document.getElementById("cancelidNumber");
+      var updateidNumberBtn = document.getElementById("updateidNumber");
+      var idNumberForm = document.getElementById("idNumberForm");
+
+      changeidNumberBtn.onclick = function () {
+        openModal(idNumberModal);
+      };
+
+      closeidNumberBtn.onclick = function () {
+        closeModal(idNumberModal);
+      };
+
+      cancelidNumberBtn.onclick = function () {
+        closeModal(idNumberModal);
+      };
+
+      // Add event listener to validate phone number on update
+      updateidNumberBtn.onclick = function (event) {
+        event.preventDefault();
+        if (idNumberForm.checkValidity()) {
+          
+          // Create a Promise to wair for all errors to be hidden
+          const hideErrorsPromise = new Promise((resolve) => {
+            // Wait 500ms to make sure all errors are hidden
+            setTimeout(resolve, 500);
+          });
+
+          // Waiting Promise to hide all errors then alert to user
+          hideErrorsPromise.then(() => {
+            alert("Successfully ID card number!");
+            idNumberForm.submit();
+          });
+        } else {
+          // If some fields are empty, show default errors
+          idNumberForm.reportValidity();
+        }
+      };
+
+
     </script>
   </body>
 </html>
