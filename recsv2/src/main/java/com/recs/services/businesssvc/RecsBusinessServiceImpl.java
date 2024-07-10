@@ -386,7 +386,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
 
     @Override
     public List<BuyerRequestDTO> getDaboardBuyerRequestByMember(String memberId) {
-        List<String> status = Stream.of(BuyerRequestStatus.CONNECTED, BuyerRequestStatus.REVIEWING)
+        List<String> status = Stream.of(BuyerRequestStatus.ACCEPTED, BuyerRequestStatus.REVIEWING)
             .map(BuyerRequestStatus::getValue)
             .toList();
 

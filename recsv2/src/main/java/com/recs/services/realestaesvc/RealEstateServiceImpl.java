@@ -366,9 +366,6 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .setAgencyRequests(
                                     realEstate.getAgencyRequests().stream()
                                             .map(AgencyRequestDTO::from)
-//                                            .filter(request -> request.getStatus().equals(
-//                                                    AgencyRequestStatus.REVIEWING.getValue()
-//                                            )) //rat can cho nay
                                             .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
                                             .toList()
                             )
@@ -391,9 +388,6 @@ public class RealEstateServiceImpl implements RealEstateService{
                             .setAgencyRequests(
                                     realEstate.getAgencyRequests().stream()
                                             .map(AgencyRequestDTO::from)
-//                                            .filter(request -> request.getStatus().equals(
-//                                                    AgencyRequestStatus.REVIEWING.getValue()
-//                                            )) //rat can cho nay
                                             .sorted(Comparator.comparing(AgencyRequestDTO::getStatus))
                                             .toList()
                             )
