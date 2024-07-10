@@ -2066,7 +2066,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
           // Waiting Promise to hide all errors then alert to user
           hideErrorsPromise.then(() => {
-            alert("Successfully update gender!");
+            alert("Successfully update address!");
             addressForm.submit();
           });
         } else {
