@@ -853,7 +853,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                             name="numOfProjects"
                             class="form-control"
                             placeholder="Enter new number of project"
-                            min="1"
+                            min="0"
                             required
                           />
                           <div id="NOPError" class="error-message"></div>
