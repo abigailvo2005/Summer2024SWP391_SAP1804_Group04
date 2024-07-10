@@ -1230,7 +1230,6 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             if (data.status.toLowerCase() == "unqualified") {
               console.log("in");
               unqualified.classList.remove("hidden");
-              console.log(data.status.toLowerCase());
               pen.classList.remove("hidden");
               penHouse.classList.remove("hidden");
               $("#popup-note").text(data.notes);

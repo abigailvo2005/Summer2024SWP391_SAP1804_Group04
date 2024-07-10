@@ -4,6 +4,7 @@ import com.recs.models.dto.account.CreateAccountRequestDTO;
 import com.recs.models.dto.account.UserInfo;
 import com.recs.models.dto.realestate.RealEstateInfo;
 import com.recs.models.entities.account.Account;
+import com.recs.models.entities.account.Staff;
 import com.recs.services.accountsvc.AccountService;
 import com.recs.services.realestaesvc.RealEstateService;
 
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -100,6 +103,7 @@ public class AdminController {
         accountService.registerAccount(request);
         return "redirect:/admin/create-account";
     }
+    
 
     @PostMapping("/password/update")
     public String updatePassword(
@@ -108,6 +112,97 @@ public class AdminController {
     ) {
         accountService.updatePassword(String.valueOf(userInfo.getAccountId()), password);
         return "redirect:/admin/profile";
+    }
+
+    @PostMapping("/email/update")
+    public String updateEmail(
+            @RequestParam String accountId,
+            @RequestParam String email) {
+        accountService.updateEmail(accountId, email);
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/company/update")
+    public String updateCompany(@RequestParam String accountId, @RequestParam String companySeller) {
+        accountService.updateCompany(accountId, companySeller);
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/yearofexperience/update")
+    public String updateYearOfExperience(@RequestParam String accountId, @RequestParam String yearsOfExperienceMan) {
+        accountService.updateYOE(accountId, yearsOfExperienceMan);
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/numberofproject/update")
+    public String updateNumberOfProject(@RequestParam String accountId, @RequestParam String numOfProjects) {
+        accountService.updateNOP(accountId, numOfProjects);
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/yoeagency/update")
+    public String updateYOEAgency(@RequestParam String accountId, @RequestParam String yearsOfExperience) {
+        accountService.updateYOEAgency(accountId, yearsOfExperience);
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/completeprojectagency/update")
+    public String updateCompletProject(@RequestParam String accountId, @RequestParam String completedProject) {
+        accountService.updateCompleteProjectAgency(accountId, completedProject);
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/description/update")
+    public String updateDescription(@RequestParam String accountId, @RequestParam String description) {
+        accountService.updateDescription(accountId, description);
+        return "redirect:/admin/dashboard";
+    }
+    
+    
+    
+
+    @PostMapping("/companyAgency/update")
+    public String updateCompanyAgency(@RequestParam String accountId, @RequestParam String company) {
+        accountService.updateCompanyAgency(accountId, company);
+        return "redirect:/admin/dashboard";
+    }
+    
+    
+    
+    
+
+    @PostMapping("/birthday/update")
+    public String updateBirthday(@RequestParam String accountId, @RequestParam String birthDate) {
+        accountService.updateBirthday(accountId, birthDate);
+        return "redirect:/admin/dashboard";
+    }
+    
+
+    @PostMapping("/address/update")
+    public String updateAddress(@RequestParam String accountId,
+                                 @RequestParam String address) {
+        
+        accountService.updateAddress(accountId, address);
+        return "redirect:/admin/dashboard";
+    }
+    
+    
+
+    @PostMapping("/gender/update")
+    public String updateGender(
+            @RequestParam String accountId,
+            @RequestParam int gender) {
+        accountService.updateGender(accountId, gender);
+        return "redirect:/admin/dashboard";
+    }
+    
+    @PostMapping("/idcard/update")
+    public String postMethodName(@RequestParam String accountId,
+                                 @RequestParam String idCard) {
+        accountService.updateIDCard(accountId, idCard);
+        System.out.println("Acccount: " + accountId);
+        System.out.println("idcard" + idCard);
+        return "redirect:/admin/dashboard";
     }
 
 

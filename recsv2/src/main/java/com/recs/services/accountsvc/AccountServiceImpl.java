@@ -453,6 +453,90 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void updateAddress(String accountId, String address) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setAddress(address);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void updateIDCard(String accountId, String idCard) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setIdCard(idCard);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void updateEmail(String accountId, String email) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setEmail(email);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void updateGender(String accountId, int gender) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setGender(gender);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void updateBirthday(String accountId, String birthDate) {
+        Account account = accountRepository.getReferenceById(accountId);
+        account.setBirthDate(birthDate);
+        accountRepository.save(account);
+    }
+
+    @Override
+    public void updateYOE(String accountId, String yearsOfExperienceMan) {
+        Manager manager = managerRepository.findByAccountId(Integer.valueOf(accountId));
+        manager.setYearsOfExperience(Integer.valueOf(yearsOfExperienceMan));
+        managerRepository.save(manager);
+    }
+
+    @Override
+    public void updateNOP(String accountId, String numOfProjects) {
+        Staff staff = staffRepository.findByAccountId(Integer.valueOf(accountId));
+        staff.setNumOfProjects(Integer.valueOf(numOfProjects));
+        staffRepository.save(staff);
+    }
+
+    @Override
+    public void updateCompany(String accountId, String company) {
+        Seller seller = sellerRepository.findByAccountId(Integer.valueOf(accountId));
+        seller.setCompany(company);
+        sellerRepository.save(seller);
+    }
+
+    @Override
+    public void updateYOEAgency(String accountId, String yearsOfExperience) {
+        Agency agency = agencyRepository.findByAccountAccountId(Integer.valueOf(accountId));
+        agency.setYearsOfExperience(Integer.valueOf(yearsOfExperience));
+        agencyRepository.save(agency);
+    }
+
+    @Override
+    public void updateCompleteProjectAgency(String accountId, String completedProject) {
+        Agency agency = agencyRepository.findByAccountAccountId(Integer.valueOf(accountId));
+        agency.setCompletedProject(Integer.valueOf(completedProject));
+        agencyRepository.save(agency);
+    }
+
+    @Override
+    public void updateDescription(String accountId, String description) {
+        Agency agency = agencyRepository.findByAccountAccountId(Integer.valueOf(accountId));
+        agency.setDescription(description);
+        agencyRepository.save(agency);
+    }
+
+    @Override 
+    public void updateCompanyAgency(String accountId, String company) {
+        Agency agency = agencyRepository.findByAccountAccountId(Integer.valueOf(accountId));
+        agency.setCompany(company);
+        agencyRepository.save(agency);
+    }
+
+    @Override
     public void updatePhone(String accountId, String phoneNum) {
         Account account = accountRepository.getReferenceById(accountId);
         account.setPhone(phoneNum);

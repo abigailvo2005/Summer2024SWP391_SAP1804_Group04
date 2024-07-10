@@ -3662,7 +3662,7 @@ textarea.form-control.is-invalid {
 
 .update-content {
   padding: 20px;
-  border: 1px solid #888;
+  border: 0px solid #888;
   border-radius: 8px;
 }
 
