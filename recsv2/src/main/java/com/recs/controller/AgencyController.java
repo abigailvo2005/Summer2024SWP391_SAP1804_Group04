@@ -180,7 +180,7 @@ public class AgencyController {
             @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         System.out.println("RealEstateID at controller: " + request.getRealEstateId());
         System.out.println("MemberID at controller: " + request.getMemberId());
-        recsBusinessService.createDeal(request.getRealEstateId(), request.getMemberId(), userInfo.getAgencyId());
+        recsBusinessService.createDeal(request, userInfo.getAgencyId());
         return "redirect:/agency";
     }
 

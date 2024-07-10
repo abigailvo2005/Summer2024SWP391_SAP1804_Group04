@@ -432,7 +432,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                   action="${pageContext.request.contextPath}/agency/assign-deal"
                   method="post"
                 >
-                  <input id="reID" type="hidden" name="realEstateId"/>
+                  <input id="reID" type="hidden" name="realEstateId" />
 
                   <div class="mb-3 row">
                     <div class="col-sm-2"><label>Property Name:</label></div>
@@ -596,6 +596,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
                         </c:forEach>
                       </select>
                     </div>
+
                     <div class="col-sm-4">
                       <input
                         id="form-chosen-member"
@@ -789,9 +790,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         document
           .querySelector("#reID")
           .setAttribute("value", chosenData.realEstateId);
-          console.log("realEstateID" + chosenData.realEstateId);
+        console.log("realEstateID" + chosenData.realEstateId);
         document.querySelector("#form-description").value =
-         chosenData.realEstate.description;
+          chosenData.realEstate.description;
         document
           .querySelector("#form-propertyType")
           .setAttribute("value", chosenData.realEstate.realEstateType);
@@ -942,11 +943,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       }
     </script>
     <!--   Core JS Files   -->
-    <script src="/template/assets/js/core/popper.min.js"></script>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
-    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>

@@ -275,7 +275,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                   </div>
 
                   <!-- drop down chosen real estate to submit buyer to -->
-                  <div class="row mb-3">
+                  <!-- <div class="row mb-3">
                     <div class="col-sm-2">
                       <label>Deal Submitted To:</label>
                     </div>
@@ -305,6 +305,38 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         type="hidden"
                         name="realEstateId"
                         class="form-control form-create-control col-10"
+                      />
+                    </div>
+                  </div> -->
+                  <div class="row mb-3">
+                    <div class="col-sm-2">
+                      <label>Deal Submitted To: </label>
+                    </div>
+                    <div class="col-sm-4">
+                      <input
+                        id="form-chosen-realEstate-Id"
+                        type="hidden"
+                        name="realEstateId"
+                        class="form-control form-create-control col-10"
+                      />
+                      <input
+                        id="form-chosen-deal"
+                        type="hidden"
+                        name="dealId"
+                        class="form-control form-create-control col-10"
+                      />
+                      <input
+                        id="member-id"
+                        type="hidden"
+                        name="memberId"
+                        class="form-control form-create-control col-10"
+                      />
+                      <input
+                        id="form-realEstate-name"
+                        type="text"
+                        name="realEstateName"
+                        class="form-control form-create-control col-10"
+                        disabled
                       />
                     </div>
                   </div>
@@ -550,7 +582,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                               onclick="showFormCreateBuyer();"
                               class="btn btn-dark w-100 my-2 mb-2 btn-validation"
                             >
-                              Create Buyer
+                              Submit New Buyer
                             </button>
                           </div>
                         </div>
@@ -719,8 +751,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
             $("#popup-area").text(data.realEstate.area + " m²");
             $("#popup-price").text(data.realEstate.textPrice + " VND");
             $("#popup-agency").text(data.agency.fullName);
-            //load ReID for controller submission
-            $("form-chosen-realEstate-Id").attr("value", data.realEstate.realEstateId);
+            //load Ids for controller submission
+            $("#form-chosen-realEstate-Id").val(data.realEstate.realEstateId);
+            $("#form-realEstate-name").val(data.realEstate.name);
+            $("#form-chosen-deal").val(data.dealId);
+            $("#memberId").val(data.member.memberId);
+           
+            console.log($("#form-chosen-realEstate-Id").val());
 
             //only show land/house fields according to type
             if (data.realEstate.realEstateType == "Land") {
@@ -840,11 +877,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     </script>
 
     <!--   Core JS Files   -->
-    <script src="/template/assets/js/core/popper.min.js"></script>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
-    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>

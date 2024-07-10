@@ -606,15 +606,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <strong class="text-dark">Bathrooms: </strong>
                           <p id="popup-bath"></p>
                         </li>
-                        <!-- Agency Request - Message to seller -->
-                        <div class="row deal-message">
-                          <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark"
-                              >Member 's Message:</strong
-                            >
-                            <p id="popup-agency-message"></p>
-                          </li>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -678,11 +669,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- END POPUP DEAL -->
 
     <!--   Core JS Files   -->
-    <script src="/template/assets/js/core/popper.min.js"></script>
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
-    <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/template/assets/js/plugins/chartjs.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>
@@ -819,9 +806,6 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-address").text(data.realEstateDTO.address);
               $("#popup-area").text(data.realEstateDTO.area + " m²");
               $("#popup-price").text(data.realEstateDTO.textPrice + " VND");
-              $("#popup-agency-message").html(
-                data.message.replace(/\r\n/g, "<br>")
-              );
 
               $.ajax({
                 url: urlRealEstate + data.realEstateDTO.realEstateId,

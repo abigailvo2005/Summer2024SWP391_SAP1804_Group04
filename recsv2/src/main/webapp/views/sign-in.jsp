@@ -126,7 +126,6 @@
       <!-- END FOOTER-->
 
       <!--   Core JS Files   -->
-      <script src="/template/assets/js/core/popper.min.js"></script>
 
       <script src="/template/assets/js/core/bootstrap.min.js"></script>
 

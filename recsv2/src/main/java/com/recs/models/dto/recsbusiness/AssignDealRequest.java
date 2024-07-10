@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class AssignDealRequest {
     private String memberId;
     private String realEstateId;
+    private String requestId;
 }

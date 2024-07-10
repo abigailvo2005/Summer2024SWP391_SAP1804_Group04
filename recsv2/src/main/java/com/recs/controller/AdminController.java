@@ -53,7 +53,7 @@ public class AdminController {
         List<Account> registerList = accountService.getApprovingAccount()
                 .stream()
                 .filter(row -> row.getAccountId() != userInfo.getAccountId()).toList();;
-        List<Account> allAccounts = accountService.getAllAccount().stream()
+        List<Account> allAccounts = accountService.getAllAccount().stream()  
                 .filter(row -> row.getAccountId() != userInfo.getAccountId()).toList();
         List<RealEstateInfo> allRealEstateInfo = realEstateService.getAllRealEstate();
         String currentPage = "dashboard";
@@ -76,29 +76,6 @@ public class AdminController {
         return "admin/profile-admin";
     }
 
-    @GetMapping({"/property-tracking"})
-    public String propTrackingView(Model model, Authentication authentication){
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "tracking";
-        model.addAttribute("fullName", name);
-        model.addAttribute("currentPage", currentPage);
-        return "admin/property-tracking";
-    }
-
-    @GetMapping({"/history"})
-    public String historyView(Model model, Authentication authentication){
-        List<Account> listAccountActive = accountService.getActiveAccount();
-        List<Account> listAccountDeclined = accountService.getDeclinedAccount();
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "history";
-        model.addAttribute("fullName", name);
-        model.addAttribute("listAccountDeclined", listAccountDeclined);
-        model.addAttribute("listAccountActive", listAccountActive);
-        model.addAttribute("currentPage", currentPage);
-        return "admin/history-admin";
-    }
 
     @GetMapping({"/create-account"})
     public String createAccount(Model model, Authentication authentication){
@@ -117,22 +94,6 @@ public class AdminController {
         model.addAttribute("fullName", name);
         model.addAttribute("currentPage", currentPage);
         return "admin/create-account";
-    }
-
-    @GetMapping("/account/approve")
-    public String approveAccount(@RequestParam(name = "") String id, Model model){
-        Account account = accountService.approveAccount(id);
-        System.out.println("Approved account:"+account);
-        model.addAttribute("msg","Account approved!");
-        return ":/admin";
-    }
-
-    @GetMapping("/account/deny")
-    public String denyAccount(@RequestParam(name = "") String id, Model model){
-        Account account = accountService.denyAccount(id);
-        System.out.println("Denied account:"+account);
-        model.addAttribute("msg","Account denied!");
-        return "redirect:/admin";
     }
 
     @PostMapping("/create-account")
