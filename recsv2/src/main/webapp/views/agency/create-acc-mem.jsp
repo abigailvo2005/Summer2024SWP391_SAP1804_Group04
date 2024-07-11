@@ -20,6 +20,9 @@
 
       <!-- FontAwesome: icons used in website-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+      <!--Alert Custom-->
+      <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css" />
     </head>
 
     <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll();">
@@ -241,15 +244,6 @@
                     <tbody>
                       <c:forEach items="${memberList}" var="member">
                         <tr class="member-row">
-                          <td class="align-middle text-center text-sm">
-                            <div class="d-flex px-2 py-1 justify-content-center">
-                              <div class="d-flex flex-column justify-content-center">
-                                <p class="mb-0 text-sm fw-bold text-dark">
-                                  ${member.account.accountId}
-                                </p>
-                              </div>
-                            </div>
-                          </td>
                           <td>
                             <div class="d-flex justify-content-start">
                               <div class="d-flex flex-column justify-content-start">
@@ -638,8 +632,18 @@
 
             // Waiting Promise to hide all errors then alert to user
             hideErrorsPromise.then(() => {
-              alert("Successfully created new Member!");
-              document.querySelector("form").submit();
+              Swal.fire({
+                title: "Loading...",
+                text: "Please wait while the page is reloading.",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+              });
+              setTimeout(() => {
+                localStorage.setItem("formSubmitted", true);
+                document.querySelector("form").submit();
+              }, 500);
             });
 
           } else {
@@ -647,6 +651,17 @@
             document.querySelector("form").reportValidity();
           }
         }
+
+        window.addEventListener('load', () => {
+          if(localStorage.getItem('formSubmitted') === 'true') {
+            Swal.fire({
+                title: 'Create account member success!',
+                text: 'Successfully created new Member!',
+                icon: 'success'
+            });
+            localStorage.removeItem('formSubmitted');
+          }
+        });
 
         //display elements according to search value
         function searchTable() {
@@ -707,6 +722,7 @@
       <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="../../template/assets/js/general-features.js"></script>
+      <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
     </body>
 
     </html>

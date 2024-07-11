@@ -241,15 +241,6 @@
                     <tbody>
                       <c:forEach items="${listStaff}" var="staff">
                         <tr class="staff-row">
-                          <td class="align-middle text-center text-sm">
-                            <div class="d-flex px-2 py-1 justify-content-center">
-                              <div class="d-flex flex-column justify-content-center">
-                                <p id="staff-id" class="mb-0 text-sm fw-bold text-dark">
-                                  ${staff.accountId}
-                                </p>
-                              </div>
-                            </div>
-                          </td>
                           <td>
                             <div class="d-flex justify-content-start">
                               <div class="d-flex flex-column justify-content-start">

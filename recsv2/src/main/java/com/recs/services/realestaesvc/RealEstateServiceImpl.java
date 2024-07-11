@@ -249,7 +249,9 @@ public class RealEstateServiceImpl implements RealEstateService{
     @Override
     public PaperWorks updatePaperWork(String realEstateID, String url) {
         PaperWorks ppw = paperWorksRepository.getReferenceById(realEstateID);
+        RealEstate realEstate = realEstateRepository.getReferenceById(realEstateID);
         if(ppw != null) {
+            realEstate.setStatus(RealEstateStatus.REVIEWING.getValue());
             ppw.setUrl(url);
             paperWorksRepository.save(ppw);
         }

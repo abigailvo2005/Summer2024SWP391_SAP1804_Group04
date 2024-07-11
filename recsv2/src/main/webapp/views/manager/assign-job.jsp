@@ -34,6 +34,9 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!--Alert Custom-->
+    <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css" />
   </head>
 
   <body class="g-sidenav-show bg-gray-100" onload="makeTableScroll()">
@@ -927,7 +930,7 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
         //check if no staff is chosen
         if (form.value == "") {
-          alert("No staff has been chosen.");
+          Swal.fire("No staff has been chosen.");
           return;
         }
 
@@ -952,5 +955,6 @@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../template/assets/js/general-features.js"></script>
+    <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
   </body>
 </html>
