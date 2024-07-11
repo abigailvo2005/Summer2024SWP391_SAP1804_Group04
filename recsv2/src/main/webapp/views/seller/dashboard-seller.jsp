@@ -1243,7 +1243,7 @@
             error: function (xhr, status, error) {
               const errorMessage = `Error: ${xhr.status} - ${xhr.statusText}`;
               console.error(errorMessage);
-              Swal.fire(errorMessage);
+              alert(errorMessage);
             },
           });
         }
