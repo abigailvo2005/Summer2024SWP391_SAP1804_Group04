@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class HomeController {
@@ -37,16 +39,23 @@ public class HomeController {
 
     @GetMapping("/login/forget")
     public String forgetPasswordView() {
-        return "home";
+        return "search-username";
     }
+
+    @PostMapping("/login/forget")
+    public String forgetPassword(@RequestParam String username) {
+        
+        return "redirect:/login/reset";
+    }
+    
 
     @GetMapping("/login/reset")
     public String resetPasswordView(
-            @RequestParam String token,
+            //@RequestParam String token,
             Model model
     ) {
-        model.addAttribute("token", token);
-        return "home";
+        //model.addAttribute("token", token);
+        return "reset-password";
     }
 
     @PostMapping("/login/reset")
