@@ -1099,7 +1099,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           class="btn btn-danger col-12"
                           onclick="loadId(event, this.value, '#delete-accountId', '#delete-account')"
                         >
-                          Delete
+                          Deactivate
                         </button>
                       </form>
                     </div>
