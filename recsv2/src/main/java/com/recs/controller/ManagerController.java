@@ -113,16 +113,6 @@ public class ManagerController {
         return "redirect:/manager";
     }
 
-    @GetMapping({ "/register-acc-man" })
-    public String registerStaffView(Model model, Authentication authentication) {
-        String name = authentication.getName();
-        Account account = accountService.getByUserName(name);
-        String currentPage = "register";
-        model.addAttribute("fullName", name);
-        model.addAttribute("currentPage", currentPage);
-        return "manager/register-acc-man";
-    }
-
     @GetMapping({ "/history" })
     public String historyView(Model model, @ModelAttribute(name = "LOGIN_USER") UserInfo userInfo) {
         String currentPage = "history";

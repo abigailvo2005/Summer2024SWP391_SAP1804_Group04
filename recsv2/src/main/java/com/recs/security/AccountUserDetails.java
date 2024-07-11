@@ -12,13 +12,18 @@ import java.util.stream.Stream;
 
 public class AccountUserDetails implements UserDetails {
 
+    private static final long serialVersionUID = 268429178315960951L;
+
+
     private String username;
     private String password;
+    private String status;
     private List<GrantedAuthority> authorities;
 
     public AccountUserDetails(Account account) {
         this.username = account.getUsername();
         this.password = account.getAccountPassword();
+        this.status = account.getStatus();
         this.authorities = Stream.of(account.getRoleId())
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -56,6 +61,6 @@ public class AccountUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return "ACTIVE".equalsIgnoreCase(status);
     }
 }
