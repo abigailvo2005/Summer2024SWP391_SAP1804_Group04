@@ -53,8 +53,7 @@ public class HomeController {
 
     @PostMapping("/login/forget")
     public String forgetPassword(@RequestParam String username) {
-        
-        return "redirect:/login/reset";
+        return "redirect:/login/forget";
     }
     
 

@@ -111,6 +111,11 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <th
                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
                           >
+                            Status
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2"
+                          >
                             Gender
                           </th>
                           <th
@@ -165,6 +170,23 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                                     class="mb-0 text-sm fw-bold text-dark"
                                   >
                                     ${user.roleId}
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div
+                                class="d-flex px-2 py-1 justify-content-center"
+                              >
+                                <div
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <p
+                                    id="user-role"
+                                    class="mb-0 text-sm fw-bold text-dark status-color"
+                                    value="${user.status}"
+                                  >
+                                    ${user.status}
                                   </p>
                                 </div>
                               </div>
