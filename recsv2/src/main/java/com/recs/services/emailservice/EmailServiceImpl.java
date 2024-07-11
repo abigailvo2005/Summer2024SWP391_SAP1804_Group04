@@ -29,7 +29,7 @@ public class EmailServiceImpl implements EmailService{
 
     @Override
     public void sendNewAccountEmail(Account account) {
-        String subject = "Recs New Account";
+        String subject = "[RECS-NOTI] New Account";
         String text = "<html>" +
                 "<body>" +
                 "<p>Welcome to Real Estate Connector System</p>" +
@@ -45,9 +45,15 @@ public class EmailServiceImpl implements EmailService{
     }
 
     @Override
-    public void sendForgetPasswordMail(String to, String token) {
-        String resetPath = appUrl + "reset-password?token="+token;
-        
+    public void sendForgetPasswordMail(Account account) {
+        String resetPath = appUrl + "login/reset?token="+account.getResetToken();
+        String text = "</p>" +
+                "<p>You have requested to reset your password.</p>" +
+                "<p>Click the link below to change your password:</p>" +
+                "<p><a href=\"" + resetPath + "\">Change my password</a></p>" +
+                "<p>Ignore this email if you do remember your password, " +
+                "or you have not made the request.</p>";
+        sendEmail(account.getEmail(), "[RECS-NOTI] Reset Account Password", text);
     }
 
     private void sendEmail(String to, String subject, String text) {

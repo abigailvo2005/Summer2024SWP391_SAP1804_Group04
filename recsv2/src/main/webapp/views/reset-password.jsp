@@ -43,7 +43,7 @@
                     <!-- Form to Login -->
                     <div class="card-body">
                       <form role="form" action="${pageContext.request.contextPath}/login/reset" method="post">
-                          <input id="token" name="token" type="text" class="form-control hidden" value="{token}" />
+                          <input id="token" name="token" type="text" class="form-control hidden" value="${token}" />
                         <label>New Password</label>
                         <div class="mb-3 password-container-login">
                           <input id="newPassword" name="newPassword" type="password" class="form-control"
@@ -73,6 +73,9 @@
                           Passwords do not match.
                         </p>
 
+                            <c:if test="${not empty errorMessage}">
+                                <p style="color: red">${errorMessage}</p>
+                            </c:if>
 
                         <!-- sign in button -->
                         <div class="text-center">

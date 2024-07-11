@@ -61,5 +61,6 @@ public class Account {
     @Column(name = "status")
     private String status;
 
-
+    @Column(name = "resetToken")
+    private String resetToken;
 }

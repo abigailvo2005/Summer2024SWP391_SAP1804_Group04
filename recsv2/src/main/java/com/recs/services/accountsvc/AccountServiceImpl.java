@@ -16,11 +16,13 @@ import com.recs.services.emailservice.EmailService;
 import com.recs.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -379,7 +381,8 @@ public class AccountServiceImpl implements AccountService {
                 request.getPhone(),
                 request.getAddress(),
                 request.getIdCard(),
-                "ACTIVE"
+                "ACTIVE",
+                ""
         );
         Account savedAccount = accountRepository.save(newAccount);
         mailRegisterAccount(newAccount, request.getPassword());
@@ -557,5 +560,30 @@ public class AccountServiceImpl implements AccountService {
     public boolean checkPassword(String accountId, String password) {
         Account account = accountRepository.getReferenceById(accountId);
         return encoder.matches(password, account.getAccountPassword());
+    }
+
+    @Override
+    public void forgetPassword(String username) {
+        Optional<Account> optionalAccount = accountRepository.findByUsername(username);
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            String resetToken = UUID.randomUUID().toString();
+            account.setResetToken(resetToken);
+            accountRepository.save(account);
+            emailService.sendForgetPasswordMail(account);
+        } else {
+            throw new UsernameNotFoundException("User with username " + username + " not found");
+        }
+    }
+
+
+    @Override
+    public void resetPassword(String token, String newPassword) {
+        Account account = accountRepository.findByResetToken(token);
+        if(account != null) {
+            account.setAccountPassword(encoder.encode(newPassword));
+            account.setResetToken(null);
+            accountRepository.save(account);
+        } else throw new RuntimeException("Cannot find account by token");
     }
 }

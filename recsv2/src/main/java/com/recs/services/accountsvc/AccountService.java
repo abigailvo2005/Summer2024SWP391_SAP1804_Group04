@@ -106,4 +106,8 @@ public interface AccountService {
     public void updateDescription(String accountId, String description);
 
     public boolean checkPassword(String accountId, String password);
+
+    public void forgetPassword(String username);
+
+    public void resetPassword(String token, String newPassword);
 }

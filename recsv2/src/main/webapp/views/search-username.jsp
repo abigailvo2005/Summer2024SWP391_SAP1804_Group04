@@ -76,7 +76,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           aria-label="Username"
                         />
                       </div>
-
+                    <c:if test="${not empty error}">
+                        <p style="color: red">${error}</p>
+                    </c:if>
 
 
                       <!-- sign in button -->
@@ -90,7 +92,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         >
                           Send
                         </button>
-                        
+                        <c:if test="${not empty message}">
+                            <p style="color: green">${message}</p>
+                        </c:if>
                       </div>
                     </form>
                   </div>

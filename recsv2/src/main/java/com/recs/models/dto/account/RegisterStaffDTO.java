@@ -32,7 +32,8 @@ public class RegisterStaffDTO {
                 phone,
                 address,
                 idCard,
-                "ACTIVE"
+                "ACTIVE",
+                ""
                 );
     }
 
