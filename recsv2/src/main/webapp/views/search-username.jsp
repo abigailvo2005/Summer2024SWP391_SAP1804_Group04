@@ -55,7 +55,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     >
                       Send Username
                     </h3>
-                    <p class="mb-0">Enter username to get confirmation message by emai</p>
+                    <p class="mb-0">Enter username to get confirmation message by email</p>
                   </div>
 
                   <!-- Form to Login -->
