@@ -53,19 +53,19 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       class="font-weight-bolder text-info text-gradient"
                       style="margin-top: -1rem"
                     >
-                      Welcome back
+                      Send Username
                     </h3>
-                    <p class="mb-0">Enter your email and password to sign in</p>
+                    <p class="mb-0">Enter username to get confirmation message by emai</p>
                   </div>
 
                   <!-- Form to Login -->
                   <div class="card-body">
                     <form
                       role="form"
-                      action="${pageContext.request.contextPath}/login"
+                      action="${pageContext.request.contextPath}/login/forget"
                       method="post"
                     >
-                      <label>Username</label>
+                      <label>USERNAME</label>
                       <div class="mb-3">
                         <input
                           id="username"
@@ -76,67 +76,24 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           aria-label="Username"
                         />
                       </div>
-                      <label>Password</label>
-                      <div class="mb-3 password-container-login">
-                        <input
-                          id="password"
-                          name="password"
-                          type="password"
-                          class="form-control"
-                          placeholder="Password"
-                          aria-label="Password"
-                        />
-                        <button
-                          type="button"
-                          class="toggle-password"
-                          data-toggle="#password"
-                        >
-                          <label>Show</label>
-                        </button>
-                      </div>
-                      <c:if test="${not empty param.error}">
-                        <p style="color: red">Invalid username or password.</p>
-                      </c:if>
+
+
 
                       <!-- sign in button -->
                       <div class="text-center">
+                        <a href="${pageContext.request.contextPath}/login" class="btn bg-light w-30 mt-4 mb-0">
+                            Cancel
+                        </a>
                         <button
                           type="submit"
-                          class="btn bg-gradient-info w-100 mt-4 mb-0"
+                          class="btn bg-gradient-info w-30 mt-4 mb-0"
                         >
-                          Sign in
+                          Send
                         </button>
+                        
                       </div>
                     </form>
                   </div>
-
-                  <!-- Reset password: optional - only add this function if have time -->
-                  <div class="text-center pt-0 px-lg-2 px-1">
-                    <p class="mb-4 text-sm mx-auto">
-                      Don't remember your password?
-                      <a
-                        href="${pageContext.request.contextPath}/login/forget"
-                        class="text-info text-gradient font-weight-bold"
-                        >Reset Password</a
-                      >
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- right side image -->
-              <div class="col-md-6">
-                <div
-                  class="oblique position-absolute top-0 h-100 d-md-block d-none me-n12"
-                >
-                  <div
-                    class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n8"
-                    style="
-                      background-image: url(/template/assets/img/curved-images/login-background.jpeg);
-                      background-position: center;
-                      width: 50%;
-                    "
-                  ></div>
                 </div>
               </div>
             </div>
@@ -188,29 +145,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <script src="/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
-      function togglePassword(inputId) {
-        var input = document.querySelector(inputId);
-        if (input.type === "password") {
-          input.type = "text";
-        } else {
-          input.type = "password";
-        }
-      }
-
-      // Add event listeners to toggle password buttons
-      document.querySelectorAll(".toggle-password").forEach(function (button) {
-        var isShowing = false;
-        button.addEventListener("click", function () {
-          var toggleTarget = button.getAttribute("data-toggle");
-          togglePassword(toggleTarget);
-          if (isShowing) {
-            button.innerHTML = "<label>Show</label>";
-          } else {
-            button.innerHTML = "<label>Hide</label>";
-          }
-          isShowing = !isShowing;
-        });
-      });
+      
     </script>
   </body>
 </html>
