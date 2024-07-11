@@ -94,8 +94,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           <label>Show</label>
                         </button>
                       </div>
-                      <c:if test="${not empty param.error}">
-                        <p style="color: red">Invalid username or password.</p>
+                      <c:if test="${not empty errorMessage}">
+                          <p style="color: red">${errorMessage}</p>
                       </c:if>
 
                       <!-- sign in button -->

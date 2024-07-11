@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,18 +36,6 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService(){
-//        UserDetails admin = User.withUsername("admin")
-//                .password(passwordEncoder.encode("admin"))
-//                .roles("ADMIN")
-//                .build();
-//        UserDetails manager = User.withUsername("manager")
-//                .password(passwordEncoder.encode("manager"))
-//                .roles("MANAGER")
-//                .build();
-//        UserDetails seller = User.withUsername("seller")
-//                .password(passwordEncoder.encode("seller"))
-//                .roles("SELLER")
-//                .build();
         return new UserInfoDetailsService();
     }
 
@@ -112,7 +102,16 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationFailureHandler customAuthenticationFailureHandler() {
-        return (request, response, exception) -> response.sendRedirect("/login?error=true");
+        return (request, response, exception) -> {
+            String errorMessage = "Invalid username or password";
+            if (exception instanceof DisabledException) {
+                errorMessage = "Your account has been disabled";
+            } else if (exception instanceof BadCredentialsException) {
+                errorMessage = "Invalid username or password";
+            }
+            request.getSession().setAttribute("LOGIN_ERROR_MESSAGE", errorMessage);
+            response.sendRedirect("/login?error=true");
+        };
     }
 
     @Bean

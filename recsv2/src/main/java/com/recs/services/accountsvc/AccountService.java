@@ -25,6 +25,8 @@ public interface AccountService {
 
     public boolean deleteAccount(String accountId);
 
+    public void updateStatus(String accountId, String status);
+
     public Account getByUserName(String username);
 
     public List<Account> getApprovingAccount();

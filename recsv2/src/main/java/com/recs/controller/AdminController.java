@@ -220,7 +220,7 @@ public class AdminController {
             @RequestParam String accountId
     ) {
         System.out.println("Account Id: " + accountId);
-        accountService.deleteAccount(accountId);
+        accountService.updateStatus(accountId, "DISABLE");
         return  "redirect:/admin";
     }
 }

@@ -141,6 +141,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void updateStatus(String accountId, String status) {
+        Account account = accountRepository.getReferenceById(accountId);
+        if (account != null) {
+            account.setStatus(status);
+            accountRepository.save(account);
+        }
+
+    }
+
+    @Override
     public Account getByUserName(String username) {
         return accountRepository.getByUsername(username);
     }

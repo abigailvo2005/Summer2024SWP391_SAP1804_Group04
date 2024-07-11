@@ -1,5 +1,6 @@
 package com.recs.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,7 +34,15 @@ public class HomeController {
     }
     
     @GetMapping(value = "/login")
-    public String SignInView(){
+    public String login(
+            @RequestParam(value = "error", required = false) String error,
+            HttpServletRequest request,
+            Model model) {
+        if (error != null) {
+            String errorMessage = (String) request.getSession().getAttribute("LOGIN_ERROR_MESSAGE");
+            model.addAttribute("errorMessage", errorMessage);
+            request.getSession().removeAttribute("LOGIN_ERROR_MESSAGE");
+        }
         return "sign-in";
     }
 
