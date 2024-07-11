@@ -218,9 +218,6 @@
                   <table class="register-req-table table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7 col-1">
-                          ID
-                        </th>
                         <th class="text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2 col-3">
                           FULL NAME
                         </th>
