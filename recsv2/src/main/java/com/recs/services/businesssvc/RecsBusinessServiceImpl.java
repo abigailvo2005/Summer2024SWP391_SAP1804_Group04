@@ -456,6 +456,14 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     }
 
     @Override
+    public void cancelJob(String jobId) {
+        AssignJobStaff job = jobAssignStaffRepository.getReferenceById(jobId);
+        job.setStatus(JobStatus.CANCELLED.getValue());
+        realEstateService.updateStatusNoNote(job.getRealEstateId(), RealEstateStatus.REVIEWING);
+        jobAssignStaffRepository.save(job);
+    }
+
+    @Override
     public void cancelDeal(String dealId) {
         DealAssignMember deal = dealAssignMemberRepository.getReferenceById(dealId);
         deal.setStatus(DealAssignMemberStatus.CANCELLED.getValue());

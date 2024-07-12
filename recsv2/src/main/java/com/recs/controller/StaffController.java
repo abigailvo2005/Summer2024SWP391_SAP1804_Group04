@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @PreAuthorize("hasRole('ROLE_STAFF')")
@@ -63,10 +65,17 @@ public class StaffController {
         return "staff/dashboard-staff";
     }
 
+    @PostMapping("/job/cancel")
+    public String cancelJob(@RequestParam String jobId) {
+        recsBusinessService.cancelJob(jobId);
+        return "redirect:/staff/dashboard";
+    }
+    
+
     @PostMapping("/validate-property")
     public String validate(@ModelAttribute(name = "request") UpdateJobStatusDTO request) {
         recsBusinessService.updateStatus(request);
-        return "redirect:/staff";
+        return "redirect:/staff/history";
     }
 
     @GetMapping({ "/history" })

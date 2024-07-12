@@ -2,6 +2,7 @@ package com.recs.models.enums;
 
 public enum JobStatus {
     UNKNOWN(""),
+    CANCELLED("Cancelled"),
     ASSIGNED("Assigned"),
     SUCCESSFUL("Successful"),
     FAIL("Fail");

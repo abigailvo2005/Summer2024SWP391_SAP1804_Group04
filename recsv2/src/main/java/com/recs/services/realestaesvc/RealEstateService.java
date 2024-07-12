@@ -36,6 +36,8 @@ public interface RealEstateService {
 
     public RealEstate updateStatus(String realEstateId, RealEstateStatus status, String noteMsg);
 
+    public RealEstate updateStatusNoNote(String realEstateId, RealEstateStatus status);
+
     public PaperWorks updatePaperWork(String realEstateID, String url);
 
     public List<RealEstateInfo> getAllByStatus(String status);

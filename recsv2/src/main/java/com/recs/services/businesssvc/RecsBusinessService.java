@@ -85,5 +85,7 @@ public interface RecsBusinessService {
 
     public void cancelDeal(String dealId);
 
+    public void cancelJob(String jobId);
+
     public void dropAgencyRequest(String requestId);
 }
