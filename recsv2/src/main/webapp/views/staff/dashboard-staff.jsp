@@ -426,7 +426,7 @@
               $("#popup-type").text(data.realEstateInfo.realEstateType);
               $("#popup-address").text(data.realEstateInfo.address);
               $("#popup-area").text(data.realEstateInfo.area + " m²");
-              $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
+              $("#popup-price").text(data.realEstateInfo.textPrice + " $");
 
               //update chosen Job ID according to the chosen one
               document

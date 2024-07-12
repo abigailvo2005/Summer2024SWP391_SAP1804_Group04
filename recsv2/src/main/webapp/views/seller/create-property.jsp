@@ -171,7 +171,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           required
                         />
                       </div>
-                      <div class="col-sm-1"><label>VND</label></div>
+                      <div class="col-sm-1"><label>$</label></div>
                     </div>
 
                     <!-- To upload images for Property -->

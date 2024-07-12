@@ -301,7 +301,7 @@
               $("#popup-type").text(data.realEstateType);
               $("#popup-address").text(data.address);
               $("#popup-area").text(data.area + " m²");
-              $("#popup-price").text(data.textPrice + " VND");
+              $("#popup-price").text(data.textPrice + " $");
 
               //only show land/house fields according to type
               if (data.realEstateType == "Land") {

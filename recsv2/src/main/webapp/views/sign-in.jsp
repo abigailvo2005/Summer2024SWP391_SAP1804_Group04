@@ -107,6 +107,13 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                           Sign in
                         </button>
                       </div>
+                      <c:if test="${not empty message}">   
+                            <p class="suscessMessage">${message}</p>
+                        </c:if>
+
+                        <c:if test="${not empty messageReset}">   
+                            <p class="suscessMessage">${messageReset}</p>
+                        </c:if>
                     </form>
                   </div>
 

@@ -622,7 +622,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             $("#popup-type").text(data.realEstate.realEstateType);
             $("#popup-address").text(data.realEstate.address);
             $("#popup-area").text(data.realEstate.area + " m²");
-            $("#popup-price").text(data.realEstate.textPrice + " VND");
+            $("#popup-price").text(data.realEstate.textPrice + " $");
             $("#popup-agency").text(data.agency.fullName);
             //load ReID for controller submission
             $("form-chosen-realEstate-Id").attr("value", data.realEstate.realEstateId);
@@ -718,7 +718,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                 $("#popup-type").text(data.realEstateDTO.realEstateType);
                 $("#popup-address").text(data.realEstateDTO.address);
                 $("#popup-area").text(data.realEstateDTO.area + " m²");
-                $("#popup-price").text(data.realEstateDTO.textPrice + " VND");
+                $("#popup-price").text(data.realEstateDTO.textPrice + " $");
                 $("#popup-agency-message").html(data.message.replace(/\r\n/g, "<br>"));
                 // //only show land/house fields according to type
                 // if (data.realEstateDTO.realEstateType == "Land") {

@@ -451,7 +451,7 @@
                 $("#popup-type").text(data.realEstate.realEstateType);
                 $("#popup-address").text(data.realEstate.address);
                 $("#popup-area").text(data.realEstate.area + " m²");
-                $("#popup-price").text(data.realEstate.textPrice + " VND");
+                $("#popup-price").text(data.realEstate.textPrice + " $");
                 $("#popup-agency-message").html(data.realEstate.agencyRequests.message);
 
                 //only show land/house fields according to type
@@ -540,7 +540,7 @@
                 $("#popup-type").text(data.realEstate.realEstateType);
                 $("#popup-address").text(data.realEstate.address);
                 $("#popup-area").text(data.realEstate.area + " m²");
-                $("#popup-price").text(data.realEstate.textPrice + " VND");
+                $("#popup-price").text(data.realEstate.textPrice + " $");
                 $("#popup-agency-experience").text(data.agency.yearsOfExperience + " years");
                 $("#popup-agency-completed").text(data.agency.completedProject + " successfully connected properties.");
                 $("#popup-agency-message").html(data.message.replace(/\r\n/g, "<br>"));

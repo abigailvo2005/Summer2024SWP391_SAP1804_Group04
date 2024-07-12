@@ -918,7 +918,7 @@
               $("#popup-type").text(data.realEstateType);
               $("#popup-address").text(data.address);
               $("#popup-area").text(data.area + " m²");
-              $("#popup-price").text(data.textPrice + " VND");
+              $("#popup-price").text(data.textPrice + " $");
 
               console.log(data.status.toLowerCase());
 

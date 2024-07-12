@@ -54,7 +54,7 @@
                                     ${prop.name}
                                   </p>
                                   <h5 class="font-weight-bolder mb-0">
-                                    ${prop.textPrice} VND
+                                    ${prop.textPrice} $
                                     <span class="text-success text-sm font-weight-bolder">/
                                       ${prop.realEstateType}</span>
                                   </h5>
@@ -307,7 +307,7 @@
               $("#popup-type").text(data.realEstateType);
               $("#popup-address").text(data.address);
               $("#popup-area").text(data.area + " m²");
-              $("#popup-price").text(data.textPrice + " VND");
+              $("#popup-price").text(data.textPrice + " $");
 
               //only show land/house fields according to type
               if (data.realEstateType == "Land") {

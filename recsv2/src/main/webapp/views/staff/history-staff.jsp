@@ -616,7 +616,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             $("#popup-type").text(data.realEstateInfo.realEstateType);
             $("#popup-address").text(data.realEstateInfo.address);
             $("#popup-area").text(data.realEstateInfo.area + " m²");
-            $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
+            $("#popup-price").text(data.realEstateInfo.textPrice + " $");
 
 
             //only show land/house fields according to type
