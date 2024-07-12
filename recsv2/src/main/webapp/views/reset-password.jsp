@@ -51,15 +51,15 @@
                           <button type="button" class="toggle-password" data-toggle="#newPassword">
                             <label>Show</label>
                           </button>
-                          <p class="text-danger text-error mb-0 text-center pt-1 error-new-pw hidden">
-                            password must be: <br />
-                            Minimum length of 8 characters.<br />
-                            At least one lowercase letter.<br />
-                            At least one uppercase letter.<br />
-                            At least one digit.<br />
-                            At least one special character from the set: @$!%*?&.
-                          </p>
                         </div>
+                        <p class="text-danger text-error mb-0 text-center pt-1 error-new-pw hidden">
+                          password must be: <br />
+                          Minimum length of 8 characters.<br />
+                          At least one lowercase letter.<br />
+                          At least one uppercase letter.<br />
+                          At least one digit.<br />
+                          At least one special character from the set: @$!%*?&.
+                        </p>
 
                         <label>Confirm Password</label>
                         <div class="mb-3 password-container-login">
@@ -68,10 +68,10 @@
                           <button type="button" class="toggle-password" data-toggle="#confirmPassword">
                             <label>Show</label>
                           </button>
-                          <p class="text-danger text-error mb-0 text-center pt-1 error-confirm-pw hidden">
-                            Passwords do not match.
-                          </p>
                         </div>
+                        <p class="text-danger text-error mb-0 text-center pt-1 error-confirm-pw hidden">
+                          Passwords do not match.
+                        </p>
 
                             <c:if test="${not empty errorMessage}">
                                 <p style="color: red">${errorMessage}</p>

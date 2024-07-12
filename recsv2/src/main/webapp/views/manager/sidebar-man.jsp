@@ -230,13 +230,28 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
     <script>
       document.getElementById('logoutButton').addEventListener('click', function () {
-        var userConfirmation = confirm('Are you sure you want to sign out?');
-        if (userConfirmation) {
-          window.location.href = '${pageContext.request.contextPath}/logout';
-        } else {
-          alert('Logout canceled.');
-        }
-      });
+        Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+              if(result.isConfirmed) {
+                Swal.fire(
+                        'Logged out!',
+                        'You have been logged out successfully.',
+                        'success'
+                ).then(() => {
+                  window.location.href = "${pageContext.request.contextPath}/logout";
+                });
+              } else {
+                Swal.fire("Logout canceled!");
+              }
+            });
+          });
     </script>
   </body>
 </html>

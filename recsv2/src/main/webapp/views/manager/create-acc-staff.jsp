@@ -630,10 +630,18 @@
             // Waiting Promise to hide all errors then alert to user
             hideErrorsPromise.then(() => {
 
-              
-
-              alert("Successfully created a new Staff!");
-              document.querySelector("form").submit();
+              Swal.fire({
+                title: "Loading...",
+                text: "Please wait while the page is reloading.",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+              });
+              setTimeout(() => {
+                localStorage.setItem("formSubmitted", true);
+                document.querySelector("form").submit();
+              }, 500);
             });
 
           } else {
@@ -641,6 +649,18 @@
             document.querySelector("form").reportValidity();
           }
         }
+
+        window.addEventListener('load', () => {
+          if(localStorage.getItem('formSubmitted') === 'true') {
+            Swal.fire({
+                title: 'Create account Staff success!',
+                text: 'Successfully created a new Staff!',
+                icon: 'success'
+            });
+            localStorage.removeItem('formSubmitted');
+          }
+        });
+
 
         //display elements according to search value
         function searchTable() {

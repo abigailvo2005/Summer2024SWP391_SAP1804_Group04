@@ -32,6 +32,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!--Alert Custom-->
+    <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css" />
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -206,17 +209,33 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!--   Core JS Files   -->
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
     <script>
       document
         .getElementById("logoutButton")
         .addEventListener("click", function () {
-          var userConfirmation = confirm("Are you sure you want to sign out?");
-          if (userConfirmation) {
-            window.location.href = "${pageContext.request.contextPath}/logout";
-          } else {
-            alert("Logout canceled.");
-          }
-        });
+          Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+              if(result.isConfirmed) {
+                Swal.fire(
+                        'Logged out!',
+                        'You have been logged out successfully.',
+                        'success'
+                ).then(() => {
+                  window.location.href = "${pageContext.request.contextPath}/logout";
+                });
+              } else {
+                Swal.fire("Logout canceled!");
+              }
+            });
+          });
     </script>
   </body>
 </html>
