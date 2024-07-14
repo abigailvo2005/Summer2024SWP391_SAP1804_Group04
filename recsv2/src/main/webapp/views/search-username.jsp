@@ -58,6 +58,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                     <p class="mb-0">Enter username to get confirmation message by email</p>
                   </div>
 
+                  <div>
+
                   <!-- Form to Login -->
                   <div class="card-body">
                     <form
@@ -92,10 +94,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                         >
                           Send
                         </button>
-                        <c:if test="${not empty message}">
-                            <p style="color: green">${message}</p>
-                        </c:if>
                       </div>
+
                     </form>
                   </div>
                 </div>

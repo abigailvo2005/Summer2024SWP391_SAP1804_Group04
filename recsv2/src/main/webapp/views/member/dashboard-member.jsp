@@ -715,7 +715,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-type").text(data.realEstate.realEstateType);
               $("#popup-address").text(data.realEstate.address);
               $("#popup-area").text(data.realEstate.area + " m²");
-              $("#popup-price").text(data.realEstate.textPrice + " VND");
+              $("#popup-price").text(data.realEstate.textPrice + " $");
               $("#popup-handle").text(data.member.fullName);
 
               //only show land/house fields according to type
@@ -805,7 +805,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
               $("#popup-type").text(data.realEstateDTO.realEstateType);
               $("#popup-address").text(data.realEstateDTO.address);
               $("#popup-area").text(data.realEstateDTO.area + " m²");
-              $("#popup-price").text(data.realEstateDTO.textPrice + " VND");
+              $("#popup-price").text(data.realEstateDTO.textPrice + " $");
 
               $.ajax({
                 url: urlRealEstate + data.realEstateDTO.realEstateId,

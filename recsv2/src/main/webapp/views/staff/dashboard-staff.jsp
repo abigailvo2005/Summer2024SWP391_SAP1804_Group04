@@ -299,6 +299,7 @@
                           </li>
                         </div>
                       </div>
+
                       <!-- Buttons to decide if property is appropriate or not -->
                       <form action="${pageContext.request.contextPath}/staff/validate-property" method="post">
                         <input name="jobId" id="popup-jobID" class="hidden" />
@@ -341,11 +342,24 @@
                             </div>
                           </div>
                         </div>
-                        <div class="row justify-content-center">
+                        <div id="confirmForm" class="row justify-content-center">
                           <div class="col-auto">
                             <button type="submit" onclick="confirmSubmit()"
                               class="btn btn-dark w-100 my-2 mb-2 btn-validation">
                               Confirm
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+
+                      <form id="cancelForm" action="${pageContext.request.contextPath}/staff/job/cancel" method="post">
+                        <input type="hidden" id="jobId-cancel" name="jobId" />
+
+                        <div class="row justify-content-center">
+                          <div class="col-auto">
+                            <button type="submit" onclick="cancelSubmit()"
+                              class="btn btn-danger w-100 my-2 mb-2 btn-canel">
+                              Cancel
                             </button>
                           </div>
                         </div>
@@ -365,7 +379,31 @@
       <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
       <script>
 
+        function cancelSubmit() {
+          var cancelForm = document.getElementById("cancelForm");
+
+          Swal.fire({
+            title: "Cancel Success!",
+            text: "Job Cancel successfully!",
+            icon: "success",
+          }).then(() => {
+            Swal.fire({
+              title: "Loading...",
+              text: "Please wait while the page is reloading.",
+              allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+              }
+            });
+
+            //execute default submit
+            cancelForm.submit();
+          });
+        }
+
         function confirmSubmit() {
+
+          var confirmForm = document.getElementById("confirmForm");
 
           Swal.fire({
             title: "Success Confirm!",
@@ -375,7 +413,7 @@
           }).then((result) => {
             if (result.isConfirmed) {
 
-              document.querySelector("form").submit();
+              confirmForm.submit();
             }
           });
 
@@ -426,11 +464,15 @@
               $("#popup-type").text(data.realEstateInfo.realEstateType);
               $("#popup-address").text(data.realEstateInfo.address);
               $("#popup-area").text(data.realEstateInfo.area + " m²");
-              $("#popup-price").text(data.realEstateInfo.textPrice + " VND");
+              $("#popup-price").text(data.realEstateInfo.textPrice + " $");
 
               //update chosen Job ID according to the chosen one
               document
                 .querySelector("#popup-jobID")
+                .setAttribute("value", data.jobId);
+
+              document
+                .querySelector("#jobId-cancel")
                 .setAttribute("value", data.jobId);
 
               //only show land/house fields according to type

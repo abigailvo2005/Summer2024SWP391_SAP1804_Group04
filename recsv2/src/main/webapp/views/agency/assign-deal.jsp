@@ -336,7 +336,7 @@
                           <input id="form-price" type="text" name="textprice"
                             class="form-control form-create-control col-10" disabled />
                         </div>
-                        <div class="col-sm-1"><label>VND</label></div>
+                        <div class="col-sm-1"><label>$</label></div>
                       </div>
                       <div class="mb-3 row">
                         <div class="col-sm-2"><label>Area:</label></div>
@@ -484,7 +484,7 @@
                 $("#popup-type").text(data.realEstate.realEstateType);
                 $("#popup-address").text(data.realEstate.address);
                 $("#popup-area").text(data.realEstate.area + " m²");
-                $("#popup-price").text(data.realEstate.textPrice + " VND");
+                $("#popup-price").text(data.realEstate.textPrice + " $");
 
                 //update chosen data for form filling
                 chosenData = data;

@@ -33,6 +33,9 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!--Alert Custom-->
+    <link rel="stylesheet" type="text/css" href="/template/assets/css/sweetalert2.css" />
   </head>
 
   <body class="g-sidenav-show bg-gray-100">
@@ -202,6 +205,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!--   Core JS Files   -->
     <script src="/template/assets/js/core/bootstrap.min.js"></script>
     <script src="/template/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script type="text/javascript" src="../../template/assets/js/sweetalert2.js"></script>
     <script>
       document
         .getElementById("logoutButton")

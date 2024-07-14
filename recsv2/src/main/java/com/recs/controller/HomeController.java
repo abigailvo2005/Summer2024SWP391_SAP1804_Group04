@@ -67,12 +67,14 @@ public class HomeController {
         } catch (UsernameNotFoundException e) {
             redirectAttributes
                     .addFlashAttribute("error", "Username not found.");
+            return "redirect:/login/forget";
         } catch (Exception e) {
             redirectAttributes
                     .addFlashAttribute("error", "An error occurred while processing your request.");
+            return "redirect:/login/forget";
         }
 
-        return "redirect:/login/forget";
+        return "redirect:/login";
     }
     
 
@@ -89,10 +91,12 @@ public class HomeController {
     public String resetPassword(
             @RequestParam String token,
             @RequestParam String newPassword,
+            RedirectAttributes redirectAttributes,
             Model model
     ) {
         try {
             accountService.resetPassword(token,newPassword);
+            redirectAttributes.addFlashAttribute("messageReset", "Password is reset. Please input username and password to login!");
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Account not found. Make sure you access this via link sent from email.");
             model.addAttribute("token", token);

@@ -586,7 +586,7 @@
               $("#popup-type").text(data.realEstate.realEstateType);
               $("#popup-address").text(data.realEstate.address);
               $("#popup-area").text(data.realEstate.area + " m²");
-              $("#popup-price").text(data.realEstate.textPrice + " VND");
+              $("#popup-price").text(data.realEstate.textPrice + " $");
               $("#popup-agency").text(data.agency.fullName);
               //load Ids for controller submission
               $("#form-chosen-realEstate-Id").val(data.realEstate.realEstateId);

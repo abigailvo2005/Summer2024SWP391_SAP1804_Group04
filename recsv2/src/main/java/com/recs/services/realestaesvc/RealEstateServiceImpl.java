@@ -235,6 +235,17 @@ public class RealEstateServiceImpl implements RealEstateService{
     }
 
     @Override
+    public RealEstate updateStatusNoNote(String realEstateId, RealEstateStatus status) {
+        RealEstate rEstate = realEstateRepository.getReferenceById(realEstateId);
+        if(rEstate!=null) {
+            rEstate.setStatus(status.getValue());
+            rEstate.setUpdateTimestamp(Clock.systemUTC().millis());
+            realEstateRepository.save(rEstate);
+        }
+        return rEstate;
+    }
+
+    @Override
     public RealEstate updateStatus(String realEstateId, RealEstateStatus status, String noteMsg) {
         RealEstate realEstate = realEstateRepository.getReferenceById(realEstateId);
         if(realEstate != null) {

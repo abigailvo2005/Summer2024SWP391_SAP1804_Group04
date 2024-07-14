@@ -198,8 +198,8 @@ async function submitRequest(event) {
       const price = document.getElementById("price").value;
       const areaNumber = parseFloat(area);
       const priceNumber = parseFloat(price);
-      const minPrice = areaNumber * 20000000;
-      const maxPrice = areaNumber * 50000000;
+      const minPrice = areaNumber * 1000;
+      const maxPrice = areaNumber * 2000;
 
       // No errors on start up
       nameError.classList.add("hidden"); // clear all errors first
