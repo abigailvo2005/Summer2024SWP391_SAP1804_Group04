@@ -586,4 +586,10 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.save(account);
         } else throw new RuntimeException("Cannot find account by token");
     }
+
+    @Override
+    public boolean checkExistedMail(String mail) {
+        List<Account> accountsByEmail = accountRepository.getAllByEmail(mail);
+        return !accountsByEmail.isEmpty();
+    }
 }

@@ -12,4 +12,5 @@ public interface AccountRepository extends JpaRepository<Account, String> {
     List<Account> findByStatus(String status);
     List<Account> findByRoleId(String roleId);
     Account findByResetToken(String token);
+    List<Account> getAllByEmail(String email);
 }

@@ -94,4 +94,11 @@ public class ApiController {
     ) {
         return ResponseEntity.ok(Map.of("result", accountService.checkPassword(accountId,password)));
     }
+
+    @PostMapping(value = "/mail/check")
+    public ResponseEntity<Map<String, Boolean>> checkEmail(
+            @RequestParam String email
+    ) {
+        return ResponseEntity.ok(Map.of("isExist", accountService.checkExistedMail(email)));
+    }
 }

@@ -110,4 +110,6 @@ public interface AccountService {
     public void forgetPassword(String username);
 
     public void resetPassword(String token, String newPassword);
+
+    public boolean checkExistedMail(String mail);
 }
