@@ -661,7 +661,7 @@
       <!-- Internal JS -->
       <script>
         //URL REAL ESTATE API
-        const urlRealEstate = "http://localhost:8085/api/real-estate/";
+        const urlRealEstate = "http://recs.site/api/real-estate/";
         var chosenRequest = null;
         var propStatus = null;
         const chosenAgencyStatusHide = [

@@ -109,7 +109,8 @@
                             placeholder="Enter work email" required />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-email hidden">
                             email is not in the correct format. (ie:
-                            example@domain.com)
+                            example@domain.com) or email exist in system
+                            .Please input another email
                           </p>
                         </div>
                       </div>
@@ -651,13 +652,15 @@
           }
         };
 
+        const urlCheckEmail = "https://recs.site/api/mail/check?email=";
+
         function viewDetail(userID) {
           var popup = document.getElementById("popup-user");
           var company = document.querySelector(".company");
 
           // Send GET Request API to retrieve single user information
           $.ajax({
-            url: "http://localhost:8085/api/user/" + userID,
+            url: "http://recs.site/api/user/" + userID,
             type: "GET",
             success: function (data) {
               // Update popup với information chosen User
@@ -830,6 +833,23 @@
               emailError.classList.add("hidden");
             }
 
+            $.ajax({
+              url:
+                urlCheckEmail + emailInput,
+              type: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              success: function (data) {
+                if (data.isExist) {
+                  emailError.classList.remove("hidden");
+                  return;
+                } else {
+                  emailError.classList.add("hidden");
+                }
+              }
+            });
+
             if (
               !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
                 passwordInput.value
@@ -860,7 +880,7 @@
                 text: "Please wait while the page is reloading.",
                 allowOutsideClick: false,
                 didOpen: () => {
-                    Swal.showLoading();
+                  Swal.showLoading();
                 }
               });
               setTimeout(() => {
@@ -875,11 +895,11 @@
         }
 
         window.addEventListener('load', () => {
-          if(localStorage.getItem('formSubmitted') === 'true') {
+          if (localStorage.getItem('formSubmitted') === 'true') {
             Swal.fire({
-                title: 'Create account success!',
-                text: 'Successfully create an account!',
-                icon: 'success'
+              title: 'Create account success!',
+              text: 'Successfully create an account!',
+              icon: 'success'
             });
             localStorage.removeItem('formSubmitted');
           }

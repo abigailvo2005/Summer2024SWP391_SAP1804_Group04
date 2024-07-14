@@ -107,7 +107,8 @@
                             placeholder="Enter work email" required />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-email hidden">
                             email is not in the correct format. (ie:
-                            example@domain.com)
+                            example@domain.com) or email exist in system
+                            .Please input another email
                           </p>
                         </div>
                       </div>
@@ -463,7 +464,7 @@
 
           // Send GET Request API to retrieve single user information
           $.ajax({
-            url: "http://localhost:8085/api/user/" + userID,
+            url: "http://recs.site/api/user/" + userID,
             type: "GET",
             success: function (data) {
               // Update popup với information chosen User
@@ -554,7 +555,7 @@
             document.querySelector(".error-bday").classList.add("hidden"); //hide errors
           }
         }
-
+        const urlCheckEmail = "https://recs.site/api/mail/check?email=";
         //submit register new staff request to admin
         function submitRegister() {
           event.preventDefault(); //Stop form from default submitting
@@ -601,6 +602,23 @@
             } else {
               emailError.classList.add("hidden");
             }
+
+            $.ajax({
+              url:
+                urlCheckEmail + emailInput,
+              type: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              success: function (data) {
+                if (data.isExist) {
+                  emailError.classList.remove("hidden");
+                  return;
+                } else {
+                  emailError.classList.add("hidden");
+                }
+              }
+            });
 
             if (
               !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(

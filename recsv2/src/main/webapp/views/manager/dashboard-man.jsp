@@ -455,7 +455,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         popup.classList.add("hidden");
       }
       //URL REAL ESTATE API
-      const urlJobValidate = "http://localhost:8085/api/job/validation/";
+      const urlJobValidate = "http://recs.site/api/job/validation/";
 
       function viewDetail(jobID) {
         var popup = document.getElementById("popup-detail");

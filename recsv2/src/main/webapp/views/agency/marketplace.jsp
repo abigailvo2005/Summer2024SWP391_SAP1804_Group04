@@ -288,7 +288,7 @@
       <!-- Internal JS -->
       <script>
         //URL REAL ESTATE API
-        const urlRealEstate = "http://localhost:8085/api/real-estate/";
+        const urlRealEstate = "http://recs.site/api/real-estate/";
 
         /* View Popup detail of each property */
         function viewDetailProperty(propID, action) {
