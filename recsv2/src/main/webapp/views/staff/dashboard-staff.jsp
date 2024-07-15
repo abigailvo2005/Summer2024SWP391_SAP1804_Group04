@@ -359,7 +359,7 @@
                           <div class="col-auto">
                             <button type="submit" onclick="cancelSubmit()"
                               class="btn btn-danger w-100 my-2 mb-2 btn-canel">
-                              Cancel
+                              Return Job
                             </button>
                           </div>
                         </div>
