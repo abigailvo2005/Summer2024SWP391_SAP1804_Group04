@@ -660,7 +660,7 @@
 
           // Send GET Request API to retrieve single user information
           $.ajax({
-            url: "http://recs.site/api/user/" + userID,
+            url: "https://recs.site/api/user/" + userID,
             type: "GET",
             success: function (data) {
               // Update popup với information chosen User

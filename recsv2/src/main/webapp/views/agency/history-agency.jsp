@@ -426,8 +426,8 @@
       <script src="../../template/assets/js/general-features.js"></script>
       <script>
 
-        const urlDeal = "http://recs.site/api/deal/";
-        const urlAgencyRequest = "http://recs.site/api/agency-request/";
+        const urlDeal = "https://recs.site/api/deal/";
+        const urlAgencyRequest = "https://recs.site/api/agency-request/";
 
         function viewDetail(propID, type) {
           var popup = document.querySelector("#popup-property-request");

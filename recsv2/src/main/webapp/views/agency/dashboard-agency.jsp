@@ -653,8 +653,8 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- Internal JS -->
     <script>
       //URL REAL ESTATE API
-      const urlAgencyRequest = "http://recs.site/api/agency-request/";
-      const urlDeal = "http://recs.site/api/deal/";
+      const urlAgencyRequest = "https://recs.site/api/agency-request/";
+      const urlDeal = "https://recs.site/api/deal/";
 
       /* View Popup detail of each property */
       function viewDetail(propID, type) {

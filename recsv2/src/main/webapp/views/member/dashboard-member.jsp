@@ -691,9 +691,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
         }
       };
 
-      const urlDeal = "http://recs.site/api/deal/";
-      const urlBuyerRequest = "http://recs.site/api/buyer-request/";
-      const urlRealEstate = "http://recs.site/api/real-estate/";
+      const urlDeal = "https://recs.site/api/deal/";
+      const urlBuyerRequest = "https://recs.site/api/buyer-request/";
+      const urlRealEstate = "https://recs.site/api/real-estate/";
       function viewDetailProperty(popupid, type) {
         var popup = document.querySelector("#popup-property-request");
         var landSection = document.querySelector(".land-info-section");

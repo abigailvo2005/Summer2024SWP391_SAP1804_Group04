@@ -1335,7 +1335,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
     <!-- end: core js files -->
 
     <script type="text/javascript">
-      const urlRealEstate = "http://recs.site/api/real-estate/";
+      const urlRealEstate = "https://recs.site/api/real-estate/";
 
       function viewDetailProperty(propID) {
         var popup = document.querySelector("#popup-property-request");
@@ -1464,7 +1464,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
         // Send GET Request API to retrieve single user information
         $.ajax({
-          url: "http://recs.site/api/user/" + userID,
+          url: "https://recs.site/api/user/" + userID,
           type: "GET",
           success: function (data) {
             // Update popup với information chosen User

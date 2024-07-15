@@ -420,7 +420,7 @@
         }
 
         //URL REAL ESTATE API
-        const urlJobValidation = "http://recs.site/api/job/validation/";
+        const urlJobValidation = "https://recs.site/api/job/validation/";
 
         /* Display validation status note according to chosen option */
         function showNote() {

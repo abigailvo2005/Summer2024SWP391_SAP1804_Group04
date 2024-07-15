@@ -565,7 +565,7 @@
         }
 
         //URL DEAL API
-        const urlDeal = "http://recs.site/api/deal/";
+        const urlDeal = "https://recs.site/api/deal/";
 
         /* View Popup detail of each property */
         function viewDetailProperty(dealId) {

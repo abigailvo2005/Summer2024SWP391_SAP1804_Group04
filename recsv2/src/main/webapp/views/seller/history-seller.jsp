@@ -282,7 +282,7 @@
       <script src="../../template/assets/js/general-features.js"></script>
       <script>
         //URL REAL ESTATE API
-        const urlRealEstate = "http://recs.site/api/real-estate/";
+        const urlRealEstate = "https://recs.site/api/real-estate/";
         /* View Popup detail of each property */
         function viewDetail(propID, type) {
           var popup = document.querySelector("#popup-property-request");

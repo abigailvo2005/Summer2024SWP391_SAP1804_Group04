@@ -594,9 +594,9 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
       }
 
       //URL DEAL API
-      const urlDeal = "http://recs.site/api/deal/";
+      const urlDeal = "https://recs.site/api/deal/";
 
-      const urlBuyerRequest = "http://recs.site/api/buyer-request/";
+      const urlBuyerRequest = "https://recs.site/api/buyer-request/";
 
 
       /* View Popup detail of each property */

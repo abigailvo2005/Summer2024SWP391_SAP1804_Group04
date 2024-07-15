@@ -475,7 +475,7 @@
 
         <script>
           //URL REAL ESTATE API
-          const urlRealEstate = "http://recs.site/api/real-estate/";
+          const urlRealEstate = "https://recs.site/api/real-estate/";
           var chosenData = null;
 
           //to show detail register request popup

@@ -462,7 +462,7 @@
         </main>
 
         <script>
-          const urlAgencyRequest = "http://recs.site/api/agency-request/";
+          const urlAgencyRequest = "https://recs.site/api/agency-request/";
           var chosenData = null;
 
           /* View Popup detail of each property */

@@ -408,7 +408,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
     <script>
       //URL REAL ESTATE API
-      const urlUser = "http://recs.site/api/user/";
+      const urlUser = "https://recs.site/api/user/";
       const urlCheckPassword =
         "https://recs.site/api/password/check?accountId=";
 

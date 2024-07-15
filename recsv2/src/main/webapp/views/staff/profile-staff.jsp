@@ -273,7 +273,7 @@
       <script src="../../template/assets/js/sweetalert2.js"></script>
       <script>
         //URL REAL ESTATE API
-        const urlUser = "http://recs.site/api/user/";
+        const urlUser = "https://recs.site/api/user/";
         const urlCheckPassword = "https://recs.site/api/password/check?accountId=";
 
         var overlay = document.getElementById("overlay");
