@@ -467,6 +467,7 @@ public class RecsBusinessServiceImpl implements RecsBusinessService{
     public void cancelDeal(String dealId) {
         DealAssignMember deal = dealAssignMemberRepository.getReferenceById(dealId);
         deal.setStatus(DealAssignMemberStatus.CANCELLED.getValue());
+        realEstateService.updateStatusNoNote(deal.getRealEstate().getRealEstateId(), RealEstateStatus.HANDLED);
         AgencyRequest agencyRequest = agencyRequestRepository.getByAgencyAgencyIdAndRealEstateRealEstateId(
                 deal.getAgency().getAgencyId(),
                 deal.getRealEstate().getRealEstateId()

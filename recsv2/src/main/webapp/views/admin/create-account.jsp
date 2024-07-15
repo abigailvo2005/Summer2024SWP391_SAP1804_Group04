@@ -83,8 +83,8 @@
                             <option value="" disabled selected>
                               Select biological gender
                             </option>
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                           </select>
                         </div>
                       </div>
@@ -652,8 +652,6 @@
           }
         };
 
-        const urlCheckEmail = "https://recs.site/api/mail/check?email=";
-
         function viewDetail(userID) {
           var popup = document.getElementById("popup-user");
           var company = document.querySelector(".company");
@@ -785,6 +783,7 @@
         function validateDateOfBirth(value) {
           const birthDate = new Date(value);
           const currentDate = new Date();
+          const birthdayInput = document.querySelector("#birthday");
 
           if (birthDate.getTime() >= currentDate.getTime()) {
             document.querySelector(".error-bday").classList.remove("hidden"); //show errors
@@ -793,6 +792,8 @@
             document.querySelector(".error-bday").classList.add("hidden"); //hide errors
           }
         }
+
+        const urlCheckEmail = "https://recs.site/api/mail/check?email=";
 
         //create an account
         function createAccount() {
@@ -833,21 +834,31 @@
               emailError.classList.add("hidden");
             }
 
-            $.ajax({
-              url:
-                urlCheckEmail + emailInput,
-              type: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              success: function (data) {
-                if (data.isExist) {
-                  emailError.classList.remove("hidden");
-                  return;
-                } else {
-                  emailError.classList.add("hidden");
-                }
-              }
+            const emailvalue = $("#email").val();
+            const checkEmailExistence = new Promise((resolve, reject) => {
+              $.ajax({
+                url:
+                  urlCheckEmail + emailvalue,
+                type: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                success: function (data) {
+                  if (data.isExist) {
+                    console.log("exist email" + data.isExist);
+                    emailError.classList.remove("hidden");
+                    reject(new Error("Email already exists"));
+                  } else {
+                    emailError.classList.add("hidden");
+                    resolve();
+                  }
+                },
+                error: function (xhr, status, error) {
+                  // The request failed, handle the error
+                  console.error("Error checkin email:", error);
+                  reject(new Error("Error checking email"));
+                },
+              });
             });
 
             if (
@@ -867,14 +878,8 @@
             emailError.classList.add("hidden");
             pwError.classList.add("hidden");
 
-            // Create a Promise to wair for all errors to be hidden
-            const hideErrorsPromise = new Promise((resolve) => {
-              // Wait 500ms to make sure all errors are hidden
-              setTimeout(resolve, 500);
-            });
-
             // Waiting Promise to hide all errors then alert to user
-            hideErrorsPromise.then(() => {
+            checkEmailExistence.then(() => {
               Swal.fire({
                 title: "Loading...",
                 text: "Please wait while the page is reloading.",

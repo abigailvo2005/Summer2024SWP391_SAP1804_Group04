@@ -795,6 +795,12 @@
               confirmButtonText: 'OK'
             });
           } else {
+            Swal.fire({
+              title: 'Successfull!',
+              text: 'Confirm agency success!',
+              icon: 'successs',
+              confirmButtonText: 'OK'
+            });
             document.querySelector("#agency-form").submit();
           }
         }
@@ -844,6 +850,12 @@
               confirmButtonText: 'OK'
             });
           } else {
+            Swal.fire({
+              title: 'Successfull!',
+              text: 'Confirm buyer success!',
+              icon: 'successs',
+              confirmButtonText: 'OK'
+            });
             document.querySelector("#buyer-form").submit();
           }
         }
