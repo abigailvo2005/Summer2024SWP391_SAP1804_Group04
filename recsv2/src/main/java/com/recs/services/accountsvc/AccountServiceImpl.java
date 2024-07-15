@@ -58,8 +58,7 @@ public class AccountServiceImpl implements AccountService {
             MemberRepository memberRepository,
             PasswordEncoder passwordEncoder,
             AccountUtils accountUtils,
-            EmailService emailService
-    ) {
+            EmailService emailService) {
         this.accountRepository = accountRepository;
         this.sellerRepository = sellerRepository;
         this.managerRepository = managerRepository;
@@ -104,7 +103,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean deleteAccount(String accountId) {
         Account deleteAccount = accountRepository.getReferenceById(accountId);
-        if(deleteAccount != null & deleteAccount.getRoleId() != null) {
+        if (deleteAccount != null & deleteAccount.getRoleId() != null) {
             switch (deleteAccount.getRoleId()) {
                 case "ROLE_SELLER":
                     Seller seller = sellerRepository.findByAccountId(Integer.parseInt(accountId));
@@ -178,7 +177,7 @@ public class AccountServiceImpl implements AccountService {
         System.out.println("ACTIVE LIST " + list.size());
         return list;
     }
-    
+
     @Override
     public List<Account> getApprovingAccount() {
         List<Account> list = accountRepository.findByStatus("APPROVING")
@@ -288,10 +287,11 @@ public class AccountServiceImpl implements AccountService {
         List<Agency> agencies = agencyRepository.findAll();
 
         return agencies.stream().map(agency -> {
-            Account account = accountRepository.findById(String.valueOf(agency.getAccount().getAccountId())).orElse(null);
+            Account account = accountRepository.findById(String.valueOf(agency.getAccount().getAccountId()))
+                    .orElse(null);
             return UserInfo.fromAgency(account, agency);
         })
-        .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -301,8 +301,8 @@ public class AccountServiceImpl implements AccountService {
         return sellers.stream().map(seller -> {
             Account account = accountRepository.findById(String.valueOf(seller.getAccountId())).orElse(null);
             return UserInfo.fromSeller(account, seller);
-            })
-            .collect(Collectors.toList());
+        })
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -310,9 +310,9 @@ public class AccountServiceImpl implements AccountService {
         List<Manager> managers = managerRepository.findAll();
 
         return managers.stream().map(manager -> {
-                Account account = accountRepository.findById(String.valueOf(manager.getAccountId())).orElse(null);
-                return UserInfo.fromManager(account, manager);
-                })
+            Account account = accountRepository.findById(String.valueOf(manager.getAccountId())).orElse(null);
+            return UserInfo.fromManager(account, manager);
+        })
                 .collect(Collectors.toList());
     }
 
@@ -382,8 +382,7 @@ public class AccountServiceImpl implements AccountService {
                 request.getAddress(),
                 request.getIdCard(),
                 "ACTIVE",
-                ""
-        );
+                "");
         Account savedAccount = accountRepository.save(newAccount);
         mailRegisterAccount(newAccount, request.getPassword());
         switch (savedAccount.getRoleId()) {
@@ -391,16 +390,14 @@ public class AccountServiceImpl implements AccountService {
                 Seller newSeller = new Seller(
                         UUID.randomUUID().toString(),
                         savedAccount.getAccountId(),
-                        request.getCompanySeller()
-                );
+                        request.getCompanySeller());
                 sellerRepository.save(newSeller);
             }
             case "ROLE_MANAGER" -> {
                 Manager newManager = new Manager(
                         UUID.randomUUID().toString(),
                         savedAccount.getAccountId(),
-                        request.getYearsOfExperienceMan() != 0 ? request.getYearsOfExperienceMan() : 0
-                );
+                        request.getYearsOfExperienceMan() != 0 ? request.getYearsOfExperienceMan() : 0);
                 managerRepository.save(newManager);
             }
             case "ROLE_AGENCY" -> {
@@ -411,8 +408,7 @@ public class AccountServiceImpl implements AccountService {
                         request.getCompletedProject() != 0 ? request.getCompletedProject() : 0,
                         request.getDescription(),
                         savedAccount,
-                        List.of()
-                );
+                        List.of());
                 agencyRepository.save(newAgency);
             }
         }
@@ -428,8 +424,7 @@ public class AccountServiceImpl implements AccountService {
                 UUID.randomUUID().toString(),
                 savedAccount.getAccountId(),
                 managerId,
-                0
-        );
+                0);
         mailRegisterAccount(newAccount, request.getPassword());
         staffRepository.save(newStaff);
     }
@@ -443,8 +438,7 @@ public class AccountServiceImpl implements AccountService {
         Member newMember = new Member(
                 UUID.randomUUID().toString(),
                 agencyRepository.getReferenceById(agencyId),
-                savedAccount
-        );
+                savedAccount);
         mailRegisterAccount(newAccount, request.getPassword());
         memberRepository.save(newMember);
     }
@@ -542,7 +536,7 @@ public class AccountServiceImpl implements AccountService {
         agencyRepository.save(agency);
     }
 
-    @Override 
+    @Override
     public void updateCompanyAgency(String accountId, String company) {
         Agency agency = agencyRepository.findByAccountAccountId(Integer.valueOf(accountId));
         agency.setCompany(company);
@@ -576,14 +570,20 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-
     @Override
     public void resetPassword(String token, String newPassword) {
         Account account = accountRepository.findByResetToken(token);
-        if(account != null) {
+        if (account != null) {
             account.setAccountPassword(encoder.encode(newPassword));
             account.setResetToken(null);
             accountRepository.save(account);
-        } else throw new RuntimeException("Cannot find account by token");
+        } else
+            throw new RuntimeException("Cannot find account by token");
+    }
+
+    @Override
+    public boolean checkExistedMail(String mail) {
+        List<Account> accountsByEmail = accountRepository.getAllByEmail(mail);
+        return !accountsByEmail.isEmpty();
     }
 }

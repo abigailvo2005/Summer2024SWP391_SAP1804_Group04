@@ -210,7 +210,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
                   <h6>Closed Deals Assignment</h6>
                   <p class="text-sm mb-0">
                     <i class="fa-regular fa-comment-dots"></i>
-                    <span class="font-weight-bold ms-1">${listDeal.size()} Closed(s)</span>
+                    <span class="font-weight-bold ms-1">${listDeal.size()} Closed Deal(s)</span>
                     in total
                   </p>
                 </div>

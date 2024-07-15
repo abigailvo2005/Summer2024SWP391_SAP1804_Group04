@@ -65,7 +65,7 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
                       action="${pageContext.request.contextPath}/login"
                       method="post"
                     >
-                      <label>Username</label>
+                      <label>Username/Email</label>
                       <div class="mb-3">
                         <input
                           id="username"

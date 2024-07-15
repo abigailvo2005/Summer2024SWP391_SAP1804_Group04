@@ -37,8 +37,7 @@ public class ApiController {
     public ApiController(
             AccountService accountService,
             RealEstateService realEstateService,
-            RecsBusinessService recsBusinessService
-            ) {
+            RecsBusinessService recsBusinessService) {
         this.accountService = accountService;
         this.realEstateService = realEstateService;
         this.recsBusinessService = recsBusinessService;
@@ -90,8 +89,13 @@ public class ApiController {
     @PostMapping(value = "password/check", produces = "application/json")
     public ResponseEntity<Map<String, Boolean>> checkPassword(
             @RequestParam String accountId,
-            @RequestParam String password
-    ) {
-        return ResponseEntity.ok(Map.of("result", accountService.checkPassword(accountId,password)));
+            @RequestParam String password) {
+        return ResponseEntity.ok(Map.of("result", accountService.checkPassword(accountId, password)));
+    }
+
+    @PostMapping(value = "/mail/check")
+    public ResponseEntity<Map<String, Boolean>> checkEmail(
+            @RequestParam String email) {
+        return ResponseEntity.ok(Map.of("isExist", accountService.checkExistedMail(email)));
     }
 }
