@@ -800,8 +800,11 @@
               text: 'Confirm agency success!',
               icon: 'successs',
               confirmButtonText: 'OK'
+            }).then((result) => {
+              if(result.isConfirmed) {
+                document.querySelector("#agency-form").submit();
+              }
             });
-            document.querySelector("#agency-form").submit();
           }
         }
 
@@ -855,8 +858,11 @@
               text: 'Confirm buyer success!',
               icon: 'successs',
               confirmButtonText: 'OK'
+            }).then((result) => {
+              if(result.isConfirmed) {
+                document.querySelector("#buyer-form").submit();
+              }
             });
-            document.querySelector("#buyer-form").submit();
           }
         }
 
