@@ -405,9 +405,9 @@ pageEncoding="UTF-8" %> <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
     <script>
       //URL REAL ESTATE API
-      const urlUser = "http://localhost:8085/api/user/";
+      const urlUser = "https://recs.site/api/user/";
       const urlCheckPassword =
-        "http://localhost:8085/api/password/check?accountId=";
+        "https://recs.site/api/password/check?accountId=";
 
       var overlay = document.getElementById("overlay");
       var phoneModal = document.getElementById("phoneModal");

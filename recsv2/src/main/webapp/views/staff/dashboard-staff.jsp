@@ -359,7 +359,7 @@
                           <div class="col-auto">
                             <button type="submit" onclick="cancelSubmit()"
                               class="btn btn-danger w-100 my-2 mb-2 btn-canel">
-                              Cancel
+                              Return Job
                             </button>
                           </div>
                         </div>
@@ -420,7 +420,7 @@
         }
 
         //URL REAL ESTATE API
-        const urlJobValidation = "http://localhost:8085/api/job/validation/";
+        const urlJobValidation = "https://recs.site/api/job/validation/";
 
         /* Display validation status note according to chosen option */
         function showNote() {

@@ -166,18 +166,6 @@
                       <ul class="list-group">
                         <div class="container-fluid">
                           <div class="row">
-                            <div class="validation-only col-6 px-0">
-                              <li class="list-group-item border-0 ps-0 text-sm d-flex">
-                                <strong class="text-dark">Owner:</strong>
-                                <p id="owner"></p>
-                              </li>
-                            </div>
-
-                            <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
-                              <strong class="text-dark">Created on:</strong>
-                              <p id="popup-dateCreated"></p>
-                            </li>
-                          </div>
                           <div class="row">
                             <li class="list-group-item border-0 ps-0 text-sm col-6 d-flex">
                               <strong class="text-dark">Address:</strong>
@@ -462,7 +450,7 @@
         </main>
 
         <script>
-          const urlAgencyRequest = "http://localhost:8085/api/agency-request/";
+          const urlAgencyRequest = "https://recs.site/api/agency-request/";
           var chosenData = null;
 
           /* View Popup detail of each property */

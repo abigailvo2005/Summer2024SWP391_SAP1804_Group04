@@ -107,7 +107,8 @@
                             placeholder="Enter work email" required />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-email hidden">
                             email is not in the correct format. (ie:
-                            example@domain.com)
+                            example@domain.com) or email exist in system
+                            .Please input another email
                           </p>
                         </div>
                       </div>
@@ -463,7 +464,7 @@
 
           // Send GET Request API to retrieve single user information
           $.ajax({
-            url: "http://localhost:8085/api/user/" + userID,
+            url: "https://recs.site/api/user/" + userID,
             type: "GET",
             success: function (data) {
               // Update popup với information chosen User
@@ -555,6 +556,7 @@
           }
         }
 
+        const urlCheckEmail = "https://recs.site/api/mail/check?email=";
         //submit register new staff request to admin
         function submitRegister() {
           event.preventDefault(); //Stop form from default submitting
@@ -602,6 +604,33 @@
               emailError.classList.add("hidden");
             }
 
+            const emailvalue = $("#email").val();
+            const checkEmailExistence = new Promise((resolve, reject) => {
+              $.ajax({
+                url:
+                  urlCheckEmail + emailvalue,
+                type: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                success: function (data) {
+                  if (data.isExist) {
+                    console.log("exist email" + data.isExist);
+                    emailError.classList.remove("hidden");
+                    reject(new Error("Email already exists"));
+                  } else {
+                    emailError.classList.add("hidden");
+                    resolve();
+                  }
+                },
+                error: function (xhr, status, error) {
+                  // The request failed, handle the error
+                  console.error("Error checkin email:", error);
+                  reject(new Error("Error checking email"));
+                },
+              });
+            });
+
             if (
               !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
                 passwordInput.value
@@ -621,14 +650,8 @@
             emailError.classList.add("hidden");
             pwError.classList.add("hidden");
 
-            // Create a Promise to wair for all errors to be hidden
-            const hideErrorsPromise = new Promise((resolve) => {
-              // Wait 500ms to make sure all errors are hidden
-              setTimeout(resolve, 500);
-            });
-
             // Waiting Promise to hide all errors then alert to user
-            hideErrorsPromise.then(() => {
+            checkEmailExistence.then(() => {
 
               Swal.fire({
                 title: "Loading...",

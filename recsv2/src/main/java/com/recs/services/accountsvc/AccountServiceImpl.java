@@ -586,4 +586,10 @@ public class AccountServiceImpl implements AccountService {
         List<Account> accountsByEmail = accountRepository.getAllByEmail(mail);
         return !accountsByEmail.isEmpty();
     }
+
+    @Override
+    public boolean checkExistedMail(String mail) {
+        List<Account> accountsByEmail = accountRepository.getAllByEmail(mail);
+        return !accountsByEmail.isEmpty();
+    }
 }

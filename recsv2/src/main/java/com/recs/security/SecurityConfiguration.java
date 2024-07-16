@@ -103,11 +103,11 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationFailureHandler customAuthenticationFailureHandler() {
         return (request, response, exception) -> {
-            String errorMessage = "Invalid username or password";
+            String errorMessage = "Invalid email/username or password";
             if (exception instanceof DisabledException) {
                 errorMessage = "Your account has been disabled";
             } else if (exception instanceof BadCredentialsException) {
-                errorMessage = "Invalid username or password";
+                errorMessage = "Invalid email/username or password";
             }
             request.getSession().setAttribute("LOGIN_ERROR_MESSAGE", errorMessage);
             response.sendRedirect("/login?error=true");

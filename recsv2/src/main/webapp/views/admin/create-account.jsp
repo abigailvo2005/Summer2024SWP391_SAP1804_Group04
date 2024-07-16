@@ -83,8 +83,8 @@
                             <option value="" disabled selected>
                               Select biological gender
                             </option>
-                            <option value="0">Male</option>
-                            <option value="1">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                           </select>
                         </div>
                       </div>
@@ -109,7 +109,8 @@
                             placeholder="Enter work email" required />
                           <p class="text-danger text-error mb-0 text-center pt-1 error-email hidden">
                             email is not in the correct format. (ie:
-                            example@domain.com)
+                            example@domain.com) or email exist in system
+                            .Please input another email
                           </p>
                         </div>
                       </div>
@@ -657,7 +658,7 @@
 
           // Send GET Request API to retrieve single user information
           $.ajax({
-            url: "http://localhost:8085/api/user/" + userID,
+            url: "https://recs.site/api/user/" + userID,
             type: "GET",
             success: function (data) {
               // Update popup với information chosen User
@@ -782,6 +783,7 @@
         function validateDateOfBirth(value) {
           const birthDate = new Date(value);
           const currentDate = new Date();
+          const birthdayInput = document.querySelector("#birthday");
 
           if (birthDate.getTime() >= currentDate.getTime()) {
             document.querySelector(".error-bday").classList.remove("hidden"); //show errors
@@ -790,6 +792,8 @@
             document.querySelector(".error-bday").classList.add("hidden"); //hide errors
           }
         }
+
+        const urlCheckEmail = "https://recs.site/api/mail/check?email=";
 
         //create an account
         function createAccount() {
@@ -830,6 +834,33 @@
               emailError.classList.add("hidden");
             }
 
+            const emailvalue = $("#email").val();
+            const checkEmailExistence = new Promise((resolve, reject) => {
+              $.ajax({
+                url:
+                  urlCheckEmail + emailvalue,
+                type: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                success: function (data) {
+                  if (data.isExist) {
+                    console.log("exist email" + data.isExist);
+                    emailError.classList.remove("hidden");
+                    reject(new Error("Email already exists"));
+                  } else {
+                    emailError.classList.add("hidden");
+                    resolve();
+                  }
+                },
+                error: function (xhr, status, error) {
+                  // The request failed, handle the error
+                  console.error("Error checkin email:", error);
+                  reject(new Error("Error checking email"));
+                },
+              });
+            });
+
             if (
               !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
                 passwordInput.value
@@ -847,20 +878,14 @@
             emailError.classList.add("hidden");
             pwError.classList.add("hidden");
 
-            // Create a Promise to wair for all errors to be hidden
-            const hideErrorsPromise = new Promise((resolve) => {
-              // Wait 500ms to make sure all errors are hidden
-              setTimeout(resolve, 500);
-            });
-
             // Waiting Promise to hide all errors then alert to user
-            hideErrorsPromise.then(() => {
+            checkEmailExistence.then(() => {
               Swal.fire({
                 title: "Loading...",
                 text: "Please wait while the page is reloading.",
                 allowOutsideClick: false,
                 didOpen: () => {
-                    Swal.showLoading();
+                  Swal.showLoading();
                 }
               });
               setTimeout(() => {
@@ -875,11 +900,11 @@
         }
 
         window.addEventListener('load', () => {
-          if(localStorage.getItem('formSubmitted') === 'true') {
+          if (localStorage.getItem('formSubmitted') === 'true') {
             Swal.fire({
-                title: 'Create account success!',
-                text: 'Successfully create an account!',
-                icon: 'success'
+              title: 'Create account success!',
+              text: 'Successfully create an account!',
+              icon: 'success'
             });
             localStorage.removeItem('formSubmitted');
           }

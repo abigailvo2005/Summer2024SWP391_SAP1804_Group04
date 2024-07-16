@@ -661,7 +661,7 @@
       <!-- Internal JS -->
       <script>
         //URL REAL ESTATE API
-        const urlRealEstate = "http://localhost:8085/api/real-estate/";
+        const urlRealEstate = "https://recs.site/api/real-estate/";
         var chosenRequest = null;
         var propStatus = null;
         const chosenAgencyStatusHide = [
@@ -795,7 +795,16 @@
               confirmButtonText: 'OK'
             });
           } else {
-            document.querySelector("#agency-form").submit();
+            Swal.fire({
+              title: 'Successfull!',
+              text: 'Confirm agency success!',
+              icon: 'successs',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if(result.isConfirmed) {
+                document.querySelector("#agency-form").submit();
+              }
+            });
           }
         }
 
@@ -844,7 +853,16 @@
               confirmButtonText: 'OK'
             });
           } else {
-            document.querySelector("#buyer-form").submit();
+            Swal.fire({
+              title: 'Successfull!',
+              text: 'Confirm buyer success!',
+              icon: 'successs',
+              confirmButtonText: 'OK'
+            }).then((result) => {
+              if(result.isConfirmed) {
+                document.querySelector("#buyer-form").submit();
+              }
+            });
           }
         }
 
